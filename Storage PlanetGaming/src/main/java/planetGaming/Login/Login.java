@@ -26,7 +26,7 @@ public class Login extends HttpServlet {
 	
 	//controlla le credenziali inserite nel form di login con quelle presenti nel DB
 			private boolean checkLogin(String email, String password){
-
+				//ciao
 				try {
 					utenteBean = utenteDao.doRetrieveByKey(email, password);
 					if(utenteBean.getEmail() != null && utenteBean.getPassword() != null && utenteBean.getEmail().equals(email) && utenteBean.getPassword().equals(password) && !utenteBean.getEmail().equals(""))
