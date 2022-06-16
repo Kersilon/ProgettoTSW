@@ -1,0 +1,21 @@
+Caricare file/immagine nel DB
+	riceviamo il file da un form
+	ricevuto il file dobbiamo
+		
+		ricostruirlo partendo dalle sue parti
+			    Part filePart = request.getPart("file");
+			    	il file è suddiviso in parti prendiamo inizialmente solo una di queste
+			    	
+  				String fileName = filePart.getSubmittedFileName();
+  					la quale la usiamo per ottenere il nome del file
+  					
+  				for (Part part : request.getParts()) {
+  					iteriamo su tutte le parti presenti nella richiesta
+  					
+   				part.write("C:\\upload\\" + fileName);
+   					memorizziamo ciscuna delle parti nel percorso specificato nel metodo.write nel file corrispondente al nome specificato
+   					andiamo a ricostruire il file un pezzo per volta
+    			}
+    			
+    			
+		ricostruito va caricato nel DB

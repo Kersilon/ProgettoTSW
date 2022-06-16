@@ -1,0 +1,18 @@
+Container(usando il model cioè il DAO)
+	Prendere tutti i prodotti con il DAO dei prodotti usando il metodo retriveAll
+	mandare l'oggetto contenente tutti i prodotto alla view dello storage
+	
+View
+la view scorre l'array di prodotti e li stampa uno ad uno come colonne della tabella
+
+
+ordine di chiamata come lo fa la prof
+Login-form.jsp -> LoginServlet -> (se Admin)Storage.jsp -> (Storage.jsp se non ha già l'oggetto videogiochi)  StorageControl
+
+ordine di chiamata come l'ho fatto io
+Login-form.jsp -> LoginServlet -> (se Admin)StorageControl -> Storage.jsp
+
+implementazione add
+form in Storage.jsp -> 
+-> (il quale viene mandato dal client alla servlet StorageControl) StorageControl, if che controlla se ha ricevuto il form per aggiungere elementi ->
+-> se si prende parametri ricevuti dal form -> inserisce l'oggetto nel DB -> dispatch alla Storage.jsp
