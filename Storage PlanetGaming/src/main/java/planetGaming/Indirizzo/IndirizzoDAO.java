@@ -41,8 +41,9 @@ public class IndirizzoDAO implements IndirizzoModel{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, indirizzo.getVia());
-			preparedStatement.setString(2, indirizzo.getCap());
+			preparedStatement.setInt(2, Integer.parseInt(indirizzo.getCap()));
 			preparedStatement.setString(3, indirizzo.getCitta());
+			preparedStatement.setInt(4, indirizzo.getCodice_utente());
 
 			preparedStatement.executeUpdate();
 
@@ -59,19 +60,20 @@ public class IndirizzoDAO implements IndirizzoModel{
 	}
 
 	@Override
-	public synchronized IndirizzoBean doRetrieveByKey(String via, String cap) throws SQLException {
+	public synchronized IndirizzoBean doRetrieveByKey(String via, String cap, int codiceUtente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		IndirizzoBean bean = new IndirizzoBean();
 
-		String selectSQL = "SELECT * FROM " + IndirizzoDAO.TABLE_NAME + " WHERE VIA = ? AND CAP = ?";
+		String selectSQL = "SELECT * FROM " + IndirizzoDAO.TABLE_NAME + " WHERE VIA = ? AND CAP = ? AND codiceUtente = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, via);
-			preparedStatement.setString(2, cap);
+			preparedStatement.setInt(2, Integer.parseInt(cap));
+			preparedStatement.setInt(3, codiceUtente);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -79,6 +81,7 @@ public class IndirizzoDAO implements IndirizzoModel{
 				bean.setVia(rs.getString("VIA"));
 				bean.setCap(rs.getString("CAP"));
 				bean.setCitta(rs.getString("CITTA"));
+				bean.setCodice_utente(rs.getInt("codiceUtente"));
 			
 			}
 
@@ -95,7 +98,7 @@ public class IndirizzoDAO implements IndirizzoModel{
 	}
 	
 	@Override
-	public synchronized boolean doDelete(String via, String cap) throws SQLException {
+	public synchronized boolean doDelete(String via, String cap, int codiceUtente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -107,7 +110,8 @@ public class IndirizzoDAO implements IndirizzoModel{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, via);
-			preparedStatement.setString(2, cap);
+			preparedStatement.setInt(2, Integer.parseInt(cap));
+			preparedStatement.setInt(3, codiceUtente);
 
 			result = preparedStatement.executeUpdate();
 
@@ -147,7 +151,8 @@ public class IndirizzoDAO implements IndirizzoModel{
 
 				bean.setVia(rs.getString("VIA"));
 				bean.setCap(rs.getString("CAP"));
-				bean.setCitta("CITTA");
+				bean.setCitta(rs.getString("CITTA"));
+				bean.setCodice_utente(rs.getInt("codiceUtente"));
 				indirizzi.add(bean);
 			}
 

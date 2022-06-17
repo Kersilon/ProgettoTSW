@@ -9,14 +9,21 @@ public class IndirizzoBean implements Serializable{
 	String via;
 	String cap;
 	String citta;
+	int codice_utente;
 	
-	public IndirizzoBean() {
-		via = "";
-		cap = "";
-		citta = "";
-		
+	public IndirizzoBean() {	
 	}
 	
+	
+	public int getCodice_utente() {
+		return codice_utente;
+	}
+
+
+	public void setCodice_utente(int codice_utente) {
+		this.codice_utente = codice_utente;
+	}
+
 	public String getVia() {
 		return via;
 	}

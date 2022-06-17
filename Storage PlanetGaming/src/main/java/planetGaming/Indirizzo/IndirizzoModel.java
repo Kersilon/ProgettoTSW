@@ -7,9 +7,9 @@ public interface IndirizzoModel {
 
 	public void doSave(IndirizzoBean indirizzo) throws SQLException;
 	
-	public boolean doDelete(String via, String cap) throws SQLException;
+	public boolean doDelete(String via, String cap, int codiceUtente) throws SQLException;
 	
-	public IndirizzoBean doRetrieveByKey(String via, String cap) throws SQLException;
+	public IndirizzoBean doRetrieveByKey(String via, String cap, int codiceUtente) throws SQLException;
 	
 	public Collection<IndirizzoBean> doRetrieveAll(String order) throws SQLException;
 }
