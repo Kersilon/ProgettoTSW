@@ -4,14 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import planetGaming.Videogioco.VideogiocoBean;
+import planetGaming.Videogioco.VideogiocoDAO;
+
 public class MetodoPagamentoDAO implements MetodoPagamentoModel {
-private static final String TABLE_NAME = null;
+private static final String TABLE_NAME = "pagamento";
 //inizializzazione collegamento DB
 	private static DataSource ds;
 
@@ -133,6 +138,51 @@ private static final String TABLE_NAME = null;
 			}
 		}
 		return bean;
+	}
+
+	@Override
+	public Collection<MetodoPagamentoBean> doRetrieveAll(String order) throws SQLException {
+		//instauro connessione e realizzazione prepared statement
+ 		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Collection<MetodoPagamentoBean> metodiPagamento = new LinkedList<MetodoPagamentoBean>();
+		
+		String querySQL = "select * from "+ MetodoPagamentoDAO.TABLE_NAME; //TODO se non funziona controlla che gli spazi nella stringa siano corretti
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(querySQL);
+			
+			//parte centrale del codice
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				MetodoPagamentoBean metodoPagamento = new MetodoPagamentoBean();
+
+				metodoPagamento.setNumCarta(rs.getString("numero_carta"));
+				metodoPagamento.setCcv((rs.getString("ccv")));		
+				metodoPagamento.setCircuito((rs.getString("circuito")));
+				metodoPagamento.setScadenza((rs.getString("scadenza")));
+				metodoPagamento.setCodiceUtente((rs.getInt("codice_utente")));
+				metodoPagamento.setNomeIntestatario((rs.getString("nome_intestatario")));
+				metodoPagamento.setCognomeIntestatario((rs.getString("cognome_intestatario")));
+				
+				
+				metodiPagamento.add(metodoPagamento);
+			}
+			
+			return metodiPagamento;
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
 	}
 
 }

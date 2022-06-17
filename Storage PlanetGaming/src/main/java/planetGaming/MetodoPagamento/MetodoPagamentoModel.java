@@ -1,6 +1,7 @@
 package planetGaming.MetodoPagamento;
 
 import java.sql.SQLException;
+import java.util.Collection;
 
 public interface MetodoPagamentoModel {
 	public void doSave(MetodoPagamentoBean metodoPagamento) throws SQLException;
@@ -10,6 +11,5 @@ public interface MetodoPagamentoModel {
 	//TODO non implementato
 	public MetodoPagamentoBean doRetrieveByKey(int numCarta) throws SQLException;
 	
-	//non credo servirà
-	//public Collection<Bean> doRetrieveAll(String order) throws SQLException; //order = ordine in cui vengono prese le entry del DB
+	public Collection<MetodoPagamentoBean> doRetrieveAll(String order) throws SQLException; //order = ordine in cui vengono prese le entry del DB
 }

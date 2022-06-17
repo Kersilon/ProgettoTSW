@@ -12,6 +12,13 @@ public class MetodoPagamentoBean implements Serializable {
 	int codice_utente;
 	String nome_intestatario;
 	String cognome_intestatario;
+	
+	
+
+	public MetodoPagamentoBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getNumCarta() {
 		return numero_carta;
