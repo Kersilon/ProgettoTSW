@@ -54,11 +54,16 @@
 		<fieldset>
 			<legend>payment method</legend>
 			<input type="hidden" name="action" value="Registration">
+			<input type="hidden" name="UserId" value="">
 			
 			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" placeholder="enter card number"><br>
 			<p id="cardNumberError"></p>
 			
+			ccv: 				<input name="ccv" 				type="text" 	id="ccv" 			maxlength="20" placeholder="enter ccv"><br>
+			circuito: 			<input name="circuit" 			type="text"				 			maxlength="20" placeholder="enter card circuit"><br>
+			
 			Name: 				<input name="name" 				type="text"				 			maxlength="20" placeholder="enter name on the card"><br>
+			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" placeholder="enter surname on the card"><br>
 			Expiration date: 	<input name="expirationDate" 	type ="text" 	id="expirationDate"	maxlength="20" placeholder="enter expiration date"><br>
 			<p id="expirationDateError"></p>
 			

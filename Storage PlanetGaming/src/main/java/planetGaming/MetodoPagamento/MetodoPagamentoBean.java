@@ -17,7 +17,6 @@ public class MetodoPagamentoBean implements Serializable {
 
 	public MetodoPagamentoBean() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getNumCarta() {

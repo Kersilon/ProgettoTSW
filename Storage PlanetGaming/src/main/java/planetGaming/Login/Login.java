@@ -82,6 +82,8 @@ public class Login extends HttpServlet {
 				if(checkLogin(email, password))
 				{
 					request.getSession().setAttribute("isLogged", true);
+					request.getSession().setAttribute("userId", utenteBean.getCodiceUtente());
+					
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 					dispatcher.forward(request, response);
 					
@@ -95,7 +97,15 @@ public class Login extends HttpServlet {
 			{
 				if(checkLogin(email, password))
 				{
+					try {
+						utenteBean = utenteDao.doRetrieveByKey(email, password);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					request.getSession().setAttribute("isLogged", true);
+					request.getSession().setAttribute("userId", utenteBean.getCodiceUtente());
 					
 					if(utenteBean.isAMMINISTRATORE())
 					{

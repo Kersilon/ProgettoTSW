@@ -115,7 +115,7 @@ public class UtenteDAO implements UtenteModel {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
-			UtenteBean bean = new UtenteBean();
+			UtenteBean utenteBean = new UtenteBean();
 			String selectSQL = "SELECT * FROM " + UtenteDAO.TABLE_NAME + " WHERE email=? AND Password=?";
 
 			try {
@@ -126,11 +126,15 @@ public class UtenteDAO implements UtenteModel {
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
-					bean.setNome(rs.getString("Nome"));
-					bean.setCognome(rs.getString("Cognome"));
-					bean.setEmail(email);
-					bean.setPassword(password);
-					bean.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
+					utenteBean.setNome(rs.getString("Nome"));
+					utenteBean.setCognome(rs.getString("Cognome"));
+					utenteBean.setDataNascita(rs.getString("dataNascita"));
+					utenteBean.setNomeUtente(rs.getString("nomeUtente"));
+					utenteBean.setPassword(password);
+					utenteBean.setEmail(email);
+					utenteBean.setTelefono(rs.getString("telefono"));
+					utenteBean.setCodiceUtente(rs.getInt("codiceUtente"));
+					utenteBean.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
 				}
 
 			} finally {
@@ -142,7 +146,7 @@ public class UtenteDAO implements UtenteModel {
 						connection.close();
 				}
 			}
-			return bean;
+			return utenteBean;
 		}
 
 }

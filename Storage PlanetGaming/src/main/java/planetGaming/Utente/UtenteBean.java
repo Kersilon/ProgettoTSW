@@ -14,6 +14,7 @@ public class UtenteBean implements Serializable {
 	private String password;
 	private String email;
 	private String telefono;
+	private int codiceUtente;
 	private boolean AMMINISTRATORE;
 
 	
@@ -25,6 +26,14 @@ public class UtenteBean implements Serializable {
 		AMMINISTRATORE = aMMINISTRATORE;
 	}
 	
+	public int getCodiceUtente() {
+		return codiceUtente;
+	}
+
+	public void setCodiceUtente(int codiceUtente) {
+		this.codiceUtente = codiceUtente;
+	}
+
 	public String getEmail() {
 		return email;
 	}

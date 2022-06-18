@@ -40,7 +40,15 @@ public class UserInfo extends HttpServlet {
 		if(action != null) {
 			
 			if(action.equals("addPaymentMethod")) {
+				metodoPagamentoBean = new MetodoPagamentoBean();
 				
+				metodoPagamentoBean.setNumCarta(request.getParameter("cardNumber"));
+				metodoPagamentoBean.setCcv(request.getParameter("ccv"));
+				metodoPagamentoBean.setCircuito(request.getParameter("circuit"));
+				metodoPagamentoBean.setScadenza(request.getParameter("expirationDate"));
+				metodoPagamentoBean.setCodiceUtente((Integer) request.getSession().getAttribute("userId"));
+				metodoPagamentoBean.setNomeIntestatario(request.getParameter("name"));
+				metodoPagamentoBean.setCognomeIntestatario(request.getParameter("surname"));
 			}
 			
 			if(action.equals("addAddress")) {
