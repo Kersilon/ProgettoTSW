@@ -2,6 +2,9 @@ package planetGaming.Utente;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,6 +46,10 @@ public class UserInfo extends HttpServlet {
 		
 		IndirizzoBean 	indirizzoBean;
 		IndirizzoDAO	indirizzoDao;
+		
+		Collection<MetodoPagamentoBean> metodiPagamento, buffer;
+		Iterator it;
+		
 		
 		metodoPagamentoDao = new MetodoPagamentoDAO();
 		indirizzoDao = new IndirizzoDAO();
@@ -104,15 +111,27 @@ public class UserInfo extends HttpServlet {
 			//TODO sostituire doRetriveAll con doRetriveByKey
 			request.removeAttribute("metodiPagamento");
 			
+			buffer = new LinkedList<MetodoPagamentoBean>();
+			metodiPagamento = new LinkedList<MetodoPagamentoBean>();
+			
 			try {
-				//TODO inserire una variabile al posto di ASC				
-				request.setAttribute("metodiPagamento", metodoPagamentoDao.doRetrieveAll("ASC"));
-				
-				
+				buffer = metodoPagamentoDao.doRetrieveAll("ASC");
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
+			//presi tutti metodi di pagamento scorriamo la lista temporanea, di metodi di pagamento e per ognuno di essi
+			//se questo ha il codice utente uguale a quello dell'utente attualmente loggato
+			//questo viene inserito nella lista di metodi che sarà poi effettivamente salvata nella sessione
+			for(MetodoPagamentoBean mp : buffer) {
+				if(mp.getCodiceUtente() == (Integer) request.getSession().getAttribute("userId")) {
+					metodiPagamento.add(mp);
+				}
+			}
+			
+			request.setAttribute("metodiPagamento", metodiPagamento);
+	
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 			dispatcher.forward(request, response);
 		}

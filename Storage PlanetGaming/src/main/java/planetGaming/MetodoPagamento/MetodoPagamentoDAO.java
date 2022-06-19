@@ -101,31 +101,31 @@ private static final String TABLE_NAME = "pagamento";
 	}
 
 	@Override
-	public MetodoPagamentoBean doRetrieveByKey(int numCarta) throws SQLException {
+	public MetodoPagamentoBean doRetrieveByKey(int key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		 MetodoPagamentoBean bean = new MetodoPagamentoBean();
+		 MetodoPagamentoBean metodoPagamento = new MetodoPagamentoBean();
 
 		String selectSQL = "SELECT * FROM " + MetodoPagamentoDAO.TABLE_NAME + " WHERE NUMERO_CARTA = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, numCarta);
+			preparedStatement.setInt(1, key);
 			
 
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				bean.setNumero_carta(rs.getString("numero_carta"));
-				bean.setCcv(rs.getString("ccv"));
-				bean.setCircuito(rs.getString("circuito"));
-				bean.setScadenza(rs.getString("scadenza"));
-				bean.setCodiceUtente(rs.getInt("codiceUtente"));
-				bean.setNome_intestatario(rs.getString("nome_intestatario"));
-				bean.setCognome_intestatario(rs.getString("cognome_intestatario"));
-				
+				metodoPagamento.setNumero_carta(rs.getString("numero_carta"));
+				metodoPagamento.setCcv(rs.getString("ccv"));
+				metodoPagamento.setCircuito(rs.getString("circuito"));
+				metodoPagamento.setScadenza(rs.getString("scadenza"));
+				metodoPagamento.setCodiceUtente(rs.getInt("codiceUtente"));
+				metodoPagamento.setNome_intestatario(rs.getString("nome_intestatario"));
+				metodoPagamento.setCognome_intestatario(rs.getString("cognome_intestatario"));
+				metodoPagamento.setIdCarta(rs.getInt("idCarta"));
 			
 			}
 
@@ -138,7 +138,7 @@ private static final String TABLE_NAME = "pagamento";
 					connection.close();
 			}
 		}
-		return bean;
+		return metodoPagamento;
 	}
 
 	@Override
