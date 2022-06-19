@@ -80,23 +80,122 @@ function checkFiscalCode(){
 	let regex;
 }
 
-function checkAddress(){
-	let address;
-	let addressError;
+
+//campi indirizzo di consegna (form delivery address in paginaProtetta.jsp)
+function checkCap(){
+	let cap;
+	let capError;
 	let regex;
+	
+	regex = /^\d{5}$/;
+	cap = document.getElementById("cap").value;
+	capError = document.getElementById("capError");
+	
+	if(regex.test(cap)){
+		capError.innerHTML = "";
+		return true;
+	}else{
+		capError.innerHTML = "Cap not valid";
+		return false;
+	}
 }
 
-function cardNumberCode(){
+function checkProvince(){
+	let province;
+	let provinceError;
+	let regex;
+	
+	regex = /^[A-Z]{2}$/;
+	province = document.getElementById("province").value;
+	provinceError = document.getElementById("provinceError");
+	
+	if(regex.test(province)){
+		provinceError.innerHTML = "";
+		return true;
+	}else{
+		provinceError.innerHTML = "province not valid";
+		return false;
+	}
+}
+
+function checkCity(){
+	let city;
+	let cityError;
+	let regex;
+	
+	regex = /^[a-zA-Z',.\s-]{1,25}$/;
+	///^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
+	city = document.getElementById("city").value;
+	cityError = document.getElementById("cityError");
+	
+	if(regex.test(city)){
+		cityError.innerHTML = "";
+		return true;
+	}else{
+		cityError.innerHTML = "city not valid";
+		return false;
+	}
+}
+
+
+
+//campi metodo di pagamento (form payment method in paginaProtetta.jsp)
+function checkCardNumber(){
 	let cardNumber;
 	let cardNumberError;
 	let regex;
+	
+	regex = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|622((12[6-9]|1[3-9][0-9])|([2-8][0-9][0-9])|(9(([0-1][0-9])|(2[0-5]))))[0-9]{10}|64[4-9][0-9]{13}|65[0-9]{14}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47][0-9]{13})*$/;
+	//l'espressione regolare controlla se il prefisso è corretto quindi deve corrispondere ad un reale prefisso ad esempio Visa che sarebbe 4023
+	cardNumber = document.getElementById("cardNumber").value;
+	cardNumberError = document.getElementById("cardNumberError");
+	
+	if(regex.test(cardNumber)){
+		cardNumberError.innerHTML = "";
+		return true;
+	}else{
+		cardNumberError.innerHTML = "Card number not valid";
+		return false;
+	}
 }
 
-function expirationDateCode(){
+function checkCcv(){
+	let ccv;
+	let ccvError;
+	let regex;
+	
+	regex = /^[0-9]{3}$/;
+	ccv = document.getElementById("ccv").value;
+	ccvError = document.getElementById("ccvError");
+	
+	if(regex.test(ccv)){
+		ccvError.innerHTML = "";
+		return true;
+	}else{
+		ccvError.innerHTML = "ccv not valid";
+		return false;
+	}
+}
+
+function checkExpirationDate(){
 	let expirationDate;
 	let expirationDateError;
 	let regex;
+	
+	regex = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
+	expirationDate = document.getElementById("expirationDate").value;
+	expirationDateError = document.getElementById("expirationDateError");
+	
+	if(regex.test(expirationDate)){
+		expirationDateError.innerHTML = "";
+		return true;
+	}else{
+		expirationDateError.innerHTML = "Expiration date not valid";
+		return false;
+	}
 }
+
+
 
 function checkCredentialsLogin(){
 	let counter;
@@ -143,5 +242,51 @@ function checkCredentialsRegistration(){
 	if(counter == 4){
 		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
 		document.getElementById("RegistrationButton").setAttribute('type', 'submit');
+	}
+}
+
+function checkDeliveryAddress(){
+		let counter;
+		
+		
+		counter = 0;
+		
+		if(checkCap()){
+			counter++;
+		}
+		if(checkProvince()){
+			counter++;
+		}
+		if(checkCity()){
+			counter++;
+		}
+		
+		
+	if(counter == 3){
+		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
+		document.getElementById("addressButton").setAttribute('type', 'submit');
+	}
+}
+
+function checkPaymentMethod(){
+		let counter;
+		
+		
+		counter = 0;
+		
+		if(checkCardNumber()){
+		counter++;
+		}
+		if(checkCcv()){
+		counter++;
+		}
+		if(checkExpirationDate()){
+		counter++;
+		}
+		
+		
+	if(counter == 3){
+		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
+		document.getElementById("paymentMethodButton").setAttribute('type', 'submit');
 	}
 }

@@ -27,6 +27,7 @@
 <title>Protected Page</title>
 </head>
 <body>
+	<script type="text/javascript" src="ControllaCredenziali.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 	
 	<h1>Welcome to the user page</h1><br>
@@ -117,14 +118,16 @@
 			<p id="fiscalCodeError"></p>-->
 			
 			Address: 		<input name="address" 		type="text" 	id="address"		maxlength="20" 	placeholder="enter address"><br>
-			<p id="addressError"></p>
 			cap: 			<input name="cap" 			type="text" 	id="cap"			maxlength="20" 	placeholder="enter cap"><br>
+			<p id="capError" class="ErrorParagraph"></p>
 			
-			Province: 		<input name="province" 		type="text" 						maxlength="20" 	placeholder="enter state"><br>
-			City: 			<input name="city" 			type="text" 						maxlength="20" 	placeholder="enter city"><br>
+			Province: 		<input name="province" 		type="text" 	id="province"		maxlength="20" 	placeholder="enter state"><br>
+			<p id="provinceError" class="ErrorParagraph"></p>
 			
-			<!--  <button type="button" id ="addressButton" onclick ="">Save</button>-->
-			<input type="submit" value="Submit">
+			City: 			<input name="city" 			type="text" 	id="city"			maxlength="20" 	placeholder="enter city"><br>
+			<p id="cityError" class="ErrorParagraph"></p>
+			
+			<button type="button" id ="addressButton" onclick ="checkDeliveryAddress()">Save</button>
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>
@@ -135,18 +138,20 @@
 			<input type="hidden" name="action" value="addPaymentMethod">
 			
 			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" placeholder="enter card number"><br>
-			<p id="cardNumberError"></p>
+			<p id="cardNumberError" class="ErrorParagraph"></p>
 			
 			ccv: 				<input name="ccv" 				type="text" 	id="ccv" 			maxlength="20" placeholder="enter ccv"><br>
+			<p id="ccvError" class="ErrorParagraph"></p>
+			
 			circuito: 			<input name="circuit" 			type="text"				 			maxlength="20" placeholder="enter card circuit"><br>
+			<!--<p id="" class="ErrorParagraph"></p>-->
 			
 			Name: 				<input name="name" 				type="text"				 			maxlength="20" placeholder="enter name on the card"><br>
 			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" placeholder="enter surname on the card"><br>
 			Expiration date: 	<input name="expirationDate" 	type ="text" 	id="expirationDate"	maxlength="20" placeholder="enter expiration date"><br>
-			<p id="expirationDateError"></p>
+			<p id="expirationDateError" class="ErrorParagraph"></p>
 			
-			<!--  <button type="button" id ="paymentMethodButton" onclick ="">Save</button>-->
-			<input type="submit" value="Submit">
+			<button type="button" id ="paymentMethodButton" onclick ="checkPaymentMethod()">Save</button>
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>
