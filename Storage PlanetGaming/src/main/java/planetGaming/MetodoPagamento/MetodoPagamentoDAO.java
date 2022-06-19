@@ -50,7 +50,7 @@ private static final String TABLE_NAME = "pagamento";
 			preparedStatement.setString(2, metodoPagamento.getCcv());
 			preparedStatement.setString(3, metodoPagamento.getScadenza());
 			preparedStatement.setString(4, metodoPagamento.getCircuito());
-			preparedStatement.setInt(5, metodoPagamento.getCodiceUtente());
+			preparedStatement.setInt(	5, metodoPagamento.getCodiceUtente());
 			preparedStatement.setString(6, metodoPagamento.getNomeIntestatario());
 			preparedStatement.setString(7, metodoPagamento.getCognomeIntestatario());
 			//TODO preparedStatement.set per tutti gli attributi

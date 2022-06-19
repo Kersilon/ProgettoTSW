@@ -28,24 +28,22 @@
 	<form action="UserInfo" method="post">
 		<fieldset>
 			<legend>delivery address</legend>
-			<input type="hidden" name="action" value="">
+			<input type="hidden" name="action" value="addAddress">
 			
 			Name: 			<input name="name" 			type="text" 						maxlength="20" 	placeholder="enter name"><br>
 			Surname: 		<input name="surname" 		type="text" 						maxlength="20" 	placeholder="enter surname"><br>
-			Fiscal code: 	<input name="fiscalCode" 	type="text"		id="fiscalCode"		maxlength="20" 	placeholder="enter fiscal code"><br>
-			<p id="fiscalCodeError"></p>
+			<!--  TODO da spostare nei dati dell'utente; 	Fiscal code: 	<input name="fiscalCode" 	type="text"		id="fiscalCode"		maxlength="20" 	placeholder="enter fiscal code"><br>
+			<p id="fiscalCodeError"></p>-->
 			
 			Address: 		<input name="address" 		type="text" 	id="address"		maxlength="20" 	placeholder="enter address"><br>
 			<p id="addressError"></p>
+			cap: 			<input name="cap" 			type="text" 	id="cap"			maxlength="20" 	placeholder="enter cap"><br>
 			
-			Locality: 		<input name="locality" 		type="text" 						maxlength="20"	placeholder="enter locality"><br>
-			Nation: 		<input name="nation" 		type="text" 						maxlength="20"	placeholder="enter nation"><br>
-			State/Province: <input name="state" 		type="text" 						maxlength="20" 	placeholder="enter state"><br>
+			Province: 		<input name="province" 		type="text" 						maxlength="20" 	placeholder="enter state"><br>
 			City: 			<input name="city" 			type="text" 						maxlength="20" 	placeholder="enter city"><br>
-			telephone: 		<input name="telephone" 	type="number" 	id="telephone" 		maxlength="20" 	placeholder="enter telephone number"><br>
-			<p id="phoneError"></p>
 			
-			<button type="button" id ="addressButton" onclick ="">Save</button>
+			<!--  <button type="button" id ="addressButton" onclick ="">Save</button>-->
+			<input type="submit" value="Submit">
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>
@@ -54,7 +52,6 @@
 		<fieldset>
 			<legend>payment method</legend>
 			<input type="hidden" name="action" value="addPaymentMethod">
-			<input type="hidden" name="UserId" value="">
 			
 			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" placeholder="enter card number"><br>
 			<p id="cardNumberError"></p>

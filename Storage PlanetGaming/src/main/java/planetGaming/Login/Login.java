@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email=request.getParameter("email");
+		String email=	request.getParameter("email");
 		String password=request.getParameter("password");
 		String action = request.getParameter("action");
 		
@@ -59,13 +59,13 @@ public class Login extends HttpServlet {
 				//altrimenti si prendono i dati inviati con il form di registrazione e li si salva nel DB, effettuando quindi la registrazione
 				}else {
 					
-					utenteBean.setNome(request.getParameter("nome"));
-					utenteBean.setCognome(request.getParameter("cognome"));
-					utenteBean.setDataNascita(request.getParameter("dataNascita"));
-					utenteBean.setNomeUtente(request.getParameter("nomeUtente"));
-					utenteBean.setPassword(request.getParameter("password"));
-					utenteBean.setEmail(request.getParameter("email"));
-					utenteBean.setTelefono(request.getParameter("telefono"));
+					utenteBean.setNome(			request.getParameter("nome"));
+					utenteBean.setCognome(		request.getParameter("cognome"));
+					utenteBean.setDataNascita(	request.getParameter("dataNascita"));
+					utenteBean.setNomeUtente(	request.getParameter("nomeUtente"));
+					utenteBean.setPassword(		request.getParameter("password"));
+					utenteBean.setEmail(		request.getParameter("email"));
+					utenteBean.setTelefono(		request.getParameter("telefono"));
 					
 					try {
 						utenteDao.doSave(utenteBean);

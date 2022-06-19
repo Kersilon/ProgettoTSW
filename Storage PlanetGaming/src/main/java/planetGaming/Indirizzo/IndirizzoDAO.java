@@ -19,7 +19,7 @@ public class IndirizzoDAO implements IndirizzoModel{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/-----");
+			ds = (DataSource) envCtx.lookup("jdbc/planetgaming");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
@@ -35,15 +35,19 @@ public class IndirizzoDAO implements IndirizzoModel{
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + IndirizzoDAO.TABLE_NAME
-				+ " (VIA, CAP, CITTA) VALUES (?, ?, ?)";
+				+ " (via, cap, citta, codiceUtente, provincia) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, indirizzo.getVia());
-			preparedStatement.setInt(2, Integer.parseInt(indirizzo.getCap()));
+			
+			System.out.println("cap = " + indirizzo.getCap());
+			
+			preparedStatement.setInt(2, Integer.parseInt(indirizzo.getCap()));		
 			preparedStatement.setString(3, indirizzo.getCitta());
 			preparedStatement.setInt(4, indirizzo.getCodice_utente());
+			preparedStatement.setString(5, indirizzo.getProvincia());
 
 			preparedStatement.executeUpdate();
 
@@ -64,9 +68,9 @@ public class IndirizzoDAO implements IndirizzoModel{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		IndirizzoBean bean = new IndirizzoBean();
+		IndirizzoBean indirizzoBean = new IndirizzoBean();
 
-		String selectSQL = "SELECT * FROM " + IndirizzoDAO.TABLE_NAME + " WHERE VIA = ? AND CAP = ? AND codiceUtente = ?";
+		String selectSQL = "SELECT * FROM " + IndirizzoDAO.TABLE_NAME + " WHERE via = ? AND cap = ? AND codiceUtente = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -78,10 +82,11 @@ public class IndirizzoDAO implements IndirizzoModel{
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				bean.setVia(rs.getString("VIA"));
-				bean.setCap(rs.getString("CAP"));
-				bean.setCitta(rs.getString("CITTA"));
-				bean.setCodice_utente(rs.getInt("codiceUtente"));
+				indirizzoBean.setVia(rs.getString("via"));
+				indirizzoBean.setCap(rs.getString("cap"));
+				indirizzoBean.setCitta(rs.getString("citta"));
+				indirizzoBean.setCodice_utente(rs.getInt("codiceUtente"));
+				indirizzoBean.setIdIndirizzo(rs.getInt("idIndirizzo"));
 			
 			}
 
@@ -94,7 +99,7 @@ public class IndirizzoDAO implements IndirizzoModel{
 					connection.close();
 			}
 		}
-		return bean;
+		return indirizzoBean;
 	}
 	
 	@Override
@@ -147,13 +152,14 @@ public class IndirizzoDAO implements IndirizzoModel{
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				IndirizzoBean bean = new IndirizzoBean();
+				IndirizzoBean indirizzoBean = new IndirizzoBean();
 
-				bean.setVia(rs.getString("VIA"));
-				bean.setCap(rs.getString("CAP"));
-				bean.setCitta(rs.getString("CITTA"));
-				bean.setCodice_utente(rs.getInt("codiceUtente"));
-				indirizzi.add(bean);
+				indirizzoBean.setVia(rs.getString("via"));
+				indirizzoBean.setCap(rs.getString("cap"));
+				indirizzoBean.setCitta(rs.getString("citta"));
+				indirizzoBean.setCodice_utente(rs.getInt("codiceUtente"));
+				indirizzoBean.setIdIndirizzo(rs.getInt("idIndirizzo"));
+				indirizzi.add(indirizzoBean);
 			}
 
 		} finally {
