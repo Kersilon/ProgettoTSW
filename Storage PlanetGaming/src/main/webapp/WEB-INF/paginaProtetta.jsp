@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
+<%@ page import="java.util.*" import="planetGaming.MetodoPagamento.*" import="planetGaming.Indirizzo.*"%>
+
 <%
 	//Check user credentials
 	Boolean isLogged = (Boolean) request.getSession().getAttribute("isLogged");
@@ -9,6 +11,12 @@
 	{
 		response.sendRedirect("./login-form.jsp");
 		//return;	//TODO cosa fa effettivamente questo return?
+	}
+	
+	Collection<?> metodiPagamento = (Collection<?>) request.getAttribute("metodiPagamento");
+	if(metodiPagamento == null)
+	{
+		
 	}
 %>
 
@@ -22,8 +30,50 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/header.jsp" />
-
+	
 	<h1>Welcome to the user page</h1><br>
+	<p>Here you can add, delete, payment methods and delivery addresses</p>
+	<br><br>
+	
+	<h2>Payment methods</h2>
+	<table>
+		<tr>
+			<th>numero_carta</th>
+			<th>ccv</th>
+			<th>circuito</th>
+			<th>scadenza</th>
+			<th>codiceUtente</th>
+			<th>nome_intestatario</th>
+			<th>cognome_intestatario</th>
+			<th>idCarta</th>
+	  	</tr>
+		  <!-- contenuto tabella -->
+	  
+		<%
+	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
+	  		Iterator<?> it = metodiPagamento.iterator();
+				while (it.hasNext()) {
+					MetodoPagamentoBean metodoPagamento = (MetodoPagamentoBean) it.next();
+		%>
+			<tr>
+				<td><%=metodoPagamento.getNumero_carta()%></td>
+				<td><%=metodoPagamento.getCcv()%></td>
+				<td><%=metodoPagamento.getCircuito()%></td>
+				<td><%=metodoPagamento.getScadenza()%></td>
+				<td><%=metodoPagamento.getCodiceUtente()%></td>
+				<td><%=metodoPagamento.getNome_intestatario()%></td>
+				<td><%=metodoPagamento.getCognome_intestatario()%></td>
+				<td><%=metodoPagamento.getIdCarta()%></td>
+		  	</tr>
+			
+	<%
+				}
+	%>
+	
+	</table>	
+	
+	
+	
 	
 	<form action="UserInfo" method="post">
 		<fieldset>

@@ -105,8 +105,10 @@ public class UserInfo extends HttpServlet {
 			request.removeAttribute("metodiPagamento");
 			
 			try {
-				//TODO inserire una variabile al posto di ASC
+				//TODO inserire una variabile al posto di ASC				
 				request.setAttribute("metodiPagamento", metodoPagamentoDao.doRetrieveAll("ASC"));
+				
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

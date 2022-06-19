@@ -84,7 +84,7 @@ public class Login extends HttpServlet {
 					request.getSession().setAttribute("isLogged", true);
 					request.getSession().setAttribute("userId", utenteBean.getCodiceUtente());
 					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserInfo");
 					dispatcher.forward(request, response);
 					
 					//TODO capire perché... response.sendRedirect non va bene in questo contesto non so perché ma facendo così non funziona
