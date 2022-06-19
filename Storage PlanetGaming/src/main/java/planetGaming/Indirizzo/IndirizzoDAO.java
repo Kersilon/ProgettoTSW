@@ -9,6 +9,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import planetGaming.Videogioco.VideogiocoDAO;
+
 
 public class IndirizzoDAO implements IndirizzoModel{
 	
@@ -40,10 +42,7 @@ public class IndirizzoDAO implements IndirizzoModel{
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, indirizzo.getVia());
-			
-			System.out.println("cap = " + indirizzo.getCap());
-			
+			preparedStatement.setString(1, indirizzo.getVia());			
 			preparedStatement.setInt(2, Integer.parseInt(indirizzo.getCap()));		
 			preparedStatement.setString(3, indirizzo.getCitta());
 			preparedStatement.setInt(4, indirizzo.getCodice_utente());
@@ -139,15 +138,11 @@ public class IndirizzoDAO implements IndirizzoModel{
 
 		Collection<IndirizzoBean> indirizzi = new LinkedList<IndirizzoBean>();
 
-		String selectSQL = "SELECT * FROM " + IndirizzoDAO.TABLE_NAME;
-
-		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
-		}
+		String querySQL = "select * from "+ IndirizzoDAO.TABLE_NAME;
 
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement = connection.prepareStatement(querySQL);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -157,6 +152,7 @@ public class IndirizzoDAO implements IndirizzoModel{
 				indirizzoBean.setVia(rs.getString("via"));
 				indirizzoBean.setCap(rs.getString("cap"));
 				indirizzoBean.setCitta(rs.getString("citta"));
+				indirizzoBean.setProvincia(rs.getString("provincia"));
 				indirizzoBean.setCodice_utente(rs.getInt("codiceUtente"));
 				indirizzoBean.setIdIndirizzo(rs.getInt("idIndirizzo"));
 				indirizzi.add(indirizzoBean);

@@ -14,10 +14,8 @@
 	}
 	
 	Collection<?> metodiPagamento = (Collection<?>) request.getAttribute("metodiPagamento");
-	if(metodiPagamento == null)
-	{
-		
-	}
+	Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
+	
 %>
 
 <!DOCTYPE html>
@@ -50,7 +48,7 @@
 		  <!-- contenuto tabella -->
 	  
 		<%
-	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
+	  		//scorre l'array metodi di pagamento e stampa gli elementi nella tabella
 	  		Iterator<?> it = metodiPagamento.iterator();
 				while (it.hasNext()) {
 					MetodoPagamentoBean metodoPagamento = (MetodoPagamentoBean) it.next();
@@ -70,7 +68,40 @@
 				}
 	%>
 	
-	</table>	
+	</table>
+	
+	<h2>Addresses</h2>
+	<table>
+		<tr>
+			<th>via</th>
+			<th>cap</th>
+			<th>citta</th>
+			<th>provincia</th>
+			<th>codiceUtente</th>
+			<th>idIndirizzo</th>
+	  	</tr>
+		  <!-- contenuto tabella -->
+	  
+		<%
+	  		//scorre l'array indirizzi e stampa gli elementi nella tabella
+	  			it = indirizzi.iterator();
+				while (it.hasNext()) {
+					IndirizzoBean indirizzo = (IndirizzoBean) it.next();
+		%>
+			<tr>
+				<td><%=indirizzo.getVia()%></td>
+				<td><%=indirizzo.getCap()%></td>
+				<td><%=indirizzo.getCitta()%></td>
+				<td><%=indirizzo.getProvincia()%></td>
+				<td><%=indirizzo.getCodice_utente()%></td>
+				<td><%=indirizzo.getIdIndirizzo()%></td>
+		  	</tr>
+			
+	<%
+				}
+	%>
+	
+	</table>		
 	
 	
 	

@@ -70,7 +70,6 @@ public class Login extends HttpServlet {
 					try {
 						utenteDao.doSave(utenteBean);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
@@ -100,7 +99,6 @@ public class Login extends HttpServlet {
 					try {
 						utenteBean = utenteDao.doRetrieveByKey(email, password);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
@@ -161,7 +159,6 @@ public class Login extends HttpServlet {
 				try {
 					utenteDao.doSave(utenteBean);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

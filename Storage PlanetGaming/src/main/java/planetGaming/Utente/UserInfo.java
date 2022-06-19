@@ -37,7 +37,6 @@ public class UserInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String action;
@@ -47,8 +46,8 @@ public class UserInfo extends HttpServlet {
 		IndirizzoBean 	indirizzoBean;
 		IndirizzoDAO	indirizzoDao;
 		
-		Collection<MetodoPagamentoBean> metodiPagamento, buffer;
-		Iterator it;
+		Collection<MetodoPagamentoBean> metodiPagamento, bufferMetodiPagamento;
+		Collection<IndirizzoBean> indirizzi, bufferIndirizzi;
 		
 		
 		metodoPagamentoDao = new MetodoPagamentoDAO();
@@ -99,23 +98,18 @@ public class UserInfo extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			
-			if(action.equals("showPaymentMethods")) {
-
-			}
 			
-			if(action.equals("showAddresses")) {
-				
-			}
 			
+			
+			//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
 			//prende e inserisce nella request tutti i metodi di pagamento dell'utente
-			//TODO sostituire doRetriveAll con doRetriveByKey
 			request.removeAttribute("metodiPagamento");
 			
-			buffer = new LinkedList<MetodoPagamentoBean>();
+			bufferMetodiPagamento = new LinkedList<MetodoPagamentoBean>();
 			metodiPagamento = new LinkedList<MetodoPagamentoBean>();
 			
 			try {
-				buffer = metodoPagamentoDao.doRetrieveAll("ASC");
+				bufferMetodiPagamento = metodoPagamentoDao.doRetrieveAll("ASC");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -124,14 +118,45 @@ public class UserInfo extends HttpServlet {
 			//presi tutti metodi di pagamento scorriamo la lista temporanea, di metodi di pagamento e per ognuno di essi
 			//se questo ha il codice utente uguale a quello dell'utente attualmente loggato
 			//questo viene inserito nella lista di metodi che sarà poi effettivamente salvata nella sessione
-			for(MetodoPagamentoBean mp : buffer) {
+			for(MetodoPagamentoBean mp : bufferMetodiPagamento) {
 				if(mp.getCodiceUtente() == (Integer) request.getSession().getAttribute("userId")) {
 					metodiPagamento.add(mp);
 				}
 			}
 			
 			request.setAttribute("metodiPagamento", metodiPagamento);
-	
+			
+			
+			
+			
+			//TODO eseguire la visualizzazione di tutti gli indirizzi solo se si preme un pulsante
+			//prende e inserisce nella request tutti gli indirizzi dell'utente
+			request.removeAttribute("indirizzi");
+			
+			bufferIndirizzi = new LinkedList<IndirizzoBean>();
+			indirizzi = new LinkedList<IndirizzoBean>();
+			
+			try {
+				bufferIndirizzi = indirizzoDao.doRetrieveAll("ASC");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//presi tutti gli indirizzi scorriamo la lista temporanea, di indirizzi e per ognuno di essi
+			//se questo ha il codice utente uguale a quello dell'utente attualmente loggato
+			//questo viene inserito nella lista di indirizzi che sarà poi effettivamente salvata nella sessione
+			for(IndirizzoBean ind : bufferIndirizzi) {
+				if(ind.getCodice_utente() == (Integer) request.getSession().getAttribute("userId")) {
+					indirizzi.add(ind);
+				}
+			}
+			
+			request.setAttribute("indirizzi", indirizzi);
+			
+			
+			
+			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -141,7 +166,6 @@ public class UserInfo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
