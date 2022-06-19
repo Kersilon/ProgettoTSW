@@ -53,13 +53,13 @@ public class UserInfo extends HttpServlet {
 			if(action.equals("addPaymentMethod")) {
 				metodoPagamentoBean = new MetodoPagamentoBean();
 				
-				metodoPagamentoBean.setNumCarta(				request.getParameter("cardNumber"));
+				metodoPagamentoBean.setNumero_carta(			request.getParameter("cardNumber"));
 				metodoPagamentoBean.setCcv(						request.getParameter("ccv"));
 				metodoPagamentoBean.setCircuito(				request.getParameter("circuit"));
 				metodoPagamentoBean.setScadenza(				request.getParameter("expirationDate"));
 				metodoPagamentoBean.setCodiceUtente((Integer) 	request.getSession().getAttribute("userId"));
-				metodoPagamentoBean.setNomeIntestatario(		request.getParameter("name"));
-				metodoPagamentoBean.setCognomeIntestatario(		request.getParameter("surname"));
+				metodoPagamentoBean.setNome_intestatario(		request.getParameter("name"));
+				metodoPagamentoBean.setCognome_intestatario(	request.getParameter("surname"));
 				
 				try {
 					metodoPagamentoDao.doSave(metodoPagamentoBean);
@@ -93,12 +93,26 @@ public class UserInfo extends HttpServlet {
 			}
 			
 			if(action.equals("showPaymentMethods")) {
-				
+
 			}
 			
 			if(action.equals("showAddresses")) {
 				
 			}
+			
+			//prende e inserisce nella request tutti i metodi di pagamento dell'utente
+			//TODO sostituire doRetriveAll con doRetriveByKey
+			request.removeAttribute("metodiPagamento");
+			
+			try {
+				//TODO inserire una variabile al posto di ASC
+				request.setAttribute("metodiPagamento", metodoPagamentoDao.doRetrieveAll("ASC"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 

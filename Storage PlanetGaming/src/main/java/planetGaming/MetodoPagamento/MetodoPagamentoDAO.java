@@ -46,13 +46,13 @@ private static final String TABLE_NAME = "pagamento";
 			preparedStatement = connection.prepareStatement(querySQL);
 			
 			//complazione preparedStatement ed esecuzione
-			preparedStatement.setString(1, metodoPagamento.getNumCarta());
+			preparedStatement.setString(1, metodoPagamento.getNumero_carta());
 			preparedStatement.setString(2, metodoPagamento.getCcv());
 			preparedStatement.setString(3, metodoPagamento.getScadenza());
 			preparedStatement.setString(4, metodoPagamento.getCircuito());
 			preparedStatement.setInt(	5, metodoPagamento.getCodiceUtente());
-			preparedStatement.setString(6, metodoPagamento.getNomeIntestatario());
-			preparedStatement.setString(7, metodoPagamento.getCognomeIntestatario());
+			preparedStatement.setString(6, metodoPagamento.getNome_intestatario());
+			preparedStatement.setString(7, metodoPagamento.getCognome_intestatario());
 			//TODO preparedStatement.set per tutti gli attributi
 			
 			preparedStatement.executeUpdate();
@@ -118,13 +118,13 @@ private static final String TABLE_NAME = "pagamento";
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				bean.setNumCarta(rs.getString("numero_carta"));
+				bean.setNumero_carta(rs.getString("numero_carta"));
 				bean.setCcv(rs.getString("ccv"));
 				bean.setCircuito(rs.getString("circuito"));
 				bean.setScadenza(rs.getString("scadenza"));
-				bean.setCodiceUtente(rs.getInt("codice_utente"));
-				bean.setNomeIntestatario(rs.getString("nome_intestatario"));
-				bean.setCognomeIntestatario(rs.getString("cognome_intestatario"));
+				bean.setCodiceUtente(rs.getInt("codiceUtente"));
+				bean.setNome_intestatario(rs.getString("nome_intestatario"));
+				bean.setCognome_intestatario(rs.getString("cognome_intestatario"));
 				
 			
 			}
@@ -161,13 +161,14 @@ private static final String TABLE_NAME = "pagamento";
 			while (rs.next()) {
 				MetodoPagamentoBean metodoPagamento = new MetodoPagamentoBean();
 
-				metodoPagamento.setNumCarta(rs.getString("numero_carta"));
+				metodoPagamento.setNumero_carta(rs.getString("numero_carta"));
 				metodoPagamento.setCcv((rs.getString("ccv")));		
-				metodoPagamento.setCircuito((rs.getString("circuito")));
 				metodoPagamento.setScadenza((rs.getString("scadenza")));
-				metodoPagamento.setCodiceUtente((rs.getInt("codice_utente")));
-				metodoPagamento.setNomeIntestatario((rs.getString("nome_intestatario")));
-				metodoPagamento.setCognomeIntestatario((rs.getString("cognome_intestatario")));
+				metodoPagamento.setCircuito((rs.getString("circuito")));
+				metodoPagamento.setCodiceUtente((rs.getInt("codiceUtente")));
+				metodoPagamento.setNome_intestatario((rs.getString("nome_intestatario")));
+				metodoPagamento.setCognome_intestatario((rs.getString("cognome_intestatario")));
+				metodoPagamento.setIdCarta(rs.getInt("idCarta"));
 				
 				
 				metodiPagamento.add(metodoPagamento);
