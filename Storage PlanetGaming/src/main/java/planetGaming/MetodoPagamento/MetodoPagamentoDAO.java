@@ -25,7 +25,7 @@ private static final String TABLE_NAME = "pagamento";
 				Context initCtx = new InitialContext();
 				Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-				ds = (DataSource) envCtx.lookup("jdbc/storage");
+				ds = (DataSource) envCtx.lookup("jdbc/planetgaming");
 
 			} catch (NamingException e) {
 				System.out.println("Error:" + e.getMessage());
@@ -38,12 +38,13 @@ private static final String TABLE_NAME = "pagamento";
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "INSERT INTO " + MetodoPagamentoDAO.TABLE_NAME
-				+ " (NUMERO_CARTA, CCV, SCADENZA, CIRCUITO, CODICE_UTENTE, NOME_INTESTATARIO, COGNOME_INTESTATARIO) "
+				+ " (numero_carta, ccv, scadenza, circuito, codiceUtente, nome_intestatario, cognome_intestatario) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)"; //TODO query sql con "?"
 		
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
+			
 			//complazione preparedStatement ed esecuzione
 			preparedStatement.setString(1, metodoPagamento.getNumCarta());
 			preparedStatement.setString(2, metodoPagamento.getCcv());

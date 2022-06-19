@@ -1,6 +1,8 @@
 package planetGaming.Utente;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,8 @@ public class UserInfo extends HttpServlet {
 		MetodoPagamentoBean metodoPagamentoBean;
 		MetodoPagamentoDAO metodoPagamentoDao;
 		
+		metodoPagamentoDao = new MetodoPagamentoDAO();
+		
 		action = request.getParameter("action");
 		if(action != null) {
 			
@@ -49,6 +53,13 @@ public class UserInfo extends HttpServlet {
 				metodoPagamentoBean.setCodiceUtente((Integer) request.getSession().getAttribute("userId"));
 				metodoPagamentoBean.setNomeIntestatario(request.getParameter("name"));
 				metodoPagamentoBean.setCognomeIntestatario(request.getParameter("surname"));
+				
+				try {
+					metodoPagamentoDao.doSave(metodoPagamentoBean);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			if(action.equals("addAddress")) {

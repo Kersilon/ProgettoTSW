@@ -132,7 +132,7 @@ public class UtenteDAO implements UtenteModel {
 					utenteBean.setNomeUtente(rs.getString("nomeUtente"));
 					utenteBean.setPassword(password);
 					utenteBean.setEmail(email);
-					utenteBean.setTelefono(rs.getString("telefono"));
+					utenteBean.setTelefono(rs.getString("#telefono"));
 					utenteBean.setCodiceUtente(rs.getInt("codiceUtente"));
 					utenteBean.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
 				}

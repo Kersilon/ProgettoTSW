@@ -25,7 +25,7 @@
 
 	<h1>Welcome to the user page</h1><br>
 	
-	<form action="" method="post">
+	<form action="UserInfo" method="post">
 		<fieldset>
 			<legend>delivery address</legend>
 			<input type="hidden" name="action" value="">
@@ -50,10 +50,10 @@
 		</fieldset>
 	</form>
 	
-	<form action="" method="post">
+	<form action="UserInfo" method="post">
 		<fieldset>
 			<legend>payment method</legend>
-			<input type="hidden" name="action" value="Registration">
+			<input type="hidden" name="action" value="addPaymentMethod">
 			<input type="hidden" name="UserId" value="">
 			
 			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" placeholder="enter card number"><br>
@@ -67,7 +67,8 @@
 			Expiration date: 	<input name="expirationDate" 	type ="text" 	id="expirationDate"	maxlength="20" placeholder="enter expiration date"><br>
 			<p id="expirationDateError"></p>
 			
-			<button type="button" id ="paymentMethodButton" onclick ="">Save</button>
+			<!--  <button type="button" id ="paymentMethodButton" onclick ="">Save</button>-->
+			<input type="submit" value="Submit">
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>

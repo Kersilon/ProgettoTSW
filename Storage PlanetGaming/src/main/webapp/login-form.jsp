@@ -24,11 +24,11 @@
 			<input name="action" value="login"><br>
 					
 			<label for="email"> Login:</label>
-			<input type="text" name="email" id ="email" placeholder="enter Username">
+			<input type="text" name="email" id ="email" placeholder="enter Username" value="ersilio@gmail.com">
 			<p id="emailError" class="ErrorParagraph"></p>			
 			<br>
 			<label for="password"> Password:</label>
-			<input type="password" name="password" id="password" placeholder="enter Password">
+			<input type="password" name="password" id="password" placeholder="enter Password" value="12345">
 			<p id="passwordError" class="ErrorParagraph"></p>	
 			<br>
 			<button type="button" id ="LoginButton" onclick ="checkCredentialsLogin()">Login</button>
