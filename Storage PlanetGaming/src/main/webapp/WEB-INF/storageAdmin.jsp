@@ -31,6 +31,7 @@
 
 </head>
 <body>
+<script type="text/javascript" src="ControllaCredenziali.js"></script>
 <jsp:include page="header.jsp" />
 
 	<h1>Welcome to the Storage Page</h1>
@@ -99,23 +100,30 @@
 			<legend>Insert</legend>
 			<input type="hidden" name="action" value="insert"> 
 			
-			Name: 			<input name="nome" type="text" maxlength="20" required placeholder="enter name"><br> 
-			Edition: 		<input name="edizione" type="text" maxlength="20" required placeholder="enter name"><br> 
-			Description: 	<input name="descrizione" type="text" maxlength="60" required placeholder="enter name"><br> 
-			Price: 			<input name="prezzo_vetrina" type="number" maxlength="20" required placeholder="enter name"><br>
-			Date: 			<input name="data_uscita" type="text" maxlength="20" required placeholder="enter name"><br>
-			Platform: 		<input name="piattaforma" type="text" maxlength="20" required placeholder="enter name"><br>
-			Console: 		<input name="console" type="text" maxlength="20" required placeholder="enter name"><br>
-			Sale: 			<input name="sconto" type="number" maxlength="20" required placeholder="enter name"><br>
-			Copy: 			<input name="#copie" type="number" maxlength="20" required placeholder="enter name"><br>
-			Developer: 		<input name="Sviluppatore" type="text" maxlength="20" required placeholder="enter name"><br>
-			Publisher: 		<input name="Pubblisher" type="text" maxlength="20" required placeholder="enter name"><br>
+			Name: 			<input name="nome" 										type="text" 	maxlength="20" required placeholder="enter name"><br> 
+			Edition: 		<input name="edizione" 									type="text" 	maxlength="20" required placeholder="enter name"><br> 
+			Description: 	<input name="descrizione" 								type="text" 	maxlength="60" required placeholder="enter name"><br> 
+			Price: 			<input name="prezzo_vetrina" 	id = "prezzo_vetrina"	type="text" 	maxlength="20" required placeholder="enter name"><br>
+			<p id="prezzo_vetrinaError" class="ErrorParagraph"></p>
+			
+			Date: 			<input name="data_uscita" 		id = "data_uscita"		type="text" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+			<p id="data_uscitaError" class="ErrorParagraph"></p>
+			
+			Platform: 		<input name="piattaforma" 								type="text" 	maxlength="20" required placeholder="enter name"><br>
+			Console: 		<input name="console" 									type="text" 	maxlength="20" required placeholder="enter name"><br>
+			Sale: 			<input name="sconto" 			id = "sconto"			type="text" 	maxlength="20" required placeholder="enter name"><br>
+			<p id="scontoError" class="ErrorParagraph"></p>
+			
+			Copy: 			<input name="#copie" 			id = "copie"			type="text" 	maxlength="20" required placeholder="enter name"><br>
+			<p id="copieError" class="ErrorParagraph"></p>
+			
+			Developer: 		<input name="Sviluppatore" 								type="text" 	maxlength="20" required placeholder="enter name"><br>
+			Publisher: 		<input name="Pubblisher" 								type="text" 	maxlength="20" required placeholder="enter name"><br>
 	
 			<!-- mi sembra eccessivo rendere la foto un campo required -->
 			Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"><br>
 					
-	
-			<input type="submit" value="Add">
+			<button type="button" id ="insertButton" onclick ="checkInsert()">insert</button>
 			<input type="reset" value="Reset">
 		</fieldset>
 	</form>
@@ -139,22 +147,32 @@
 			<legend>Modify</legend>
 			<input type="hidden" name="action" value="modify"> 
 			
-			ID: 			<input name="codice_prodotto" type="number" maxlength="20" placeholder="enter ID"><br>
-			Name: 			<input name="nome" type="text" maxlength="20" placeholder="enter name"><br> 
-			Edition: 		<input name="edizione" type="text" maxlength="20" placeholder="enter name"><br> 
-			Description: 	<input name="descrizione" type="text" maxlength="60" placeholder="enter description"><br> 
-			Price: 			<input name="prezzo_vetrina" type="number" maxlength="20" placeholder="enter name"><br>
-			Date: 			<input name="data_uscita" type="text" maxlength="20" placeholder="enter name"><br>
-			Platform: 		<input name="piattaforma" type="text" maxlength="20" placeholder="enter name"><br>
-			Console: 		<input name="console" type="text" maxlength="20" placeholder="enter name"><br>
-			Sale: 			<input name="sconto" type="number" maxlength="20" placeholder="enter name"><br>
-			Copy:			<input name="#copie" type="number" maxlength="20" placeholder="enter name"><br>
-			Developer: 		<input name="Sviluppatore" type="text" maxlength="20" placeholder="enter name"><br>
-			Publisher: 		<input name="Pubblisher" type="text" maxlength="20" placeholder="enter name"><br>
-			Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"><br>
+			ID: 			<input name="codice_prodotto" id = "codice_prodotto"		type="number" 	maxlength="20" 			placeholder="enter ID"			><br>
+			<p id="codice_prodottoError" class="ErrorParagraph"></p>
+			
+			Name: 			<input name="nome" 											type="text" 	maxlength="20" 			placeholder="enter name"		><br> 
+			Edition: 		<input name="edizione" 										type="text" 	maxlength="20" 			placeholder="enter name"		><br> 
+			Description: 	<input name="descrizione" 									type="text" 	maxlength="60" 			placeholder="enter description"	><br> 
+			Price: 			<input name="prezzo_vetrina" 	id = "price2"				type="text" 	maxlength="20" 			placeholder="enter name"		><br>
+			<p id="priceError2" class="ErrorParagraph"></p>
+			
+			Date: 			<input name="data_uscita" 		id = "date2"				type="text" 	maxlength="20"			placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+			<p id="dateError2" class="ErrorParagraph"></p>
+			
+			Platform: 		<input name="piattaforma" 									type="text" 	maxlength="20" 			placeholder="enter name"		><br>
+			Console: 		<input name="console" 										type="text"	 	maxlength="20" 			placeholder="enter name"		><br>
+			Sale: 			<input name="sconto" 			id = "sale2"				type="text" 	maxlength="20" 			placeholder="enter name"		><br>
+			<p id="saleError2" class="ErrorParagraph"></p>
+			
+			Copy:			<input name="#copie" 			id = "copy2"				type="text" 	maxlength="20" 			placeholder="enter name"		><br>
+			<p id="copyError2" class="ErrorParagraph"></p>
+			
+			Developer: 		<input name="Sviluppatore" 									type="text" 	maxlength="20" 			placeholder="enter name"		><br>
+			Publisher: 		<input name="Pubblisher" 									type="text" 	maxlength="20" 			placeholder="enter name"		><br>
+			Photo: 			<input name="foto"							class="file"	type="file"    	maxlength="255"											><br>
 					
 	
-			<input type="submit" value="Add">
+			<button type="button" id ="modifyButton" onclick ="checkModify()">modify</button>
 			<input type="reset" value="Reset">
 		</fieldset>
 	</form>

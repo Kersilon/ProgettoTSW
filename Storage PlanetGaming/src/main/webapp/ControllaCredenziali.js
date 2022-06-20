@@ -197,6 +197,101 @@ function checkExpirationDate(){
 
 
 
+
+//controlli inserimento prodotto in storageAdmin.jsp
+function checkPrice(){
+	let regex;
+	let price;
+	let priceError;
+	
+	regex = /^\d{0,8}(\.\d{1,4})?$/;
+	price = document.getElementById("prezzo_vetrina").value;
+	priceError = document.getElementById("prezzo_vetrinaError");
+	
+	if(regex.test(price)){
+		priceError.innerHTML = "";
+		return true;
+	}else{
+		priceError.innerHTML = "price not valid";
+		return false;
+	}
+}
+
+function checkDate(){
+	let date;
+	let dateError;
+	let regex;
+	
+	regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;	//data nel formato dd-/mm-/aaaa va bene sia "-" o "/" per separare i caratteri
+	date = document.getElementById("data_uscita").value;
+	dateError = document.getElementById("data_uscitaError");
+	
+	if(regex.test(date)){
+		dateError.innerHTML = "";
+		return true;
+	}else{
+		dateError.innerHTML = "date not valid";
+		return false;
+	}
+}
+
+function checkSale(){
+	let sale;
+	let saleError;
+	let regex;
+	
+	regex = /^100(\.0{0,2})? *%?$|^\d{1,2}(\.\d{1,2})? *%?$/; //matches 	100% 100.00 % 95.4% 1.2 % 12
+	sale = document.getElementById("sconto").value;
+	saleError = document.getElementById("scontoError");
+	
+	if(regex.test(sale)){
+		saleError.innerHTML = "";
+		return true;
+	}else{
+		saleError.innerHTML = "sale not valid";
+		return false;
+	}
+}
+
+function checkCopy(){
+	let copy;
+	let copyError;
+	let regex;
+	
+	regex = /^\d+$/;
+	copy = document.getElementById("copie").value;
+	copyError = document.getElementById("copieError");
+	
+	if(regex.test(copy)){
+		copyError.innerHTML = "";
+		return true;
+	}else{
+		copyError.innerHTML = "copy not valid";
+		return false;
+	}
+}
+
+function checkId(){
+	let id;
+	let idError;
+	let regex;
+	
+	regex = /^\d+$/;
+	id = document.getElementById("codice_prodotto").value;
+	idError = document.getElementById("codice_prodottoError");
+	
+	if(regex.test(id)){
+		idError.innerHTML = "";
+		return true;
+	}else{
+		idError.innerHTML = "id not valid";
+		return false;
+	}
+}
+
+
+
+
 function checkCredentialsLogin(){
 	let counter;
 	
@@ -288,5 +383,60 @@ function checkPaymentMethod(){
 	if(counter == 3){
 		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
 		document.getElementById("paymentMethodButton").setAttribute('type', 'submit');
+	}
+}
+
+function checkInsert(){
+		let counter;
+		
+		
+		counter = 0;
+		
+		if(checkPrice()){
+			counter++;
+		}
+		if(checkDate()){
+			counter++;
+		}
+		if(checkSale()){
+			counter++;
+		}
+		if(checkCopy()){
+			counter++;
+		}
+		
+		
+	if(counter == 4){
+		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
+		document.getElementById("insertButton").setAttribute('type', 'submit');
+	}
+}
+
+function checkModify(){
+		let counter;
+		
+		
+		counter = 0;
+		
+		if(checkPrice()){
+			counter++;
+		}
+		if(checkDate()){
+			counter++;
+		}
+		if(checkSale()){
+			counter++;
+		}
+		if(checkCopy()){
+			counter++;
+		}
+		if(checkId()){
+			counter++;
+		}
+		
+		
+	if(counter == 5){
+		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
+		document.getElementById("modifyButton").setAttribute('type', 'submit');
 	}
 }
