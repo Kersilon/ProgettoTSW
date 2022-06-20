@@ -199,14 +199,14 @@ function checkExpirationDate(){
 
 
 //controlli inserimento prodotto in storageAdmin.jsp
-function checkPrice(){
+function checkPrice(form, indexError){
 	let regex;
 	let price;
 	let priceError;
 	
 	regex = /^\d{0,8}(\.\d{1,4})?$/;
-	price = document.getElementById("prezzo_vetrina").value;
-	priceError = document.getElementById("prezzo_vetrinaError");
+	price = document.forms[form]["prezzo_vetrina"].value;
+	priceError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
 	if(regex.test(price)){
 		priceError.innerHTML = "";
@@ -217,14 +217,14 @@ function checkPrice(){
 	}
 }
 
-function checkDate(){
+function checkDate(form, indexError){
 	let date;
 	let dateError;
 	let regex;
 	
 	regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;	//data nel formato dd-/mm-/aaaa va bene sia "-" o "/" per separare i caratteri
-	date = document.getElementById("data_uscita").value;
-	dateError = document.getElementById("data_uscitaError");
+	date = document.forms[form]["data_uscita"].value;
+	dateError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
 	if(regex.test(date)){
 		dateError.innerHTML = "";
@@ -235,14 +235,14 @@ function checkDate(){
 	}
 }
 
-function checkSale(){
+function checkSale(form, indexError){
 	let sale;
 	let saleError;
 	let regex;
 	
 	regex = /^100(\.0{0,2})? *%?$|^\d{1,2}(\.\d{1,2})? *%?$/; //matches 	100% 100.00 % 95.4% 1.2 % 12
-	sale = document.getElementById("sconto").value;
-	saleError = document.getElementById("scontoError");
+	sale = document.forms[form]["sconto"].value;
+	saleError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
 	if(regex.test(sale)){
 		saleError.innerHTML = "";
@@ -253,14 +253,14 @@ function checkSale(){
 	}
 }
 
-function checkCopy(){
+function checkCopy(form, indexError){
 	let copy;
 	let copyError;
 	let regex;
 	
 	regex = /^\d+$/;
-	copy = document.getElementById("copie").value;
-	copyError = document.getElementById("copieError");
+	copy = document.forms[form]["#copie"].value;
+	copyError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
 	if(regex.test(copy)){
 		copyError.innerHTML = "";
@@ -271,14 +271,14 @@ function checkCopy(){
 	}
 }
 
-function checkId(){
+function checkId(form, indexError){
 	let id;
 	let idError;
 	let regex;
 	
 	regex = /^\d+$/;
-	id = document.getElementById("codice_prodotto").value;
-	idError = document.getElementById("codice_prodottoError");
+	id = document.forms[form]["codice_prodotto"].value;
+	idError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
 	if(regex.test(id)){
 		idError.innerHTML = "";
@@ -386,22 +386,22 @@ function checkPaymentMethod(){
 	}
 }
 
-function checkInsert(){
+function checkInsert(form){
 		let counter;
 		
 		
 		counter = 0;
 		
-		if(checkPrice()){
+		if(checkPrice(form, 0)){
 			counter++;
 		}
-		if(checkDate()){
+		if(checkDate(form, 1)){
 			counter++;
 		}
-		if(checkSale()){
+		if(checkSale(form, 2)){
 			counter++;
 		}
-		if(checkCopy()){
+		if(checkCopy(form, 3)){
 			counter++;
 		}
 		
@@ -412,27 +412,27 @@ function checkInsert(){
 	}
 }
 
-function checkModify(){
+function checkModify(form){
 		let counter;
-		
 		
 		counter = 0;
 		
-		if(checkPrice()){
+		if(checkId(form, 0)){
 			counter++;
 		}
-		if(checkDate()){
+		if(checkPrice(form, 1)){
 			counter++;
 		}
-		if(checkSale()){
+		if(checkDate(form, 2)){
 			counter++;
 		}
-		if(checkCopy()){
+		if(checkSale(form, 3)){
 			counter++;
 		}
-		if(checkId()){
+		if(checkCopy(form, 4)){
 			counter++;
 		}
+
 		
 		
 	if(counter == 5){
