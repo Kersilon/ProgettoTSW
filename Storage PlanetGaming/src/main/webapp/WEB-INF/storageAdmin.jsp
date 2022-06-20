@@ -129,14 +129,15 @@
 	</form>
 	
 	<br>
-	<form action="StorageControl" method="post">
+	<form id="deleteForm" action="StorageControl" method="post">
 		<fieldset>
 			<legend>Delete</legend>
-			<input type="hidden" name="action" value="delete">
+					<input  name="action" 			type="hidden" 	value="delete">
 			
-			Code: <input name="codice_prodotto" type="text" maxlength="20" required placeholder="enter code"><br>
+			Code:	<input	name="codice_prodotto" 	type="text" 					maxlength="20" required placeholder="enter code"><br>
+			<p class="ErrorParagraph"></p>
 			
-			<input type="submit" value="Remove">
+			<button type="button" id ="deleteButton" onclick ="checkIdToDelete('deleteForm')">delete</button>
 			<input type="reset" value="Reset">
 		</fieldset>
 	</form>

@@ -440,3 +440,11 @@ function checkModify(form){
 		document.getElementById("modifyButton").setAttribute('type', 'submit');
 	}
 }
+
+function checkIdToDelete(form){
+
+	
+	if(checkId(form, 0)){
+			document.getElementById("deleteButton").setAttribute('type', 'submit');
+	}
+}
