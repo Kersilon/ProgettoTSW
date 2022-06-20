@@ -13,8 +13,8 @@
 		//return;	//TODO cosa fa effettivamente questo return?
 	}
 	
-	Collection<?> metodiPagamento = (Collection<?>) request.getAttribute("metodiPagamento");
-	Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
+	Collection<?> metodiPagamento = (Collection<?>) request.getSession().getAttribute("metodiPagamento");
+	Collection<?> indirizzi = (Collection<?>) request.getSession().getAttribute("indirizzi");
 	
 %>
 
@@ -137,18 +137,18 @@
 			<legend>payment method</legend>
 			<input type="hidden" name="action" value="addPaymentMethod">
 			
-			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" placeholder="enter card number"><br>
+			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" value ="4023123412341234"	placeholder="enter card number"><br>
 			<p id="cardNumberError" class="ErrorParagraph"></p>
 			
-			ccv: 				<input name="ccv" 				type="text" 	id="ccv" 			maxlength="20" placeholder="enter ccv"><br>
+			ccv: 				<input name="ccv" 				type="text" 	id="ccv" 			maxlength="20" value ="123"					placeholder="enter ccv"><br>
 			<p id="ccvError" class="ErrorParagraph"></p>
 			
-			circuito: 			<input name="circuit" 			type="text"				 			maxlength="20" placeholder="enter card circuit"><br>
+			circuito: 			<input name="circuit" 			type="text"				 			maxlength="20" 								placeholder="enter card circuit"><br>
 			<!--<p id="" class="ErrorParagraph"></p>-->
 			
-			Name: 				<input name="name" 				type="text"				 			maxlength="20" placeholder="enter name on the card"><br>
-			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" placeholder="enter surname on the card"><br>
-			Expiration date: 	<input name="expirationDate" 	type ="text" 	id="expirationDate"	maxlength="20" placeholder="enter expiration date"><br>
+			Name: 				<input name="name" 				type="text"				 			maxlength="20" 								placeholder="enter name on the card"><br>
+			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" 								placeholder="enter surname on the card"><br>
+			Expiration date: 	<input name="expirationDate" 	type ="text" 	id="expirationDate"	maxlength="20" value ="112022"				placeholder="enter expiration date"><br>
 			<p id="expirationDateError" class="ErrorParagraph"></p>
 			
 			<button type="button" id ="paymentMethodButton" onclick ="checkPaymentMethod()">Save</button>

@@ -103,7 +103,7 @@ public class UserInfo extends HttpServlet {
 			
 			//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
 			//prende e inserisce nella request tutti i metodi di pagamento dell'utente
-			request.removeAttribute("metodiPagamento");
+			//request.getSession().removeAttribute("metodiPagamento");
 			
 			bufferMetodiPagamento = new LinkedList<MetodoPagamentoBean>();
 			metodiPagamento = new LinkedList<MetodoPagamentoBean>();
@@ -124,14 +124,14 @@ public class UserInfo extends HttpServlet {
 				}
 			}
 			
-			request.setAttribute("metodiPagamento", metodiPagamento);
+			request.getSession().setAttribute("metodiPagamento", metodiPagamento);
 			
 			
 			
 			
 			//TODO eseguire la visualizzazione di tutti gli indirizzi solo se si preme un pulsante
 			//prende e inserisce nella request tutti gli indirizzi dell'utente
-			request.removeAttribute("indirizzi");
+			//request.getSession().removeAttribute("indirizzi");
 			
 			bufferIndirizzi = new LinkedList<IndirizzoBean>();
 			indirizzi = new LinkedList<IndirizzoBean>();
@@ -152,7 +152,7 @@ public class UserInfo extends HttpServlet {
 				}
 			}
 			
-			request.setAttribute("indirizzi", indirizzi);
+			request.getSession().setAttribute("indirizzi", indirizzi);
 			
 			
 			
