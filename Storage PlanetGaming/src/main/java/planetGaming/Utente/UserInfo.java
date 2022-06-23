@@ -110,6 +110,7 @@ public class UserInfo extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			//TODO inserire qualcosa tra gli apici di equals
+			/*
 			if(action.equals("")) {
 				bufferOrdini = new LinkedList<OrdineBean>();
 				ordini = new LinkedList<OrdineBean>();
@@ -138,6 +139,7 @@ public class UserInfo extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
 				dispatcher.forward(request, response);
 			}
+			*/
 			
 			
 			
