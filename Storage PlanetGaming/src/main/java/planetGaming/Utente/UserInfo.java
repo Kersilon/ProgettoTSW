@@ -17,6 +17,8 @@ import planetGaming.Indirizzo.IndirizzoBean;
 import planetGaming.Indirizzo.IndirizzoDAO;
 import planetGaming.MetodoPagamento.MetodoPagamentoBean;
 import planetGaming.MetodoPagamento.MetodoPagamentoDAO;
+import planetGaming.Ordine.OrdineBean;
+import planetGaming.Ordine.OrdineDAO;
 
 /**
  * Servlet implementation class UserInfo
@@ -40,14 +42,24 @@ public class UserInfo extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String action;
+		int userId;
+		
 		MetodoPagamentoBean metodoPagamentoBean;
 		MetodoPagamentoDAO 	metodoPagamentoDao;
 		
 		IndirizzoBean 	indirizzoBean;
 		IndirizzoDAO	indirizzoDao;
 		
+		OrdineBean ordineBean;
+		OrdineDAO ordineDao;
+		
+		
 		Collection<MetodoPagamentoBean> metodiPagamento, bufferMetodiPagamento;
+		
 		Collection<IndirizzoBean> indirizzi, bufferIndirizzi;
+		
+		Collection<OrdineBean> ordini, bufferOrdini;
+		
 		
 		
 		metodoPagamentoDao = new MetodoPagamentoDAO();
@@ -97,7 +109,35 @@ public class UserInfo extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 				dispatcher.forward(request, response);
 			}
-			
+			//TODO inserire qualcosa tra gli apici di equals
+			if(action.equals("")) {
+				bufferOrdini = new LinkedList<OrdineBean>();
+				ordini = new LinkedList<OrdineBean>();
+				ordineDao = new OrdineDAO();
+				
+				userId = (Integer) request.getSession().getAttribute("userId");
+				
+				
+				try {
+					//TODO finire di sistemare il dao ordine
+					bufferOrdini = ordineDao.doRetrieveAll("ASC");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				for(OrdineBean ord: bufferOrdini) {
+					if(ord.getIdUtente() == userId) {
+						ordini.add(ord);
+					}
+				}
+				
+				request.getSession().setAttribute("ordini", ordini);
+				
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
+				dispatcher.forward(request, response);
+			}
 			
 			
 			
