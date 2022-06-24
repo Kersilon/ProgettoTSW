@@ -1,4 +1,4 @@
-<%@ page import ="java.util.*" import = "OrderPage.java" import = "CartItem.java" %>
+<%@ page import ="java.util.*" import = "OrderPage.java" import = "planetGaming.Carrello.*" %>
 
 
 <% 
