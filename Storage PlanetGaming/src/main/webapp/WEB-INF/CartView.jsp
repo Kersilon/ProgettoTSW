@@ -18,7 +18,7 @@
 
 <jsp:include page="/WEB-INF/header.jsp" />
 <h1>Cart View</h1>
-<p>Show the shopping cart!</p><br>
+<p>Show the shopping cart</p><br>
 
 <table>
 
