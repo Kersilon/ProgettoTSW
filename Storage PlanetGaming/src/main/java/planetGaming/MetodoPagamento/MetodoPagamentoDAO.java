@@ -39,7 +39,7 @@ private static final String TABLE_NAME = "pagamento";
 		
 		String querySQL = "INSERT INTO " + MetodoPagamentoDAO.TABLE_NAME
 				+ " (numero_carta, ccv, scadenza, circuito, codiceUtente, nome_intestatario, cognome_intestatario) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)"; //TODO query sql con "?"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
@@ -53,7 +53,7 @@ private static final String TABLE_NAME = "pagamento";
 			preparedStatement.setInt(	5, metodoPagamento.getCodiceUtente());
 			preparedStatement.setString(6, metodoPagamento.getNome_intestatario());
 			preparedStatement.setString(7, metodoPagamento.getCognome_intestatario());
-			//TODO preparedStatement.set per tutti gli attributi
+			
 			
 			preparedStatement.executeUpdate();
 			connection.commit();

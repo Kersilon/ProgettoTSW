@@ -8,6 +8,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import planetGaming.MetodoPagamento.MetodoPagamentoDAO;
+
 import java.sql.*;
 
 
@@ -20,14 +23,16 @@ public class OrdineDAO implements OrdineModel{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 			
-			ds = (DataSource) envCtx.lookup("jdbc/-----");
+			ds = (DataSource) envCtx.lookup("jdbc/planetgaming");
 		}
 		
 	 catch (NamingException e) {
 		System.out.println("Error:" + e.getMessage());
 	}
 }
+	
 	private static final String TABLE_NAME = "ordine";
+	prodottoOrdineDAO prodottoOrdine = new prodottoOrdineDAO();
 	
 	@Override
 	public synchronized void doSave(OrdineBean ordine) throws SQLException {
@@ -35,13 +40,19 @@ public class OrdineDAO implements OrdineModel{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO " + OrdineDAO.TABLE_NAME
-				+ " (CODICE) VALUES (?)";
+		String querySQL = "INSERT INTO " + OrdineDAO.TABLE_NAME
+				+ " (idUtente, idModalitaPagamento, idIndirizzo, prezzoTotale, data, tracking) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setInt(1, ordine.getCodice());
+			preparedStatement = connection.prepareStatement(querySQL);
+			preparedStatement.setInt(	1, ordine.getIdUtente());
+			preparedStatement.setInt(	2, ordine.getIdModalitaPagamento());
+			preparedStatement.setInt(	3, ordine.getIdIndirizzo());
+			preparedStatement.setInt(	4, ordine.getPrezzoTotale());
+			preparedStatement.setString(5, ordine.getDataOrdine());
+			preparedStatement.setString(6, ordine.getTracking());
 			
 			preparedStatement.executeUpdate();
 
@@ -55,6 +66,11 @@ public class OrdineDAO implements OrdineModel{
 					connection.close();
 			}
 		}
+		
+		for(prodottoOrdineBean po: ordine.getProdottiOrdine()) {
+			prodottoOrdine.doSave(po);
+		}
+		
 	}
 
 	@Override

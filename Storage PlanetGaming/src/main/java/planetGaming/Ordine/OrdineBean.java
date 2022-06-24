@@ -3,19 +3,19 @@ package planetGaming.Ordine;
 import java.io.Serializable;
 import java.util.Collection;
 
-import planetGaming.Videogioco.VideogiocoBean;
-
 
 public class OrdineBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int idOrdine;
 	private int idUtente;
+	private int idModalitaPagamento;
+	private int idIndirizzo;
 	private int prezzoTotale;
 	private String dataOrdine;
 	private String tracking;
-	private String modalitaPagamento;
-	private Collection<VideogiocoBean> prodottiOrdine;
+	
+	private Collection<prodottoOrdineBean> prodottiOrdine;
 	
 	
 	public OrdineBean() {
@@ -23,18 +23,29 @@ public class OrdineBean implements Serializable {
 	}
 	
 	
-	
+	public Collection<prodottoOrdineBean> getProdottiOrdine() {
+		return prodottiOrdine;
+	}
+	public void setProdottiOrdine(Collection<prodottoOrdineBean> prodottiOrdine) {
+		this.prodottiOrdine = prodottiOrdine;
+	}
+	public int getIdModalitaPagamento() {
+		return idModalitaPagamento;
+	}
+	public void setIdModalitaPagamento(int idModalitaPagamento) {
+		this.idModalitaPagamento = idModalitaPagamento;
+	}
+	public int getIdIndirizzo() {
+		return idIndirizzo;
+	}
+	public void setIdIndirizzo(int idIndirizzo) {
+		this.idIndirizzo = idIndirizzo;
+	}
 	public String getTracking() {
 		return tracking;
 	}
 	public void setTracking(String tracking) {
 		this.tracking = tracking;
-	}
-	public String getModalitaPagamento() {
-		return modalitaPagamento;
-	}
-	public void setModalitaPagamento(String modalitaPagamento) {
-		this.modalitaPagamento = modalitaPagamento;
 	}
 	public int getIdUtente() {
 		return idUtente;
@@ -59,12 +70,6 @@ public class OrdineBean implements Serializable {
 	}
 	public void setDataOrdine(String dataOrdine) {
 		this.dataOrdine = dataOrdine;
-	}
-	public Collection<VideogiocoBean> getProdottiOrdine() {
-		return prodottiOrdine;
-	}
-	public void setProdottiOrdine(Collection<VideogiocoBean> prodottiOrdine) {
-		this.prodottiOrdine = prodottiOrdine;
 	}
 	
 	
