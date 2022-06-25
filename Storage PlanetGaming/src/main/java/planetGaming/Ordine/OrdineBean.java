@@ -22,6 +22,16 @@ public class OrdineBean implements Serializable {
 		super();
 	}
 	
+	public void notSetProdottiOrdine(OrdineBean ordine) {
+		this.idOrdine = ordine.getIdOrdine();
+		this.idUtente = ordine.getIdUtente();
+		this.idModalitaPagamento = ordine.getIdModalitaPagamento();
+		this.idIndirizzo = ordine.getIdIndirizzo();
+		this.prezzoTotale = ordine.getPrezzoTotale();
+		this.dataOrdine = ordine.getDataOrdine();
+		this.tracking = ordine.getTracking();
+		this.prodottiOrdine = null;
+	}
 	
 	public Collection<prodottoOrdineBean> getProdottiOrdine() {
 		return prodottiOrdine;

@@ -2,8 +2,10 @@ package planetGaming.Ordine;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -75,8 +77,46 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 
 	@Override
 	public Collection<prodottoOrdineBean> doRetrieveAll(String order) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Collection<prodottoOrdineBean> prodottiOrdine = new LinkedList<prodottoOrdineBean>();
+		
+		String querySQL = "select * from "+ prodottoOrdineDAO.TABLE_NAME;
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(querySQL);
+			
+			//parte centrale del codice
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				prodottoOrdineBean prodottoOrdine = new prodottoOrdineBean();
+
+				prodottoOrdine.setIdProdottoOrdine(((rs.getInt("idProdottiOrdine"))));
+				prodottoOrdine.setIdOrdine(((rs.getInt("idOrdine"))));
+				prodottoOrdine.setIdVideogioco(((rs.getInt("idVideogioco"))));
+				prodottoOrdine.setNomeVideogioco(((rs.getString("nome"))));
+				prodottoOrdine.setPrezzoAcquisto(((rs.getDouble("prezzoAcquisto"))));
+				prodottoOrdine.setScontoAcquisto(((rs.getDouble("scontoAcquisto"))));
+				prodottoOrdine.setQuantitaAcquisto(((rs.getInt("quantitaAcquisto"))));
+				prodottoOrdine.setIva(((rs.getDouble("iva"))));
+				
+				prodottiOrdine.add(prodottoOrdine);
+			}
+			return prodottiOrdine;
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+
 	}
 
 }

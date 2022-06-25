@@ -17,8 +17,7 @@ import planetGaming.Indirizzo.IndirizzoBean;
 import planetGaming.Indirizzo.IndirizzoDAO;
 import planetGaming.MetodoPagamento.MetodoPagamentoBean;
 import planetGaming.MetodoPagamento.MetodoPagamentoDAO;
-import planetGaming.Ordine.OrdineBean;
-import planetGaming.Ordine.OrdineDAO;
+import planetGaming.Ordine.*;
 
 /**
  * Servlet implementation class UserInfo
@@ -59,6 +58,8 @@ public class UserInfo extends HttpServlet {
 		Collection<IndirizzoBean> indirizzi, bufferIndirizzi;
 		
 		Collection<OrdineBean> ordini, bufferOrdini;
+		
+		Collection<prodottoOrdineBean> prodottiOrdine, bufferProdottiOrdine;
 		
 		
 		
@@ -110,26 +111,42 @@ public class UserInfo extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			//TODO inserire qualcosa tra gli apici di equals
-			/*
+
 			if(action.equals("")) {
 				bufferOrdini = new LinkedList<OrdineBean>();
 				ordini = new LinkedList<OrdineBean>();
+				
+				bufferProdottiOrdine = new LinkedList<prodottoOrdineBean>();
+				prodottiOrdine = new LinkedList<prodottoOrdineBean>();
+				
 				ordineDao = new OrdineDAO();
+				ordineBean = new OrdineBean();
+				
 				
 				userId = (Integer) request.getSession().getAttribute("userId");
 				
 				
 				try {
 					//TODO finire di sistemare il dao ordine
-					bufferOrdini = ordineDao.doRetrieveAll("ASC");
+					bufferOrdini = ordineDao.doRetrieveAll("ASC"); 
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 				
 				for(OrdineBean ord: bufferOrdini) {
 					if(ord.getIdUtente() == userId) {
+						ordineBean.notSetProdottiOrdine(ord);
+						ordineBean.setProdottiOrdine(new LinkedList<prodottoOrdineBean>());
+						
+						bufferProdottiOrdine = ord.getProdottiOrdine();
+						for(prodottoOrdineBean pOrd: bufferProdottiOrdine) {
+							
+							if(pOrd.getIdOrdine() == ord.getIdOrdine()){
+								ordineBean.getProdottiOrdine().add(pOrd);
+							}
+						}
+						
 						ordini.add(ord);
 					}
 				}
@@ -139,7 +156,6 @@ public class UserInfo extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
 				dispatcher.forward(request, response);
 			}
-			*/
 			
 			
 			

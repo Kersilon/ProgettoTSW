@@ -1,6 +1,5 @@
 package planetGaming.Ordine;
 
-import java.sql.Connection;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -10,6 +9,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import planetGaming.MetodoPagamento.MetodoPagamentoDAO;
+import planetGaming.Videogioco.VideogiocoBean;
+import planetGaming.Videogioco.VideogiocoDAO;
 
 import java.sql.*;
 
@@ -32,7 +33,7 @@ public class OrdineDAO implements OrdineModel{
 }
 	
 	private static final String TABLE_NAME = "ordine";
-	prodottoOrdineDAO prodottoOrdine = new prodottoOrdineDAO();
+	prodottoOrdineDAO prodottoOrdineDao = new prodottoOrdineDAO();
 	
 	@Override
 	public synchronized void doSave(OrdineBean ordine) throws SQLException {
@@ -68,13 +69,14 @@ public class OrdineDAO implements OrdineModel{
 		}
 		
 		for(prodottoOrdineBean po: ordine.getProdottiOrdine()) {
-			prodottoOrdine.doSave(po);
+			prodottoOrdineDao.doSave(po);
 		}
 		
 	}
 
 	@Override
 	public synchronized OrdineBean doRetrieveByKey(int codice) throws SQLException {
+		/*
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -104,6 +106,9 @@ public class OrdineDAO implements OrdineModel{
 			}
 		}
 		return bean;
+		*/
+		//TODO ricorda di togliere "return null;"
+		return null;
 	}
 
 	@Override
@@ -138,29 +143,35 @@ public class OrdineDAO implements OrdineModel{
 	public synchronized Collection<OrdineBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		
 		Collection<OrdineBean> ordini = new LinkedList<OrdineBean>();
-
-		String selectSQL = "SELECT * FROM " + OrdineDAO.TABLE_NAME;
-
-		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
-		}
-
+		
+		String querySQL = "select * from "+ OrdineDAO.TABLE_NAME;
+		
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-
+			preparedStatement = connection.prepareStatement(querySQL);
+			
+			//parte centrale del codice
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				OrdineBean bean = new OrdineBean();
+				OrdineBean ordine = new OrdineBean();
 
-				bean.setCodice(rs.getInt("CODICE"));
+				ordine.setIdOrdine((rs.getInt("idOrdine")));
+				ordine.setIdUtente((rs.getInt("idUtente")));
+				ordine.setIdModalitaPagamento((rs.getInt("idModalitaPagamento")));
+				ordine.setIdIndirizzo((rs.getInt("idIndirizzo")));
+				ordine.setPrezzoTotale((rs.getInt("prezzoTotale")));
+				ordine.setDataOrdine((rs.getString("data")));
+				ordine.setTracking((rs.getString("tracking")));
 				
-				ordini.add(bean);
+				ordine.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll("ASC"));
+				ordini.add(ordine);
 			}
-
+			
+			return ordini;
+			
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -170,8 +181,6 @@ public class OrdineDAO implements OrdineModel{
 					connection.close();
 			}
 		}
-		return ordini;
+
 	}
-
-
 }
