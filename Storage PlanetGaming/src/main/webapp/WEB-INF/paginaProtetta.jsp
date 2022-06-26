@@ -160,6 +160,11 @@
 		<input type="submit" value="Logout"/>
 	</form>
 	
+	<form action="UserInfo" method="get">
+		<input type="hidden" name="action" value="ordini"> 
+		<input type="submit" value="Ordini"/>
+	</form>
+	
 	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

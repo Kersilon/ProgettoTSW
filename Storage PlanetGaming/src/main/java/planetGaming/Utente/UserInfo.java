@@ -112,7 +112,7 @@ public class UserInfo extends HttpServlet {
 			}
 			//TODO inserire qualcosa tra gli apici di equals
 
-			if(action.equals("")) {
+			if(action.equals("ordini")) {
 				bufferOrdini = new LinkedList<OrdineBean>();
 				ordini = new LinkedList<OrdineBean>();
 				

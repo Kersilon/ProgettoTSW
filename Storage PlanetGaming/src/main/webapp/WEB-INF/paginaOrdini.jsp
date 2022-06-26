@@ -33,7 +33,7 @@
 	<table>
 		<tr>
 			<th>id Order</th>
-			<th>Videogames</th>
+			<th>id User</th>
 	  	</tr>
 	  	
 		  <!-- contenuto tabella -->
@@ -44,13 +44,26 @@
 				while (it.hasNext()) {
 					OrdineBean ordine = (OrdineBean) it.next();
 		%>
-			<tr>
-				<td><%=ordine.getIdOrdine()%></td>
-		  	</tr>
+					<tr>
+						<td>idOrdine:<%=ordine.getIdOrdine()%></td>
+						<td>idUtente:<%=ordine.getIdUtente()%></td>
+		  			</tr>
+		  			
+		  			
 			
 	<%
-				}
+					Iterator<?> itProdotti = ordine.getProdottiOrdine().iterator();
+					while (itProdotti.hasNext()) {
+						prodottoOrdineBean prodottoOrdine = (prodottoOrdineBean) itProdotti.next();
 	%>
+						<tr>
+							<td>idOrdine del prodotto: <%=prodottoOrdine.getIdOrdine()%></td>
+			  			</tr>
+			 <%
+					}
+				}
+			 %>
+			  			
 
 	</table>
 	<jsp:include page="/WEB-INF/footer.jsp" />
