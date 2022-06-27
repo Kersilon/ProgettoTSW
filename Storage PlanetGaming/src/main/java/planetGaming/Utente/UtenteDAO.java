@@ -10,6 +10,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import planetGaming.Videogioco.VideogiocoDAO;
+
 
 public class UtenteDAO implements UtenteModel {
 	private static DataSource ds;
@@ -110,7 +112,6 @@ public class UtenteDAO implements UtenteModel {
 
 	
 	@Override
-	//TODO cambiare nel DB le chiavi primarie dell'utente in email e password
 	public synchronized UtenteBean doRetrieveByKey(String email, String password) throws SQLException {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
@@ -148,5 +149,77 @@ public class UtenteDAO implements UtenteModel {
 			}
 			return utenteBean;
 		}
+	
+		public synchronized UtenteBean doRetrieveByKey(int idUtente) throws SQLException {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			
+			UtenteBean utenteBean = new UtenteBean();
+			String selectSQL = "SELECT * FROM " + UtenteDAO.TABLE_NAME + " WHERE codiceUtente=?";
+	
+			try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(selectSQL);
+				preparedStatement.setInt(1, idUtente);
+				ResultSet rs = preparedStatement.executeQuery();
+	
+				while (rs.next()) {
+					utenteBean.setNome(rs.getString("Nome"));
+					utenteBean.setCognome(rs.getString("Cognome"));
+					utenteBean.setDataNascita(rs.getString("dataNascita"));
+					utenteBean.setNomeUtente(rs.getString("nomeUtente"));
+					utenteBean.setPassword(rs.getString("password"));
+					utenteBean.setEmail(rs.getString("email"));
+					utenteBean.setTelefono(rs.getString("#telefono"));
+					utenteBean.setCodiceUtente(rs.getInt("codiceUtente"));
+					utenteBean.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
+				}
+	
+			} finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+			return utenteBean;
+	}
 
+		@Override
+		public void doUpdate(UtenteBean utente) throws SQLException {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			
+			String querySQL = "UPDATE " +UtenteDAO.TABLE_NAME+ " SET nome=?, cognome=?, dataNascita=?, nomeUtente=?, password=?, email=?, `#telefono`=?, `#acquisti`=?, AMMINISTRATORE=?, dataRegistrazione=? WHERE codiceUtente=?";
+			
+			try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(querySQL);
+				
+				// inserisci quì il contentuo
+				preparedStatement.setString(1, utente.getNome());
+				preparedStatement.setString(2, utente.getCognome());
+				preparedStatement.setString(3, utente.getDataNascita());
+				preparedStatement.setString(4, utente.getNomeUtente());
+				preparedStatement.setString(5, utente.getPassword());
+				preparedStatement.setString(6, utente.getEmail());
+				preparedStatement.setString(7, utente.getTelefono());
+				preparedStatement.setInt(8, utente.getAcquisti());
+				preparedStatement.setInt(9, utente.getAMMINISTRATORE());
+				preparedStatement.setString(10, utente.getDataRegistrazione());
+				preparedStatement.setInt(11, utente.getCodiceUtente());
+				
+				preparedStatement.executeUpdate();
+			} finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+		}
 }

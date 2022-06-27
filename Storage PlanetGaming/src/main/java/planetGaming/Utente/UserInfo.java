@@ -52,6 +52,8 @@ public class UserInfo extends HttpServlet {
 		OrdineBean ordineBean;
 		OrdineDAO ordineDao;
 		
+		UtenteBean utenteBean;
+		UtenteDAO utenteDao;
 		
 		Collection<MetodoPagamentoBean> metodiPagamento, bufferMetodiPagamento;
 		
@@ -62,9 +64,10 @@ public class UserInfo extends HttpServlet {
 		Collection<prodottoOrdineBean> prodottiOrdine, bufferProdottiOrdine;
 		
 		
-		
+		userId = (Integer) request.getSession().getAttribute("userId");
 		metodoPagamentoDao = new MetodoPagamentoDAO();
 		indirizzoDao = new IndirizzoDAO();
+		utenteDao = new UtenteDAO();
 		
 		action = request.getParameter("action");
 		if(action != null) {
@@ -123,7 +126,7 @@ public class UserInfo extends HttpServlet {
 				ordineBean = new OrdineBean();
 				
 				
-				userId = (Integer) request.getSession().getAttribute("userId");
+				
 				
 				
 				try {
@@ -155,6 +158,37 @@ public class UserInfo extends HttpServlet {
 				
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
 				dispatcher.forward(request, response);
+			}
+			if(action.equals("modifyUserData")) {
+				utenteBean = null;
+				
+				try {
+					utenteBean = utenteDao.doRetrieveByKey(userId);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				//TODO inserire qualcosa nei valori di request.getParameter
+				if(request.getParameter("nomeUtente") != null && !request.getParameter("nomeUtente").equals(""))
+				{
+					utenteBean.setNomeUtente(request.getParameter("nomeUtente"));
+				}
+				
+				if(request.getParameter("password") != null && !request.getParameter("password").equals(""))
+				{
+					utenteBean.setPassword(request.getParameter("password"));
+				}
+				
+				if(request.getParameter("telefono") != null && !request.getParameter("telefono").equals(""))
+				{
+					utenteBean.setTelefono(request.getParameter("telefono"));
+				}
+				
+				try {
+					utenteDao.doUpdate(utenteBean);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			
@@ -211,6 +245,21 @@ public class UserInfo extends HttpServlet {
 			}
 			
 			request.getSession().setAttribute("indirizzi", indirizzi);
+			
+			
+			
+			//TODO eseguire la visualizzazione di tutti i dati dell'utente solo se si preme un pulsante
+			//inserisco nella sessione i dati dell'utente
+			utenteBean = new UtenteBean();
+			
+			try {
+				utenteBean = utenteDao.doRetrieveByKey(userId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			request.getSession().setAttribute("datiUtente", utenteBean);
 			
 			
 			

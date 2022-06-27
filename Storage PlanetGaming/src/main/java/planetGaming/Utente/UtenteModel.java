@@ -1,6 +1,8 @@
 package planetGaming.Utente;
 import java.sql.SQLException;
 
+import planetGaming.Videogioco.VideogiocoBean;
+
 public interface UtenteModel {
 	public void doSave(UtenteBean utente) throws SQLException;
 
@@ -11,4 +13,6 @@ public interface UtenteModel {
 	
 	//non credo servirà
 	//public Collection</*TODO tipo*/> doRetrieveAll(String order/*TODO da modificare*/) throws SQLException;
+	
+	public void doUpdate(UtenteBean utente) throws SQLException;
 }

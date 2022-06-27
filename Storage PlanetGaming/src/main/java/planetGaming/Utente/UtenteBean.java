@@ -14,14 +14,40 @@ public class UtenteBean implements Serializable {
 	private String password;
 	private String email;
 	private String telefono;
+	private int acquisti;
 	private int codiceUtente;
+	private String dataRegistrazione;
 	private boolean AMMINISTRATORE;
 
+	
+	
+	public String getDataRegistrazione() {
+		return dataRegistrazione;
+	}
+
+	public void setDataRegistrazione(String dataRegistrazione) {
+		this.dataRegistrazione = dataRegistrazione;
+	}
+
+	public int getAcquisti() {
+		return acquisti;
+	}
+	
+	public void setAcquisti(int acquisti) {
+		this.acquisti = acquisti;
+	}
 	
 	public boolean isAMMINISTRATORE() {
 		return AMMINISTRATORE;
 	}
-
+	
+	public int getAMMINISTRATORE() {
+		if(this.isAMMINISTRATORE()) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 	public void setAMMINISTRATORE(boolean aMMINISTRATORE) {
 		AMMINISTRATORE = aMMINISTRATORE;
 	}
