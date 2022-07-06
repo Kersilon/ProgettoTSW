@@ -191,7 +191,7 @@ public class UserInfo extends HttpServlet {
 				}
 			}
 			
-			
+			//TODO inserire questo codice in dei blocchi if dell'action
 			
 			//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
 			//prende e inserisce nella request tutti i metodi di pagamento dell'utente

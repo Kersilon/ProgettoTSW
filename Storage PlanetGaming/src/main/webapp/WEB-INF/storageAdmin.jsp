@@ -106,7 +106,7 @@
 			Price: 			<input name="prezzo_vetrina" 		type="text" 	maxlength="20" required placeholder="enter name"><br>
 			<p class="ErrorParagraph"></p>
 			
-			Date: 			<input name="data_uscita" 			type="text" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+			Date: 			<input name="data_uscita" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
 			<p class="ErrorParagraph"></p>
 			
 			Platform: 		<input name="piattaforma" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
