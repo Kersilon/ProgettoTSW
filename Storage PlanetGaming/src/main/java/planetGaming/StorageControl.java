@@ -60,12 +60,14 @@ public class StorageControl extends HttpServlet {
 				videogiocoBean.setEdizione(										req.getParameter("edizione"));
 				videogiocoBean.setDescrizione(									req.getParameter("descrizione"));
 				videogiocoBean.setPrezzo_vetrina(	Double.parseDouble(			req.getParameter("prezzo_vetrina")));
+				
 				try {
 					videogiocoBean.setData_uscita(									new java.sql.Date(formatter.parse(req.getParameter("data_uscita")).getTime()));
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
 				videogiocoBean.setPiattaforma(									req.getParameter("piattaforma"));
 				videogiocoBean.setConsole(										req.getParameter("console"));
 				videogiocoBean.setSconto(			Integer.parseInt(			req.getParameter("sconto")));
