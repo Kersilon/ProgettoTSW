@@ -1,6 +1,7 @@
 package planetGaming.Ordine;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Collection;
 
 
@@ -12,7 +13,7 @@ public class OrdineBean implements Serializable {
 	private int idModalitaPagamento;
 	private int idIndirizzo;
 	private int prezzoTotale;
-	private String dataOrdine;
+	private Date dataOrdine;
 	private String tracking;
 	
 	private Collection<prodottoOrdineBean> prodottiOrdine;
@@ -75,10 +76,10 @@ public class OrdineBean implements Serializable {
 	public void setPrezzoTotale(int prezzoTotale) {
 		this.prezzoTotale = prezzoTotale;
 	}
-	public String getDataOrdine() {
+	public Date getDataOrdine() {
 		return dataOrdine;
 	}
-	public void setDataOrdine(String dataOrdine) {
+	public void setDataOrdine(Date dataOrdine) {
 		this.dataOrdine = dataOrdine;
 	}
 	

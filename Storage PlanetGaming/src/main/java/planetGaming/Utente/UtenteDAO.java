@@ -10,8 +10,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import planetGaming.Videogioco.VideogiocoDAO;
-
 
 public class UtenteDAO implements UtenteModel {
 	private static DataSource ds;
@@ -208,7 +206,7 @@ public class UtenteDAO implements UtenteModel {
 				preparedStatement.setString(7, utente.getTelefono());
 				preparedStatement.setInt(8, utente.getAcquisti());
 				preparedStatement.setInt(9, utente.getAMMINISTRATORE());
-				preparedStatement.setString(10, utente.getDataRegistrazione());
+				preparedStatement.setDate(10, utente.getDataRegistrazione());
 				preparedStatement.setInt(11, utente.getCodiceUtente());
 				
 				preparedStatement.executeUpdate();

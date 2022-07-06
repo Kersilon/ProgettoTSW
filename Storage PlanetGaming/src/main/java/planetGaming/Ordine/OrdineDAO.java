@@ -8,10 +8,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import planetGaming.MetodoPagamento.MetodoPagamentoDAO;
-import planetGaming.Videogioco.VideogiocoBean;
-import planetGaming.Videogioco.VideogiocoDAO;
-
 import java.sql.*;
 
 
@@ -52,7 +48,7 @@ public class OrdineDAO implements OrdineModel{
 			preparedStatement.setInt(	2, ordine.getIdModalitaPagamento());
 			preparedStatement.setInt(	3, ordine.getIdIndirizzo());
 			preparedStatement.setInt(	4, ordine.getPrezzoTotale());
-			preparedStatement.setString(5, ordine.getDataOrdine());
+			preparedStatement.setDate(5, ordine.getDataOrdine());
 			preparedStatement.setString(6, ordine.getTracking());
 			
 			preparedStatement.executeUpdate();
@@ -163,7 +159,7 @@ public class OrdineDAO implements OrdineModel{
 				ordine.setIdModalitaPagamento((rs.getInt("idModalitaPagamento")));
 				ordine.setIdIndirizzo((rs.getInt("idIndirizzo")));
 				ordine.setPrezzoTotale((rs.getInt("prezzoTotale")));
-				ordine.setDataOrdine((rs.getString("data")));
+				ordine.setDataOrdine((rs.getDate("data")));
 				ordine.setTracking((rs.getString("tracking")));
 				
 				ordine.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll("ASC"));

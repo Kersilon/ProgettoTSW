@@ -1,6 +1,7 @@
 package planetGaming.Utente;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class UtenteBean implements Serializable {
 
@@ -16,16 +17,16 @@ public class UtenteBean implements Serializable {
 	private String telefono;
 	private int acquisti;
 	private int codiceUtente;
-	private String dataRegistrazione;
+	private Date dataRegistrazione;
 	private boolean AMMINISTRATORE;
 
 	
 	
-	public String getDataRegistrazione() {
+	public Date getDataRegistrazione() {
 		return dataRegistrazione;
 	}
 
-	public void setDataRegistrazione(String dataRegistrazione) {
+	public void setDataRegistrazione(Date dataRegistrazione) {
 		this.dataRegistrazione = dataRegistrazione;
 	}
 
