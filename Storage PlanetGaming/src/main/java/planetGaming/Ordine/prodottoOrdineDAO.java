@@ -119,4 +119,50 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 
 	}
 
+	@Override
+	public Collection<prodottoOrdineBean> doRetrieveAll(int idOrdine) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Collection<prodottoOrdineBean> prodottiOrdine = new LinkedList<prodottoOrdineBean>();
+		
+		String querySQL = "select * from "+ prodottoOrdineDAO.TABLE_NAME +" where idOrdine = ?";
+		//SELECT * FROM planetgaming.inclusione where idOrdine = 1;
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(querySQL);
+			preparedStatement.setInt(1, idOrdine);
+			
+			//parte centrale del codice
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				prodottoOrdineBean prodottoOrdine = new prodottoOrdineBean();
+
+				prodottoOrdine.setIdProdottoOrdine(((rs.getInt("idProdottiOrdine"))));
+				prodottoOrdine.setIdOrdine(((rs.getInt("idOrdine"))));
+				prodottoOrdine.setIdVideogioco(((rs.getInt("idVideogioco"))));
+				prodottoOrdine.setNomeVideogioco(((rs.getString("nome"))));
+				prodottoOrdine.setPrezzoAcquisto(((rs.getDouble("prezzoAcquisto"))));
+				prodottoOrdine.setScontoAcquisto(((rs.getDouble("scontoAcquisto"))));
+				prodottoOrdine.setQuantitaAcquisto(((rs.getInt("quantitaAcquisto"))));
+				prodottoOrdine.setIva(((rs.getDouble("iva"))));
+				
+				prodottiOrdine.add(prodottoOrdine);
+			}
+			return prodottiOrdine;
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+
+	}
+
 }
