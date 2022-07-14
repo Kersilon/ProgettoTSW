@@ -3,7 +3,9 @@ package planetGaming;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,6 +43,8 @@ public class StorageControl extends HttpServlet {
 		String action = req.getParameter("action");
 		String fileName;
 		FileSupport fs = new FileSupport();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
 		
 		if(action != null)
 		{
@@ -56,7 +60,14 @@ public class StorageControl extends HttpServlet {
 				videogiocoBean.setEdizione(										req.getParameter("edizione"));
 				videogiocoBean.setDescrizione(									req.getParameter("descrizione"));
 				videogiocoBean.setPrezzo_vetrina(	Double.parseDouble(			req.getParameter("prezzo_vetrina")));
-				videogiocoBean.setData_uscita(									req.getParameter("data_uscita"));
+				
+				try {
+					videogiocoBean.setData_uscita(									new java.sql.Date(formatter.parse(req.getParameter("data_uscita")).getTime()));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				videogiocoBean.setPiattaforma(									req.getParameter("piattaforma"));
 				videogiocoBean.setConsole(										req.getParameter("console"));
 				videogiocoBean.setSconto(			Integer.parseInt(			req.getParameter("sconto")));
@@ -126,7 +137,12 @@ public class StorageControl extends HttpServlet {
 				
 				if(req.getParameter("data_uscita") != null && !req.getParameter("data_uscita").equals(""))
 				{
-					videogiocoBean.setData_uscita(req.getParameter("data_uscita"));
+					try {
+						videogiocoBean.setData_uscita(new java.sql.Date(formatter.parse(req.getParameter("data_uscita")).getTime()));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				
 				

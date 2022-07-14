@@ -1,6 +1,7 @@
 package planetGaming.Utente;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class UtenteBean implements Serializable {
 
@@ -9,19 +10,45 @@ public class UtenteBean implements Serializable {
 	
 	private String nome;
 	private String cognome;
-	private String dataNascita;
+	private Date dataNascita;
 	private String nomeUtente;
 	private String password;
 	private String email;
 	private String telefono;
+	private int acquisti;
 	private int codiceUtente;
+	private Date dataRegistrazione;
 	private boolean AMMINISTRATORE;
 
+	
+	
+	public Date getDataRegistrazione() {
+		return dataRegistrazione;
+	}
+
+	public void setDataRegistrazione(Date dataRegistrazione) {
+		this.dataRegistrazione = dataRegistrazione;
+	}
+
+	public int getAcquisti() {
+		return acquisti;
+	}
+	
+	public void setAcquisti(int acquisti) {
+		this.acquisti = acquisti;
+	}
 	
 	public boolean isAMMINISTRATORE() {
 		return AMMINISTRATORE;
 	}
-
+	
+	public int getAMMINISTRATORE() {
+		if(this.isAMMINISTRATORE()) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 	public void setAMMINISTRATORE(boolean aMMINISTRATORE) {
 		AMMINISTRATORE = aMMINISTRATORE;
 	}
@@ -66,11 +93,11 @@ public class UtenteBean implements Serializable {
 		this.cognome = cognome;
 	}
 
-	public String getDataNascita() {
+	public Date getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(String dataNascita) {
+	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 

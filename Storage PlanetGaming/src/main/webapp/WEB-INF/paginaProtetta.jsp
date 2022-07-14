@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ page import="java.util.*" import="planetGaming.MetodoPagamento.*" import="planetGaming.Indirizzo.*"%>
+<%@ page import="java.util.*" import="planetGaming.MetodoPagamento.*" import="planetGaming.Indirizzo.*" import="planetGaming.Utente.*"%>
 
 <%
 	//Check user credentials
@@ -15,6 +15,7 @@
 	
 	Collection<?> metodiPagamento = (Collection<?>) request.getSession().getAttribute("metodiPagamento");
 	Collection<?> indirizzi = (Collection<?>) request.getSession().getAttribute("indirizzi");
+	UtenteBean datiUtente = (UtenteBean) request.getSession().getAttribute("datiUtente");
 	
 %>
 
@@ -28,6 +29,7 @@
 </head>
 <body>
 	<script type="text/javascript" src="ControllaCredenziali.js"></script>
+	<script type="text/javascript" src="HideShowButton.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 	
 	<h1>Welcome to the user page</h1><br>
@@ -102,6 +104,39 @@
 				}
 	%>
 	
+	</table>
+	
+	
+	
+	<h2>User's data</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Surname</th>
+			<th>Birth date</th>
+			<th>Username</th>
+			<th>Password
+				<button type="button" id ="ShowButton" onclick ="show()">Show</button>
+				<button type="button" id ="HideButton" onclick ="hide()">Hide</button>
+			</th>
+			<th>Email</th>
+			<th>Phone number</th>
+			<th>UserId</th>
+			<th>Admin?</th>
+	  	</tr>
+		  <!-- contenuto tabella -->
+	  
+			<tr>
+				<td><%=datiUtente.getNome()%></td>
+				<td><%=datiUtente.getCognome()%></td>
+				<td><%=datiUtente.getDataNascita()%></td>
+				<td><%=datiUtente.getNomeUtente()%></td>
+				<td><div  class ="hide"><%=datiUtente.getPassword()%></div></td>
+				<td><%=datiUtente.getEmail()%></td>
+				<td><%=datiUtente.getTelefono()%></td>
+				<td><%=datiUtente.getCodiceUtente()%></td>
+				<td><%=datiUtente.isAMMINISTRATORE()%></td>
+		  	</tr>
 	</table>		
 	
 	
@@ -156,8 +191,54 @@
 		</fieldset>
 	</form>
 	
+	<form id="modifyUsername" action="UserInfo" method="post">
+		<fieldset>
+			<legend>modify Username</legend>
+			<input type="hidden" name="action" value="modifyUserData">
+			
+			Username: 	<input name="nomeUtente" 	type="text" 						maxlength="20" placeholder="enter username"			><br>
+			
+			<input type="submit" value="Modify"/>
+			<input type="reset" value="Reset"/>
+		</fieldset>
+	</form>
+	
+	
+	<form id="modifyPassword" action="UserInfo" method="post">
+		<fieldset>
+			<legend>modify Password</legend>
+			<input type="hidden" name="action" value="modifyUserData">
+			
+			Password: 	<input name="password" 		type="password"				 		maxlength="20" placeholder="enter password"			><br>
+			<p class="ErrorParagraph"></p>
+							
+			<button type="button" onclick ="checkModify('modifyPassword', checkPassword)">Modify</button>
+			<input type="reset" value="Reset"/>
+		</fieldset>
+	</form>
+	
+	
+	<form id="modifyPhone" action="UserInfo" method="post">
+		<fieldset>
+			<legend>modify Phone</legend>
+			<input type="hidden" name="action" value="modifyUserData">
+			
+			telephone: 	<input name="telefono" 		type="number"						maxlength="20" placeholder="enter telephone number"	><br>
+			<p class="ErrorParagraph"></p>
+			
+			<button type="button" onclick ="checkModify('modifyPhone', checkPhone)">Modify</button>
+			<input type="reset" value="Reset"/>
+		</fieldset>
+	</form>
+	
+	
 	<form action="Logout" method="get">
 		<input type="submit" value="Logout"/>
+	</form>
+	
+	<form action="UserInfo" method="get">
+		<input type="hidden" name="action" value="ordini"> 
+		<input type="submit" value="Ordini"/>
 	</form>
 	
 	<jsp:include page="/WEB-INF/footer.jsp" />

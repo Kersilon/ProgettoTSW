@@ -20,14 +20,14 @@ function checkEmail(){
 	}
 }
 
-function checkPassword(){
+function checkPassword(form, indexError){
 	let password;
 	let passwordError;
 	let regex;
 	
 	regex = /(?=.*[0-9])/;	//deve esserci almeno un numero
-	password = document.getElementById("password").value;
-	passwordError = document.getElementById("passwordError");
+	password = document.forms[form]["password"].value;
+	passwordError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 
 	if(regex.test(password)){
 		passwordError.innerHTML = "";
@@ -56,14 +56,14 @@ function checkBirthDate(){
 	}
 }
 
-function checkPhone(){
+function checkPhone(form, indexError){
 	let phone;
 	let phoneError;
 	let regex;
 	
 	regex = /^(\+)?([ 0-9]){10,16}$/; //si possono inserire prefissi come "+39"
-	phone = document.getElementById("telefono").value;
-	phoneError = document.getElementById("phoneError");
+	phone = document.forms[form]["telefono"].value;
+	phoneError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
 	if(regex.test(phone)){
 		phoneError.innerHTML = "";
@@ -291,8 +291,7 @@ function checkId(form, indexError){
 
 
 
-
-function checkCredentialsLogin(){
+function checkCredentialsLogin(form){
 	let counter;
 	
 	
@@ -303,7 +302,7 @@ function checkCredentialsLogin(){
 	if(checkEmail()){
 		counter++;
 	}
-	if(checkPassword()){
+	if(checkPassword(form, 1)){
 		counter++;
 	}
 	
@@ -314,7 +313,7 @@ function checkCredentialsLogin(){
 	}
 }
 
-function checkCredentialsRegistration(){
+function checkCredentialsRegistration(form){
 		let counter;
 		
 		
@@ -323,13 +322,13 @@ function checkCredentialsRegistration(){
 		if(checkEmail()){
 		counter++;
 		}
-		if(checkPassword()){
+		if(checkPassword(form, 1)){
 		counter++;
 		}
 		if(checkBirthDate()){
 		counter++;
 		}
-		if(checkPhone()){
+		if(checkPhone(form, 3)){
 		counter++;
 		}
 		
@@ -412,6 +411,7 @@ function checkInsert(form){
 	}
 }
 
+/*
 function checkModify(form){
 		let counter;
 		
@@ -438,6 +438,54 @@ function checkModify(form){
 	if(counter == 5){
 		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
 		document.getElementById("modifyButton").setAttribute('type', 'submit');
+	}
+}
+*/
+
+function checkModify(form, checkFunction){
+	if(checkFunction(form, 0)){
+		document.forms[form].getElementsByTagName("button")[0].setAttribute('type', 'submit');
+	}
+}
+
+/*
+function checkId(form, indexError){
+	let id;
+	let idError;
+	let regex;
+	
+	regex = /^\d+$/;
+	id = document.forms[form]["codice_prodotto"].value;
+	idError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
+	
+	if(regex.test(id)){
+		idError.innerHTML = "";
+		return true;
+	}else{
+		idError.innerHTML = "id not valid";
+		return false;
+	}
+}
+*/
+
+function checkModifyUserData(form){
+		let counter;
+		
+		counter = 0;
+		
+		if(checkPassword(form, 0)){
+			counter++;
+		}
+
+		if(checkPhone(form, 1)){
+			counter++;
+		}
+
+		
+		
+	if(counter == 2){
+		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
+		document.getElementById("modifyUserDataButton").setAttribute('type', 'submit');
 	}
 }
 

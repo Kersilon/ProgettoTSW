@@ -50,7 +50,7 @@ public class VideogiocoDAO implements VideogiocoModel {
 			preparedStatement.setString(2, videogioco.getEdizione());
 			preparedStatement.setString(3, videogioco.getDescrizione());
 			preparedStatement.setDouble(4, videogioco.getPrezzo_vetrina());
-			preparedStatement.setString(5, videogioco.getData_uscita());
+			preparedStatement.setDate(5, videogioco.getData_uscita());
 			preparedStatement.setString(6, videogioco.getPiattaforma());
 			preparedStatement.setString(7, videogioco.getConsole());
 			preparedStatement.setInt(8, videogioco.getSconto());
@@ -127,7 +127,7 @@ public class VideogiocoDAO implements VideogiocoModel {
 				videogiocoBean.setEdizione(rs.getString("edizione"));
 				videogiocoBean.setDescrizione(rs.getString("descrizione"));
 				videogiocoBean.setPrezzo_vetrina(rs.getDouble("prezzo_vetrina"));
-				videogiocoBean.setData_uscita(rs.getString("data_uscita"));
+				videogiocoBean.setData_uscita(rs.getDate("data_uscita"));
 				videogiocoBean.setPiattaforma(rs.getString("piattaforma"));
 				videogiocoBean.setConsole(rs.getString("Console"));
 				videogiocoBean.setSconto(rs.getInt("sconto"));
@@ -175,7 +175,7 @@ public class VideogiocoDAO implements VideogiocoModel {
 				videogioco.setEdizione(rs.getString("edizione"));
 				videogioco.setDescrizione(rs.getString("descrizione"));
 				videogioco.setPrezzo_vetrina(rs.getDouble("prezzo_vetrina"));
-				videogioco.setData_uscita(rs.getString("data_uscita"));
+				videogioco.setData_uscita(rs.getDate("data_uscita"));
 				videogioco.setPiattaforma(rs.getString("piattaforma"));
 				videogioco.setConsole(rs.getString("console"));
 				videogioco.setSconto(rs.getInt("sconto"));
@@ -216,7 +216,7 @@ public class VideogiocoDAO implements VideogiocoModel {
 			preparedStatement.setString(2, videogioco.getEdizione());
 			preparedStatement.setString(3, videogioco.getDescrizione());
 			preparedStatement.setDouble(4, videogioco.getPrezzo_vetrina());
-			preparedStatement.setString(5, videogioco.getData_uscita());
+			preparedStatement.setDate(5, videogioco.getData_uscita());
 			preparedStatement.setString(6, videogioco.getPiattaforma());
 			preparedStatement.setString(7, videogioco.getConsole());
 			preparedStatement.setInt(8, videogioco.getSconto());

@@ -28,3 +28,7 @@ input:focus {
 .ErrorParagraph{
 	color: red;
 }
+
+#HideButton, .hide{
+	display: none;
+}

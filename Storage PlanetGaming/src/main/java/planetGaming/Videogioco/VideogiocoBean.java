@@ -2,6 +2,7 @@ package planetGaming.Videogioco;
 
 
 import java.io.Serializable;
+import java.sql.Date;
 
 
 public class VideogiocoBean implements Serializable {
@@ -14,7 +15,7 @@ public class VideogiocoBean implements Serializable {
 	private String edizione;
 	private String descrizione;
 	private double prezzo_vetrina;  
-	private String data_uscita;
+	private Date data_uscita;
 	private String piattaforma; 
 	private String Console; 
 	private Integer sconto; 
@@ -69,11 +70,11 @@ public class VideogiocoBean implements Serializable {
 		this.prezzo_vetrina = prezzo_vetrina;
 	}
 
-	public String getData_uscita() {
+	public Date getData_uscita() {
 		return data_uscita;
 	}
 
-	public void setData_uscita(String data_uscita) {
+	public void setData_uscita(Date data_uscita) {
 		this.data_uscita = data_uscita;
 	}
 

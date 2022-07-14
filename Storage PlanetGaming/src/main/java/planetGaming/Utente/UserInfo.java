@@ -17,8 +17,7 @@ import planetGaming.Indirizzo.IndirizzoBean;
 import planetGaming.Indirizzo.IndirizzoDAO;
 import planetGaming.MetodoPagamento.MetodoPagamentoBean;
 import planetGaming.MetodoPagamento.MetodoPagamentoDAO;
-import planetGaming.Ordine.OrdineBean;
-import planetGaming.Ordine.OrdineDAO;
+import planetGaming.Ordine.*;
 
 /**
  * Servlet implementation class UserInfo
@@ -53,6 +52,8 @@ public class UserInfo extends HttpServlet {
 		OrdineBean ordineBean;
 		OrdineDAO ordineDao;
 		
+		UtenteBean utenteBean;
+		UtenteDAO utenteDao;
 		
 		Collection<MetodoPagamentoBean> metodiPagamento, bufferMetodiPagamento;
 		
@@ -60,10 +61,13 @@ public class UserInfo extends HttpServlet {
 		
 		Collection<OrdineBean> ordini, bufferOrdini;
 		
+		Collection<prodottoOrdineBean> prodottiOrdine, bufferProdottiOrdine;
 		
 		
+		userId = (Integer) request.getSession().getAttribute("userId");
 		metodoPagamentoDao = new MetodoPagamentoDAO();
 		indirizzoDao = new IndirizzoDAO();
+		utenteDao = new UtenteDAO();
 		
 		action = request.getParameter("action");
 		if(action != null) {
@@ -110,26 +114,42 @@ public class UserInfo extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			//TODO inserire qualcosa tra gli apici di equals
-			/*
-			if(action.equals("")) {
+
+			if(action.equals("ordini")) {
 				bufferOrdini = new LinkedList<OrdineBean>();
 				ordini = new LinkedList<OrdineBean>();
-				ordineDao = new OrdineDAO();
 				
-				userId = (Integer) request.getSession().getAttribute("userId");
+				bufferProdottiOrdine = new LinkedList<prodottoOrdineBean>();
+				prodottiOrdine = new LinkedList<prodottoOrdineBean>();
+				
+				ordineDao = new OrdineDAO();
+				ordineBean = new OrdineBean();
+				
+				
+				
 				
 				
 				try {
 					//TODO finire di sistemare il dao ordine
-					bufferOrdini = ordineDao.doRetrieveAll("ASC");
+					bufferOrdini = ordineDao.doRetrieveAll("ASC"); 
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 				
 				for(OrdineBean ord: bufferOrdini) {
 					if(ord.getIdUtente() == userId) {
+						ordineBean.notSetProdottiOrdine(ord);
+						ordineBean.setProdottiOrdine(new LinkedList<prodottoOrdineBean>());
+						
+						bufferProdottiOrdine = ord.getProdottiOrdine();
+						for(prodottoOrdineBean pOrd: bufferProdottiOrdine) {
+							
+							if(pOrd.getIdOrdine() == ord.getIdOrdine()){
+								ordineBean.getProdottiOrdine().add(pOrd);
+							}
+						}
+						
 						ordini.add(ord);
 					}
 				}
@@ -139,9 +159,39 @@ public class UserInfo extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
 				dispatcher.forward(request, response);
 			}
-			*/
+			if(action.equals("modifyUserData")) {
+				utenteBean = null;
+				
+				try {
+					utenteBean = utenteDao.doRetrieveByKey(userId);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				//TODO inserire qualcosa nei valori di request.getParameter
+				if(request.getParameter("nomeUtente") != null && !request.getParameter("nomeUtente").equals(""))
+				{
+					utenteBean.setNomeUtente(request.getParameter("nomeUtente"));
+				}
+				
+				if(request.getParameter("password") != null && !request.getParameter("password").equals(""))
+				{
+					utenteBean.setPassword(request.getParameter("password"));
+				}
+				
+				if(request.getParameter("telefono") != null && !request.getParameter("telefono").equals(""))
+				{
+					utenteBean.setTelefono(request.getParameter("telefono"));
+				}
+				
+				try {
+					utenteDao.doUpdate(utenteBean);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 			
-			
+			//TODO inserire questo codice in dei blocchi if dell'action
 			
 			//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
 			//prende e inserisce nella request tutti i metodi di pagamento dell'utente
@@ -195,6 +245,21 @@ public class UserInfo extends HttpServlet {
 			}
 			
 			request.getSession().setAttribute("indirizzi", indirizzi);
+			
+			
+			
+			//TODO eseguire la visualizzazione di tutti i dati dell'utente solo se si preme un pulsante
+			//inserisco nella sessione i dati dell'utente
+			utenteBean = new UtenteBean();
+			
+			try {
+				utenteBean = utenteDao.doRetrieveByKey(userId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			request.getSession().setAttribute("datiUtente", utenteBean);
 			
 			
 			

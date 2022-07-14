@@ -1,5 +1,7 @@
 package planetGaming.Utente;
 import java.sql.SQLException;
+import java.util.Collection;
+
 
 public interface UtenteModel {
 	public void doSave(UtenteBean utente) throws SQLException;
@@ -9,6 +11,7 @@ public interface UtenteModel {
 	//TODO non implementato
 	public UtenteBean doRetrieveByKey(String email, String password) throws SQLException;
 	
-	//non credo servirà
-	//public Collection</*TODO tipo*/> doRetrieveAll(String order/*TODO da modificare*/) throws SQLException;
+	Collection<UtenteBean> doRetrieveAll() throws SQLException;
+	
+	public void doUpdate(UtenteBean utente) throws SQLException;
 }

@@ -17,11 +17,11 @@
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 
-	<form action="LoginStorage" method="post">
+	<form id="loginForm" action="LoginStorage" method="post">
 		<fieldset>
 			<legend>Login</legend>
 			<!-- da rendere hidden quando potrò spostarmi dallo storage alla pagina protetta durante l'esecuzione -->
-			<input name="action" value="storage"><br>
+			<input name="action" value="login"><br>
 					
 			<label for="email"> Login:</label>
 			<input type="text" name="email" id ="email" placeholder="enter Username" value="ersilio@gmail.com">
@@ -31,7 +31,7 @@
 			<input type="password" name="password" id="password" placeholder="enter Password" value="12345">
 			<p id="passwordError" class="ErrorParagraph"></p>	
 			<br>
-			<button type="button" id ="LoginButton" onclick ="checkCredentialsLogin()">Login</button>
+			<button type="button" id ="LoginButton" onclick ="checkCredentialsLogin('loginForm')">Login</button>
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>
