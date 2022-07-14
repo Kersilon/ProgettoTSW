@@ -1,6 +1,7 @@
 package planetGaming.Utente;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -45,10 +46,32 @@ public class AdministratorPageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		OrdineDAO ordineDao = new OrdineDAO();
 		Collection<OrdineBean> ordiniUtenti = new LinkedList<OrdineBean>();
+		
+		UtenteDAO utenteDao = new UtenteDAO();
+		Collection<UtenteBean> utenti = new LinkedList<UtenteBean>();
+		
 		String action = request.getParameter("action");
+		
+		Integer OrdersByUserId;
+		Date min;
+		Date max;
+		
+		
+		
+		
 		
 		if(action != null) {
 			
+				if(action.equals("clean")) {
+					request.getSession().removeAttribute("ordiniUtenti");
+					request.getSession().removeAttribute("utenti");
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
+					dispatcher.forward(request, response);
+				}
+			
+				
+				
 				if(action.equals("ShowOrders")) {
 					try {
 						ordiniUtenti = ordineDao.doRetrieveAll("ASC");
@@ -66,15 +89,50 @@ public class AdministratorPageServlet extends HttpServlet {
 				
 			
 				else if(action.equals("ShowOrdersByUser")) {
+					//System.out.println(request.getParameter("OrdersByUserId"));
+					OrdersByUserId = Integer.parseInt(request.getParameter("OrdersByUserId"));
+					
 					try {
-						System.out.println("in");
-						ordiniUtenti = ordineDao.doRetrieveAll(request.getParameter("OrdersByUserId"));
+						ordiniUtenti = ordineDao.doRetrieveAll(OrdersByUserId);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
 					request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+				
+				
+				else if(action.equals("ShowOrdersByDate")) {
+					min = Date.valueOf(request.getParameter("DateMin"));
+					max = Date.valueOf(request.getParameter("DateMax"));
+					
+					try {
+						ordiniUtenti = ordineDao.doRetrieveAll(min, max);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+				else if(action.equals("ShowUsers")) {
+					try {
+						utenti = utenteDao.doRetrieveAll();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					request.getSession().setAttribute("utenti", utenti);
 					
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
 					dispatcher.forward(request, response);

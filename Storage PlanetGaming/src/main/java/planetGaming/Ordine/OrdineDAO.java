@@ -225,4 +225,52 @@ public class OrdineDAO implements OrdineModel{
 		}
 
 	}
+
+	@Override
+	public Collection<OrdineBean> doRetrieveAll(Date min, Date max) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Collection<OrdineBean> ordini = new LinkedList<OrdineBean>();
+		
+		String querySQL = "SELECT * FROM "+ OrdineDAO.TABLE_NAME +" where data >= ? && data <= ? order by data";
+		
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(querySQL);
+			preparedStatement.setDate(1, min);
+			preparedStatement.setDate(2, max);
+			
+			//parte centrale del codice
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				OrdineBean ordine = new OrdineBean();
+
+				ordine.setIdOrdine((rs.getInt("idOrdine")));
+				ordine.setIdUtente((rs.getInt("idUtente")));
+				ordine.setIdModalitaPagamento((rs.getInt("idModalitaPagamento")));
+				ordine.setIdIndirizzo((rs.getInt("idIndirizzo")));
+				ordine.setPrezzoTotale((rs.getInt("prezzoTotale")));
+				ordine.setDataOrdine((rs.getDate("data")));
+				ordine.setTracking((rs.getString("tracking")));
+				
+				ordine.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll(ordine.getIdOrdine()));
+				ordini.add(ordine);
+			}
+			
+			return ordini;
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+
+	}
 }

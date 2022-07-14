@@ -1,6 +1,7 @@
 package planetGaming;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import planetGaming.Ordine.OrdineBean;
+import planetGaming.Ordine.OrdineDAO;
 import planetGaming.Ordine.prodottoOrdineBean;
 import planetGaming.Ordine.prodottoOrdineDAO;
 
@@ -32,11 +35,14 @@ public class Test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		prodottoOrdineDAO daoTest = new prodottoOrdineDAO();
+		OrdineDAO daoTest = new OrdineDAO();
+		Date min = Date.valueOf("2021-01-01");
+		Date max = Date.valueOf("2022-01-01");
 		
 		try {
-			for(prodottoOrdineBean bean : daoTest.doRetrieveAll(2)) {
+			for(OrdineBean bean : daoTest.doRetrieveAll(min, max)) {
 				System.out.println(bean.getIdOrdine());
+				System.out.println(bean.getDataOrdine());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -4,11 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import planetGaming.Ordine.OrdineBean;
+import planetGaming.Ordine.OrdineDAO;
 
 
 public class UtenteDAO implements UtenteModel {
@@ -43,7 +48,7 @@ public class UtenteDAO implements UtenteModel {
 			// inserisci quì il contentuo
 			preparedStatement.setString(1, utente.getNome());
 			preparedStatement.setString(2, utente.getCognome());
-			preparedStatement.setString(3, utente.getDataNascita());
+			preparedStatement.setDate(3, utente.getDataNascita());
 			preparedStatement.setString(4, utente.getNomeUtente());
 			preparedStatement.setString(5, utente.getPassword());
 			preparedStatement.setString(6, utente.getEmail());
@@ -127,7 +132,7 @@ public class UtenteDAO implements UtenteModel {
 				while (rs.next()) {
 					utenteBean.setNome(rs.getString("Nome"));
 					utenteBean.setCognome(rs.getString("Cognome"));
-					utenteBean.setDataNascita(rs.getString("dataNascita"));
+					utenteBean.setDataNascita(rs.getDate("dataNascita"));
 					utenteBean.setNomeUtente(rs.getString("nomeUtente"));
 					utenteBean.setPassword(password);
 					utenteBean.setEmail(email);
@@ -164,7 +169,7 @@ public class UtenteDAO implements UtenteModel {
 				while (rs.next()) {
 					utenteBean.setNome(rs.getString("Nome"));
 					utenteBean.setCognome(rs.getString("Cognome"));
-					utenteBean.setDataNascita(rs.getString("dataNascita"));
+					utenteBean.setDataNascita(rs.getDate("dataNascita"));
 					utenteBean.setNomeUtente(rs.getString("nomeUtente"));
 					utenteBean.setPassword(rs.getString("password"));
 					utenteBean.setEmail(rs.getString("email"));
@@ -199,7 +204,7 @@ public class UtenteDAO implements UtenteModel {
 				// inserisci quì il contentuo
 				preparedStatement.setString(1, utente.getNome());
 				preparedStatement.setString(2, utente.getCognome());
-				preparedStatement.setString(3, utente.getDataNascita());
+				preparedStatement.setDate(3, utente.getDataNascita());
 				preparedStatement.setString(4, utente.getNomeUtente());
 				preparedStatement.setString(5, utente.getPassword());
 				preparedStatement.setString(6, utente.getEmail());
@@ -219,5 +224,53 @@ public class UtenteDAO implements UtenteModel {
 						connection.close();
 				}
 			}
+		}
+
+		@Override
+		public Collection<UtenteBean> doRetrieveAll() throws SQLException {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			
+			Collection<UtenteBean> utenti = new LinkedList<UtenteBean>();
+			
+			String querySQL = "select * from "+ UtenteDAO.TABLE_NAME;
+			
+			try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(querySQL);
+				
+				//parte centrale del codice
+				ResultSet rs = preparedStatement.executeQuery();
+
+				while (rs.next()) {
+					UtenteBean utente = new UtenteBean();
+
+					utente.setCodiceUtente(rs.getInt("codiceUtente"));
+					utente.setNome(rs.getString("nome"));
+					utente.setCognome(rs.getString("cognome"));
+					utente.setDataNascita(rs.getDate("dataNascita"));;
+					utente.setNomeUtente(rs.getString("nomeUtente"));
+					utente.setPassword(rs.getString("password"));
+					utente.setEmail(rs.getString("email"));
+					utente.setTelefono(rs.getString("#telefono"));
+					utente.setAcquisti(rs.getInt("#acquisti"));
+					utente.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
+					utente.setDataRegistrazione(rs.getDate("dataRegistrazione"));
+					
+					utenti.add(utente);
+				}
+				
+				return utenti;
+				
+			} finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+
 		}
 }

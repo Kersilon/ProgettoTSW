@@ -10,7 +10,7 @@ public class UtenteBean implements Serializable {
 	
 	private String nome;
 	private String cognome;
-	private String dataNascita;
+	private Date dataNascita;
 	private String nomeUtente;
 	private String password;
 	private String email;
@@ -93,11 +93,11 @@ public class UtenteBean implements Serializable {
 		this.cognome = cognome;
 	}
 
-	public String getDataNascita() {
+	public Date getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(String dataNascita) {
+	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 
