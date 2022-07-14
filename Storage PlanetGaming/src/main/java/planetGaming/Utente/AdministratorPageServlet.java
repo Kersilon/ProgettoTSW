@@ -49,19 +49,36 @@ public class AdministratorPageServlet extends HttpServlet {
 		
 		if(action != null) {
 			
-			if(action.equals("ShowOrders")) {
-				try {
-					ordiniUtenti = ordineDao.doRetrieveAll("ASC");
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(action.equals("ShowOrders")) {
+					try {
+						ordiniUtenti = ordineDao.doRetrieveAll("ASC");
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
+					dispatcher.forward(request, response);
 				}
 				
-				request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
 				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-				dispatcher.forward(request, response);
-			}
+			
+				else if(action.equals("ShowOrdersByUser")) {
+					try {
+						System.out.println("in");
+						ordiniUtenti = ordineDao.doRetrieveAll(request.getParameter("OrdersByUserId"));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
+					dispatcher.forward(request, response);
+				}
 		}
 		
 		else {

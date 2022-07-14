@@ -11,5 +11,7 @@ public interface OrdineModel {
 	public OrdineBean doRetrieveByKey(int codice) throws SQLException;
 	
 	public Collection<OrdineBean> doRetrieveAll(String order) throws SQLException;
+	
+	public Collection<OrdineBean> doRetrieveAll(int idUtente) throws SQLException;
 
 }

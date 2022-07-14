@@ -26,6 +26,24 @@
 		<input type="submit" value="Orders"/>
 	</form>
 	
-	<p>TEST: <%=ordiniUtenti.isEmpty()%></p>
+	<form action="AdministratorPageServlet" method="get">
+		<input type="hidden" name="action" value="ShowOrdersByUser"> 
+		<input type="number" name="OrdersByUserId">
+		<input type="submit" value="User's Orders"/>
+	</form>
+	
+	
+		<% 	
+			if(ordiniUtenti != null){
+		%>
+			<p>
+				TEST: <%=ordiniUtenti.isEmpty()%>
+			</p>
+
+		<%	
+			}	
+		%>
+
+		
 </body>
 </html>
