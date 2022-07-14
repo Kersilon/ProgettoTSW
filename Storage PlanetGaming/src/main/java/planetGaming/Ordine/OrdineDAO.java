@@ -162,7 +162,7 @@ public class OrdineDAO implements OrdineModel{
 				ordine.setDataOrdine((rs.getDate("data")));
 				ordine.setTracking((rs.getString("tracking")));
 				
-				ordine.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll("ASC"));
+				ordine.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll(ordine.getIdOrdine()));
 				ordini.add(ordine);
 			}
 			
