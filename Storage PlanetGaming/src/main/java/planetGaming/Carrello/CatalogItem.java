@@ -1,24 +1,34 @@
 package planetGaming.Carrello;
 
+import javax.servlet.annotation.WebServlet;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
+
+
+@WebServlet("/CatalogItem")
+
 public class CatalogItem {
-		  private String itemID;
+		  private int itemID;
 		  private String shortDescription;
 		  private String longDescription;
 		  private double cost;
+		  private int numItem;
+		  private String photo;
 
-		  public CatalogItem(String itemID, String shortDescription,
-		                     String longDescription, double cost) {
-		    setItemID(itemID);
-		    setShortDescription(shortDescription);
-		    setLongDescription(longDescription);
-		    setCost(cost);
+		  public CatalogItem(VideogiocoBean videogioco) {
+		    setItemID(videogioco.getCodiceProdotto());
+		    setShortDescription(videogioco.getNome() + " - " + videogioco.getPiattaforma() + " di " + videogioco.getSviluppatore());
+		    setLongDescription(videogioco.getDescrizione());
+		    setCost(videogioco.getCosto());
+		    setNumItem(videogioco.getCopie());
+		    setPhoto(videogioco.getFoto());
 		  }
 		    
-		  public String getItemID() {
+		  public int getItemID() {
 		    return(itemID);
 		  }
 
-		  protected void setItemID(String itemID) {
+		  protected void setItemID(int itemID) {
 		    this.itemID = itemID;
 		  }
 
@@ -44,6 +54,22 @@ public class CatalogItem {
 
 		  protected void setCost(double cost) {
 		    this.cost = cost;
+		  }
+		  
+		  public int getNumItem() {
+			  return(numItem);
+		  }
+		  
+		  protected void setNumItem(int numItem) {
+			  this.numItem = numItem;
+		  }
+		  
+		  public String getPhoto() {
+			  return(photo);
+		  }
+		  
+		  protected void setPhoto(String photo) {
+			  this.photo = photo;
 		  }
 
 }
