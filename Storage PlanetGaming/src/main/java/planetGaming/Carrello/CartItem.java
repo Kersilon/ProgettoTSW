@@ -21,7 +21,7 @@ public class CartItem {
 		    this.item = item;
 		  }
 
-		  public int getItemID() {
+		  public String getItemID() {
 		    return(getItem().getItemID());
 		  }
 

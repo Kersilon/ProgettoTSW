@@ -108,7 +108,7 @@ public class IndirizzoDAO implements IndirizzoModel{
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + IndirizzoDAO.TABLE_NAME + " WHERE VIA = ? AND CAP = ? AND CODICEUTENTE = ?";
+		String deleteSQL = "DELETE FROM " + IndirizzoDAO.TABLE_NAME + " WHERE VIA = ? AND CAP = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -170,43 +170,4 @@ public class IndirizzoDAO implements IndirizzoModel{
 		return indirizzi;
 	}
 
-	public Collection<IndirizzoBean> doRetrieveByUser(int codiceUtente) throws SQLException{
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		Collection<IndirizzoBean> indirizzi = new LinkedList<IndirizzoBean>();
-
-		String selectSQL = "SELECT * FROM " + IndirizzoDAO.TABLE_NAME + " WHERE codiceUtente = ?";
-
-		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, codiceUtente);
-	
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				IndirizzoBean indirizzoBean = new IndirizzoBean();
-
-				indirizzoBean.setVia(rs.getString("via"));
-				indirizzoBean.setCap(rs.getString("cap"));
-				indirizzoBean.setCitta(rs.getString("citta"));
-				indirizzoBean.setProvincia(rs.getString("provincia"));
-				indirizzoBean.setCodice_utente(rs.getInt("codiceUtente"));
-				indirizzoBean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-				indirizzi.add(indirizzoBean);
-			}
-
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return indirizzi;
-	}
 }

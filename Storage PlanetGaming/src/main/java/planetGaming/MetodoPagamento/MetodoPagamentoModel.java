@@ -12,6 +12,4 @@ public interface MetodoPagamentoModel {
 	public MetodoPagamentoBean doRetrieveByKey(int numCarta) throws SQLException;
 	
 	public Collection<MetodoPagamentoBean> doRetrieveAll(String order) throws SQLException; //order = ordine in cui vengono prese le entry del DB
-
-    public Collection<MetodoPagamentoBean> doRetrieveByUser(int codiceUtente) throws SQLException;
 }
