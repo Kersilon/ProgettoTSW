@@ -11,6 +11,14 @@
 		<legend>Index</legend>
 		<a href="login-form.jsp"> <input type="button" value="Login"> </a>
 		<a href="registration.jsp"> <input type="button" value="Sign in"> </a>
+		
+		<form action="StorageControl" method="get">
+			<input type="submit" value="Homepage"/>
+		</form>
+		
+		<form action="UserInfo" method="get">
+			<input type="submit" value="User page"/>
+		</form>
 	</fieldset>
 </body>
 </html>
