@@ -69,6 +69,7 @@ public class UserInfo extends HttpServlet {
 		indirizzoDao = new IndirizzoDAO();
 		utenteDao = new UtenteDAO();
 		
+		
 		action = request.getParameter("action");
 		if(action != null) {
 			
@@ -192,7 +193,6 @@ public class UserInfo extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
 			//TODO inserire questo codice in dei blocchi if dell'action
 			
 			//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
@@ -269,7 +269,12 @@ public class UserInfo extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 			dispatcher.forward(request, response);
 		}
+		else if(request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin")) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AdministratorPageServlet");
+			dispatcher.forward(request, response);
+		}
 		else {
+			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 			dispatcher.forward(request, response);
 		}

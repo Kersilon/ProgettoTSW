@@ -5,11 +5,11 @@
 
 <%
 	//Check user credentials
-	Boolean isLogged = (Boolean) request.getSession().getAttribute("isLogged");
+	Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
 	
-	if((isLogged == null) || isLogged.equals(false))
+	if(isAdmin == null || isAdmin.equals(false))
 	{
-		//response.sendRedirect("./login-form.jsp");
+		response.sendRedirect("./login-form.jsp");
 	}
 	
 	Collection<?> ordiniUtenti = (Collection<?>) request.getSession().getAttribute("ordiniUtenti");
@@ -22,6 +22,8 @@
 <title>Administrator Page</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/header.jsp" />
+	
 	<h1>Welcome to the Administrator page</h1><br>
 	<p></p>
 	<br><br>
@@ -161,6 +163,6 @@
 			}	
 	%>
 				
-		
+	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

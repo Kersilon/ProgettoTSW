@@ -84,6 +84,11 @@ public class Login extends HttpServlet {
 					request.getSession().setAttribute("isLogged", true);
 					request.getSession().setAttribute("userId", utenteBean.getCodiceUtente());
 					
+					if(utenteBean.isAMMINISTRATORE())
+					{
+						request.getSession().setAttribute("isAdmin", true);
+					}
+					
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserInfo");
 					dispatcher.forward(request, response);
 					
@@ -93,6 +98,7 @@ public class Login extends HttpServlet {
 					response.sendRedirect(request.getContextPath()+"/login-form.jsp");
 				}
 			}
+			/*
 			if(action.equalsIgnoreCase("storage"))
 			{
 				if(checkLogin(email, password))
@@ -119,6 +125,7 @@ public class Login extends HttpServlet {
 					response.sendRedirect(request.getContextPath()+"/login-form.jsp");
 				}
 			}
+			*/
 		}else {
 			//se action è nullo significa che stiamo accedendo alla web app partendo da questa servlet e per tanto si dovrebbe essere rindirizzati
 			//alla homepage

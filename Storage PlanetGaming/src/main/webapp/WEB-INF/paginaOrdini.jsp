@@ -31,7 +31,7 @@
 	<p>Here you can see all orders made</p>
 	<br><br>
 	
-	<h2>Payment methods</h2>
+	<h2>Orders</h2>
 	<table>
 		<tr>
 			<td>Order<td>
