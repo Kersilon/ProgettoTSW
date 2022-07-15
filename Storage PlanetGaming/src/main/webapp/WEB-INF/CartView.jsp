@@ -1,4 +1,4 @@
-<%@ page import ="java.util.*" import = "OrderPage.java" import = "planetGaming.Carrello.*" %>
+<%@ page import ="java.util.*" import = "CartItem.java" import = "planetGaming.Carrello.*" %>
 
 
 <% 
@@ -43,9 +43,21 @@
 	<td><%=ordine.getUnitCost()%></td>
 	<td><%=ordine.getNumItems()%></td>
 	<td><%=ordine.getTotalCost()%></td>
+	<td><form action = "CartControl" method = "post">
+	<input type = "number" min = "1" max = "<%ordine.getItem().getNumItem(); %>">
+	<input type = "submit" value = "Elimina dal carrello">
+	</form></td><!-- Inserire link dell'immagine nel pulsante elimina -->
 	</tr>
 <%  } %>
 </table>
+    
+    <!--  Pulsanti "Aggiorna ordine" e "Procedi all'acquisto" -->
+    <form action = "CartControl" method = "post">
+    <input type = "submit" value = "Aggiorna Ordine">
+    </form>
+    <form action = "Indirizzo e pagamento" method = "post">
+    <input onclick ="window.location.href = 'link gestione indirizzo e pagamento' "type ="submit" value = "Procedi all'Ordine">
+    </form>
 
 <jsp:include page="/WEB-INF/footer.jsp" />
 

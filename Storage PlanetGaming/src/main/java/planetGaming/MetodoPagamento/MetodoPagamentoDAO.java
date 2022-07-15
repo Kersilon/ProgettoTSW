@@ -187,4 +187,47 @@ private static final String TABLE_NAME = "pagamento";
 		}
 	}
 
+	public Collection<MetodoPagamentoBean> doRetrieveByUser(int codiceUtente) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Collection<MetodoPagamentoBean> metodiPagamento = new LinkedList<MetodoPagamentoBean>();
+		
+		String querySQL = "select * from "+ MetodoPagamentoDAO.TABLE_NAME + " WHERE codiceUtente = ?"; //TODO se non funziona controlla che gli spazi nella stringa siano corretti
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(querySQL);
+			
+			//parte centrale del codice
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				MetodoPagamentoBean metodoPagamento = new MetodoPagamentoBean();
+
+				metodoPagamento.setNumero_carta(rs.getString("numero_carta"));
+				metodoPagamento.setCcv((rs.getString("ccv")));		
+				metodoPagamento.setScadenza((rs.getString("scadenza")));
+				metodoPagamento.setCircuito((rs.getString("circuito")));
+				metodoPagamento.setCodiceUtente((rs.getInt("codiceUtente")));
+				metodoPagamento.setNome_intestatario((rs.getString("nome_intestatario")));
+				metodoPagamento.setCognome_intestatario((rs.getString("cognome_intestatario")));
+				metodoPagamento.setIdCarta(rs.getInt("idCarta"));
+				
+				
+				metodiPagamento.add(metodoPagamento);
+			}
+			
+			return metodiPagamento;
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+	}
 }
