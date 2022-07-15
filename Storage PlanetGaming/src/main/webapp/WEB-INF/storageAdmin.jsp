@@ -69,9 +69,9 @@
 			    <td>
 			    	<%=videogioco.getDescrizione()%>
 			    	<form action="StorageControl" method="post">
-			    	<input type="hidden" name="action" value="ExtendedDescription"> 
-					<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
-					<input type="submit" value="More...">
+			    		<input type="hidden" name="action" value="ExtendedDescription"> 
+						<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
+						<input type="submit" value="More...">
 					</form>
 			    </td>
 			    <td><%=videogioco.getPrezzo_vetrina()%></td>

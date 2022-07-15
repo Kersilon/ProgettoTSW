@@ -199,6 +199,7 @@ public class StorageControl extends HttpServlet {
 				
 			}else if(action.equalsIgnoreCase("ExtendedDescription"))
 			{
+				
 				VideogiocoBean videogiocoBean = new VideogiocoBean();
 				
 				try {
@@ -208,8 +209,9 @@ public class StorageControl extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				req.removeAttribute("descrizione");
-				req.setAttribute("descrizione", videogiocoBean.getDescrizione());
+				req.removeAttribute("paginaVideogioco");
+				req.setAttribute("paginaVideogioco", videogiocoBean);
+				
 				
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/DescrizioneEstesa.jsp");
 				dispatcher.forward(req, resp);
