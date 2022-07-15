@@ -1,6 +1,7 @@
 package planetGaming.Login;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -61,7 +62,7 @@ public class Login extends HttpServlet {
 					
 					utenteBean.setNome(			request.getParameter("nome"));
 					utenteBean.setCognome(		request.getParameter("cognome"));
-					utenteBean.setDataNascita(	request.getParameter("dataNascita"));
+					utenteBean.setDataNascita(Date.valueOf(request.getParameter("dataNascita")));
 					utenteBean.setNomeUtente(	request.getParameter("nomeUtente"));
 					utenteBean.setPassword(		request.getParameter("password"));
 					utenteBean.setEmail(		request.getParameter("email"));
