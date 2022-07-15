@@ -52,7 +52,7 @@ public class AdministratorPageServlet extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		Integer ordersByUserId, userId;
+		Integer OrdersByUserId;
 		Date min;
 		Date max;
 		
@@ -90,10 +90,10 @@ public class AdministratorPageServlet extends HttpServlet {
 			
 				else if(action.equals("ShowOrdersByUser")) {
 					//System.out.println(request.getParameter("OrdersByUserId"));
-					ordersByUserId = Integer.parseInt(request.getParameter("OrdersByUserId"));
+					OrdersByUserId = Integer.parseInt(request.getParameter("OrdersByUserId"));
 					
 					try {
-						ordiniUtenti = ordineDao.doRetrieveAll(ordersByUserId);
+						ordiniUtenti = ordineDao.doRetrieveAll(OrdersByUserId);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -127,22 +127,6 @@ public class AdministratorPageServlet extends HttpServlet {
 				else if(action.equals("ShowUsers")) {
 					try {
 						utenti = utenteDao.doRetrieveAll();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					request.getSession().setAttribute("utenti", utenti);
-					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-					dispatcher.forward(request, response);
-				}
-				
-				else if(action.equals("ShowUser")) {
-					userId = Integer.parseInt(request.getParameter("UserId"));
-					
-					try {
-						utenti = utenteDao.doRetrieveAll(userId);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
