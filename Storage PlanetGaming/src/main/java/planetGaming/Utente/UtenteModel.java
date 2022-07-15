@@ -13,7 +13,5 @@ public interface UtenteModel {
 	
 	Collection<UtenteBean> doRetrieveAll() throws SQLException;
 	
-	Collection<UtenteBean> doRetrieveAll(int idUtente) throws SQLException;
-	
 	public void doUpdate(UtenteBean utente) throws SQLException;
 }
