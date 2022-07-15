@@ -64,13 +64,15 @@ public class UserInfo extends HttpServlet {
 		Collection<prodottoOrdineBean> prodottiOrdine, bufferProdottiOrdine;
 		
 		
-		userId = (Integer) request.getSession().getAttribute("userId");
+		
 		metodoPagamentoDao = new MetodoPagamentoDAO();
 		indirizzoDao = new IndirizzoDAO();
 		utenteDao = new UtenteDAO();
 		
 		action = request.getParameter("action");
 		if(action != null) {
+			
+			userId = (Integer) request.getSession().getAttribute("userId");
 			
 			if(action.equals("addPaymentMethod")) {
 				metodoPagamentoBean = new MetodoPagamentoBean();
@@ -264,6 +266,10 @@ public class UserInfo extends HttpServlet {
 			
 			
 			
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 			dispatcher.forward(request, response);
 		}

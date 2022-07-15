@@ -36,6 +36,18 @@
 	<p>Here you can add, delete, payment methods and delivery addresses</p>
 	<br><br>
 	
+	
+	
+	<%
+			Iterator<?> it;
+	%>
+	
+	
+	
+	<%
+			if(metodiPagamento != null && !metodiPagamento.isEmpty()){
+	%>
+	
 	<h2>Payment methods</h2>
 	<table>
 		<tr>
@@ -52,7 +64,7 @@
 	  
 		<%
 	  		//scorre l'array metodi di pagamento e stampa gli elementi nella tabella
-	  		Iterator<?> it = metodiPagamento.iterator();
+	  		it = metodiPagamento.iterator();
 				while (it.hasNext()) {
 					MetodoPagamentoBean metodoPagamento = (MetodoPagamentoBean) it.next();
 		%>
@@ -71,75 +83,94 @@
 				}
 	%>
 	
-	</table>
-	
-	<h2>Addresses</h2>
-	<table>
-		<tr>
-			<th>via</th>
-			<th>cap</th>
-			<th>citta</th>
-			<th>provincia</th>
-			<th>codiceUtente</th>
-			<th>idIndirizzo</th>
-	  	</tr>
-		  <!-- contenuto tabella -->
-	  
-		<%
-	  		//scorre l'array indirizzi e stampa gli elementi nella tabella
-	  			it = indirizzi.iterator();
-				while (it.hasNext()) {
-					IndirizzoBean indirizzo = (IndirizzoBean) it.next();
-		%>
-			<tr>
-				<td><%=indirizzo.getVia()%></td>
-				<td><%=indirizzo.getCap()%></td>
-				<td><%=indirizzo.getCitta()%></td>
-				<td><%=indirizzo.getProvincia()%></td>
-				<td><%=indirizzo.getCodice_utente()%></td>
-				<td><%=indirizzo.getIdIndirizzo()%></td>
-		  	</tr>
-			
-	<%
-				}
+	<% 	
+			}
 	%>
 	
-	</table>
+	
+	
+	<% 	
+			if(indirizzi != null && !indirizzi.isEmpty()){
+	%>
+	
+			</table>
+			
+			<h2>Addresses</h2>
+			<table>
+				<tr>
+					<th>via</th>
+					<th>cap</th>
+					<th>citta</th>
+					<th>provincia</th>
+					<th>codiceUtente</th>
+					<th>idIndirizzo</th>
+			  	</tr>
+				  <!-- contenuto tabella -->
+			  
+				<%
+			  		//scorre l'array indirizzi e stampa gli elementi nella tabella
+			  			it = indirizzi.iterator();
+						while (it.hasNext()) {
+							IndirizzoBean indirizzo = (IndirizzoBean) it.next();
+				%>
+					<tr>
+						<td><%=indirizzo.getVia()%></td>
+						<td><%=indirizzo.getCap()%></td>
+						<td><%=indirizzo.getCitta()%></td>
+						<td><%=indirizzo.getProvincia()%></td>
+						<td><%=indirizzo.getCodice_utente()%></td>
+						<td><%=indirizzo.getIdIndirizzo()%></td>
+				  	</tr>
+					
+			<%
+						}
+			%>
+			
+				</table>
+	<% 	
+			}
+	%>
 	
 	
 	
-	<h2>User's data</h2>
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Surname</th>
-			<th>Birth date</th>
-			<th>Username</th>
-			<th>Password
-				<button type="button" id ="ShowButton" onclick ="show()">Show</button>
-				<button type="button" id ="HideButton" onclick ="hide()">Hide</button>
-			</th>
-			<th>Email</th>
-			<th>Phone number</th>
-			<th>UserId</th>
-			<th>Admin?</th>
-	  	</tr>
-		  <!-- contenuto tabella -->
-	  
-			<tr>
-				<td><%=datiUtente.getNome()%></td>
-				<td><%=datiUtente.getCognome()%></td>
-				<td><%=datiUtente.getDataNascita()%></td>
-				<td><%=datiUtente.getNomeUtente()%></td>
-				<td><div  class ="hide"><%=datiUtente.getPassword()%></div></td>
-				<td><%=datiUtente.getEmail()%></td>
-				<td><%=datiUtente.getTelefono()%></td>
-				<td><%=datiUtente.getCodiceUtente()%></td>
-				<td><%=datiUtente.isAMMINISTRATORE()%></td>
-		  	</tr>
-	</table>		
+	<% 	
+			if(datiUtente != null){
+	%>
 	
+			<h2>User's data</h2>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Birth date</th>
+					<th>Username</th>
+					<th>Password
+						<button type="button" id ="ShowButton" onclick ="show()">Show</button>
+						<button type="button" id ="HideButton" onclick ="hide()">Hide</button>
+					</th>
+					<th>Email</th>
+					<th>Phone number</th>
+					<th>UserId</th>
+					<th>Admin?</th>
+			  	</tr>
+				  <!-- contenuto tabella -->
+			  
+					<tr>
+						<td><%=datiUtente.getNome()%></td>
+						<td><%=datiUtente.getCognome()%></td>
+						<td><%=datiUtente.getDataNascita()%></td>
+						<td><%=datiUtente.getNomeUtente()%></td>
+						<td><div  class ="hide"><%=datiUtente.getPassword()%></div></td>
+						<td><%=datiUtente.getEmail()%></td>
+						<td><%=datiUtente.getTelefono()%></td>
+						<td><%=datiUtente.getCodiceUtente()%></td>
+						<td><%=datiUtente.isAMMINISTRATORE()%></td>
+				  	</tr>
+			</table>		
 	
+	<% 	
+			}
+	%>
 	
 	
 	<form action="UserInfo" method="post">
