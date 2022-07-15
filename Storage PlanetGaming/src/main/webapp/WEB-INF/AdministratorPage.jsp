@@ -56,6 +56,12 @@
 		<input type="submit" value="Users"/>
 	</form>
 	
+	<form action="AdministratorPageServlet" method="get">
+		<input type="hidden" name="action" value="ShowUser">
+		<p>User id: <input type="number" name="UserId" required></p>
+		<input type="submit" value="User by id"/>
+	</form>
+	
 
 	
 	<% 	
