@@ -83,7 +83,7 @@
 			    <td><%=videogioco.getSviluppatore()%></td>
 			    <td><%=videogioco.getPubblisher()%></td>
 			    <!-- uso Jquery per visualizzare l'immagine -->
-			    <td><img src="${pageContext.request.contextPath}/immagini Videogiochi/<%=videogioco.getFoto()%>"></td>
+			    <td><img src="./immagini Videogiochi/<%=videogioco.getFoto()%>"></td>
 		  	</tr>
 			
 	<%

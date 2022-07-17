@@ -34,7 +34,7 @@ public class Test extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		/*
 		OrdineDAO daoTest = new OrdineDAO();
 		Date min = Date.valueOf("2021-01-01");
 		Date max = Date.valueOf("2022-01-01");
@@ -45,16 +45,22 @@ public class Test extends HttpServlet {
 				System.out.println(bean.getDataOrdine());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
+		*/
+		 String text = "some text";
+
+		 response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+		 response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+		 response.getWriter().write(text);       // Write response body.
 	}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

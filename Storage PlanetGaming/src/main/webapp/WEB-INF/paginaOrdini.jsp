@@ -67,6 +67,7 @@
 							<button type="button" id ="HideButton" onclick ="hide()">Hide products</button>
 						</td>
 		  			</tr>
+ 		
  						
 		<tr class ="hide">
 			<th>id product</th>

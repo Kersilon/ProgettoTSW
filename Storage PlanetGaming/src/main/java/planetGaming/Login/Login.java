@@ -49,8 +49,12 @@ public class Login extends HttpServlet {
 		String password=request.getParameter("password");
 		String action = request.getParameter("action");
 		
+		System.out.println("entro nella servlet");
+		
 		if(action != null)
 		{
+			System.out.println("action ha un valore");
+			
 			if(action.equalsIgnoreCase("registration"))
 			{
 				//se le credenziali risultano presenti nel DB allora significa che l'utente è già registrato e quindi viene rimandato alla pagina di login
@@ -95,7 +99,11 @@ public class Login extends HttpServlet {
 					//TODO capire perché... response.sendRedirect non va bene in questo contesto non so perché ma facendo così non funziona
 					//response.sendRedirect(request.getContextPath()+"/WEB-INF/paginaProtetta.jsp");
 				}else {
-					response.sendRedirect(request.getContextPath()+"/login-form.jsp");
+					System.out.println("arrivo quì");
+					//response.sendRedirect(request.getContextPath()+"/login-form.jsp");
+					response.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
+					response.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
+					response.getWriter().write("Wrong Email or Password");      	// Write response body.
 				}
 			}
 			/*
