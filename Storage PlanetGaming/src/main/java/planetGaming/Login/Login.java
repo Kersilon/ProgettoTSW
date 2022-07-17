@@ -57,10 +57,12 @@ public class Login extends HttpServlet {
 			
 			if(action.equalsIgnoreCase("registration"))
 			{
-				//se le credenziali risultano presenti nel DB allora significa che l'utente è già registrato e quindi viene rimandato alla pagina di login
+				//se le credenziali risultano presenti nel DB allora significa che l'utente è già registrato e quindi viene informato di ciò
 				if(checkLogin(email, password))
 				{
-					response.sendRedirect(request.getContextPath()+"/login-form.jsp");
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					response.getWriter().write("Email already used");
 				//altrimenti si prendono i dati inviati con il form di registrazione e li si salva nel DB, effettuando quindi la registrazione
 				}else {
 					
@@ -78,7 +80,9 @@ public class Login extends HttpServlet {
 						e.printStackTrace();
 					}
 					
-					response.sendRedirect(request.getContextPath()+"/login-form.jsp");
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					response.getWriter().write("./login-form.jsp");
 				}
 			}
 			if(action.equalsIgnoreCase("login"))
@@ -93,8 +97,11 @@ public class Login extends HttpServlet {
 						request.getSession().setAttribute("isAdmin", true);
 					}
 					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserInfo");
-					dispatcher.forward(request, response);
+					//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserInfo");
+					//dispatcher.forward(request, response);
+					response.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
+					response.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
+					response.getWriter().write("./UserInfo");      					// Write response body
 					
 					//TODO capire perché... response.sendRedirect non va bene in questo contesto non so perché ma facendo così non funziona
 					//response.sendRedirect(request.getContextPath()+"/WEB-INF/paginaProtetta.jsp");

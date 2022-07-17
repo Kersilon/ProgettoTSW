@@ -22,6 +22,24 @@ function LoginFail(idButton, errorTextContainer) {
 
 }
 
+/*
 function test(){
 	 ${pageContext.request.contextPath};
 }
+*/
+
+			/*
+				//$(document).on("submit", "#loginForm", function(event) {
+	   				var $form = $(this);
+	   				//if(checkCredentialsLogin($form.attr("id"))){
+	
+		    			$.post($form.attr("action"), $form.serialize(), function(response) {
+		    				//setTimeout(alert(response), 1000);
+		    				
+		    				$(#emailError).text(response);
+		    			});
+	   				//}
+	
+	    			event.preventDefault(); // Important! Prevents submitting the form.
+				});
+			*/

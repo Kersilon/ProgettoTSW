@@ -43,7 +43,7 @@ function checkBirthDate(){
 	let birthDateError;
 	let regex;
 	
-	regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;	//data nel formato dd-/mm-/aaaa va bene sia "-" o "/" per separare i caratteri
+	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;	//data nel formato dd-/mm-/aaaa va bene sia "-" o "/" per separare i caratteri
 	birthDate = document.getElementById("dataNascita").value;
 	birthDateError = document.getElementById("birthDateError");
 	
@@ -222,7 +222,7 @@ function checkDate(form, indexError){
 	let dateError;
 	let regex;
 	
-	regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;	//data nel formato dd-/mm-/aaaa va bene sia "-" o "/" per separare i caratteri
+	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 	date = document.forms[form]["data_uscita"].value;
 	dateError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
@@ -338,7 +338,9 @@ function checkCredentialsRegistration(form){
 		
 	if(counter == 4){
 		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
-		document.getElementById("RegistrationButton").setAttribute('type', 'submit');
+		return true;
+	}else{
+		return false;
 	}
 }
 
