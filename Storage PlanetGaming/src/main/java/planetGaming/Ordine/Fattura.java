@@ -1,15 +1,17 @@
 package planetGaming.Ordine;
 
-import planetGaming.*;
+import planetGaming.Indirizzo.IndirizzoBean;
+import planetGaming.Indirizzo.IndirizzoDAO;
 import planetGaming.Utente.UtenteBean;
+import planetGaming.Utente.UtenteDAO;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,17 +30,18 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 public class Fattura extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	private PDDocument invc=new PDDocument();
-	private OrdineBean bean=null;
-	private UtenteBean utente=null;
+	private PDDocument invc = new PDDocument();
+	private OrdineBean ordine = null;
+	private UtenteBean utente = null;
+	private IndirizzoBean indirizzo = null;
 	private ArrayList<String> ProductName=new ArrayList<>();
-	private ArrayList<Float> ProductPrice=new ArrayList<>();
+	private ArrayList<Double> ProductPrice=new ArrayList<>();
 	private ArrayList<Integer> ProductQty=new ArrayList<>();
-	private ArrayList<Integer> ProductIva=new ArrayList<>();
-	private float total=0;
-	private float tasse=0;
-	private float price=0;
-	private int iva=0;
+	private ArrayList<Double> ProductIva=new ArrayList<>();
+	private double total = 0;
+	private double tasse = 0;
+	private double price = 0;
+	private double iva = 0;
 	Date OrderDate;
 	private int CustId;
 	private String CustName;
@@ -56,17 +59,17 @@ public class Fattura extends HttpServlet{
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BufferedReader reader=request.getReader();
+		
 		//TODO prendi id dell'ordine ps: prova dalla session
-		JSONObject obj = new JSONObject(reader.readLine());
-		int id=obj.getInt("number_order_header");
-		OrdineTestataDAO dao=new OrdineTestataDAO();
-		UtenteDAO utenteDao=new UtenteDAO();
+		OrdineDAO ordineDao = new OrdineDAO();
+		UtenteDAO utenteDao = new UtenteDAO();
+		IndirizzoDAO indirizzoDao = new IndirizzoDAO();
 		
 		try {
 			//TODO controlla l'implementazione
-			bean=dao.doRetrieveByKey(id);
-			utente=utenteDao.doRetrieveByKey(bean.getIdUtente());
+			ordine = ordineDao.doRetrieveByKey(Integer.parseInt(request.getParameter("OrderId")));
+			utente = utenteDao.doRetrieveByKey(ordine.getIdUtente());
+			indirizzo = indirizzoDao.doRetrieveByKey(ordine.getIdIndirizzo());
 		} catch (SQLException e) {
 			//response.addHeader("res", "403");
 			e.printStackTrace();
@@ -79,31 +82,35 @@ public class Fattura extends HttpServlet{
 		WriteInvoice();
 	    //Save the PDF
 	
-		File f=new File(getServletContext().getRealPath("/")+"\\pdf\\"+id+".pdf");
+		File f=new File(getServletContext().getRealPath("/")+"\\fatture\\"+ordine.getIdOrdine()+".pdf");
 		if(f.exists())
 			f.delete();
 		invc.save(f);
-		response.addHeader("res", "200");
+
+		//System.out.println(getServletContext().getRealPath("/")+"\\fatture\\"+ordine.getIdOrdine()+".pdf");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/fatture/"+ordine.getIdOrdine()+".pdf");
+		dispatcher.forward(request, response);
+		
 	}
 	  
 	 //prende tutti i dati dell'utente
 	//TODO sostituire con utenteBean e OrdineBean
 	 private void getdata() {
-		 CustId=utente.getId();
-	     CustName= utente.getNome()+" "+utente.getCognome();
-	     CustAddress=bean.getIndirizzo_Fatturazione();
-	     CustAddressShipping=bean.getIndirizzo_Spedizione();
-	     OrderDate=bean.getData();
+		 CustId = utente.getCodiceUtente();
+	     CustName = utente.getNome()+" "+utente.getCognome();
+	     CustAddress = indirizzo.getVia();
+	     CustAddressShipping= indirizzo.getVia();
+	     OrderDate = ordine.getDataOrdine();
 	     
 	     //inserisce dati di tutti i proditti acquistati
 	     //TODO sostituire con prodottoOrdine
-	     for(OrdineRigoBean ordineRigo: bean.getOrdineRigo()) {
-		      ProductName.add(ordineRigo.getArticolo().getNome());
-		      ProductPrice.add(ordineRigo.getPrezzo());
-		      ProductQty.add(ordineRigo.getQuantita());
-		      ProductIva.add(ordineRigo.getIva());
-		      tasse=tasse + (ordineRigo.getPrezzo()/100*ordineRigo.getIva()*ordineRigo.getQuantita());
-		      total = total + (ordineRigo.getPrezzo()*ordineRigo.getQuantita());
+	     for(prodottoOrdineBean prodotto: ordine.getProdottiOrdine()) {
+		      ProductName.add(prodotto.getNomeVideogioco());
+		      ProductPrice.add(prodotto.getPrezzoAcquisto());
+		      ProductQty.add(prodotto.getQuantitaAcquisto());
+		      ProductIva.add(prodotto.getIva());
+		      tasse = tasse + (prodotto.getPrezzoAcquisto()/100*prodotto.getIva()*prodotto.getQuantitaAcquisto());
+		      total = total + (prodotto.getPrezzoAcquisto()*prodotto.getQuantitaAcquisto());
 	    }
 	  }
 	  
@@ -213,7 +220,7 @@ public class Fattura extends HttpServlet{
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 9);
 	      cs.setLeading(20f);
 	      cs.newLineAtOffset(50, 520);
-	      for(int i =0; i<bean.getOrdineRigo().size(); i++) {
+	      for(int i =0; i<ordine.getProdottiOrdine().size(); i++) {
 	    	if(ProductName.get(i).length()>50)
 	    		
 	    		//scrive al più "secondo valore di substring" caratteri
@@ -228,7 +235,7 @@ public class Fattura extends HttpServlet{
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 9);
 	      cs.setLeading(20f);
 	      cs.newLineAtOffset(270, 520);
-	      for(int i =0; i<bean.getOrdineRigo().size(); i++) {
+	      for(int i =0; i<ordine.getProdottiOrdine().size(); i++) {
 	        cs.showText(ProductPrice.get(i).toString());
 	        cs.newLine();
 	      }
@@ -238,7 +245,7 @@ public class Fattura extends HttpServlet{
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 9);
 	      cs.setLeading(20f);
 	      cs.newLineAtOffset(370, 520);
-	      for(int i =0; i<bean.getOrdineRigo().size(); i++) {
+	      for(int i =0; i<ordine.getProdottiOrdine().size(); i++) {
 	        cs.showText(ProductQty.get(i).toString());
 	        cs.newLine();
 	      }
@@ -248,7 +255,7 @@ public class Fattura extends HttpServlet{
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 9);
 	      cs.setLeading(20f);
 	      cs.newLineAtOffset(440, 520);
-	      for(int i =0; i<bean.getOrdineRigo().size(); i++) {
+	      for(int i =0; i<ordine.getProdottiOrdine().size(); i++) {
 	        price = ProductPrice.get(i)*ProductQty.get(i);
 	        cs.showText(String.valueOf(price));
 	        cs.newLine();
@@ -259,7 +266,7 @@ public class Fattura extends HttpServlet{
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 9);
 	      cs.setLeading(20f);
 	      cs.newLineAtOffset(500, 520);
-	      for(int i =0; i<bean.getOrdineRigo().size(); i++) {
+	      for(int i =0; i<ordine.getProdottiOrdine().size(); i++) {
 	        iva = ProductIva.get(i);
 	        cs.showText(String.valueOf(iva));
 	        cs.newLine();
@@ -268,40 +275,40 @@ public class Fattura extends HttpServlet{
 	      
 	      cs.beginText();
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 14);
-	      cs.newLineAtOffset(310, (500-(20*bean.getOrdineRigo().size())));
+	      cs.newLineAtOffset(310, (500-(20*ordine.getProdottiOrdine().size())));
 	      cs.showText("Subtotale: ");
 	      cs.endText();
 	      
 	      cs.beginText();
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 14);
-	      cs.newLineAtOffset(310, (470-(20*bean.getOrdineRigo().size())));
+	      cs.newLineAtOffset(310, (470-(20*ordine.getProdottiOrdine().size())));
 	      cs.showText("Tasse: ");
 	      cs.endText();
 	      
 	      cs.beginText();
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 14);
-	      cs.newLineAtOffset(310, (430-(20*bean.getOrdineRigo().size())));
+	      cs.newLineAtOffset(310, (430-(20*ordine.getProdottiOrdine().size())));
 	      cs.showText("Totale: ");
 	      cs.endText();
 	      
 	      cs.beginText();
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 14);
 	      //Calculating where total is to be written using number of products
-	      cs.newLineAtOffset(410, (500-(20*bean.getOrdineRigo().size())));
+	      cs.newLineAtOffset(410, (500-(20*ordine.getProdottiOrdine().size())));
 	      cs.showText(String.valueOf(total-tasse));
 	      cs.endText();
 	      
 	      cs.beginText();
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 14);
 	      //Calculating where total is to be written using number of products
-	      cs.newLineAtOffset(410, (470-(20*bean.getOrdineRigo().size())));
+	      cs.newLineAtOffset(410, (470-(20*ordine.getProdottiOrdine().size())));
 	      cs.showText(String.valueOf(tasse));
 	      cs.endText();
 	      
 	      cs.beginText();
 	      cs.setFont(PDType1Font.TIMES_ROMAN, 14);
 	      //Calculating where total is to be written using number of products
-	      cs.newLineAtOffset(410, (430-(20*bean.getOrdineRigo().size())));
+	      cs.newLineAtOffset(410, (430-(20*ordine.getProdottiOrdine().size())));
 	      cs.showText(String.valueOf(total));
 	      cs.endText();
 	      
@@ -310,7 +317,10 @@ public class Fattura extends HttpServlet{
 	      
 	    } catch (IOException e) {
 	      e.printStackTrace();
+	     
 	    }
+	    
+
 	  }
   
   

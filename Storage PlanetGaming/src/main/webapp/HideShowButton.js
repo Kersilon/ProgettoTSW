@@ -8,12 +8,11 @@ function hide(){
 	showButton = document.getElementById("ShowButton");
 	
 	for(i = 0; i<table.length; i++){
-		//table[i].style.display ="none";
-		
+		table[i].style.display ="none";
 	}
 	
 	hideButton.style.display = "none";
-	showButton.style.display = "block";
+	showButton.style.display = "inline";
 }
 
 function show(){

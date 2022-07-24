@@ -66,12 +66,18 @@
 							<button type="button" id ="ShowButton" onclick ="show()">Show products</button>
 							<button type="button" id ="HideButton" onclick ="hide()">Hide products</button>
 						</td>
+						<td>
+							<form action="Fattura" method="post">
+								<input type="hidden" name="OrderId" value=<%=ordine.getIdOrdine()%>> 
+								<input type="submit" value="Invoice">
+							</form>
+						</td>
 		  			</tr>
  		
  						
-		<tr class ="hide">
-			<th>id product</th>
-			<th>id Order</th>
+		<tr >
+			<th class ="hide" >id product</th>
+			<th class ="hide">id Order</th>
 			<th>id videogame</th>
 			<th>id videgame's name</th>
 			<th>price</th>
@@ -84,9 +90,9 @@
 					while (itProdotti.hasNext()) {
 						prodottoOrdineBean prodottoOrdine = (prodottoOrdineBean) itProdotti.next();
 	%>
-						<tr class ="hide">
-							<td><%=prodottoOrdine.getIdProdottoOrdine()%></td>
-							<td><%=prodottoOrdine.getIdOrdine()%></td>
+						<tr >
+							<td class ="hide"><%=prodottoOrdine.getIdProdottoOrdine()%></td>
+							<td class ="hide"><%=prodottoOrdine.getIdOrdine()%></td>
 							<td><%=prodottoOrdine.getIdVideogioco()%></td>
 							<td><%=prodottoOrdine.getNomeVideogioco()%></td>
 							<td><%=prodottoOrdine.getPrezzoAcquisto()%></td>

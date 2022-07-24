@@ -179,17 +179,8 @@ public class StorageControl extends HttpServlet {
 				if(req.getParameter("Pubblisher") != null && !req.getParameter("Pubblisher").equals(""))
 				{
 					videogiocoBean.setPubblisher(req.getParameter("Pubblisher"));
-				}
-				
-				if(req.getParts() != null && !req.getPart("foto").getSubmittedFileName().isBlank())
-				{
-					//memorizzio l'immagine in una cartella e memorizzo il percorso nel bean
-					fileName = fs.fileAssembler(req.getParts(), req.getServletContext().getRealPath(""), SAVE_DIR);
-					videogiocoBean.setFoto(fileName);
-				}
-				
-				
-				
+				}			
+							
 				try {
 					videogioco.doUpdate(videogiocoBean);
 				} catch (SQLException e) {
@@ -197,8 +188,29 @@ public class StorageControl extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-			}else if(action.equalsIgnoreCase("ExtendedDescription"))
-			{
+				
+				
+			}else if(action.equalsIgnoreCase("modifyPhoto")) {
+				VideogiocoBean videogiocoBean = new VideogiocoBean();
+				
+				try {
+					videogiocoBean = videogioco.doRetrieveByKey(Integer.parseInt(req.getParameter("codice_prodotto")));
+				} catch (NumberFormatException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				if(req.getParts() != null && !req.getPart("foto").getSubmittedFileName().isBlank())
+				{
+					//memorizzio l'immagine in una cartella e memorizzo il percorso nel bean
+					System.out.println(req.getServletContext().getRealPath(""));
+					fileName = fs.fileAssembler(req.getParts(), req.getServletContext().getRealPath(""), SAVE_DIR);
+					videogiocoBean.setFoto(fileName);
+				}
+				
+
+				
+			}else if(action.equalsIgnoreCase("ExtendedDescription")) {
 				
 				VideogiocoBean videogiocoBean = new VideogiocoBean();
 				

@@ -142,6 +142,8 @@
 		</fieldset>
 	</form>
 	
+	
+	<!--
 	<br>
 	<form id ="modifyForm" action="StorageControl" enctype="multipart/form-data" method="post">
 		<fieldset>
@@ -175,8 +177,177 @@
 	
 			<button type="button" id ="modifyButton" onclick ="checkModify('modifyForm')">modify</button>
 			<input type="reset" value="Reset">
+				
 		</fieldset>
 	</form>
+	 -->
+		<form id="modifyNomeId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Name</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Name: 			<input name="nome" 				type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyEditionId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Edition</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Edition: 		<input name="edizione" 			type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyDescriptionId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Description</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Description: 	<input name="descrizione" 		type="text" 	maxlength="60"	required	placeholder="enter description"	><br> 
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyPriceId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Price</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Price: 			<input name="prezzo_vetrina" 	type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="button" id ="modifyButton" onclick ="checkModify('modifyPriceId', checkPrice)">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyDateId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Date</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Date: 			<input name="data_uscita" 		type="text" 	maxlength="20"	required	placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="button" id ="modifyButton" onclick ="checkModify('modifyDateId', checkDate)">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyPlatformId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Platform</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Platform: 		<input name="piattaforma" 		type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyConsoleId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Console</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifySaleId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Sale</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="button" id ="modifyButton" onclick ="checkModify('modifySaleId', checkSale)">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyCopyId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Copy</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Copy:			<input name="#copie" 			type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="button" id ="modifyButton" onclick ="checkModify('modifyCopyId', checkCopy)">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyDeveloperId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Developer</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Developer: 		<input name="Sviluppatore" 		type="text" 	maxlength="20" 		required	placeholder="enter name"		><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyPublisherId" action="StorageControl" method="post">
+				<fieldset>
+					<legend>modify Publisher</legend>
+					<input type="hidden" name="action" value="modify"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
+		
+		<form id="modifyPhotoId" action="StorageControl" enctype="multipart/form-data" method="post">
+				<fieldset>
+					<legend>modify Photo</legend>
+					<input type="hidden" name="action" value="modifyPhoto"> 
+					
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					Photo: 			<input name="foto"				type="file"    	maxlength="255"		class="file"	required><br>
+					<p class="ErrorParagraph"></p>
+									
+					<button type="submit" value="modifica">modify</button>
+					<input type="reset" value="Reset"/>
+				</fieldset>
+		</form>
 	
 	<form action="Logout" method="get">
 		<input type="submit" value="Logout"/>

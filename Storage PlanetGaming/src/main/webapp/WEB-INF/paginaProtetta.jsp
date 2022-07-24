@@ -262,11 +262,6 @@
 		</fieldset>
 	</form>
 	
-	
-	<form action="Logout" method="get">
-		<input type="submit" value="Logout"/>
-	</form>
-	
 	<form action="UserInfo" method="get">
 		<input type="hidden" name="action" value="ordini"> 
 		<input type="submit" value="Ordini"/>

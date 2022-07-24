@@ -218,8 +218,8 @@ public class VideogiocoDAO implements VideogiocoModel {
 			preparedStatement.setDouble(4, videogioco.getPrezzo_vetrina());
 			preparedStatement.setDate(5, videogioco.getData_uscita());
 			preparedStatement.setString(6, videogioco.getPiattaforma());
-			preparedStatement.setString(7, videogioco.getConsole());
-			preparedStatement.setInt(8, videogioco.getSconto());
+			preparedStatement.setInt(7, videogioco.getSconto());
+			preparedStatement.setString(8, videogioco.getConsole());
 			preparedStatement.setInt(9, videogioco.getCopie());
 			preparedStatement.setString(10, videogioco.getSviluppatore());
 			preparedStatement.setString(11, videogioco.getPubblisher());

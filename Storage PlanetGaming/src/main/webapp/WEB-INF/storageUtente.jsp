@@ -66,10 +66,6 @@
 	  	
 	</table>
 	
-	<form action="Logout" method="get">
-		<input type="submit" value="Logout"/>
-	</form>
-	
 	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

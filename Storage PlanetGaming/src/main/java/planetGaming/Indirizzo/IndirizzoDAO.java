@@ -9,8 +9,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import planetGaming.Videogioco.VideogiocoDAO;
-
 
 public class IndirizzoDAO implements IndirizzoModel{
 	
@@ -77,6 +75,42 @@ public class IndirizzoDAO implements IndirizzoModel{
 			preparedStatement.setString(1, via);
 			preparedStatement.setInt(2, Integer.parseInt(cap));
 			preparedStatement.setInt(3, codiceUtente);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				indirizzoBean.setVia(rs.getString("via"));
+				indirizzoBean.setCap(rs.getString("cap"));
+				indirizzoBean.setCitta(rs.getString("citta"));
+				indirizzoBean.setCodice_utente(rs.getInt("codiceUtente"));
+				indirizzoBean.setIdIndirizzo(rs.getInt("idIndirizzo"));
+			
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return indirizzoBean;
+	}
+	
+	public synchronized IndirizzoBean doRetrieveByKey(int idIndirizzo) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		IndirizzoBean indirizzoBean = new IndirizzoBean();
+
+		String selectSQL = "SELECT * FROM " + IndirizzoDAO.TABLE_NAME + " WHERE idIndirizzo = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, idIndirizzo);
 
 			ResultSet rs = preparedStatement.executeQuery();
 

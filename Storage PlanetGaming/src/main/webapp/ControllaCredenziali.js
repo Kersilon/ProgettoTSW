@@ -38,12 +38,13 @@ function checkPassword(form, indexError){
 	}
 }
 
-function checkBirthDate(){
+
+function checkDate(){
 	let birthDate;
 	let birthDateError;
 	let regex;
 	
-	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;	//data nel formato dd-/mm-/aaaa va bene sia "-" o "/" per separare i caratteri
+	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;	//data nel formato aaaa-mm-dd va bene sia "-" o "/" per separare i caratteri
 	birthDate = document.getElementById("dataNascita").value;
 	birthDateError = document.getElementById("birthDateError");
 	
@@ -51,7 +52,7 @@ function checkBirthDate(){
 		birthDateError.innerHTML = "";
 		return true;
 	}else{
-		birthDateError.innerHTML = "Birth Date not valid";
+		birthDateError.innerHTML = "Date not valid";
 		return false;
 	}
 }
@@ -176,7 +177,7 @@ function checkCcv(){
 		return false;
 	}
 }
-
+/*
 function checkExpirationDate(){
 	let expirationDate;
 	let expirationDateError;
@@ -194,7 +195,7 @@ function checkExpirationDate(){
 		return false;
 	}
 }
-
+*/
 
 
 
@@ -217,6 +218,7 @@ function checkPrice(form, indexError){
 	}
 }
 
+/*
 function checkDate(form, indexError){
 	let date;
 	let dateError;
@@ -234,7 +236,7 @@ function checkDate(form, indexError){
 		return false;
 	}
 }
-
+*/
 function checkSale(form, indexError){
 	let sale;
 	let saleError;
@@ -248,7 +250,7 @@ function checkSale(form, indexError){
 		saleError.innerHTML = "";
 		return true;
 	}else{
-		saleError.innerHTML = "sale not valid";
+		saleError.innerHTML = "Sale not valid";
 		return false;
 	}
 }
@@ -328,7 +330,7 @@ function checkCredentialsRegistration(form){
 		if(checkPassword(form, 1)){
 		counter++;
 		}
-		if(checkBirthDate()){
+		if(checkDate()){
 		counter++;
 		}
 		if(checkPhone(form, 3)){
@@ -379,7 +381,7 @@ function checkPaymentMethod(){
 		if(checkCcv()){
 		counter++;
 		}
-		if(checkExpirationDate()){
+		if(checkDate()){
 		counter++;
 		}
 		

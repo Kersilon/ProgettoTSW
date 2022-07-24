@@ -72,26 +72,37 @@ public class OrdineDAO implements OrdineModel{
 
 	@Override
 	public synchronized OrdineBean doRetrieveByKey(int codice) throws SQLException {
-		/*
-		Connection connection = null;
+		//instauro connessione e realizzazione prepared statement
+ 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
-		OrdineBean bean = new OrdineBean();
-
-		String selectSQL = "SELECT * FROM " + OrdineDAO.TABLE_NAME + " WHERE CODICE = ?";
-
+		
+		OrdineBean ordineBean;
+		
+		String querySQL = "SELECT * FROM "+OrdineDAO.TABLE_NAME+" WHERE idOrdine=?";
+		
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, codice);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				bean.setCodice(rs.getInt("CODICE"));
+			preparedStatement = connection.prepareStatement(querySQL);
 			
+			// inserisci quì il contentuo
+			ordineBean = new OrdineBean(); 
+			preparedStatement.setInt(1, codice);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next())
+			{
+				ordineBean.setIdOrdine(rs.getInt("idOrdine"));
+				ordineBean.setIdUtente(rs.getInt("idUtente"));
+				ordineBean.setIdModalitaPagamento(rs.getInt("idModalitaPagamento"));
+				ordineBean.setIdIndirizzo(rs.getInt("idIndirizzo"));
+				ordineBean.setPrezzoTotale(rs.getInt("prezzoTotale"));
+				ordineBean.setDataOrdine(rs.getDate("data"));
+				ordineBean.setTracking(rs.getString("tracking"));
+				
+				ordineBean.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll(ordineBean.getIdOrdine()));
 			}
-
+			
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -101,11 +112,9 @@ public class OrdineDAO implements OrdineModel{
 					connection.close();
 			}
 		}
-		return bean;
-		*/
-		//TODO ricorda di togliere "return null;"
-		return null;
-	}
+		
+		return ordineBean;
+}
 
 	@Override
 	public synchronized boolean doDelete(int codice) throws SQLException {
