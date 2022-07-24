@@ -23,7 +23,7 @@ function show(){
 	table = document.getElementsByClassName("hide");
 	hideButton = document.getElementById("HideButton");
 	showButton = document.getElementById("ShowButton");
-	
+
 	for(i = 0; i<table.length; i++){
 		table[i].style.display ="block";
 	}

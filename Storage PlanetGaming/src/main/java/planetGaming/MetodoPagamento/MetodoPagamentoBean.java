@@ -1,6 +1,7 @@
 package planetGaming.MetodoPagamento;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class MetodoPagamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -8,7 +9,7 @@ public class MetodoPagamentoBean implements Serializable {
 	String numero_carta;
 	String ccv;
 	String circuito;
-	String scadenza;
+	Date scadenza;
 	int codiceUtente;
 	String nome_intestatario;
 	String cognome_intestatario;
@@ -57,14 +58,13 @@ public class MetodoPagamentoBean implements Serializable {
 	}
 
 
-
-	public String getScadenza() {
+	public Date getScadenza() {
 		return scadenza;
 	}
 
 
 
-	public void setScadenza(String scadenza) {
+	public void setScadenza(Date scadenza) {
 		this.scadenza = scadenza;
 	}
 

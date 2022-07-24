@@ -1,6 +1,7 @@
 package planetGaming.Utente;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -68,131 +69,16 @@ public class UserInfo extends HttpServlet {
 		metodoPagamentoDao = new MetodoPagamentoDAO();
 		indirizzoDao = new IndirizzoDAO();
 		utenteDao = new UtenteDAO();
+		RequestDispatcher dispatcher;
 		
-		
-		action = request.getParameter("action");
-		if(action != null) {
-			
+		if(request.getSession().getAttribute("isLogged") != null && (boolean) request.getSession().getAttribute("isLogged")){
 			userId = (Integer) request.getSession().getAttribute("userId");
 			
-			if(action.equals("addPaymentMethod")) {
-				metodoPagamentoBean = new MetodoPagamentoBean();
-				
-				metodoPagamentoBean.setNumero_carta(			request.getParameter("cardNumber"));
-				metodoPagamentoBean.setCcv(						request.getParameter("ccv"));
-				metodoPagamentoBean.setCircuito(				request.getParameter("circuit"));
-				metodoPagamentoBean.setScadenza(				request.getParameter("expirationDate"));
-				metodoPagamentoBean.setCodiceUtente((Integer) 	request.getSession().getAttribute("userId"));
-				metodoPagamentoBean.setNome_intestatario(		request.getParameter("name"));
-				metodoPagamentoBean.setCognome_intestatario(	request.getParameter("surname"));
-				
-				try {
-					metodoPagamentoDao.doSave(metodoPagamentoBean);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-				dispatcher.forward(request, response);
-			}
 			
-			if(action.equals("addAddress")) {
-				indirizzoBean = new IndirizzoBean();
-				
-				indirizzoBean.setVia(						request.getParameter("address"));
-				indirizzoBean.setCap(						request.getParameter("cap"));
-				indirizzoBean.setCitta(						request.getParameter("city"));
-				indirizzoBean.setCodice_utente((Integer) 	request.getSession().getAttribute("userId"));
-				indirizzoBean.setProvincia(  				request.getParameter("province")); 
-				
-				try {
-					indirizzoDao.doSave(indirizzoBean);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-				dispatcher.forward(request, response);
-			}
-			//TODO inserire qualcosa tra gli apici di equals
-
-			if(action.equals("ordini")) {
-				bufferOrdini = new LinkedList<OrdineBean>();
-				ordini = new LinkedList<OrdineBean>();
-				
-				bufferProdottiOrdine = new LinkedList<prodottoOrdineBean>();
-				prodottiOrdine = new LinkedList<prodottoOrdineBean>();
-				
-				ordineDao = new OrdineDAO();
-				ordineBean = new OrdineBean();
-				
-				
-				
-				
-				
-				try {
-					//TODO finire di sistemare il dao ordine
-					bufferOrdini = ordineDao.doRetrieveAll("ASC"); 
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				
-				
-				for(OrdineBean ord: bufferOrdini) {
-					if(ord.getIdUtente() == userId) {
-						ordineBean.notSetProdottiOrdine(ord);
-						ordineBean.setProdottiOrdine(new LinkedList<prodottoOrdineBean>());
-						
-						bufferProdottiOrdine = ord.getProdottiOrdine();
-						for(prodottoOrdineBean pOrd: bufferProdottiOrdine) {
-							
-							if(pOrd.getIdOrdine() == ord.getIdOrdine()){
-								ordineBean.getProdottiOrdine().add(pOrd);
-							}
-						}
-						
-						ordini.add(ord);
-					}
-				}
-				
-				request.getSession().setAttribute("ordini", ordini);
-				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
-				dispatcher.forward(request, response);
-			}
-			if(action.equals("modifyUserData")) {
-				utenteBean = null;
-				
-				try {
-					utenteBean = utenteDao.doRetrieveByKey(userId);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				
-				//TODO inserire qualcosa nei valori di request.getParameter
-				if(request.getParameter("nomeUtente") != null && !request.getParameter("nomeUtente").equals(""))
-				{
-					utenteBean.setNomeUtente(request.getParameter("nomeUtente"));
-				}
-				
-				if(request.getParameter("password") != null && !request.getParameter("password").equals(""))
-				{
-					utenteBean.setPassword(request.getParameter("password"));
-				}
-				
-				if(request.getParameter("telefono") != null && !request.getParameter("telefono").equals(""))
-				{
-					utenteBean.setTelefono(request.getParameter("telefono"));
-				}
-				
-				try {
-					utenteDao.doUpdate(utenteBean);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			
+			
+			
+			
 			//TODO inserire questo codice in dei blocchi if dell'action
 			
 			//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
@@ -266,19 +152,159 @@ public class UserInfo extends HttpServlet {
 			
 			
 			
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-			dispatcher.forward(request, response);
-		}
-		else if(request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin")) {
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AdministratorPageServlet");
-			dispatcher.forward(request, response);
-		}
-		else {
 			
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-			dispatcher.forward(request, response);
+			
+			
+			
 		}
-	}
+			
+			
+				
+				
+				
+				
+				
+
+		
+		
+					action = request.getParameter("action");
+					if(action != null) {
+						userId = (Integer) request.getSession().getAttribute("userId");
+						
+						if(action.equals("addPaymentMethod")) {
+							metodoPagamentoBean = new MetodoPagamentoBean();
+							
+							metodoPagamentoBean.setNumero_carta(			request.getParameter("cardNumber"));
+							metodoPagamentoBean.setCcv(						request.getParameter("ccv"));
+							metodoPagamentoBean.setCircuito(				request.getParameter("circuit"));
+							metodoPagamentoBean.setScadenza(	Date.valueOf(request.getParameter("dataNascita")));
+							metodoPagamentoBean.setCodiceUtente((Integer) 	request.getSession().getAttribute("userId"));
+							metodoPagamentoBean.setNome_intestatario(		request.getParameter("name"));
+							metodoPagamentoBean.setCognome_intestatario(	request.getParameter("surname"));
+							
+							try {
+								metodoPagamentoDao.doSave(metodoPagamentoBean);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+							dispatcher.forward(request, response);
+						}
+						
+						if(action.equals("addAddress")) {
+							indirizzoBean = new IndirizzoBean();
+							
+							indirizzoBean.setVia(						request.getParameter("address"));
+							indirizzoBean.setCap(						request.getParameter("cap"));
+							indirizzoBean.setCitta(						request.getParameter("city"));
+							indirizzoBean.setCodice_utente((Integer) 	request.getSession().getAttribute("userId"));
+							indirizzoBean.setProvincia(  				request.getParameter("province")); 
+							
+							try {
+								indirizzoDao.doSave(indirizzoBean);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+							dispatcher.forward(request, response);
+						}
+						//TODO inserire qualcosa tra gli apici di equals
+			
+						if(action.equals("ordini")) {
+							bufferOrdini = new LinkedList<OrdineBean>();
+							ordini = new LinkedList<OrdineBean>();
+							
+							bufferProdottiOrdine = new LinkedList<prodottoOrdineBean>();
+							prodottiOrdine = new LinkedList<prodottoOrdineBean>();
+							
+							ordineDao = new OrdineDAO();
+							ordineBean = new OrdineBean();
+							
+							
+							
+							
+							
+							try {
+								//TODO finire di sistemare il dao ordine
+								bufferOrdini = ordineDao.doRetrieveAll("ASC"); 
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+							
+							
+							for(OrdineBean ord: bufferOrdini) {
+								if(ord.getIdUtente() == userId) {
+									ordineBean.notSetProdottiOrdine(ord);
+									ordineBean.setProdottiOrdine(new LinkedList<prodottoOrdineBean>());
+									
+									bufferProdottiOrdine = ord.getProdottiOrdine();
+									for(prodottoOrdineBean pOrd: bufferProdottiOrdine) {
+										
+										if(pOrd.getIdOrdine() == ord.getIdOrdine()){
+											ordineBean.getProdottiOrdine().add(pOrd);
+										}
+									}
+									
+									ordini.add(ord);
+								}
+							}
+							
+							request.getSession().setAttribute("ordini", ordini);
+							
+							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
+							dispatcher.forward(request, response);
+						}
+						if(action.equals("modifyUserData")) {
+							utenteBean = null;
+							
+							try {
+								utenteBean = utenteDao.doRetrieveByKey(userId);
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+							
+							//TODO inserire qualcosa nei valori di request.getParameter
+							if(request.getParameter("nomeUtente") != null && !request.getParameter("nomeUtente").equals(""))
+							{
+								utenteBean.setNomeUtente(request.getParameter("nomeUtente"));
+							}
+							
+							if(request.getParameter("password") != null && !request.getParameter("password").equals(""))
+							{
+								utenteBean.setPassword(request.getParameter("password"));
+							}
+							
+							if(request.getParameter("telefono") != null && !request.getParameter("telefono").equals(""))
+							{
+								utenteBean.setTelefono(request.getParameter("telefono"));
+							}
+							
+							try {
+								utenteDao.doUpdate(utenteBean);
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+						
+						
+						
+					}else if(request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin")) {
+						dispatcher = getServletContext().getRequestDispatcher("/AdministratorPageServlet");
+						dispatcher.forward(request, response);
+					}else {
+						
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+						dispatcher.forward(request, response);
+					}
+					
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+					dispatcher.forward(request, response);
+				}
+	//}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -43,12 +43,14 @@ private static final String TABLE_NAME = "pagamento";
 		
 		try {
 			connection = ds.getConnection();
+			connection.setAutoCommit(false);
+			
 			preparedStatement = connection.prepareStatement(querySQL);
 			
 			//complazione preparedStatement ed esecuzione
 			preparedStatement.setString(1, metodoPagamento.getNumero_carta());
 			preparedStatement.setString(2, metodoPagamento.getCcv());
-			preparedStatement.setString(3, metodoPagamento.getScadenza());
+			preparedStatement.setDate(3, metodoPagamento.getScadenza());
 			preparedStatement.setString(4, metodoPagamento.getCircuito());
 			preparedStatement.setInt(	5, metodoPagamento.getCodiceUtente());
 			preparedStatement.setString(6, metodoPagamento.getNome_intestatario());
@@ -121,7 +123,7 @@ private static final String TABLE_NAME = "pagamento";
 				metodoPagamento.setNumero_carta(rs.getString("numero_carta"));
 				metodoPagamento.setCcv(rs.getString("ccv"));
 				metodoPagamento.setCircuito(rs.getString("circuito"));
-				metodoPagamento.setScadenza(rs.getString("scadenza"));
+				metodoPagamento.setScadenza(rs.getDate("scadenza"));
 				metodoPagamento.setCodiceUtente(rs.getInt("codiceUtente"));
 				metodoPagamento.setNome_intestatario(rs.getString("nome_intestatario"));
 				metodoPagamento.setCognome_intestatario(rs.getString("cognome_intestatario"));
@@ -163,7 +165,7 @@ private static final String TABLE_NAME = "pagamento";
 
 				metodoPagamento.setNumero_carta(rs.getString("numero_carta"));
 				metodoPagamento.setCcv((rs.getString("ccv")));		
-				metodoPagamento.setScadenza((rs.getString("scadenza")));
+				metodoPagamento.setScadenza((rs.getDate("scadenza")));
 				metodoPagamento.setCircuito((rs.getString("circuito")));
 				metodoPagamento.setCodiceUtente((rs.getInt("codiceUtente")));
 				metodoPagamento.setNome_intestatario((rs.getString("nome_intestatario")));

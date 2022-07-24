@@ -26,11 +26,11 @@
 			<input name="action" value="login"><br>
 					
 			<label for="email"> Login:</label>
-			<input type="text" name="email" id ="email" placeholder="enter Username" value="ersilio@gmail.com">
+			<input type="text" name="email" id ="email" placeholder="enter Username" >
 			<p id="emailError" class="ErrorParagraph"></p>			
 			<br>
 			<label for="password"> Password:</label>
-			<input type="password" name="password" id="password" placeholder="enter Password" value="12345">
+			<input type="password" name="password" id="password" placeholder="enter Password" >
 			<p id="passwordError" class="ErrorParagraph"></p>	
 			<br>
 			<input type="submit" name="submit" value="Submit" />

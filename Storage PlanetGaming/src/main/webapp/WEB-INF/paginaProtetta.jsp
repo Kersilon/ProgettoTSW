@@ -10,7 +10,6 @@
 	if((isLogged == null) || isLogged.equals(false))
 	{
 		response.sendRedirect("./login-form.jsp");
-		//return;	//TODO cosa fa effettivamente questo return?
 	}
 	
 	Collection<?> metodiPagamento = (Collection<?>) request.getSession().getAttribute("metodiPagamento");
@@ -178,19 +177,19 @@
 			<legend>delivery address</legend>
 			<input type="hidden" name="action" value="addAddress">
 			
-			Name: 			<input name="name" 			type="text" 						maxlength="20" 	placeholder="enter name"><br>
-			Surname: 		<input name="surname" 		type="text" 						maxlength="20" 	placeholder="enter surname"><br>
+			Name: 			<input name="name" 			type="text" 						maxlength="20" 	value ="io" placeholder="enter name"><br>
+			Surname: 		<input name="surname" 		type="text" 						maxlength="20" 	value ="oi" placeholder="enter surname"><br>
 			<!--  TODO da spostare nei dati dell'utente; 	Fiscal code: 	<input name="fiscalCode" 	type="text"		id="fiscalCode"		maxlength="20" 	placeholder="enter fiscal code"><br>
 			<p id="fiscalCodeError"></p>-->
 			
-			Address: 		<input name="address" 		type="text" 	id="address"		maxlength="20" 	placeholder="enter address"><br>
-			cap: 			<input name="cap" 			type="text" 	id="cap"			maxlength="20" 	placeholder="enter cap"><br>
+			Address: 		<input name="address" 		type="text" 	id="address"		maxlength="20" 	value ="via" placeholder="enter address"><br>
+			cap: 			<input name="cap" 			type="text" 	id="cap"			maxlength="20" 	value ="10203" placeholder="enter cap"><br>
 			<p id="capError" class="ErrorParagraph"></p>
 			
-			Province: 		<input name="province" 		type="text" 	id="province"		maxlength="20" 	placeholder="enter state"><br>
+			Province: 		<input name="province" 		type="text" 	id="province"		maxlength="20" 	value ="SA" placeholder="enter state"><br>
 			<p id="provinceError" class="ErrorParagraph"></p>
 			
-			City: 			<input name="city" 			type="text" 	id="city"			maxlength="20" 	placeholder="enter city"><br>
+			City: 			<input name="city" 			type="text" 	id="city"			maxlength="20" 	value ="Salerno" placeholder="enter city"><br>
 			<p id="cityError" class="ErrorParagraph"></p>
 			
 			<button type="button" id ="addressButton" onclick ="checkDeliveryAddress()">Save</button>
@@ -203,19 +202,19 @@
 			<legend>payment method</legend>
 			<input type="hidden" name="action" value="addPaymentMethod">
 			
-			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" value ="4023123412341234"	placeholder="enter card number"><br>
+			Card number: 		<input name="cardNumber" 		type="text" 	id="cardNumber" 	maxlength="20" 	value ="4023101120223033" placeholder="enter card number"><br>
 			<p id="cardNumberError" class="ErrorParagraph"></p>
 			
-			ccv: 				<input name="ccv" 				type="text" 	id="ccv" 			maxlength="20" value ="123"					placeholder="enter ccv"><br>
+			ccv: 				<input name="ccv" 				type="text" 	id="ccv" 			maxlength="20" 	value ="123" placeholder="enter ccv"><br>
 			<p id="ccvError" class="ErrorParagraph"></p>
 			
-			circuito: 			<input name="circuit" 			type="text"				 			maxlength="20" 								placeholder="enter card circuit"><br>
+			circuito: 			<input name="circuit" 			type="text"				 			maxlength="20" 	value ="VISA" placeholder="enter card circuit"><br>
 			<!--<p id="" class="ErrorParagraph"></p>-->
 			
-			Name: 				<input name="name" 				type="text"				 			maxlength="20" 								placeholder="enter name on the card"><br>
-			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" 								placeholder="enter surname on the card"><br>
-			Expiration date: 	<input name="expirationDate" 	type ="text" 	id="expirationDate"	maxlength="20" value ="112022"				placeholder="enter expiration date"><br>
-			<p id="expirationDateError" class="ErrorParagraph"></p>
+			Name: 				<input name="name" 				type="text"				 			maxlength="20" 	value ="io" placeholder="enter name on the card"><br>
+			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" 	value ="oi" placeholder="enter surname on the card"><br>
+			Expiration date: 	<input name="dataNascita" 		type ="text" 	id="dataNascita"	maxlength="20" 	value ="2024-10-10" placeholder="enter expiration date"><br>
+			<p id="birthDateError" class="ErrorParagraph"></p>
 			
 			<button type="button" id ="paymentMethodButton" onclick ="checkPaymentMethod()">Save</button>
 			<input type="reset" value="Reset"/>

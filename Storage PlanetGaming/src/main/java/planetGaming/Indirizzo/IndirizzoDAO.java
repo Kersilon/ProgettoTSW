@@ -39,6 +39,8 @@ public class IndirizzoDAO implements IndirizzoModel{
 
 		try {
 			connection = ds.getConnection();
+			connection.setAutoCommit(false);
+			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, indirizzo.getVia());			
 			preparedStatement.setInt(2, Integer.parseInt(indirizzo.getCap()));		
@@ -47,7 +49,6 @@ public class IndirizzoDAO implements IndirizzoModel{
 			preparedStatement.setString(5, indirizzo.getProvincia());
 
 			preparedStatement.executeUpdate();
-
 			connection.commit();
 		} finally {
 			try {
