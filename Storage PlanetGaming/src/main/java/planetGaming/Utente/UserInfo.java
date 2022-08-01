@@ -26,18 +26,16 @@ import planetGaming.Ordine.*;
 @WebServlet("/UserInfo")
 public class UserInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public UserInfo() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+    
+    
+    
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
@@ -73,11 +71,6 @@ public class UserInfo extends HttpServlet {
 		
 		if(request.getSession().getAttribute("isLogged") != null && (boolean) request.getSession().getAttribute("isLogged")){
 			userId = (Integer) request.getSession().getAttribute("userId");
-			
-			
-			
-			
-			
 			
 			//TODO inserire questo codice in dei blocchi if dell'action
 			
@@ -148,28 +141,20 @@ public class UserInfo extends HttpServlet {
 			}
 			
 			request.getSession().setAttribute("datiUtente", utenteBean);
-			
-			
-			
-			
-			
-			
-			
-			
+	
 		}
 			
-			
-				
-				
-				
-				
-				
-
+		
+		
+		
 		
 		
 					action = request.getParameter("action");
+					
 					if(action != null) {
 						userId = (Integer) request.getSession().getAttribute("userId");
+						
+						
 						
 						if(action.equals("addPaymentMethod")) {
 							metodoPagamentoBean = new MetodoPagamentoBean();
@@ -193,6 +178,8 @@ public class UserInfo extends HttpServlet {
 							dispatcher.forward(request, response);
 						}
 						
+						
+						
 						if(action.equals("addAddress")) {
 							indirizzoBean = new IndirizzoBean();
 							
@@ -212,8 +199,9 @@ public class UserInfo extends HttpServlet {
 							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 							dispatcher.forward(request, response);
 						}
-						//TODO inserire qualcosa tra gli apici di equals
 			
+						
+						
 						if(action.equals("ordini")) {
 							bufferOrdini = new LinkedList<OrdineBean>();
 							ordini = new LinkedList<OrdineBean>();
@@ -258,6 +246,9 @@ public class UserInfo extends HttpServlet {
 							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
 							dispatcher.forward(request, response);
 						}
+						
+						
+						
 						if(action.equals("modifyUserData")) {
 							utenteBean = null;
 							
@@ -291,24 +282,31 @@ public class UserInfo extends HttpServlet {
 						}
 						
 						
+					
 						
+						
+					
+					//se action è diverso da null
 					}else if(request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin")) {
 						dispatcher = getServletContext().getRequestDispatcher("/AdministratorPageServlet");
 						dispatcher.forward(request, response);
+						
+						
+						
 					}else {
 						
 						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 						dispatcher.forward(request, response);
 					}
 					
+					
+					
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 					dispatcher.forward(request, response);
 				}
 	//}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

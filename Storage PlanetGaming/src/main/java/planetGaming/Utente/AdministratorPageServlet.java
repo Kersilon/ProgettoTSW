@@ -23,27 +23,23 @@ import planetGaming.Ordine.OrdineDAO;
 public class AdministratorPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public AdministratorPageServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+    
+    
+    
+    
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		OrdineDAO ordineDao = new OrdineDAO();
 		Collection<OrdineBean> ordiniUtenti = new LinkedList<OrdineBean>();
 		
@@ -55,8 +51,6 @@ public class AdministratorPageServlet extends HttpServlet {
 		Integer ordersByUserId, userId;
 		Date min;
 		Date max;
-		
-		
 		
 		
 		
@@ -124,6 +118,8 @@ public class AdministratorPageServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 				
+				
+				
 				else if(action.equals("ShowUsers")) {
 					try {
 						utenti = utenteDao.doRetrieveAll();
@@ -137,6 +133,8 @@ public class AdministratorPageServlet extends HttpServlet {
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
 					dispatcher.forward(request, response);
 				}
+				
+				
 				
 				else if(action.equals("ShowUser")) {
 					userId = Integer.parseInt(request.getParameter("UserId"));
@@ -154,6 +152,8 @@ public class AdministratorPageServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 		}
+		
+		
 		
 		else {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");

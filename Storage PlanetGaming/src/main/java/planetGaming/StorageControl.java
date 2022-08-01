@@ -20,21 +20,25 @@ import planetGaming.Videogioco.*;
 @WebServlet("/StorageControl")
 @MultipartConfig
 public class StorageControl extends HttpServlet {
-	
-	private static final String SAVE_DIR = "immagini Videogiochi";
-
 	//necessario per le Servlet
 	private static final long serialVersionUID = 1L;
+	
+	private static final String SAVE_DIR = "immagini Videogiochi";
+	
+	//static VideogiocoModel VgDao = new VideogiocoDAO();
+
+	
 	
 	//costruttore
 	public StorageControl() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	
-	//inizializzazione DAO
-	static VideogiocoModel VgDao = new VideogiocoDAO();
+	
+	
+	
+	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,6 +48,7 @@ public class StorageControl extends HttpServlet {
 		String fileName;
 		FileSupport fs = new FileSupport();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
 		
 		
 		if(action != null)
@@ -87,6 +92,8 @@ public class StorageControl extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			
+				
 				
 			}else if(action.equalsIgnoreCase("delete"))
 			{
@@ -96,6 +103,8 @@ public class StorageControl extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			
+				
 				
 			}else if(action.equalsIgnoreCase("modify"))
 			{
@@ -231,13 +240,19 @@ public class StorageControl extends HttpServlet {
 			}
 		}
 		
+		
+		
+		
+		
+		
+		//se action è null
 		try {
 			req.removeAttribute("videogiochi");
 			
 			//TODO inserire una variabile al posto di ASC
 			req.setAttribute("videogiochi", videogioco.doRetrieveAll("ASC"));
 			
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 

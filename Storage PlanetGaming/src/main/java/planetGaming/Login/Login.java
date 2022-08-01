@@ -25,6 +25,11 @@ public class Login extends HttpServlet {
 		super();
 	}
 	
+	
+	
+	
+	
+	
 	//controlla le credenziali inserite nel form di login con quelle presenti nel DB
 			private boolean checkLogin(String email, String password){
 				//ciao
@@ -40,6 +45,11 @@ public class Login extends HttpServlet {
 				
 			}
 
+			
+			
+			
+			
+			
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -50,6 +60,8 @@ public class Login extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		System.out.println("entro nella servlet");
+		
+		
 		
 		if(action != null)
 		{
@@ -84,6 +96,9 @@ public class Login extends HttpServlet {
 					response.setCharacterEncoding("UTF-8");
 					response.getWriter().write("./login-form.jsp");
 				}
+				
+				
+				
 			}
 			if(action.equalsIgnoreCase("login"))
 			{
@@ -141,6 +156,9 @@ public class Login extends HttpServlet {
 				}
 			}
 			*/
+			
+			
+			
 		}else {
 			//se action è nullo significa che stiamo accedendo alla web app partendo da questa servlet e per tanto si dovrebbe essere rindirizzati
 			//alla homepage
