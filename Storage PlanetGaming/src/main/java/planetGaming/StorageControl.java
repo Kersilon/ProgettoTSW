@@ -245,7 +245,7 @@ public class StorageControl extends HttpServlet {
 		
 		
 		
-		//se action è null
+		//a prescindere da come va l'action se non ha già lasciato la servlet
 		try {
 			req.removeAttribute("videogiochi");
 			

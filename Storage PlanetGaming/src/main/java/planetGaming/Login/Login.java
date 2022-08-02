@@ -21,6 +21,8 @@ public class Login extends HttpServlet {
 	static UtenteModel utenteDao = new UtenteDAO();
 	UtenteBean utenteBean;
 	
+	
+	
 	public Login() {
 		super();
 	}
@@ -30,26 +32,6 @@ public class Login extends HttpServlet {
 	
 	
 	
-	//controlla le credenziali inserite nel form di login con quelle presenti nel DB
-			private boolean checkLogin(String email, String password){
-				//ciao
-				try {
-					utenteBean = utenteDao.doRetrieveByKey(email, password);
-					if(utenteBean.getEmail() != null && utenteBean.getPassword() != null && utenteBean.getEmail().equals(email) && utenteBean.getPassword().equals(password) && !utenteBean.getEmail().equals(""))
-						return true;
-				
-				} catch (SQLException e) {
-					System.out.println("Error:" + e.getMessage());
-				}
-				return false;
-				
-			}
-
-			
-			
-			
-			
-			
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -211,5 +193,22 @@ public class Login extends HttpServlet {
 		response.sendRedirect(request.getContextPath()+"/login-form.jsp");
 	}
 */
+	}
+	
+	
+	
+	//controlla le credenziali inserite nel form di login con quelle presenti nel DB
+	private boolean checkLogin(String email, String password){
+		//ciao
+		try {
+			utenteBean = utenteDao.doRetrieveByKey(email, password);
+			if(utenteBean.getEmail() != null && utenteBean.getPassword() != null && utenteBean.getEmail().equals(email) && utenteBean.getPassword().equals(password) && !utenteBean.getEmail().equals(""))
+				return true;
+		
+		} catch (SQLException e) {
+			System.out.println("Error:" + e.getMessage());
+		}
+		return false;
+		
 	}
 }

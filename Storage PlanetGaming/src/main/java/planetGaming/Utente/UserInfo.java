@@ -20,13 +20,12 @@ import planetGaming.MetodoPagamento.MetodoPagamentoBean;
 import planetGaming.MetodoPagamento.MetodoPagamentoDAO;
 import planetGaming.Ordine.*;
 
-/**
- * Servlet implementation class UserInfo
- */
 @WebServlet("/UserInfo")
 public class UserInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
+	
     public UserInfo() {
         super();
     }
@@ -62,94 +61,13 @@ public class UserInfo extends HttpServlet {
 		
 		Collection<prodottoOrdineBean> prodottiOrdine, bufferProdottiOrdine;
 		
-		
-		
 		metodoPagamentoDao = new MetodoPagamentoDAO();
 		indirizzoDao = new IndirizzoDAO();
 		utenteDao = new UtenteDAO();
 		RequestDispatcher dispatcher;
-		
-		if(request.getSession().getAttribute("isLogged") != null && (boolean) request.getSession().getAttribute("isLogged")){
-			userId = (Integer) request.getSession().getAttribute("userId");
-			
-			//TODO inserire questo codice in dei blocchi if dell'action
-			
-			//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
-			//prende e inserisce nella request tutti i metodi di pagamento dell'utente
-			//request.getSession().removeAttribute("metodiPagamento");
-			
-			bufferMetodiPagamento = new LinkedList<MetodoPagamentoBean>();
-			metodiPagamento = new LinkedList<MetodoPagamentoBean>();
-			
-			try {
-				bufferMetodiPagamento = metodoPagamentoDao.doRetrieveAll("ASC");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			//presi tutti metodi di pagamento scorriamo la lista temporanea, di metodi di pagamento e per ognuno di essi
-			//se questo ha il codice utente uguale a quello dell'utente attualmente loggato
-			//questo viene inserito nella lista di metodi che sarà poi effettivamente salvata nella sessione
-			for(MetodoPagamentoBean mp : bufferMetodiPagamento) {
-				if(mp.getCodiceUtente() == (Integer) request.getSession().getAttribute("userId")) {
-					metodiPagamento.add(mp);
-				}
-			}
-			
-			request.getSession().setAttribute("metodiPagamento", metodiPagamento);
-			
-			
-			
-			
-			//TODO eseguire la visualizzazione di tutti gli indirizzi solo se si preme un pulsante
-			//prende e inserisce nella request tutti gli indirizzi dell'utente
-			//request.getSession().removeAttribute("indirizzi");
-			
-			bufferIndirizzi = new LinkedList<IndirizzoBean>();
-			indirizzi = new LinkedList<IndirizzoBean>();
-			
-			try {
-				bufferIndirizzi = indirizzoDao.doRetrieveAll("ASC");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			//presi tutti gli indirizzi scorriamo la lista temporanea, di indirizzi e per ognuno di essi
-			//se questo ha il codice utente uguale a quello dell'utente attualmente loggato
-			//questo viene inserito nella lista di indirizzi che sarà poi effettivamente salvata nella sessione
-			for(IndirizzoBean ind : bufferIndirizzi) {
-				if(ind.getCodice_utente() == (Integer) request.getSession().getAttribute("userId")) {
-					indirizzi.add(ind);
-				}
-			}
-			
-			request.getSession().setAttribute("indirizzi", indirizzi);
-			
-			
-			
-			//TODO eseguire la visualizzazione di tutti i dati dell'utente solo se si preme un pulsante
-			//inserisco nella sessione i dati dell'utente
-			utenteBean = new UtenteBean();
-			
-			try {
-				utenteBean = utenteDao.doRetrieveByKey(userId);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			request.getSession().setAttribute("datiUtente", utenteBean);
-	
-		}
-			
-		
-		
-		
-		
-		
-					action = request.getParameter("action");
+		action = request.getParameter("action");
+					
+					
 					
 					if(action != null) {
 						userId = (Integer) request.getSession().getAttribute("userId");
@@ -173,9 +91,6 @@ public class UserInfo extends HttpServlet {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							
-							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-							dispatcher.forward(request, response);
 						}
 						
 						
@@ -195,9 +110,6 @@ public class UserInfo extends HttpServlet {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							
-							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-							dispatcher.forward(request, response);
 						}
 			
 						
@@ -286,25 +198,96 @@ public class UserInfo extends HttpServlet {
 						
 						
 					
-					//se action è diverso da null
+					//se action è diverso da null e si tratta dell'aministratore
 					}else if(request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin")) {
 						dispatcher = getServletContext().getRequestDispatcher("/AdministratorPageServlet");
 						dispatcher.forward(request, response);
+	
+					}
+					
+					
+					//a prescindere da come va l'action se non ha già lasciato la servlet
+					//se non è un admin ma è un utente loggato
+					if(request.getSession().getAttribute("isLogged") != null && (boolean) request.getSession().getAttribute("isLogged")){
+						userId = (Integer) request.getSession().getAttribute("userId");
+						
+						//TODO inserire questo codice in dei blocchi if dell'action
+						
+						//TODO eseguire la visualizzazione di tutti i metodi di pagamento solo se si preme un pulsante
+						//prende e inserisce nella request tutti i metodi di pagamento dell'utente
+						//request.getSession().removeAttribute("metodiPagamento");
+						
+						bufferMetodiPagamento = new LinkedList<MetodoPagamentoBean>();
+						metodiPagamento = new LinkedList<MetodoPagamentoBean>();
+						
+						try {
+							bufferMetodiPagamento = metodoPagamentoDao.doRetrieveAll("ASC");
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						//presi tutti metodi di pagamento scorriamo la lista temporanea, di metodi di pagamento e per ognuno di essi
+						//se questo ha il codice utente uguale a quello dell'utente attualmente loggato
+						//questo viene inserito nella lista di metodi che sarà poi effettivamente salvata nella sessione
+						for(MetodoPagamentoBean mp : bufferMetodiPagamento) {
+							if(mp.getCodiceUtente() == (Integer) request.getSession().getAttribute("userId")) {
+								metodiPagamento.add(mp);
+							}
+						}
+						
+						request.getSession().setAttribute("metodiPagamento", metodiPagamento);
 						
 						
 						
-					}else {
 						
-						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-						dispatcher.forward(request, response);
+						//TODO eseguire la visualizzazione di tutti gli indirizzi solo se si preme un pulsante
+						//prende e inserisce nella request tutti gli indirizzi dell'utente
+						//request.getSession().removeAttribute("indirizzi");
+						
+						bufferIndirizzi = new LinkedList<IndirizzoBean>();
+						indirizzi = new LinkedList<IndirizzoBean>();
+						
+						try {
+							bufferIndirizzi = indirizzoDao.doRetrieveAll("ASC");
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						//presi tutti gli indirizzi scorriamo la lista temporanea, di indirizzi e per ognuno di essi
+						//se questo ha il codice utente uguale a quello dell'utente attualmente loggato
+						//questo viene inserito nella lista di indirizzi che sarà poi effettivamente salvata nella sessione
+						for(IndirizzoBean ind : bufferIndirizzi) {
+							if(ind.getCodice_utente() == (Integer) request.getSession().getAttribute("userId")) {
+								indirizzi.add(ind);
+							}
+						}
+						
+						request.getSession().setAttribute("indirizzi", indirizzi);
+						
+						
+						
+						//TODO eseguire la visualizzazione di tutti i dati dell'utente solo se si preme un pulsante
+						//inserisco nella sessione i dati dell'utente
+						utenteBean = new UtenteBean();
+						
+						try {
+							utenteBean = utenteDao.doRetrieveByKey(userId);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						request.getSession().setAttribute("datiUtente", utenteBean);
+				
 					}
 					
 					
 					
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
 					dispatcher.forward(request, response);
-				}
-	//}
+	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -16,14 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import planetGaming.Ordine.OrdineBean;
 import planetGaming.Ordine.OrdineDAO;
 
-/**
- * Servlet implementation class AdministratorPageServlet
- */
 @WebServlet("/AdministratorPageServlet")
 public class AdministratorPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
+	
     public AdministratorPageServlet() {
         super();
     }
@@ -154,7 +152,7 @@ public class AdministratorPageServlet extends HttpServlet {
 		}
 		
 		
-		
+		//se action è null
 		else {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
 			dispatcher.forward(request, response);
