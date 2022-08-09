@@ -20,7 +20,10 @@ public class Logout extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		request.getSession().removeAttribute("adminRoles");
+		request.getSession().removeAttribute("isAdmin");
+		//request.getSession().removeAttribute("adminRoles");
+		request.getSession().removeAttribute("isLogged");
+		request.getSession().removeAttribute("userId");
 		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath()+"/login-form.jsp");
 	}

@@ -102,6 +102,7 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 				prodottoOrdine.setScontoAcquisto(((rs.getDouble("scontoAcquisto"))));
 				prodottoOrdine.setQuantitaAcquisto(((rs.getInt("quantitaAcquisto"))));
 				prodottoOrdine.setIva(((rs.getDouble("iva"))));
+				prodottoOrdine.setFoto(rs.getString("foto"));
 				
 				prodottiOrdine.add(prodottoOrdine);
 			}
@@ -148,6 +149,7 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 				prodottoOrdine.setScontoAcquisto(((rs.getDouble("scontoAcquisto"))));
 				prodottoOrdine.setQuantitaAcquisto(((rs.getInt("quantitaAcquisto"))));
 				prodottoOrdine.setIva(((rs.getDouble("iva"))));
+				prodottoOrdine.setFoto(rs.getString("foto"));
 				
 				prodottiOrdine.add(prodottoOrdine);
 			}

@@ -21,7 +21,7 @@
 			
 			Name: 		<input name="nome" 			type="text" 						maxlength="20" placeholder="enter name"				><br>
 			Surname: 	<input name="cognome" 		type="text" 						maxlength="20" placeholder="enter surname"			><br>
-			Birth date: <input name="dataNascita" 	type ="text" 	id ="dataNascita" 	maxlength="20" placeholder="enter birth date"		><br>
+			Birth date: <input name="data" 	type ="text" 	id ="dataNascita" 	maxlength="20" placeholder="enter birth date"		><br>
 			<p id="birthDateError" class="ErrorParagraph"></p>	
 			
 			Username: 	<input name="nomeUtente" 	type="text" 						maxlength="20" placeholder="enter username"			><br>

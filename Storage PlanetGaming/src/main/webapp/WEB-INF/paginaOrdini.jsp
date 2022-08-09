@@ -84,13 +84,14 @@
 			<th>discount</th>
 			<th>quantity</th>
 			<th>iva</th>
+			<th>Photo</th>
 	  	</tr>
 	<%
 					Iterator<?> itProdotti = ordine.getProdottiOrdine().iterator();
 					while (itProdotti.hasNext()) {
 						prodottoOrdineBean prodottoOrdine = (prodottoOrdineBean) itProdotti.next();
 	%>
-						<tr class ="hide">
+						<tr  class ="hide">
 							<td><%=prodottoOrdine.getIdProdottoOrdine()%></td>
 							<td><%=prodottoOrdine.getIdOrdine()%></td>
 							<td><%=prodottoOrdine.getIdVideogioco()%></td>
@@ -99,6 +100,7 @@
 							<td><%=prodottoOrdine.getScontoAcquisto()%></td>
 							<td><%=prodottoOrdine.getQuantitaAcquisto()%></td>
 							<td><%=prodottoOrdine.getIva()%></td>
+							<td><img src="./immagini Videogiochi/<%=prodottoOrdine.getFoto()%>"></td>
 			  			</tr>
 			 <%
 					}

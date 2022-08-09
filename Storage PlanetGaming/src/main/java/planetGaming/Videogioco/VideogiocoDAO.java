@@ -44,6 +44,7 @@ public class VideogiocoDAO implements VideogiocoModel {
 		
 		try {
 			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(insertSQL);
 			
 			preparedStatement.setString(1, videogioco.getNome());	//l'indice è 1 perché è il primo attributo inserito nella query insertSQL

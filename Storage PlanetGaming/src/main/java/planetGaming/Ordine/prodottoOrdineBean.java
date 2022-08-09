@@ -13,6 +13,8 @@ public class prodottoOrdineBean implements Serializable {
 	private double scontoAcquisto;
 	private int quantitaAcquisto;
 	private double iva;
+	private String foto;
+	
 	
 	
 	public prodottoOrdineBean() {
@@ -20,6 +22,15 @@ public class prodottoOrdineBean implements Serializable {
 	}
 	
 	
+	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public int getIdProdottoOrdine() {
 		return idProdottoOrdine;
 	}

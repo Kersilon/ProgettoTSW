@@ -47,8 +47,8 @@ public class StorageControl extends HttpServlet {
 		String action = req.getParameter("action");
 		String fileName;
 		FileSupport fs = new FileSupport();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		boolean ajaxFlag = false;
 		
 		
 		if(action != null)
@@ -67,7 +67,7 @@ public class StorageControl extends HttpServlet {
 				videogiocoBean.setPrezzo_vetrina(	Double.parseDouble(			req.getParameter("prezzo_vetrina")));
 				
 				try {
-					videogiocoBean.setData_uscita(									new java.sql.Date(formatter.parse(req.getParameter("data_uscita")).getTime()));
+					videogiocoBean.setData_uscita(									new java.sql.Date(formatter.parse(req.getParameter("data")).getTime()));
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -103,6 +103,11 @@ public class StorageControl extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
+				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
+				resp.getWriter().write("successful deletion");      		// Write response body.
+				ajaxFlag = true;
 			
 				
 				
@@ -247,15 +252,24 @@ public class StorageControl extends HttpServlet {
 		
 		//a prescindere da come va l'action se non ha già lasciato la servlet
 		try {
-			req.removeAttribute("videogiochi");
+			req.getSession().removeAttribute("videogiochi");
 			
 			//TODO inserire una variabile al posto di ASC
-			req.setAttribute("videogiochi", videogioco.doRetrieveAll("ASC"));
+			req.getSession().setAttribute("videogiochi", videogioco.doRetrieveAll("ASC"));
 			
 		}catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 
+		
+		//se viene eseguito il dispatcher il contenuto della response viene sovrascitta con la pagina
+		//con questo return impediamo che il dispatcher venga eseguito quando usiamo ajax
+		if(ajaxFlag) { 
+			return;
+		}
+		
+		//resp.sendRedirect(req.getContextPath()+"/storageAdmin.jsp");
+		
 		//se l'utente è un Admin viene mandato allo storage.jsp che permette di fare le operazioni da admin
 		//altrimenti se non è un admin viene mandato allo storage.jsp per utente semplice
 		Boolean isAdmin = (Boolean) req.getSession().getAttribute("isAdmin");
@@ -268,6 +282,7 @@ public class StorageControl extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
 			dispatcher.forward(req, resp);
 		}
+		
 	}
 
 	@Override

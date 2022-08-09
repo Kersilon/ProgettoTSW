@@ -3,19 +3,17 @@
 
 <% 
 	//Check user credentials
-	//Boolean adminRoles = (Boolean) session.getAttribute("adminRoles");
-	//if((adminRoles == null) || (!adminRoles.booleanValue()))
-	//{
-	//	response.sendRedirect("./login-form.jsp");
-	//	return;
-	//}
+	Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+	if((isAdmin == null) || (!isAdmin.booleanValue()))
+	{
+		response.sendRedirect("./login-form.jsp");
+	}
 	
 	//verifica se l'oggetto videogiochi è presente nella richiesta altrimenti passa il controllo alla servlet "StorageControl" che lo genera
-	Collection<?> videogiochi = (Collection<?>) request.getAttribute("videogiochi");
-	//if(videogiochi == null) {
-	//	response.sendRedirect("StorageControl");	
-	//	return;
-	//}
+	Collection<?> videogiochi = (Collection<?>) request.getSession().getAttribute("videogiochi"); //va bene anche "session" al posto di "request.getSession()"
+	if(videogiochi == null) {
+		response.sendRedirect("StorageControl");	
+	}
 %>
 
 
@@ -32,7 +30,8 @@
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
-<jsp:include page="header.jsp" />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<jsp:include page="/WEB-INF/header.jsp" />
 
 	<h1>Welcome to the Storage Page</h1>
 	<p>Here you can add, delete, remove element from the database</p>
@@ -62,7 +61,8 @@
 				while (it.hasNext()) {
 					VideogiocoBean videogioco = (VideogiocoBean) it.next();
 	%>
-			<tr>
+		
+			<tr id="<%=videogioco.getCodice_prodotto()%>">
 				<td><%=videogioco.getCodice_prodotto()%></td>
 			    <td><%=videogioco.getNome()%></td>
 			    <td><%=videogioco.getEdizione()%></td>
@@ -106,7 +106,7 @@
 			Price: 			<input name="prezzo_vetrina" 		type="text" 	maxlength="20" required placeholder="enter name"><br>
 			<p class="ErrorParagraph"></p>
 			
-			Date: 			<input name="data_uscita" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+			Date: 			<input name="data" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
 			<p class="ErrorParagraph"></p>
 			
 			Platform: 		<input name="piattaforma" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
@@ -137,11 +137,59 @@
 			Code:	<input	name="codice_prodotto" 	type="text" 					maxlength="20" required placeholder="enter code"><br>
 			<p class="ErrorParagraph"></p>
 			
-			<button type="button" id ="deleteButton" onclick ="checkIdToDelete('deleteForm')">delete</button>
+			<!--  <button type="button" id ="deleteButton" onclick ="checkIdToDelete('deleteForm')">delete</button>-->
+			<input type="submit" name="submit" value="Submit" />
 			<input type="reset" value="Reset">
 		</fieldset>
 	</form>
 	
+	
+	
+	<script>	
+				//rimuove un videogioco e aggiorna in tempo reale la tabella di videogiochi andando a rimuovere la riga che mostrava tale videogiocho
+				//per capire quale righa della tabella deve eliminare queste hanno come id, l'id del videogioco che mostrano
+				//quindi tramite quest'ultimo otteniamo la riga del videogioco eliminato
+				
+				$("#deleteForm").on('submit', function(e) {
+
+				    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+				    var form = $(this);
+				    var actionUrl = form.attr('action');
+				    var idProduct = $("#" + form.attr("id") + " " + "input[name=codice_prodotto]").val();
+				    
+				    if(checkIdToDelete(form.attr("id"))){
+				    	let bar = confirm('Are you sure you want to delete this videogame?');
+				    	
+				    	if(bar){
+				    		$.ajax({
+						        type: "POST",
+						        url: actionUrl,
+						        data: form.serialize(), // serializes the form's elements.
+						        success: function(data) // success means if the servlet has generated an output
+						        {
+							        //console.log(idProduct);			for debugging
+							        if(data === "successful deletion"){
+							       		alert(data);
+							          	
+							        	const tableRow = document.getElementById(idProduct);
+							        	
+							        	if(tableRow != null){
+							        		tableRow.remove();
+							        	}
+							            
+							    	}else{
+						        		alert("Error");
+						        		alert(data);
+						        	}
+						    	}
+						    });
+				    		
+				    	}
+					    
+				    }
+				});
+			</script>
 	
 	<!--
 	<br>
@@ -353,6 +401,6 @@
 		<input type="submit" value="Logout"/>
 	</form>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

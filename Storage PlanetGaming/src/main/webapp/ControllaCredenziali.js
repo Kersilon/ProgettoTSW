@@ -39,14 +39,14 @@ function checkPassword(form, indexError){
 }
 
 
-function checkDate(){
+function checkDate(form, indexError){
 	let birthDate;
 	let birthDateError;
 	let regex;
 	
 	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;	//data nel formato aaaa-mm-dd va bene sia "-" o "/" per separare i caratteri
-	birthDate = document.getElementById("dataNascita").value;
-	birthDateError = document.getElementById("birthDateError");
+	birthDate = document.forms[form]["data"].value;
+	birthDateError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
 	
 	if(regex.test(birthDate)){
 		birthDateError.innerHTML = "";
@@ -324,17 +324,20 @@ function checkCredentialsRegistration(form){
 		
 		counter = 0;
 		
-		if(checkEmail()){
-		counter++;
+		if(checkDate(form, 0)){
+			counter++;
 		}
+		
 		if(checkPassword(form, 1)){
-		counter++;
+			counter++;
 		}
-		if(checkDate()){
-		counter++;
+		
+		if(checkEmail()){
+			counter++;
 		}
+		
 		if(checkPhone(form, 3)){
-		counter++;
+			counter++;
 		}
 		
 		
@@ -500,6 +503,8 @@ function checkIdToDelete(form){
 
 	
 	if(checkId(form, 0)){
-			document.getElementById("deleteButton").setAttribute('type', 'submit');
+			return true;
+	}else{
+		return false;
 	}
 }

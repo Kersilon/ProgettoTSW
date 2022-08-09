@@ -1,7 +1,7 @@
 <%@ page import="java.util.*" import="planetGaming.Videogioco.*"%>
 
 <% 
-	Collection<?> videogiochi = (Collection<?>) request.getAttribute("videogiochi");
+	Collection<?> videogiochi = (Collection<?>) request.getSession().getAttribute("videogiochi");
 %>
 
 
