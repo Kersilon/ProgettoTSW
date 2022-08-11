@@ -1,0 +1,30 @@
+@charset "ISO-8859-1";
+
+/* Popup container - can be anything you want */
+.popupContainer {
+  /*position: relative;*/
+  position: -webkit-sticky; /*for some browsers it works only with this*/
+  position: sticky;
+  position: fixed;
+  top: 10%;
+  
+}
+
+/* The actual popup */
+.popupText {
+  position: -webkit-sticky;	/*for some browsers it works only with this*/
+  position: sticky;
+  position: fixed;
+  /*visibility: hidden;*/
+  opacity: 0;
+  top: 10%;
+  left: 45%;
+  
+  width: 250px;
+  background-color: #555;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 0;
+  z-index: 2;
+  text-align: center;
+}

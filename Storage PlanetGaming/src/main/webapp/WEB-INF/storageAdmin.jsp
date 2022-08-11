@@ -26,12 +26,22 @@
 <title>Storage Admin</title>
 
 <link rel="stylesheet" href="trueStorageStyle.css">
+<link rel="stylesheet" href="PopUp.css">
 
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="confirmDeleteModifyInsert.js"></script>
 <jsp:include page="/WEB-INF/header.jsp" />
+
+	<div class="popupContainer">
+	  <span class="popupText" id="popup">Videogame Successfully deleted</span>
+	</div>
+	
+	<div class="popupContainer">
+	  <span class="popupText" id="popupModify">Videogame Successfully updated</span>
+	</div>
 
 	<h1>Welcome to the Storage Page</h1>
 	<p>Here you can add, delete, remove element from the database</p>
@@ -143,53 +153,7 @@
 		</fieldset>
 	</form>
 	
-	
-	
-	<script>	
-				//rimuove un videogioco e aggiorna in tempo reale la tabella di videogiochi andando a rimuovere la riga che mostrava tale videogiocho
-				//per capire quale righa della tabella deve eliminare queste hanno come id, l'id del videogioco che mostrano
-				//quindi tramite quest'ultimo otteniamo la riga del videogioco eliminato
-				
-				$("#deleteForm").on('submit', function(e) {
-
-				    e.preventDefault(); // avoid to execute the actual submit of the form.
-
-				    var form = $(this);
-				    var actionUrl = form.attr('action');
-				    var idProduct = $("#" + form.attr("id") + " " + "input[name=codice_prodotto]").val();
-				    
-				    if(checkIdToDelete(form.attr("id"))){
-				    	let bar = confirm('Are you sure you want to delete this videogame?');
-				    	
-				    	if(bar){
-				    		$.ajax({
-						        type: "POST",
-						        url: actionUrl,
-						        data: form.serialize(), // serializes the form's elements.
-						        success: function(data) // success means if the servlet has generated an output
-						        {
-							        //console.log(idProduct);			for debugging
-							        if(data === "successful deletion"){
-							       		alert(data);
-							          	
-							        	const tableRow = document.getElementById(idProduct);
-							        	
-							        	if(tableRow != null){
-							        		tableRow.remove();
-							        	}
-							            
-							    	}else{
-						        		alert("Error");
-						        		alert(data);
-						        	}
-						    	}
-						    });
-				    		
-				    	}
-					    
-				    }
-				});
-			</script>
+	<script>deleteOnSubmit();</script>
 	
 	<!--
 	<br>
@@ -271,12 +235,16 @@
 				</fieldset>
 		</form>
 		
+		
+		
 		<form id="modifyPriceId" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Price</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Price: 			<input name="prezzo_vetrina" 	type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -284,6 +252,10 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		
+		<script> modifyOnSubmit("#modifyPriceId", checkPrice, 1);</script>
+		
+		
 		
 		<form id="modifyDateId" action="StorageControl" method="post">
 				<fieldset>

@@ -202,6 +202,12 @@ public class StorageControl extends HttpServlet {
 					e.printStackTrace();
 				}
 				
+				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
+				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
+				resp.getWriter().write("successful update");				// Write response body.
+				ajaxFlag = true;
+				
+				
 				
 				
 			}else if(action.equalsIgnoreCase("modifyPhoto")) {
