@@ -57,7 +57,7 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 	    //var idProduct = $("#" + form.attr("id") + " " + "input[name=codice_prodotto]").val();
 	    
 	    if(checkIdToDelete(form.attr("id"))){
-		    if(checkFunction(form.attr("id"), indexError)){
+		    if(checkFunction == null || checkFunction(form.attr("id"), indexError)){
 		    	let bar = confirm('Are you sure you want to modify this parameter?');
 		    	
 		    	if(bar){
@@ -86,8 +86,8 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 				    });
 		    		
 		    	}
-			    
 		    }
+			    
 		}
 	});
 }

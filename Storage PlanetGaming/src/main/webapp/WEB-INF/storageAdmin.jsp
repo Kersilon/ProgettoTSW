@@ -199,6 +199,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Name: 			<input name="nome" 				type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -206,6 +208,9 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyNomeId");</script>
+		
+		
 		
 		<form id="modifyEditionId" action="StorageControl" method="post">
 				<fieldset>
@@ -213,6 +218,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Edition: 		<input name="edizione" 			type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -227,6 +234,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Description: 	<input name="descrizione" 		type="text" 	maxlength="60"	required	placeholder="enter description"	><br> 
 					<p class="ErrorParagraph"></p>
 									
@@ -252,7 +261,6 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
-		
 		<script> modifyOnSubmit("#modifyPriceId", checkPrice, 1);</script>
 		
 		
@@ -263,6 +271,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Date: 			<input name="data_uscita" 		type="text" 	maxlength="20"	required	placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -277,6 +287,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Platform: 		<input name="piattaforma" 		type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -291,6 +303,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -305,6 +319,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -319,6 +335,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Copy:			<input name="#copie" 			type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -333,6 +351,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Developer: 		<input name="Sviluppatore" 		type="text" 	maxlength="20" 		required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -347,6 +367,8 @@
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
 					<p class="ErrorParagraph"></p>
 									
@@ -361,6 +383,8 @@
 					<input type="hidden" name="action" value="modifyPhoto"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					<p class="ErrorParagraph"></p>
+					
 					Photo: 			<input name="foto"				type="file"    	maxlength="255"		class="file"	required><br>
 					<p class="ErrorParagraph"></p>
 									
