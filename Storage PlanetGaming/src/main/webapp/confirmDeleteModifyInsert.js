@@ -54,7 +54,8 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 	
 	    var form = $(this);
 	    var actionUrl = form.attr('action');
-	    //var idProduct = $("#" + form.attr("id") + " " + "input[name=codice_prodotto]").val();
+	    var idProduct = $("#" + form.attr("id") + " " + "input[name=codice_prodotto]").val();
+	    //var idProduct = $("#modifyPriceId input[name=codice_prodotto]").val();
 	    
 	    if(checkIdToDelete(form.attr("id"))){
 		    if(checkFunction == null || checkFunction(form.attr("id"), indexError)){
@@ -68,16 +69,15 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 				        success: function(data) // success means if the servlet has generated an output
 				        {
 					        //console.log(idProduct);			for debugging
-					        if(data === "successful update"){
-					       		//alert(data);
-					          	
-					        	//const tableRow = document.getElementById(idProduct);
+					        if(data === "successful update"){			          	
+					        	const tableRow = document.getElementById(idProduct);
 					        	
-					        	//if(tableRow != null){
-					        		//tableRow.remove();
-					        		$("#popupModify").fadeTo(0100, 1);
-					        		$("#popupModify").fadeOut(3000);
-					        	//}
+					        	if(tableRow != null){
+					        	}
+					        	
+					        	$("#popupModify").fadeTo(0100, 1);
+					        	$("#popupModify").fadeOut(3000);
+					        	
 					    	}else{
 				        		alert("Error");
 				        		alert(data);

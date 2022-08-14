@@ -251,13 +251,13 @@
 					<legend>modify Price</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="text" 	maxlength="20" 	required	placeholder="enter ID"			><br>
 					<p class="ErrorParagraph"></p>
 					
 					Price: 			<input name="prezzo_vetrina" 	type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
-					<button type="button" id ="modifyButton" onclick ="checkModify('modifyPriceId', checkPrice)">modify</button>
+					<button type="submit" value="modify">modify</button>
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
