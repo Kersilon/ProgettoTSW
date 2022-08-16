@@ -73,6 +73,7 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 					        	const tableRow = document.getElementById(idProduct);
 					        	
 					        	if(tableRow != null){
+									$(tableRow).find(".priceCell").html("new price");
 					        	}
 					        	
 					        	$("#popupModify").fadeTo(0100, 1);

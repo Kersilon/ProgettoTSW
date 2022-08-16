@@ -84,7 +84,7 @@
 						<input type="submit" value="More...">
 					</form>
 			    </td>
-			    <td><%=videogioco.getPrezzo_vetrina()%></td>
+			    <td class="priceCell"><%=videogioco.getPrezzo_vetrina()%></td>
 			    <td><%=videogioco.getData_uscita()%></td>
 			    <td><%=videogioco.getPiattaforma()%></td>
 			    <td><%=videogioco.getConsole()%></td>
@@ -254,7 +254,7 @@
 					ID: 			<input name="codice_prodotto" 	type="text" 	maxlength="20" 	required	placeholder="enter ID"			><br>
 					<p class="ErrorParagraph"></p>
 					
-					Price: 			<input name="prezzo_vetrina" 	type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					Price: 			<input name="prezzo_vetrina"	type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modify">modify</button>
