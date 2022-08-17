@@ -69,20 +69,28 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 				        success: function(data) // success means if the servlet has generated an output
 				        {
 					        //console.log(idProduct);			for debugging
-					        if(data === "successful update"){			          	
+								videogioco = JSON.parse(data);			          	
 					        	const tableRow = document.getElementById(idProduct);
 					        	
 					        	if(tableRow != null){
-									$(tableRow).find(".priceCell").html("new price");
+									console.log(videogioco.nome);
+									$(tableRow).find(".idCell").html(videogioco.codice_prodotto);
+									$(tableRow).find(".nameCell").html(videogioco.nome);
+									$(tableRow).find(".editionCell").html(videogioco.edizione);
+									$(tableRow).find(".descriptionCell").html(videogioco.descrizione);
+									$(tableRow).find(".priceCell").html(videogioco.prezzo_vetrina);
+									$(tableRow).find(".dateCell").html(videogioco.data_uscita);
+									$(tableRow).find(".platformCell").html(videogioco.piattaforma);
+									$(tableRow).find(".consoleCell").html(videogioco.console);
+									$(tableRow).find(".scontoCell").html(videogioco.sconto);
+									$(tableRow).find(".copiesCell").html(videogioco.copie);
+									$(tableRow).find(".developerCell").html(videogioco.sviluppatore);
+									$(tableRow).find(".publisherCell").html(videogioco.pubblisher);
+									$(tableRow).find(".fotoCell").html(videogioco.foto);
 					        	}
 					        	
 					        	$("#popupModify").fadeTo(0100, 1);
-					        	$("#popupModify").fadeOut(3000);
-					        	
-					    	}else{
-				        		alert("Error");
-				        		alert(data);
-				        	}
+					        	$("#popupModify").fadeOut(3000);	        	
 				    	}
 				    });
 		    		

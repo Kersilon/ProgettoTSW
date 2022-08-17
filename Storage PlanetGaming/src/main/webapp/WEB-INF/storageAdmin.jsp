@@ -73,10 +73,10 @@
 	%>
 		
 			<tr id="<%=videogioco.getCodice_prodotto()%>">
-				<td><%=videogioco.getCodice_prodotto()%></td>
-			    <td><%=videogioco.getNome()%></td>
-			    <td><%=videogioco.getEdizione()%></td>
-			    <td>
+				<td class="idCell"			><%=videogioco.getCodice_prodotto()%>							</td>
+			    <td class="nameCell"		><%=videogioco.getNome()%>										</td>
+			    <td class="editionCell"		><%=videogioco.getEdizione()%>									</td>
+			    <td class="descriptionCell"	>
 			    	<%=videogioco.getDescrizione()%>
 			    	<form action="StorageControl" method="post">
 			    		<input type="hidden" name="action" value="ExtendedDescription"> 
@@ -84,16 +84,16 @@
 						<input type="submit" value="More...">
 					</form>
 			    </td>
-			    <td class="priceCell"><%=videogioco.getPrezzo_vetrina()%></td>
-			    <td><%=videogioco.getData_uscita()%></td>
-			    <td><%=videogioco.getPiattaforma()%></td>
-			    <td><%=videogioco.getConsole()%></td>
-			    <td><%=videogioco.getSconto()%></td>
-			    <td><%=videogioco.getCopie()%></td>
-			    <td><%=videogioco.getSviluppatore()%></td>
-			    <td><%=videogioco.getPubblisher()%></td>
+			    <td class="priceCell"		><%=videogioco.getPrezzo_vetrina()%>							</td>
+			    <td class="dateCell"		><%=videogioco.getData_uscita()%>								</td>
+			    <td class="platformCell"	><%=videogioco.getPiattaforma()%>								</td>
+			    <td class="consoleCell"		><%=videogioco.getConsole()%>									</td>
+			    <td class="scontoCell"		><%=videogioco.getSconto()%>									</td>
+			    <td class="copiesCell"		><%=videogioco.getCopie()%>										</td>
+			    <td class="developerCell"	><%=videogioco.getSviluppatore()%>								</td>
+			    <td class="publisherCell"	><%=videogioco.getPubblisher()%>								</td>
 			    <!-- uso Jquery per visualizzare l'immagine -->
-			    <td><img src="./immagini Videogiochi/<%=videogioco.getFoto()%>"></td>
+			    <td class="fotoCell"	><img src="./immagini Videogiochi/<%=videogioco.getFoto()%>">		</td>
 		  	</tr>
 			
 	<%

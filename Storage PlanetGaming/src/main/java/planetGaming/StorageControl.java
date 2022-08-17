@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import planetGaming.Videogioco.*;
 
 @WebServlet("/StorageControl")
@@ -198,13 +201,18 @@ public class StorageControl extends HttpServlet {
 				try {
 					videogioco.doUpdate(videogiocoBean);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
+				//Conversione di un videogiocoBean in Json
+				String json = null;
+				json = ObjectToJson(videogiocoBean);
+				req.getSession().setAttribute("videogiocoUpdated", json);
+					
 				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
 				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
-				resp.getWriter().write("successful update");				// Write response body.
+				//resp.getWriter().write("successful update");	
+				resp.getWriter().write(json);								// Write response body.
 				ajaxFlag = true;
 				
 				
@@ -294,5 +302,21 @@ public class StorageControl extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
+	}
+	
+	//Converte un videogiocoBean in Json 
+	public String ObjectToJson(VideogiocoBean Object){	
+		String json = null;
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+		  json = mapper.writeValueAsString(Object);
+		  //for debbugging System.out.println("ResultingJSONstring = " + json);
+		   
+		} catch (JsonProcessingException e) {
+		   e.printStackTrace();
+		}
+		
+		return json;
 	}
 }

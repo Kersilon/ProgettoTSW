@@ -4,6 +4,8 @@ package planetGaming.Videogioco;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class VideogiocoBean implements Serializable {
 
@@ -14,8 +16,12 @@ public class VideogiocoBean implements Serializable {
 	private String nome;
 	private String edizione;
 	private String descrizione;
-	private double prezzo_vetrina;  
+	private double prezzo_vetrina;
+	
+	//serve per far appararire la data nel formato desiderato quando l'oggetto viene convertito in json
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date data_uscita;
+	
 	private String piattaforma; 
 	private String Console; 
 	private Integer sconto; 
