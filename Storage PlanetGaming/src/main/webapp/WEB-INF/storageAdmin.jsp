@@ -227,6 +227,9 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyEditionId");</script>
+		
+		
 		
 		<form id="modifyDescriptionId" action="StorageControl" method="post">
 				<fieldset>
@@ -243,6 +246,7 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyDescriptionId");</script>
 		
 		
 		
@@ -273,13 +277,16 @@
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
 					<p class="ErrorParagraph"></p>
 					
-					Date: 			<input name="data_uscita" 		type="text" 	maxlength="20"	required	placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+					Date: 			<input name="data" 				type="date" 	maxlength="20"	required	placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
 					<p class="ErrorParagraph"></p>
 									
-					<button type="button" id ="modifyButton" onclick ="checkModify('modifyDateId', checkDate)">modify</button>
+					<button type="submit" value="modify">modify</button>
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyDateId", checkDate, 1);</script>
+		
+		
 		
 		<form id="modifyPlatformId" action="StorageControl" method="post">
 				<fieldset>
@@ -296,6 +303,9 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyPlatformId");</script>
+		
+		
 		
 		<form id="modifyConsoleId" action="StorageControl" method="post">
 				<fieldset>
@@ -312,6 +322,9 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyConsoleId");</script>
+		
+		
 		
 		<form id="modifySaleId" action="StorageControl" method="post">
 				<fieldset>
@@ -324,10 +337,13 @@
 					Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
 					<p class="ErrorParagraph"></p>
 									
-					<button type="button" id ="modifyButton" onclick ="checkModify('modifySaleId', checkSale)">modify</button>
+					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifySaleId", checkSale, 1);</script>
+		
+		
 		
 		<form id="modifyCopyId" action="StorageControl" method="post">
 				<fieldset>
@@ -340,10 +356,13 @@
 					Copy:			<input name="#copie" 			type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
 					<p class="ErrorParagraph"></p>
 									
-					<button type="button" id ="modifyButton" onclick ="checkModify('modifyCopyId', checkCopy)">modify</button>
+					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyCopyId", checkCopy, 1);</script>
+		
+		
 		
 		<form id="modifyDeveloperId" action="StorageControl" method="post">
 				<fieldset>
@@ -360,6 +379,9 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyDeveloperId");</script>
+		
+		
 		
 		<form id="modifyPublisherId" action="StorageControl" method="post">
 				<fieldset>
@@ -376,6 +398,9 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyPublisherId");</script>
+		
+		
 		
 		<form id="modifyPhotoId" action="StorageControl" enctype="multipart/form-data" method="post">
 				<fieldset>
@@ -385,13 +410,16 @@
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
 					<p class="ErrorParagraph"></p>
 					
-					Photo: 			<input name="foto"				type="file"    	maxlength="255"		class="file"	required><br>
+					Photo: 			<input name="foto"	id="file"			type="file"    	maxlength="255"		class="file"	required><br>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
+		<script> modifyOnSubmit("#modifyPhotoId");</script>
+	
+	
 	
 	<form action="Logout" method="get">
 		<input type="submit" value="Logout"/>

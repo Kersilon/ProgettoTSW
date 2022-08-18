@@ -62,10 +62,26 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 		    	let bar = confirm('Are you sure you want to modify this parameter?');
 		    	
 		    	if(bar){
+			
+					//test
+				 	var data = new FormData();
+					jQuery.each(jQuery('#file')[0].files, function(i, file) {
+						data.append('file-'+i, file);
+						});
+					//
+							
 		    		$.ajax({
 				        type: "POST",
 				        url: actionUrl,
-				        data: form.serialize(), // serializes the form's elements.
+				        //data: form.serialize(), // serializes the form's elements.
+				        
+				        //test
+				        data: data,
+					    cache: false,
+					    contentType: false,
+					    processData: false,
+				        //
+				        
 				        success: function(data) // success means if the servlet has generated an output
 				        {
 					        //console.log(idProduct);			for debugging

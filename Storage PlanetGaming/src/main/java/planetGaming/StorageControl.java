@@ -152,10 +152,10 @@ public class StorageControl extends HttpServlet {
 				}
 				
 				
-				if(req.getParameter("data_uscita") != null && !req.getParameter("data_uscita").equals(""))
+				if(req.getParameter("data") != null && !req.getParameter("data").equals(""))
 				{
 					try {
-						videogiocoBean.setData_uscita(new java.sql.Date(formatter.parse(req.getParameter("data_uscita")).getTime()));
+						videogiocoBean.setData_uscita(new java.sql.Date(formatter.parse(req.getParameter("data")).getTime()));
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -236,6 +236,21 @@ public class StorageControl extends HttpServlet {
 					videogiocoBean.setFoto(fileName);
 				}
 				
+				try {
+					videogioco.doUpdate(videogiocoBean);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				String json = null;
+				json = ObjectToJson(videogiocoBean);
+				req.getSession().setAttribute("videogiocoUpdated", json);
+					
+				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
+				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?	
+				resp.getWriter().write(json);								// Write response body.
+				ajaxFlag = true;
+				
 
 				
 			}else if(action.equalsIgnoreCase("ExtendedDescription")) {
@@ -311,7 +326,8 @@ public class StorageControl extends HttpServlet {
 		
 		try {
 		  json = mapper.writeValueAsString(Object);
-		  //for debbugging System.out.println("ResultingJSONstring = " + json);
+		  //for debbugging 
+		  System.out.println("ResultingJSONstring = " + json);
 		   
 		} catch (JsonProcessingException e) {
 		   e.printStackTrace();

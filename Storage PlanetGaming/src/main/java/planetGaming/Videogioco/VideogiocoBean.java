@@ -19,7 +19,7 @@ public class VideogiocoBean implements Serializable {
 	private double prezzo_vetrina;
 	
 	//serve per far appararire la data nel formato desiderato quando l'oggetto viene convertito in json
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Europe/Rome")
 	private Date data_uscita;
 	
 	private String piattaforma; 
