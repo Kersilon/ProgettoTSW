@@ -84,16 +84,16 @@
 						<input type="submit" value="More...">
 					</form>
 			    </td>
-			    <td class="priceCell"		><%=videogioco.getPrezzo_vetrina()%>							</td>
-			    <td class="dateCell"		><%=videogioco.getData_uscita()%>								</td>
-			    <td class="platformCell"	><%=videogioco.getPiattaforma()%>								</td>
-			    <td class="consoleCell"		><%=videogioco.getConsole()%>									</td>
-			    <td class="scontoCell"		><%=videogioco.getSconto()%>									</td>
-			    <td class="copiesCell"		><%=videogioco.getCopie()%>										</td>
-			    <td class="developerCell"	><%=videogioco.getSviluppatore()%>								</td>
-			    <td class="publisherCell"	><%=videogioco.getPubblisher()%>								</td>
+			    <td class="priceCell"		><%=videogioco.getPrezzo_vetrina()%>									</td>
+			    <td class="dateCell"		><%=videogioco.getData_uscita()%>										</td>
+			    <td class="platformCell"	><%=videogioco.getPiattaforma()%>										</td>
+			    <td class="consoleCell"		><%=videogioco.getConsole()%>											</td>
+			    <td class="scontoCell"		><%=videogioco.getSconto()%>											</td>
+			    <td class="copiesCell"		><%=videogioco.getCopie()%>												</td>
+			    <td class="developerCell"	><%=videogioco.getSviluppatore()%>										</td>
+			    <td class="publisherCell"	><%=videogioco.getPubblisher()%>										</td>
 			    <!-- uso Jquery per visualizzare l'immagine -->
-			    <td class="fotoCell"	><img src="./immagini Videogiochi/<%=videogioco.getFoto()%>">		</td>
+			    <td class="fotoCell"	><img id="fotoName<%=videogioco.getCodice_prodotto()%>" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">	</td>
 		  	</tr>
 			
 	<%
@@ -417,7 +417,7 @@
 					<input type="reset" value="Reset"/>
 				</fieldset>
 		</form>
-		<script> modifyOnSubmit("#modifyPhotoId");</script>
+		<script>modifyOnSubmit("#modifyPhotoId");</script>
 	
 	
 	

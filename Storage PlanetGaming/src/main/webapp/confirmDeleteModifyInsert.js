@@ -63,11 +63,8 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 		    	
 		    	if(bar){
 			
-					//test
-				 	var data = new FormData();
-					jQuery.each(jQuery('#file')[0].files, function(i, file) {
-						data.append('file-'+i, file);
-						});
+					//per le immagini
+				 	var data = new FormData($(formId)[0]);
 					//
 							
 		    		$.ajax({
@@ -75,7 +72,8 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 				        url: actionUrl,
 				        //data: form.serialize(), // serializes the form's elements.
 				        
-				        //test
+				        //per le immagini
+				        enctype: 'multipart/form-data',
 				        data: data,
 					    cache: false,
 					    contentType: false,
@@ -102,7 +100,8 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 									$(tableRow).find(".copiesCell").html(videogioco.copie);
 									$(tableRow).find(".developerCell").html(videogioco.sviluppatore);
 									$(tableRow).find(".publisherCell").html(videogioco.pubblisher);
-									$(tableRow).find(".fotoCell").html(videogioco.foto);
+									// it just doesn't work $(tableRow.fotoCell).find("img") pertanto ho dato un id al tag image e ho usato la riga di codice quì sotto;
+									$("#fotoName"+idProduct).attr("src", "./immagini Videogiochi/" + videogioco.foto);
 					        	}
 					        	
 					        	$("#popupModify").fadeTo(0100, 1);

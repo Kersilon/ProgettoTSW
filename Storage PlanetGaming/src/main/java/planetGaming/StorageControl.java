@@ -236,21 +236,25 @@ public class StorageControl extends HttpServlet {
 					videogiocoBean.setFoto(fileName);
 				}
 				
+				
 				try {
 					videogioco.doUpdate(videogiocoBean);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 				
+				System.out.println("superato il do Udate");
+				
 				String json = null;
 				json = ObjectToJson(videogiocoBean);
-				req.getSession().setAttribute("videogiocoUpdated", json);
+				//req.getSession().setAttribute("videogiocoUpdated", json);
 					
 				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
 				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?	
 				resp.getWriter().write(json);								// Write response body.
 				ajaxFlag = true;
 				
+				System.out.println("superato json e il write");
 
 				
 			}else if(action.equalsIgnoreCase("ExtendedDescription")) {
