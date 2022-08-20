@@ -417,7 +417,10 @@ function checkInsert(form){
 		
 	if(counter == 4){
 		//faccio diventare il pulsamnte che controlla i campi un pulsante di submit
-		document.getElementById("insertButton").setAttribute('type', 'submit');
+	//	document.getElementById("insertButton").setAttribute('type', 'submit');
+		return true;
+	}else{
+		return false;
 	}
 }
 

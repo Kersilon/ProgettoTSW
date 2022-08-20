@@ -95,6 +95,14 @@ public class StorageControl extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				String json = null;
+				json = ObjectToJson(videogiocoBean);
+					
+				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
+				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?	
+				resp.getWriter().write(json);								// Write response body.
+				ajaxFlag = true;
 			
 				
 				
@@ -207,11 +215,9 @@ public class StorageControl extends HttpServlet {
 				//Conversione di un videogiocoBean in Json
 				String json = null;
 				json = ObjectToJson(videogiocoBean);
-				req.getSession().setAttribute("videogiocoUpdated", json);
 					
 				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
 				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
-				//resp.getWriter().write("successful update");	
 				resp.getWriter().write(json);								// Write response body.
 				ajaxFlag = true;
 				
@@ -243,19 +249,15 @@ public class StorageControl extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				System.out.println("superato il do Udate");
-				
 				String json = null;
 				json = ObjectToJson(videogiocoBean);
-				//req.getSession().setAttribute("videogiocoUpdated", json);
 					
 				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
 				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?	
 				resp.getWriter().write(json);								// Write response body.
 				ajaxFlag = true;
-				
-				System.out.println("superato json e il write");
 
+				
 				
 			}else if(action.equalsIgnoreCase("ExtendedDescription")) {
 				

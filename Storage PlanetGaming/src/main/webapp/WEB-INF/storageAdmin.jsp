@@ -42,6 +42,10 @@
 	<div class="popupContainer">
 	  <span class="popupText" id="popupModify">Videogame Successfully updated</span>
 	</div>
+	
+	<div class="popupContainer">
+	  <span class="popupText" id="popupInsert">Videogame Successfully inserted</span>
+	</div>
 
 	<h1>Welcome to the Storage Page</h1>
 	<p>Here you can add, delete, remove element from the database</p>
@@ -116,7 +120,7 @@
 			Price: 			<input name="prezzo_vetrina" 		type="text" 	maxlength="20" required placeholder="enter name"><br>
 			<p class="ErrorParagraph"></p>
 			
-			Date: 			<input name="data" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+			Date: 			<input name="data" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY" value=2020-08-20><br>
 			<p class="ErrorParagraph"></p>
 			
 			Platform: 		<input name="piattaforma" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
@@ -133,10 +137,13 @@
 			<!-- mi sembra eccessivo rendere la foto un campo required -->
 			Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"><br>
 					
-			<button type="button" id ="insertButton" onclick ="checkInsert('insertForm')">insert</button>
+			<input type="submit" name="submit" value="Submit" />
 			<input type="reset" value="Reset">
 		</fieldset>
 	</form>
+	<script>insertOnSubmit("#insertForm", checkInsert);</script>
+	
+	
 	
 	<br>
 	<form id="deleteForm" action="StorageControl" method="post">
@@ -152,8 +159,9 @@
 			<input type="reset" value="Reset">
 		</fieldset>
 	</form>
-	
 	<script>deleteOnSubmit();</script>
+	
+	
 	
 	<!--
 	<br>
