@@ -9,7 +9,8 @@
 	
 	if(isAdmin == null || isAdmin.equals(false))
 	{
-		response.sendRedirect("./login-form.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("./login-form.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	Collection<?> ordiniUtenti = (Collection<?>) request.getSession().getAttribute("ordiniUtenti");
@@ -62,6 +63,14 @@
 		<input type="hidden" name="action" value="ShowUser">
 		<p>User id: <input type="number" name="UserId" required></p>
 		<input type="submit" value="User by id"/>
+	</form>
+	
+	<form action="AdministratorPageServlet" method="get">
+		<input type="hidden" name="action" value="ShowUserByFilter">
+		<p>User's fiscal code: <input type="text" name="UserFiscalCode"></p>
+		<p>User's name: <input type="text" name="UserName"></p>
+		<p>User's surname: <input type="text" name="UserSurname"></p>
+		<input type="submit" value="Search user"/>
 	</form>
 	
 
@@ -121,6 +130,7 @@
 				<table>
 					<tr>
 						<th>User code</th>
+						<th>Fiscal code</th>
 						<th>name</th>
 						<th>surname</th>
 						<th>Birth date</th>
@@ -142,6 +152,7 @@
 	%>
 				<tr>
 					<td><%=utente.getCodiceUtente()%></td>
+					<td><%=utente.getCodiceFiscale()%></td>
 					<td><%=utente.getNome()%></td>
 					<td><%=utente.getCognome()%></td>
 					<td><%=utente.getDataNascita()%></td>

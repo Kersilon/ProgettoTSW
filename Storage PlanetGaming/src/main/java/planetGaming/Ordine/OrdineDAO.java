@@ -43,6 +43,7 @@ public class OrdineDAO implements OrdineModel{
 
 		try {
 			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(querySQL);
 			preparedStatement.setInt(	1, ordine.getIdUtente());
 			preparedStatement.setInt(	2, ordine.getIdModalitaPagamento());
@@ -65,10 +66,12 @@ public class OrdineDAO implements OrdineModel{
 		}
 		
 		for(prodottoOrdineBean po: ordine.getProdottiOrdine()) {
+			po.setIdOrdine(doRetrieveLast().getIdOrdine());
 			prodottoOrdineDao.doSave(po);
 		}
 		
 	}
+	
 
 	@Override
 	public synchronized OrdineBean doRetrieveByKey(int codice) throws SQLException {
@@ -114,6 +117,50 @@ public class OrdineDAO implements OrdineModel{
 		}
 		
 		return ordineBean;
+}
+	
+@Override
+public OrdineBean doRetrieveLast() throws SQLException {
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	
+	OrdineBean ordineBean;
+	
+	String querySQL = "select * from planetgaming.ordine ORDER BY idOrdine DESC LIMIT 1"; 
+	
+	try {
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(querySQL);
+		
+		// inserisci quì il contentuo
+		ordineBean = new OrdineBean(); 
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		
+		while(rs.next())
+		{
+			ordineBean.setIdOrdine(rs.getInt("idOrdine"));
+			ordineBean.setIdUtente(rs.getInt("idUtente"));
+			ordineBean.setIdModalitaPagamento(rs.getInt("idModalitaPagamento"));
+			ordineBean.setIdIndirizzo(rs.getInt("idIndirizzo"));
+			ordineBean.setPrezzoTotale(rs.getInt("prezzoTotale"));
+			ordineBean.setDataOrdine(rs.getDate("data"));
+			ordineBean.setTracking(rs.getString("tracking"));
+			
+			ordineBean.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll(ordineBean.getIdOrdine()));
+		}
+		
+	} finally {
+		try {
+			if (preparedStatement != null)
+				preparedStatement.close();
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+	}
+	
+	return ordineBean;
 }
 
 	@Override
@@ -189,6 +236,55 @@ public class OrdineDAO implements OrdineModel{
 
 	}
 
+	
+	
+	public synchronized Collection<OrdineBean> doRetrieveAllByTotal(int idUtente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Collection<OrdineBean> ordini = new LinkedList<OrdineBean>();
+		
+		String querySQL = "select * from "+ OrdineDAO.TABLE_NAME +" where idUtente = ? order by prezzoTotale";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(querySQL);
+			preparedStatement.setInt(1, idUtente);
+			
+			//parte centrale del codice
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				OrdineBean ordine = new OrdineBean();
+
+				ordine.setIdOrdine((rs.getInt("idOrdine")));
+				ordine.setIdUtente((rs.getInt("idUtente")));
+				ordine.setIdModalitaPagamento((rs.getInt("idModalitaPagamento")));
+				ordine.setIdIndirizzo((rs.getInt("idIndirizzo")));
+				ordine.setPrezzoTotale((rs.getInt("prezzoTotale")));
+				ordine.setDataOrdine((rs.getDate("data")));
+				ordine.setTracking((rs.getString("tracking")));
+				
+				ordine.setProdottiOrdine(prodottoOrdineDao.doRetrieveAll(ordine.getIdOrdine()));
+				ordini.add(ordine);
+			}
+			
+			return ordini;
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+
+	}
+
+	
+	
 	@Override
 	public Collection<OrdineBean> doRetrieveAll(int idUtente) throws SQLException {
 		Connection connection = null;
@@ -282,4 +378,7 @@ public class OrdineDAO implements OrdineModel{
 		}
 
 	}
+
+
+
 }

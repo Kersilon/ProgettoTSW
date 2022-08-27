@@ -2,8 +2,12 @@ package planetGaming.Ordine;
 
 import java.io.Serializable;
 
+import planetGaming.Videogioco.VideogiocoBean;
+
 public class prodottoOrdineBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	private static final int iva = 10;
 	
 	private int idProdottoOrdine;
 	private int idOrdine;
@@ -12,7 +16,6 @@ public class prodottoOrdineBean implements Serializable {
 	private double prezzoAcquisto;
 	private double scontoAcquisto;
 	private int quantitaAcquisto;
-	private double iva;
 	private String foto;
 	
 	
@@ -21,7 +24,42 @@ public class prodottoOrdineBean implements Serializable {
 		super();
 	}
 	
+	public prodottoOrdineBean(VideogiocoBean videogioco) {
+		this.idVideogioco = videogioco.getCodice_prodotto();
+		this.nomeVideogioco = videogioco.getNome();
+		this.prezzoAcquisto = videogioco.getPrezzo_vetrina() - videogioco.getSconto();
+		this.scontoAcquisto = videogioco.getSconto();
+		this.quantitaAcquisto = 1;
+		this.foto = videogioco.getFoto();
+	}
 	
+	public void removeProdotto() {
+		decreasePrezzoAcquisto();
+		decreaseQuantitaAcquisto();
+	}
+	
+	public void addProdotto() {
+		increasePrezzoAcquisto();
+		increaseQuantitaAcquisto();
+	}
+	
+	public void increaseQuantitaAcquisto() {
+		this.quantitaAcquisto++;
+	}
+	
+	public void decreaseQuantitaAcquisto() {
+		this.quantitaAcquisto--;
+	}
+	
+	public void increasePrezzoAcquisto() {
+		this.prezzoAcquisto += this.prezzoAcquisto;
+		this.scontoAcquisto += this.scontoAcquisto;
+	}
+	
+	public void decreasePrezzoAcquisto() {
+		this.prezzoAcquisto -= (this.prezzoAcquisto/this.quantitaAcquisto);
+		this.scontoAcquisto -= (this.scontoAcquisto/this.quantitaAcquisto);
+	}
 	
 	public String getFoto() {
 		return foto;
@@ -75,9 +113,6 @@ public class prodottoOrdineBean implements Serializable {
 	}
 	public double getIva() {
 		return iva;
-	}
-	public void setIva(double iva) {
-		this.iva = iva;
 	}
 }
 

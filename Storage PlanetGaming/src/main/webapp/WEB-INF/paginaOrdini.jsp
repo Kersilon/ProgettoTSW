@@ -9,7 +9,9 @@
 	
 	if((isLogged == null) || isLogged.equals(false))
 	{
-		response.sendRedirect("./login-form.jsp");
+		//response.sendRedirect("./login-form.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("./login-form.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	Collection<?> ordini = (Collection<?>) request.getSession().getAttribute("ordini");
@@ -30,6 +32,11 @@
 	<h1>Welcome to orders page</h1><br>
 	<p>Here you can see all orders made</p>
 	<br><br>
+
+	<form action="UserInfo" method="post">
+		<input type="hidden" name="action" value="OrdersByTotal"> 
+		<input type="submit" value="Orders by total">
+	</form>
 	
 	<h2>Orders</h2>
 	<table>

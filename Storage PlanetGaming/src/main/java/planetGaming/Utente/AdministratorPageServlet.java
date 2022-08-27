@@ -43,6 +43,7 @@ public class AdministratorPageServlet extends HttpServlet {
 		
 		UtenteDAO utenteDao = new UtenteDAO();
 		Collection<UtenteBean> utenti = new LinkedList<UtenteBean>();
+		UtenteBean utente = new UtenteBean();
 		
 		String action = request.getParameter("action");
 		
@@ -57,9 +58,6 @@ public class AdministratorPageServlet extends HttpServlet {
 				if(action.equals("clean")) {
 					request.getSession().removeAttribute("ordiniUtenti");
 					request.getSession().removeAttribute("utenti");
-					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-					dispatcher.forward(request, response);
 				}
 			
 				
@@ -68,14 +66,10 @@ public class AdministratorPageServlet extends HttpServlet {
 					try {
 						ordiniUtenti = ordineDao.doRetrieveAll("ASC");
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
 					request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
-					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-					dispatcher.forward(request, response);
 				}
 				
 				
@@ -87,14 +81,10 @@ public class AdministratorPageServlet extends HttpServlet {
 					try {
 						ordiniUtenti = ordineDao.doRetrieveAll(ordersByUserId);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
 					request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
-					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-					dispatcher.forward(request, response);
 				}
 				
 				
@@ -106,14 +96,10 @@ public class AdministratorPageServlet extends HttpServlet {
 					try {
 						ordiniUtenti = ordineDao.doRetrieveAll(min, max);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
 					request.getSession().setAttribute("ordiniUtenti", ordiniUtenti);
-					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-					dispatcher.forward(request, response);
 				}
 				
 				
@@ -122,14 +108,10 @@ public class AdministratorPageServlet extends HttpServlet {
 					try {
 						utenti = utenteDao.doRetrieveAll();
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
 					request.getSession().setAttribute("utenti", utenti);
-					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-					dispatcher.forward(request, response);
 				}
 				
 				
@@ -140,22 +122,27 @@ public class AdministratorPageServlet extends HttpServlet {
 					try {
 						utenti = utenteDao.doRetrieveAll(userId);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
 					request.getSession().setAttribute("utenti", utenti);
+				}
+				
+				
+				else if(action.equals("ShowUserByFilter")) {
+					try {
+						utenti = utenteDao.doRetrieveAll(request.getParameter("UserFiscalCode"), request.getParameter("UserName"), request.getParameter("UserSurname"));
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-					dispatcher.forward(request, response);
+					request.getSession().setAttribute("utenti", utenti);
 				}
 		}
 		
 		
 		//se action è null
-		else {
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
-			dispatcher.forward(request, response);
-		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/AdministratorPage.jsp");
+		dispatcher.forward(request, response);
 	}
 }

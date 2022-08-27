@@ -33,7 +33,7 @@
 			<input type="password" name="password" id="password" placeholder="enter Password" >
 			<p id="passwordError" class="ErrorParagraph"></p>	
 			<br>
-			<input type="submit" name="submit" value="Submit" />
+			<input type="submit" name="submit" value="Submit">
 			<input type="reset" value="Reset"/>
 			
 			

@@ -3,6 +3,9 @@ package planetGaming.Ordine;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.LinkedList;
+
+import planetGaming.Videogioco.VideogiocoBean;
 
 
 public class OrdineBean implements Serializable {
@@ -32,6 +35,14 @@ public class OrdineBean implements Serializable {
 		this.dataOrdine = ordine.getDataOrdine();
 		this.tracking = ordine.getTracking();
 		this.prodottiOrdine = null;
+	}
+	
+	public OrdineBean(LinkedList<prodottoOrdineBean> cart) {
+		this.prodottiOrdine = cart;
+		
+		for(prodottoOrdineBean prodotto: cart) {
+			this.prezzoTotale += prodotto.getPrezzoAcquisto();
+		}
 	}
 	
 	public Collection<prodottoOrdineBean> getProdottiOrdine() {

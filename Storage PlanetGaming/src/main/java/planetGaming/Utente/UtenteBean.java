@@ -17,6 +17,7 @@ public class UtenteBean implements Serializable {
 	private String telefono;
 	private int acquisti;
 	private int codiceUtente;
+	private String codiceFiscale;
 	private Date dataRegistrazione;
 	private boolean AMMINISTRATORE;
 
@@ -115,5 +116,13 @@ public class UtenteBean implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getCodiceFiscale() {
+		return codiceFiscale;
+	}
+
+	public void setCodiceFiscale(String codiceFiscale) {
+		this.codiceFiscale = codiceFiscale;
 	}
 }

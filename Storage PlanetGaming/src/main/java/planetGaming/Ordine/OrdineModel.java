@@ -11,10 +11,14 @@ public interface OrdineModel {
 	
 	public OrdineBean doRetrieveByKey(int codice) throws SQLException;
 	
+	public OrdineBean doRetrieveLast() throws SQLException;
+	
 	public Collection<OrdineBean> doRetrieveAll(String order) throws SQLException;
 	
 	public Collection<OrdineBean> doRetrieveAll(int idUtente) throws SQLException;
 	
 	public Collection<OrdineBean> doRetrieveAll(Date min, Date max) throws SQLException;
+
+	public Collection<OrdineBean> doRetrieveAllByTotal(int idUtente) throws SQLException;
 
 }

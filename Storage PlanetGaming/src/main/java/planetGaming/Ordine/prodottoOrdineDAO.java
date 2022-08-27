@@ -35,11 +35,12 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 		PreparedStatement preparedStatement = null;
 
 		String querySQL = "INSERT INTO " + prodottoOrdineDAO.TABLE_NAME
-				+ " (idOrdine, idVideogioco, nome, prezzoAcquisto, scontoAcquisto, quantitaAcquisto, iva) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+				+ " (idOrdine, idVideogioco, nome, prezzoAcquisto, scontoAcquisto, quantitaAcquisto, iva, foto) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(querySQL);
 			preparedStatement.setInt(1, prodottoOrdine.getIdOrdine());
 			preparedStatement.setInt(2, prodottoOrdine.getIdVideogioco());
@@ -48,6 +49,7 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 			preparedStatement.setDouble(5, prodottoOrdine.getScontoAcquisto());
 			preparedStatement.setInt(6, prodottoOrdine.getQuantitaAcquisto());
 			preparedStatement.setDouble(7, prodottoOrdine.getIva());
+			preparedStatement.setString(8, prodottoOrdine.getFoto());
 			
 			preparedStatement.executeUpdate();
 
@@ -101,7 +103,6 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 				prodottoOrdine.setPrezzoAcquisto(((rs.getDouble("prezzoAcquisto"))));
 				prodottoOrdine.setScontoAcquisto(((rs.getDouble("scontoAcquisto"))));
 				prodottoOrdine.setQuantitaAcquisto(((rs.getInt("quantitaAcquisto"))));
-				prodottoOrdine.setIva(((rs.getDouble("iva"))));
 				prodottoOrdine.setFoto(rs.getString("foto"));
 				
 				prodottiOrdine.add(prodottoOrdine);
@@ -148,7 +149,6 @@ public class prodottoOrdineDAO implements prodottoOrdineModel {
 				prodottoOrdine.setPrezzoAcquisto(((rs.getDouble("prezzoAcquisto"))));
 				prodottoOrdine.setScontoAcquisto(((rs.getDouble("scontoAcquisto"))));
 				prodottoOrdine.setQuantitaAcquisto(((rs.getInt("quantitaAcquisto"))));
-				prodottoOrdine.setIva(((rs.getDouble("iva"))));
 				prodottoOrdine.setFoto(rs.getString("foto"));
 				
 				prodottiOrdine.add(prodottoOrdine);

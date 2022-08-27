@@ -161,6 +161,25 @@ public class UserInfo extends HttpServlet {
 						
 						
 						
+						if(action.equals("OrdersByTotal")) {
+							ordini = new LinkedList<OrdineBean>();
+							ordineDao = new OrdineDAO();
+							
+							try {
+								ordini = ordineDao.doRetrieveAllByTotal((int) request.getSession().getAttribute("userId"));
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							request.getSession().setAttribute("ordini", ordini);
+							
+							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
+							dispatcher.forward(request, response);
+						}
+						
+						
+						
 						if(action.equals("modifyUserData")) {
 							utenteBean = null;
 							

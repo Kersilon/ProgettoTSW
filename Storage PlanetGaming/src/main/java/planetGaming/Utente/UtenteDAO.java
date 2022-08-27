@@ -138,6 +138,7 @@ public class UtenteDAO implements UtenteModel {
 					utenteBean.setEmail(email);
 					utenteBean.setTelefono(rs.getString("#telefono"));
 					utenteBean.setCodiceUtente(rs.getInt("codiceUtente"));
+					utenteBean.setCodiceFiscale(rs.getString("codiceFiscale"));
 					utenteBean.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
 				}
 
@@ -175,6 +176,7 @@ public class UtenteDAO implements UtenteModel {
 					utenteBean.setEmail(rs.getString("email"));
 					utenteBean.setTelefono(rs.getString("#telefono"));
 					utenteBean.setCodiceUtente(rs.getInt("codiceUtente"));
+					utenteBean.setCodiceFiscale(rs.getString("codiceFiscale"));
 					utenteBean.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
 				}
 	
@@ -190,6 +192,81 @@ public class UtenteDAO implements UtenteModel {
 			return utenteBean;
 	}
 
+		@Override
+		public synchronized Collection<UtenteBean> doRetrieveAll(String fiscalCode, String name, String surname) throws SQLException {
+				Connection connection = null;
+				PreparedStatement preparedStatement = null;
+				UtenteBean utenteBean = new UtenteBean();
+				Collection<UtenteBean> utenti = new LinkedList<UtenteBean>();
+				
+				
+				String selectSQL = "SELECT * FROM " + UtenteDAO.TABLE_NAME;
+				
+				//System.out.println();
+				try {
+					connection = ds.getConnection();
+					
+					if(!fiscalCode.isBlank()) {
+						selectSQL = selectSQL.concat(" where codiceFiscale = ?");
+						preparedStatement = connection.prepareStatement(selectSQL);
+						preparedStatement.setString(1, fiscalCode);
+					}
+					
+					else if(!name.isBlank() && !surname.isBlank()) {
+						selectSQL = selectSQL.concat(" where nome = ? && cognome = ?");
+						preparedStatement = connection.prepareStatement(selectSQL);
+						preparedStatement.setString(1, name);
+						preparedStatement.setString(2, surname);
+					}
+					
+					else if(!name.isBlank()) {
+						selectSQL = selectSQL.concat(" where nome = ?");
+						preparedStatement = connection.prepareStatement(selectSQL);
+						preparedStatement.setString(1, name);
+					}
+					
+					else if(!surname.isBlank()) {			
+						selectSQL = selectSQL.concat(" where cognome = ?");
+						preparedStatement = connection.prepareStatement(selectSQL);
+						preparedStatement.setString(1, surname);
+					}
+					
+					else {
+						return null;
+					}
+				
+					ResultSet rs = preparedStatement.executeQuery();
+
+					while (rs.next()) {
+						utenteBean = new UtenteBean();
+						
+						utenteBean.setNome(rs.getString("Nome"));
+						utenteBean.setCognome(rs.getString("Cognome"));
+						utenteBean.setDataNascita(rs.getDate("dataNascita"));
+						utenteBean.setNomeUtente(rs.getString("nomeUtente"));
+						utenteBean.setPassword(rs.getString("password"));
+						utenteBean.setEmail(rs.getString("email"));
+						utenteBean.setTelefono(rs.getString("#telefono"));
+						utenteBean.setCodiceUtente(rs.getInt("codiceUtente"));
+						utenteBean.setCodiceFiscale(rs.getString("codiceFiscale"));
+						utenteBean.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
+						
+						utenti.add(utenteBean);
+					}
+
+				} finally {
+					try {
+						if (preparedStatement != null)
+							preparedStatement.close();
+					} finally {
+						if (connection != null)
+							connection.close();
+					}
+				}
+				
+				return utenti;
+			}
+		
 		@Override
 		public void doUpdate(UtenteBean utente) throws SQLException {
 			Connection connection = null;

@@ -1,7 +1,13 @@
 <%@ page import="java.util.*" import="planetGaming.Videogioco.*"%>
 
-<% 
-	Collection<?> videogiochi = (Collection<?>) request.getSession().getAttribute("videogiochi");
+
+<% 	
+	//verifica se l'oggetto videogiochi è presente nella richiesta altrimenti passa il controllo alla servlet "StorageControl" che lo genera
+	Collection<?> videogiochi = (Collection<?>) request.getSession().getAttribute("videogiochi"); //va bene anche "session" al posto di "request.getSession()"
+	if(videogiochi == null) {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/StorageControl");
+		dispatcher.forward(request, response);	
+	}
 %>
 
 
@@ -11,16 +17,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Storage Utente</title>
+<title>Storage</title>
 
-<link rel="stylesheet" href="storageStyle.css">
-
+<link rel="stylesheet" href="trueStorageStyle.css">
+<link rel="stylesheet" href="PopUp.css">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/header.jsp" />
+<script type="text/javascript" src="ControllaCredenziali.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="photoHighlight.js"></script>
+<script type="text/javascript" src="confirmDeleteModifyInsert.js"></script>
+
+<jsp:include page="/WEB-INF/header.jsp" />
 
 	<h1>Welcome to the Storage Page</h1>
-	<p>Here you can see the elements in the database</p>
+	<p>Here you can view videogames and add them to the cart</p>
 	<br><br>
 	
 	<table>
@@ -37,6 +48,7 @@
 			<th>Copy</th>
 			<th>Developer</th>
 			<th>Publisher</th>
+			<th>Photo</th>
 	  	</tr>
 	  <!-- contenuto tabella -->
 	  
@@ -46,26 +58,51 @@
 				while (it.hasNext()) {
 					VideogiocoBean videogioco = (VideogiocoBean) it.next();
 	%>
-			<tr>
-				<td><%=videogioco.getCodice_prodotto()%></td>
-			    <td><%=videogioco.getNome()%></td>
-			    <td><%=videogioco.getEdizione()%></td>
-			    <td><%=videogioco.getDescrizione()%></td>
-			    <td><%=videogioco.getPrezzo_vetrina()%></td>
-			    <td><%=videogioco.getData_uscita()%></td>
-			    <td><%=videogioco.getPiattaforma()%></td>
-			    <td><%=videogioco.getConsole()%></td>
-			    <td><%=videogioco.getSconto()%></td>
-			    <td><%=videogioco.getCopie()%></td>
-			    <td><%=videogioco.getSviluppatore()%></td>
-			    <td><%=videogioco.getPubblisher()%></td>
+		
+			<tr id="<%=videogioco.getCodice_prodotto()%>">
+				<td class="idCell"			><%=videogioco.getCodice_prodotto()%>							</td>
+			    <td class="nameCell"		><%=videogioco.getNome()%>										</td>
+			    <td class="editionCell"		><%=videogioco.getEdizione()%>									</td>
+			    <td class="descriptionCell"	>
+			    	<%=videogioco.getDescrizione()%>
+			    	<form action="StorageControl" method="post">
+			    		<input type="hidden" name="action" value="ExtendedDescription"> 
+						<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
+						<input type="submit" value="More...">
+					</form>
+			    </td>
+			    <td class="priceCell"		><%=videogioco.getPrezzo_vetrina()%>									</td>
+			    <td class="dateCell"		><%=videogioco.getData_uscita()%>										</td>
+			    <td class="platformCell"	><%=videogioco.getPiattaforma()%>										</td>
+			    <td class="consoleCell"		><%=videogioco.getConsole()%>											</td>
+			    <td class="scontoCell"		><%=videogioco.getSconto()%>											</td>
+			    <td class="copiesCell"		><%=videogioco.getCopie()%>												</td>
+			    <td class="developerCell"	><%=videogioco.getSviluppatore()%>										</td>
+			    <td class="publisherCell"	><%=videogioco.getPubblisher()%>										</td>
+			    <!-- uso Jquery per visualizzare l'immagine -->
+			    <td class="fotoCell"	><img id="fotoName<%=videogioco.getCodice_prodotto()%>" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">	</td>
+			    <td>
+			    	<form action="CartServlet" method="post">
+			    		<input type="hidden" name="action" value=addToCart>
+			    		<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
+			    		<input type="submit" value="Add to cart">
+			    	</form>
+			    </td>
 		  	</tr>
+			
 	<%
 				}
 	%>
-	  	
+	
 	</table>
 	
-	<jsp:include page="/WEB-INF/footer.jsp" />
+	<script>highlight();</script>
+	
+	<form action="CartServlet" method="post">
+		<input type="hidden" name="action" value="showCart">
+		<input type="submit" value="Show cart">
+	</form>
+
+<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

@@ -6,13 +6,16 @@
 	Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
 	if((isAdmin == null) || (!isAdmin.booleanValue()))
 	{
-		response.sendRedirect("./login-form.jsp");
+		//response.sendRedirect("./login-form.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login-form.jsp");
+		dispatcher.forward(request, response);	
 	}
 	
 	//verifica se l'oggetto videogiochi è presente nella richiesta altrimenti passa il controllo alla servlet "StorageControl" che lo genera
 	Collection<?> videogiochi = (Collection<?>) request.getSession().getAttribute("videogiochi"); //va bene anche "session" al posto di "request.getSession()"
 	if(videogiochi == null) {
-		response.sendRedirect("StorageControl");	
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/StorageControl");
+		dispatcher.forward(request, response);
 	}
 %>
 
@@ -27,12 +30,13 @@
 
 <link rel="stylesheet" href="trueStorageStyle.css">
 <link rel="stylesheet" href="PopUp.css">
-
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="photoHighlight.js"></script>
 <script type="text/javascript" src="confirmDeleteModifyInsert.js"></script>
+
 <jsp:include page="/WEB-INF/header.jsp" />
 
 	<div class="popupContainer">
@@ -105,6 +109,8 @@
 	%>
 	
 	</table>
+	
+	<script>highlight();</script>
 	
 			    
 			 
@@ -426,12 +432,6 @@
 				</fieldset>
 		</form>
 		<script>modifyOnSubmit("#modifyPhotoId");</script>
-	
-	
-	
-	<form action="Logout" method="get">
-		<input type="submit" value="Logout"/>
-	</form>
 
 <jsp:include page="/WEB-INF/footer.jsp" />
 </body>
