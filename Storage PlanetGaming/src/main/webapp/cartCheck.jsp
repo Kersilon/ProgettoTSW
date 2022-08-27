@@ -74,6 +74,7 @@
 	%>
 	
 	</table>
+
 	
 	<form action="CartServlet" method="post">
 		<input type="hidden" name="action" value="Purchase">

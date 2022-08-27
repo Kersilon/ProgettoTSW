@@ -129,12 +129,15 @@
 		<% 	
 				}
 		%>
-		
-		<form action="CartServlet" method="post">
-			<input type="hidden" name="action" value="actualPurchase">
-			<p>Card ID:		<input type="number" name="cardId" value="Insert card id" required></p>
-			<p>Address ID:	<input type="number" name="AddressId" value="Insert address id" required></p>
-			<input type="submit" value="Confirm">
-		</form>
+	
+		<fieldset>
+			<legend>Payment method and delivery address</legend>
+			<form action="CartServlet" method="post">
+				<input type="hidden" name="action" value="actualPurchase">
+				<p>Card ID:		<input type="number" name="cardId" value="Insert card id" required></p>
+				<p>Address ID:	<input type="number" name="AddressId" value="Insert address id" required></p>
+				<input type="submit" value="Confirm">
+			</form>
+		</fieldset>
 	</body>
 </html>
