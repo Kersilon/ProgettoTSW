@@ -10,8 +10,6 @@
 </head>
 	<body>
 		<div class="header">
-			<p>Header Header Header Header Header Header Header Header Header Header Header Header Header Header Header Header</p>
-			
 			<ul>
 				<li><a href="login-form.jsp"> <input type="button" value="Login"> </a></li>
 				<li><a href="registration.jsp"> <input type="button" value="Sign in"> </a></li>
