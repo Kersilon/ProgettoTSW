@@ -9,7 +9,7 @@
 	
 	if(isAdmin == null || isAdmin.equals(false))
 	{
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("./login-form.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login-form.jsp");
 		dispatcher.forward(request, response);
 	}
 	

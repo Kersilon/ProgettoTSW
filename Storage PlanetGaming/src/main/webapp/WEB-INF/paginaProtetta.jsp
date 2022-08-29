@@ -10,7 +10,7 @@
 	if((isLogged == null) || isLogged.equals(false))
 	{
 		//response.sendRedirect("./login-form.jsp");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("./login-form.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login-form.jsp");
 		dispatcher.forward(request, response);
 	}
 	

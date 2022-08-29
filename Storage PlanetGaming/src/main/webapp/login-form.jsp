@@ -23,7 +23,7 @@
 		<fieldset>
 			<legend>Login</legend>
 			<!-- da rendere hidden quando potrò spostarmi dallo storage alla pagina protetta durante l'esecuzione -->
-			<input name="action" value="login"><br>
+			<input type="hidden" name="action" value="login"><br>
 					
 			<label for="email"> Login:</label>
 			<input type="text" name="email" id ="email" placeholder="enter Username" >

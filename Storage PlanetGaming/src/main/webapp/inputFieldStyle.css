@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+.inputFieldContainer input{
+	display: block;
+}
+
+.ErrorParagraph{
+	display: inline;
+}
+
+.inputList{
+    all: initial;
+    list-style-type: none;
+}

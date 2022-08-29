@@ -34,9 +34,7 @@
 
 
 
-	<h1>Welcome to the Storage Page</h1>
-	<p>Here you can view videogames and add them to the cart</p>
-	<br><br>  
+	<h1>Storage</h1> 
 	<%
 	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
 	  		Iterator<?> it = videogiochi.iterator();
