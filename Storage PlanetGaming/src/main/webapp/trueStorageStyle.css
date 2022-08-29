@@ -5,7 +5,9 @@ table{
 	width: 100%;	/*fa in modo che la tabella occupi tutta la pagina orizzontalmente*/
 }
 
-table, th, td{
+table,
+th,
+td{
 	 border: 1px solid;
 }
 
@@ -14,21 +16,18 @@ img {
 	height: 40%;
 }
 
-
-
 /* bordo dell'input che si illumina quando viene clicaccato */
 input:focus {
 	outline: none;
   	border: 1px solid orange;
 }
 
-
-
 /*Css paragrafi di errore*/
 .ErrorParagraph{
 	color: red;
 }
 
-#HideButton, .hide{
+#HideButton,
+.hide{
 	display: none;
 }

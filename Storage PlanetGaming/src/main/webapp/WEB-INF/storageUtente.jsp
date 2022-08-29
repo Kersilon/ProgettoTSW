@@ -21,6 +21,7 @@
 
 <link rel="stylesheet" href="trueStorageStyle.css">
 <link rel="stylesheet" href="PopUp.css">
+<link rel="stylesheet" href="storage.css">
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
@@ -30,71 +31,37 @@
 
 <jsp:include page="/WEB-INF/header.jsp" />
 
+
+
+
 	<h1>Welcome to the Storage Page</h1>
 	<p>Here you can view videogames and add them to the cart</p>
-	<br><br>
-	
-	<table>
-		<tr>
-			<th>Code</th>
-			<th>Name</th>
-			<th>Edition</th>
-			<th>Description</th>
-			<th>Price</th>
-			<th>Date</th>
-			<th>Platform</th>
-			<th>Console</th>
-			<th>Sale</th>
-			<th>Copy</th>
-			<th>Developer</th>
-			<th>Publisher</th>
-			<th>Photo</th>
-	  	</tr>
-	  <!-- contenuto tabella -->
-	  
+	<br><br>  
 	<%
 	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
 	  		Iterator<?> it = videogiochi.iterator();
 				while (it.hasNext()) {
 					VideogiocoBean videogioco = (VideogiocoBean) it.next();
 	%>
+
+	<div class="box-catalogo box-border bg-image box-text">
+	<img class="videogame-image" src="./immagini Videogiochi/<%=videogioco.getFoto()%>" alt=>
+		<form action="StorageControl" method="post">
+			<input type="hidden" name="action" value="ExtendedDescription"> 
+			<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
+			<input type="submit" value="<%=videogioco.getNome()%>">
+		</form>
 		
-			<tr id="<%=videogioco.getCodice_prodotto()%>">
-				<td class="idCell"			><%=videogioco.getCodice_prodotto()%>							</td>
-			    <td class="nameCell"		><%=videogioco.getNome()%>										</td>
-			    <td class="editionCell"		><%=videogioco.getEdizione()%>									</td>
-			    <td class="descriptionCell"	>
-			    	<%=videogioco.getDescrizione()%>
-			    	<form action="StorageControl" method="post">
-			    		<input type="hidden" name="action" value="ExtendedDescription"> 
-						<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
-						<input type="submit" value="More...">
-					</form>
-			    </td>
-			    <td class="priceCell"		><%=videogioco.getPrezzo_vetrina()%>									</td>
-			    <td class="dateCell"		><%=videogioco.getData_uscita()%>										</td>
-			    <td class="platformCell"	><%=videogioco.getPiattaforma()%>										</td>
-			    <td class="consoleCell"		><%=videogioco.getConsole()%>											</td>
-			    <td class="scontoCell"		><%=videogioco.getSconto()%>											</td>
-			    <td class="copiesCell"		><%=videogioco.getCopie()%>												</td>
-			    <td class="developerCell"	><%=videogioco.getSviluppatore()%>										</td>
-			    <td class="publisherCell"	><%=videogioco.getPubblisher()%>										</td>
-			    <!-- uso Jquery per visualizzare l'immagine -->
-			    <td class="fotoCell"	><img id="fotoName<%=videogioco.getCodice_prodotto()%>" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">	</td>
-			    <td>
-			    	<form action="CartServlet" method="post">
-			    		<input type="hidden" name="action" value=addToCart>
-			    		<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
-			    		<input type="submit" value="Add to cart">
-			    	</form>
-			    </td>
-		  	</tr>
+		<form action="CartServlet" method="post">
+			<input type="hidden" name="action" value=addToCart>
+			<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
+			 <input type="submit" value="Add to cart">
+		</form>
+</div>
 			
 	<%
 				}
 	%>
-	
-	</table>
 	
 	<script>highlight();</script>
 	
@@ -102,6 +69,7 @@
 		<input type="hidden" name="action" value="showCart">
 		<input type="submit" value="Show cart">
 	</form>
+
 
 <jsp:include page="/WEB-INF/footer.jsp" />
 </body>

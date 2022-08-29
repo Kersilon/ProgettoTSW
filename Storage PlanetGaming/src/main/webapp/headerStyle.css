@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";
+
+.header{
+	background-color: #BEE8DC;
+	border: solid 1px black;
+	padding: 20px;
+}
+
+.header ul{
+    all: initial;
+    list-style-type: none;
+}
+
+.header li{
+	padding-left: 0.5%;
+	display: inline-block;
+}

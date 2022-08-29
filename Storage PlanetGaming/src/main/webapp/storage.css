@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+
+.box-catalogo{
+	width: 400px;
+	height: 350px;
+	border: solid 1px;
+	display: inline-block;
+}
+
+.box-text{
+	color: #91bdb2;
+}
+
+.bg-image{
+/* 	background-image: url(http://localhost:8080/Storage_PlanetGaming/immagini%20Videogiochi/eldenRing.jpg);
+	background-size: cover;
+	background-position: center; */
+	/* ./immagini Videogiochi/eldenRing.jpg */
+	
+	background-color: #373737;
+}
+
+.videogame-image {
+    width: auto;
+    position: sticky;
+    height: 60%;
+    padding-left: 3%;
+    padding-top: 3%;
+}
+
+.box-border{
+	border-radius: 10px;
+}
+
+.box-catalogo + p{
+	color: red;
+}
