@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="PopUp.css">
 <link rel="stylesheet" href="productBox.css">
 <link rel="stylesheet" href="storage.css">
+<link rel="stylesheet" href="form.css">
 <link rel="stylesheet" href="body.css">
 </head>
 <body>
@@ -49,13 +50,13 @@
 	<div class="box-catalogo box-border bg-image box-text">
 		<img class="videogame-image" src="./immagini Videogiochi/<%=videogioco.getFoto()%>" alt=>
 		
-		<form class="box-input" action="StorageControl" method="post">
+		<form class="product-form" action="StorageControl" method="post">
 			<input type="hidden" name="action" value="ExtendedDescription"> 
 			<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
 			<input type="submit" value="<%=videogioco.getNome()%>">
 		</form>
 		
-		<form class="box-input" action="CartServlet" method="post">
+		<form class="product-form" action="CartServlet" method="post">
 			<input type="hidden" name="action" value=addToCart>
 			<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
 			<input type="submit" value="Add to cart">
@@ -65,9 +66,9 @@
 	<%
 				}
 	%>
-	</div>
 	
-	<script>highlight();</script>
+		<script>highlight();</script>
+	</div>
 
 
 <jsp:include page="/WEB-INF/footer.jsp" />

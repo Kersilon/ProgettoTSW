@@ -1,0 +1,20 @@
+@charset "ISO-8859-1";
+/* Usalo se avrai mai problemi di compatibilità coi form*/
+
+
+/* Resetta i form mantenendoli compatibili su più browsers */
+
+/* button, 
+input, 
+select, 
+textarea{
+  font-family: inherit;
+  font-size: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+textarea{
+  overflow: auto;
+} */

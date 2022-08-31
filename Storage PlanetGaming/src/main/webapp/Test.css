@@ -1,11 +1,15 @@
 @charset "ISO-8859-1";
  
-div{
-	width:50%;
-	background-color: salmon;
-}
-
-p{
-	width:30%;
-	background-color: green;
+ .flex-container{
+ 	display: flex;
+ /* 	border: 5px solid black; */
+ 	align-items: center;
+ }
+ 
+ .flex-container div{
+ 	/* border: 5px solid red; */
+ }
+ 
+.flex-container img{
+	width: 300px;
 }

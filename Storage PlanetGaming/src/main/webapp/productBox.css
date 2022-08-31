@@ -1,8 +1,8 @@
 @charset "ISO-8859-1";
 
-.box-of-boxes{
-	/* padding-left: 7.4%; */
-}
+/* .box-of-boxes{
+	 padding-left: 7.4%; 
+} */
 
 .box-catalogo{
 	width: 400px;
@@ -24,7 +24,7 @@
 	color: #91bdb2;
 }
 
-.box-input{
+.product-form{
 	padding-left: 2.4%;
 }
 

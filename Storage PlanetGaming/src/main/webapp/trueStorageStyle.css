@@ -11,10 +11,10 @@ td{
 	 border: 1px solid;
 }
 
-img {
+/* img {
 	width: 30%;
 	height: 40%;
-}
+} */
 
 /* bordo dell'input che si illumina quando viene clicaccato */
 input:focus {

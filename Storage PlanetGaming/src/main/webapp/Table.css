@@ -1,0 +1,39 @@
+@charset "ISO-8859-1";
+
+table{
+	font-family: 'Roboto', sans-serif;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+/*  thead th:nth-child(1){
+	width:30%;
+}
+thead th:nth-child(2){
+	width:30%;
+}
+thead th:nth-child(3){
+	width:30%;
+}  */
+
+th,
+td{
+	border: 1px solid;
+    background-color: #373737;
+    color: #91bdb2;
+}
+
+tbody td{
+	text-align: center;
+}
+
+/* tfoot th{
+	text-align: right;
+} */
+.PhotoColumn{
+	width: 30%;
+}
+
+td img{
+	width: 300px;
+}

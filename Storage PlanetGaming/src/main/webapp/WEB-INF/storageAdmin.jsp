@@ -28,14 +28,19 @@
 <meta charset="ISO-8859-1">
 <title>Storage Admin</title>
 
-<link rel="stylesheet" href="trueStorageStyle.css">
+<!-- <link rel="stylesheet" href="trueStorageStyle.css"> -->
+<link rel="stylesheet" href="Table.css">
 <link rel="stylesheet" href="PopUp.css">
+<link rel="stylesheet" href="productBox.css">
+<link rel="stylesheet" href="productFlexTable.css">
+<link rel="stylesheet" href="body.css">
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="photoHighlight.js"></script>
 <script type="text/javascript" src="confirmDeleteModifyInsert.js"></script>
+
 
 <jsp:include page="/WEB-INF/header.jsp" />
 
@@ -51,34 +56,81 @@
 	  <span class="popupText" id="popupInsert">Videogame Successfully inserted</span>
 	</div>
 
-	<h1>Welcome to the Storage Page</h1>
-	<p>Here you can add, delete, remove element from the database</p>
-	<br><br>
+	<h1>Storage Admin</h1>
 	
-	<table>
-		<tr>
-			<th>Code</th>
-			<th>Name</th>
-			<th>Edition</th>
-			<th>Description</th>
-			<th>Price</th>
-			<th>Date</th>
-			<th>Platform</th>
-			<th>Console</th>
-			<th>Sale</th>
-			<th>Copy</th>
-			<th>Developer</th>
-			<th>Publisher</th>
-			<th>Photo</th>
-	  	</tr>
-	  <!-- contenuto tabella -->
-	  
+	
 	<%
 	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
 	  		Iterator<?> it = videogiochi.iterator();
 				while (it.hasNext()) {
 					VideogiocoBean videogioco = (VideogiocoBean) it.next();
 	%>
+	    	<div class="flex-container">
+    		<div class="product-buttons">
+		 		<form class="product-form" action="StorageControl" method="post">
+					<input type="hidden" name="action" value="ExtendedDescription"> 
+					<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
+					<input type="submit" value="<%=videogioco.getNome()%>">
+				</form>
+    		</div>
+    		<div class="product-info">
+    			<p>ID: <%=videogioco.getCodice_prodotto()%> | Name: <%=videogioco.getNome()%>  | Edition: <%=videogioco.getEdizione()%></p>
+    			<p>Description: <%=videogioco.getDescrizione()%> | Price: <%=videogioco.getPrezzo_vetrina()%> | Date: <%=videogioco.getData_uscita()%></p>
+    			<p>Platform: <%=videogioco.getPiattaforma()%> | Console: <%=videogioco.getConsole()%> | Sale: <%=videogioco.getSconto()%></p>
+    			<p>Copy: <%=videogioco.getCopie()%> | Developer: <%=videogioco.getSviluppatore()%> | Publisher: <%=videogioco.getPubblisher()%></p>
+    		</div>
+    		<img class="product-image" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">
+    	</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+	<%
+				}
+				//TODO da eliminare
+				it = videogiochi.iterator();
+				VideogiocoBean videogioco = (VideogiocoBean) it.next();
+	%>
+	<table>
+		<thead>
+			<tr>
+				<th>Code</th>
+				<th>Name</th>
+				<th>Edition</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Date</th>
+				<th>Platform</th>
+				<th>Console</th>
+				<th>Sale</th>
+				<th>Copy</th>
+				<th>Developer</th>
+				<th>Publisher</th>
+				<th>Photo</th>
+		  	</tr>
+	  	</thead>
+	  <!-- contenuto tabella -->
+	  	<tbody>
+		
 		
 			<tr id="<%=videogioco.getCodice_prodotto()%>">
 				<td class="idCell"			><%=videogioco.getCodice_prodotto()%>							</td>
@@ -103,11 +155,7 @@
 			    <!-- uso Jquery per visualizzare l'immagine -->
 			    <td class="fotoCell"	><img id="fotoName<%=videogioco.getCodice_prodotto()%>" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">	</td>
 		  	</tr>
-			
-	<%
-				}
-	%>
-	
+		</tbody>
 	</table>
 	
 	<script>highlight();</script>

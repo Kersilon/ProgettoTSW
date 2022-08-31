@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+
+.box-catalogo{
+	    width: 100%;
+}
+
+
+.box-forms{
+    border: 5px solid red;
+    display: inline-block;
+    width: 10%;
+    height: auto;
+}
+
+.box-image{
+    border: 5px solid #e6ff00;
+    display: inline-block;
+    width: 27%;
+    height: 95%;
+}
+
+.box-prductInfo{
+    border: 5px solid green;
+    display: inline-block;
+    width: 60%;
+    height: 95%;
+}
+
+
+.product-form{
+	all: unset;
+}
+
+.videogame-image {
+}
+
+.product-data{
+	display: inline;
+}
+

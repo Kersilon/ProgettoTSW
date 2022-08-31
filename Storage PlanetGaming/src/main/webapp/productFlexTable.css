@@ -1,0 +1,35 @@
+@charset "ISO-8859-1";
+
+.flex-container {
+    display: flex;
+    border: 5px solid #91bdb2;
+    background-color: #373737;
+    color: #91bdb2;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.product-buttons {
+    /* border: 5px solid red; */
+    width: 15%;
+}
+
+.product-info {
+	border: 1px solid #91bdb2;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+}
+
+.product-image {
+    width: 275px;
+    margin: 15px 0;
+}
+
+@media screen and (max-width: 800px) {
+.flex-container {
+    flex-direction:column;
+  }
+}
