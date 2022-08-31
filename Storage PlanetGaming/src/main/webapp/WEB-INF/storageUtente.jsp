@@ -21,7 +21,9 @@
 
 <link rel="stylesheet" href="trueStorageStyle.css">
 <link rel="stylesheet" href="PopUp.css">
+<link rel="stylesheet" href="productBox.css">
 <link rel="stylesheet" href="storage.css">
+<link rel="stylesheet" href="body.css">
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
@@ -34,7 +36,9 @@
 
 
 
-	<h1>Storage</h1> 
+	<h1 class="title">Storage</h1> 
+	
+	<div class="box-of-boxes">
 	<%
 	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
 	  		Iterator<?> it = videogiochi.iterator();
@@ -43,30 +47,27 @@
 	%>
 
 	<div class="box-catalogo box-border bg-image box-text">
-	<img class="videogame-image" src="./immagini Videogiochi/<%=videogioco.getFoto()%>" alt=>
-		<form action="StorageControl" method="post">
+		<img class="videogame-image" src="./immagini Videogiochi/<%=videogioco.getFoto()%>" alt=>
+		
+		<form class="box-input" action="StorageControl" method="post">
 			<input type="hidden" name="action" value="ExtendedDescription"> 
 			<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
 			<input type="submit" value="<%=videogioco.getNome()%>">
 		</form>
 		
-		<form action="CartServlet" method="post">
+		<form class="box-input" action="CartServlet" method="post">
 			<input type="hidden" name="action" value=addToCart>
 			<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
-			 <input type="submit" value="Add to cart">
+			<input type="submit" value="Add to cart">
 		</form>
-</div>
+	</div>
 			
 	<%
 				}
 	%>
+	</div>
 	
 	<script>highlight();</script>
-	
-	<form action="CartServlet" method="post">
-		<input type="hidden" name="action" value="showCart">
-		<input type="submit" value="Show cart">
-	</form>
 
 
 <jsp:include page="/WEB-INF/footer.jsp" />

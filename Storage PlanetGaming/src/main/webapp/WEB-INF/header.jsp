@@ -28,6 +28,12 @@
 						<input type="submit" value="User page"/>
 					</form>
 				</li>
+				<li>
+					<form action="CartServlet" method="post">
+						<input type="hidden" name="action" value="showCart">
+						<input type="submit" value="Show cart">
+					</form>
+				</li>
 			</ul>
 		</div>
 	</body>

@@ -1,0 +1,36 @@
+@charset "ISO-8859-1";
+
+.box-of-boxes{
+	/* padding-left: 7.4%; */
+}
+
+.box-catalogo{
+	width: 400px;
+	height: 275px;
+	border: solid 1px;
+	display: inline-block;
+}
+
+.box-border{
+	border-radius: 10px;
+	color: #91bdb2;
+}
+
+.bg-image{
+	background-color: #373737;
+}
+
+.box-text{
+	color: #91bdb2;
+}
+
+.box-input{
+	padding-left: 2.4%;
+}
+
+.videogame-image {
+    width: 95%;
+    height: auto;
+    padding-left: 2.4%;
+    padding-top: 2.4%;
+}

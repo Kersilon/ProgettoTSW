@@ -24,9 +24,7 @@
 
 <jsp:include page="/WEB-INF/header.jsp" />
 
-	<h1>Welcome to the Storage Page</h1>
-	<p>Here you can view videogames and add them to the cart</p>
-	<br><br>
+	<h1>Cart</h1>
 	
 	<% if(carrello != null && !carrello.isEmpty()){ %>
 	<table>
@@ -70,12 +68,18 @@
 			
 	<%
 				}
-	}
 	%>
 	
 	</table>
-
+	<%
+	}else{ 
+	%>
 	
+		<p>Nothing to see here... yet!</p>
+	<%
+	}
+	%>
+
 	<form action="CartServlet" method="post">
 		<input type="hidden" name="action" value="Purchase">
 		<input type="submit" value="Purchase">

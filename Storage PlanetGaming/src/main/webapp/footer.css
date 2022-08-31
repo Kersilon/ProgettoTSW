@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+
+.footer{
+	background-color: #BEE8DC;
+	border: solid 1px black;
+	padding: 20px;
+	margin-top: 8%;
+}
+
+.footer p{
+	color: black;
+}

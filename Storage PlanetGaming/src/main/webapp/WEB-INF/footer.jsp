@@ -5,8 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title></title>
+<link rel="stylesheet" href="footer.css">
 </head>
+
 <body>
-	<p>Footer of doom</p>
+	<div class="footer">
+		<p>Footer of doom</p>
+	</div>
 </body>
 </html>
