@@ -13,8 +13,10 @@
 <meta charset="ISO-8859-1">
 <title>Storage</title>
 
-<link rel="stylesheet" href="trueStorageStyle.css">
-<link rel="stylesheet" href="PopUp.css">
+	<link rel="stylesheet" href="trueStorageStyle.css">
+	<link rel="stylesheet" href="PopUp.css">
+	<link rel="stylesheet" href="body.css">
+	<link rel="stylesheet" href="productFlexTable.css">
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
@@ -27,18 +29,7 @@
 	<h1>Cart</h1>
 	
 	<% if(carrello != null && !carrello.isEmpty()){ %>
-	<table>
-		<tr>
-			<th>Id product</th>
-			<th>Id order</th>
-			<th>id videogame</th>
-			<th>Videogame's name</th>
-			<th>Total price</th>
-			<th>Total discount</th>
-			<th>Quantity</th>
-			<th>Photo</th>
-	  	</tr>
-	  <!-- contenuto tabella -->
+
 	  
 	<%
 	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
@@ -47,30 +38,38 @@
 					prodottoOrdineBean prodotto = (prodottoOrdineBean) it.next();
 	%>
 		
-			<tr id="<%=prodotto.getIdProdottoOrdine()%>">
-				<td class="idCell"			><%=prodotto.getIdProdottoOrdine()%>							</td>
-				<td class="idOrderCell"		><%=prodotto.getIdOrdine()%>									</td>
-				<td class="idVideogameCell"	><%=prodotto.getIdVideogioco()%>								</td>
-			    <td class="nameCell"		><%=prodotto.getNomeVideogioco()%>								</td>
-			    <td class="priceCell"		><%=prodotto.getPrezzoAcquisto()%>								</td>
-			    <td class="scontoCell"		><%=prodotto.getScontoAcquisto()%>								</td>
-			    <td class="copiesCell"		><%=prodotto.getQuantitaAcquisto()%>							</td>
-			    <!-- uso Jquery per visualizzare l'immagine -->
-			    <td class="fotoCell"	><img id="fotoName<%=prodotto.getIdProdottoOrdine()%>" src="./immagini Videogiochi/<%=prodotto.getFoto()%>">	</td>
-			    <td>
-			    	<form action="CartServlet" method="post">
+			
+		<div id="<%=prodotto.getIdProdottoOrdine()%>" class="flex-container">
+    		<div class="product-buttons">
+		 		<form class="product-form" action="StorageControl" method="post">
+					<input type="hidden" name="action" value="ExtendedDescription"> 
+					<input type="hidden" name="codice_prodotto" value=<%=prodotto.getIdProdottoOrdine()%>> 
+					<input type="submit" value="<%=prodotto.getNomeVideogioco()%>">
+				</form>
+				<form action="CartServlet" method="post">
 			    		<input type="hidden" name="action" value="removeFromCart">
 			    		<input type="hidden" name="deleteFromCart" value=<%=prodotto.getIdVideogioco()%>>
 			    		<input type="submit" value="Remove from cart">
-			    	</form>
-			    </td>
-		  	</tr>
+			    </form>
+    		</div>
+    		<div class="product-info">
+    			<p>Id product:<span class="idCell"><%=prodotto.getIdProdottoOrdine()%></span> | Id order: <span class="idOrderCell"><%=prodotto.getIdOrdine()%></span>  | id videogame: <span class="idVideogameCell"><%=prodotto.getIdVideogioco()%></span></p>
+    			<p>Videogame's name: <span class="nameCell"><%=prodotto.getNomeVideogioco()%></span> | Total price: <span class="priceCell"><%=prodotto.getPrezzoAcquisto()%></span> | Total discount: <span class="scontoCell"><%=prodotto.getScontoAcquisto()%></span></p>
+    			<p>Quantity: <span class="copiesCell"><%=prodotto.getQuantitaAcquisto()%></span></p>
+    		</div>
+    		<img id="fotoName<%=prodotto.getIdProdottoOrdine()%>" class="product-image fotoCell" src="./immagini Videogiochi/<%=prodotto.getFoto()%>">
+    	</div>
 			
+			
+			
+			
+			
+
 	<%
 				}
 	%>
 	
-	</table>
+
 	<%
 	}else{ 
 	%>

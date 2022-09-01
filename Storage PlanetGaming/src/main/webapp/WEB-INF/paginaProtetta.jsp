@@ -24,6 +24,10 @@
 <html>
 <head>
 <link rel="stylesheet" href="trueStorageStyle.css">
+<link rel="stylesheet" href="inputFieldStyle.css">
+<link rel="stylesheet" href="body.css">
+<link rel="stylesheet" href="trueStorageStyle.css">
+<link rel="stylesheet" href="productFlexTable.css">
 
 <meta charset="ISO-8859-1">
 <title>Protected Page</title>
@@ -33,11 +37,13 @@
 	<script type="text/javascript" src="HideShowButton.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 	
-	<h1>Welcome to the user page</h1><br>
+	<h1>Welcome to the user page</h1>
 	<p>Here you can add, delete, payment methods and delivery addresses</p>
-	<br><br>
 	
-	
+	<form class="inputFieldContainer inputList" action="UserInfo" method="get">
+		<input type="hidden" name="action" value="ordini"> 
+		<input type="submit" value="Ordini"/>
+	</form>
 	
 	<%
 			Iterator<?> it;
@@ -49,37 +55,28 @@
 			if(metodiPagamento != null && !metodiPagamento.isEmpty()){
 	%>
 	
-	<h2>Payment methods</h2>
-	<table>
-		<tr>
-			<th>numero_carta</th>
-			<th>ccv</th>
-			<th>circuito</th>
-			<th>scadenza</th>
-			<th>codiceUtente</th>
-			<th>nome_intestatario</th>
-			<th>cognome_intestatario</th>
-			<th>idCarta</th>
-	  	</tr>
-		  <!-- contenuto tabella -->
-	  
+	
+	
+
+    	
+    	
+    	
+
+	  		<h2>Paymenth methods</h2>
 		<%
 	  		//scorre l'array metodi di pagamento e stampa gli elementi nella tabella
 	  		it = metodiPagamento.iterator();
 				while (it.hasNext()) {
 					MetodoPagamentoBean metodoPagamento = (MetodoPagamentoBean) it.next();
 		%>
-			<tr>
-				<td><%=metodoPagamento.getNumero_carta()%></td>
-				<td><%=metodoPagamento.getCcv()%></td>
-				<td><%=metodoPagamento.getCircuito()%></td>
-				<td><%=metodoPagamento.getScadenza()%></td>
-				<td><%=metodoPagamento.getCodiceUtente()%></td>
-				<td><%=metodoPagamento.getNome_intestatario()%></td>
-				<td><%=metodoPagamento.getCognome_intestatario()%></td>
-				<td><%=metodoPagamento.getIdCarta()%></td>
-		  	</tr>
 			
+			<div id="<%=metodoPagamento.getIdCarta()%>" class="flex-container">
+	    		<!-- <div class="product-info"> -->
+	    			<p>CardId: <span class="idCell"><%=metodoPagamento.getIdCarta()%></span> | cardNumber: <span class=""><%=metodoPagamento.getNumero_carta()%></span>  | ccv: <span class=""><%=metodoPagamento.getCcv()%></span></p>
+	    			<p>Circuit: <span class=""><%=metodoPagamento.getCircuito()%></span> | expiration date: <span class=""><%=metodoPagamento.getScadenza()%></span> | UserId: <span class=""><%=metodoPagamento.getCodiceUtente()%></span></p>
+	    			<p>accountholder's name: <span class="platformCell"><%=metodoPagamento.getNome_intestatario()%></span> | accountholder's surname: <span class=""><%=metodoPagamento.getCognome_intestatario()%></span></p>
+	    		<!-- </div> -->
+    	</div>
 	<%
 				}
 	%>
@@ -94,40 +91,29 @@
 			if(indirizzi != null && !indirizzi.isEmpty()){
 	%>
 	
-			</table>
 			
-			<h2>Addresses</h2>
-			<table>
-				<tr>
-					<th>via</th>
-					<th>cap</th>
-					<th>citta</th>
-					<th>provincia</th>
-					<th>codiceUtente</th>
-					<th>idIndirizzo</th>
-			  	</tr>
-				  <!-- contenuto tabella -->
-			  
+			
+			
+			  <h2>Indirizzi di consegna</h2>
 				<%
 			  		//scorre l'array indirizzi e stampa gli elementi nella tabella
 			  			it = indirizzi.iterator();
 						while (it.hasNext()) {
 							IndirizzoBean indirizzo = (IndirizzoBean) it.next();
 				%>
-					<tr>
-						<td><%=indirizzo.getVia()%></td>
-						<td><%=indirizzo.getCap()%></td>
-						<td><%=indirizzo.getCitta()%></td>
-						<td><%=indirizzo.getProvincia()%></td>
-						<td><%=indirizzo.getCodice_utente()%></td>
-						<td><%=indirizzo.getIdIndirizzo()%></td>
-				  	</tr>
+				
+						<div id="<%=indirizzo.getIdIndirizzo()%>" class="flex-container">
+				    		<!-- <div class="product-info"> -->
+				    			<p>AddressId: <span class="idCell"><%=indirizzo.getIdIndirizzo()%></span> | Street: <span class=""><%=indirizzo.getVia()%></span>  | cap: <span class=""><%=indirizzo.getCap()%></span></p>
+				    			<p>City: <span class=""><%=indirizzo.getCitta()%></span> | province: <span class=""><%=indirizzo.getProvincia()%></span> | UserId: <span class=""><%=indirizzo.getCodice_utente()%></span></p>
+				    		<!-- </div> -->
+						</div>	
 					
 			<%
 						}
 			%>
 			
-				</table>
+				
 	<% 	
 			}
 	%>
@@ -137,44 +123,24 @@
 	<% 	
 			if(datiUtente != null){
 	%>
-	
 			<h2>User's data</h2>
-			<table>
-				<tr>
-					<th>Name</th>
-					<th>Surname</th>
-					<th>Birth date</th>
-					<th>Username</th>
-					<th>Password
-						<button type="button" id ="ShowButton" onclick ="show()">Show</button>
-						<button type="button" id ="HideButton" onclick ="hide()">Hide</button>
-					</th>
-					<th>Email</th>
-					<th>Phone number</th>
-					<th>UserId</th>
-					<th>Admin?</th>
-			  	</tr>
-				  <!-- contenuto tabella -->
-			  
-					<tr>
-						<td><%=datiUtente.getNome()%></td>
-						<td><%=datiUtente.getCognome()%></td>
-						<td><%=datiUtente.getDataNascita()%></td>
-						<td><%=datiUtente.getNomeUtente()%></td>
-						<td><div  class ="hide"><%=datiUtente.getPassword()%></div></td>
-						<td><%=datiUtente.getEmail()%></td>
-						<td><%=datiUtente.getTelefono()%></td>
-						<td><%=datiUtente.getCodiceUtente()%></td>
-						<td><%=datiUtente.isAMMINISTRATORE()%></td>
-				  	</tr>
-			</table>		
+		    <div class="flex-container">
+    		<!-- <div class="product-info"> -->
+    			<p>UserId: <span class="idCell"><%=datiUtente.getCodiceUtente()%></span> | Name: <span class="nameCell"><%=datiUtente.getNome()%></span>  | Surname: <span class="editionCell"><%=datiUtente.getCognome()%></span></p>
+    			<p>Birth date: <span class="descriptionCell"><%=datiUtente.getDataNascita()%></span> | Username: <span class="priceCell"><%=datiUtente.getNomeUtente()%></span></p>
+    			<p><button type="button" id ="ShowButton" onclick ="show()">Show</button><button type="button" id ="HideButton" onclick ="hide()">Hide</button> Password: <span class="hide"><%=datiUtente.getPassword()%></span></p>
+    			<p>Email: <span class="platformCell"><%=datiUtente.getEmail()%></span> | Phone number: <span class="consoleCell"><%=datiUtente.getTelefono()%></span> | Admin?: <span class="scontoCell"><%=datiUtente.isAMMINISTRATORE()%></span></p>
+    		<!-- </div> -->
+    	</div>
+    			
 	
 	<% 	
 			}
 	%>
 	
-	
-	<form action="UserInfo" method="post">
+	<h2>Operetions</h2>
+	<div class="flex-container">
+	<form class="inputFieldContainer inputList" action="UserInfo" method="post">
 		<fieldset>
 			<legend>delivery address</legend>
 			<input type="hidden" name="action" value="addAddress">
@@ -199,7 +165,7 @@
 		</fieldset>
 	</form>
 	
-	<form action="UserInfo" method="post">
+	<form class="inputFieldContainer inputList" action="UserInfo" method="post">
 		<fieldset>
 			<legend>payment method</legend>
 			<input type="hidden" name="action" value="addPaymentMethod">
@@ -223,7 +189,7 @@
 		</fieldset>
 	</form>
 	
-	<form id="modifyUsername" action="UserInfo" method="post">
+	<form id="modifyUsername" class="inputFieldContainer inputList" action="UserInfo" method="post">
 		<fieldset>
 			<legend>modify Username</legend>
 			<input type="hidden" name="action" value="modifyUserData">
@@ -236,7 +202,7 @@
 	</form>
 	
 	
-	<form id="modifyPassword" action="UserInfo" method="post">
+	<form id="modifyPassword" class="inputFieldContainer inputList" action="UserInfo" method="post">
 		<fieldset>
 			<legend>modify Password</legend>
 			<input type="hidden" name="action" value="modifyUserData">
@@ -250,7 +216,7 @@
 	</form>
 	
 	
-	<form id="modifyPhone" action="UserInfo" method="post">
+	<form id="modifyPhone" class="inputFieldContainer inputList" action="UserInfo" method="post">
 		<fieldset>
 			<legend>modify Phone</legend>
 			<input type="hidden" name="action" value="modifyUserData">
@@ -263,11 +229,7 @@
 		</fieldset>
 	</form>
 	
-	<form action="UserInfo" method="get">
-		<input type="hidden" name="action" value="ordini"> 
-		<input type="submit" value="Ordini"/>
-	</form>
-	
+	</div>
 	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

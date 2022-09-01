@@ -9,6 +9,7 @@
     justify-content: space-around;
     border-radius: 10px;
     margin-bottom: 5px;
+    flex-wrap: wrap;
 }
 
 .product-buttons {
@@ -28,7 +29,7 @@
     margin: 15px 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 836px) {
 .flex-container {
     flex-direction:column;
   }

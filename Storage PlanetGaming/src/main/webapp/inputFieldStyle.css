@@ -9,6 +9,6 @@
 }
 
 .inputList{
-    all: initial;
+    /* all: initial; */
     list-style-type: none;
 }

@@ -25,15 +25,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Storage Admin</title>
-
-<!-- <link rel="stylesheet" href="trueStorageStyle.css"> -->
-<link rel="stylesheet" href="Table.css">
-<link rel="stylesheet" href="PopUp.css">
-<link rel="stylesheet" href="productBox.css">
-<link rel="stylesheet" href="productFlexTable.css">
-<link rel="stylesheet" href="body.css">
+	<meta charset="ISO-8859-1">
+	<title>Storage Admin</title>
+	
+	<!-- <link rel="stylesheet" href="trueStorageStyle.css"> -->
+	<link rel="stylesheet" href="Table.css">
+	<link rel="stylesheet" href="PopUp.css">
+	<link rel="stylesheet" href="productBox.css">
+	<link rel="stylesheet" href="productFlexTable.css">
+	<link rel="stylesheet" href="inputFieldStyle.css">
+	<link rel="stylesheet" href="body.css">
+	<link rel="stylesheet" href="trueStorageStyle.css">
 </head>
 <body>
 <script type="text/javascript" src="ControllaCredenziali.js"></script>
@@ -65,7 +67,7 @@
 				while (it.hasNext()) {
 					VideogiocoBean videogioco = (VideogiocoBean) it.next();
 	%>
-	    	<div class="flex-container">
+	    <div id="<%=videogioco.getCodice_prodotto()%>" class="flex-container">
     		<div class="product-buttons">
 		 		<form class="product-form" action="StorageControl" method="post">
 					<input type="hidden" name="action" value="ExtendedDescription"> 
@@ -74,96 +76,23 @@
 				</form>
     		</div>
     		<div class="product-info">
-    			<p>ID: <%=videogioco.getCodice_prodotto()%> | Name: <%=videogioco.getNome()%>  | Edition: <%=videogioco.getEdizione()%></p>
-    			<p>Description: <%=videogioco.getDescrizione()%> | Price: <%=videogioco.getPrezzo_vetrina()%> | Date: <%=videogioco.getData_uscita()%></p>
-    			<p>Platform: <%=videogioco.getPiattaforma()%> | Console: <%=videogioco.getConsole()%> | Sale: <%=videogioco.getSconto()%></p>
-    			<p>Copy: <%=videogioco.getCopie()%> | Developer: <%=videogioco.getSviluppatore()%> | Publisher: <%=videogioco.getPubblisher()%></p>
+    			<p>ID:<span class="idCell"><%=videogioco.getCodice_prodotto()%></span> | Name: <span class="nameCell"><%=videogioco.getNome()%></span>  | Edition: <span class="editionCell"><%=videogioco.getEdizione()%></span></p>
+    			<p>Description: <span class="descriptionCell"><%=videogioco.getDescrizione()%></span> | Price: <span class="priceCell"><%=videogioco.getPrezzo_vetrina()%></span> | Date: <span class="dateCell"><%=videogioco.getData_uscita()%></span></p>
+    			<p>Platform: <span class="platformCell"><%=videogioco.getPiattaforma()%></span> | Console: <span class="consoleCell"><%=videogioco.getConsole()%></span> | Sale: <span class="scontoCell"><%=videogioco.getSconto()%></span></p>
+    			<p>Copy: <span class="copiesCell"><%=videogioco.getCopie()%></span> | Developer: <span class="developerCell"><%=videogioco.getSviluppatore()%></span> | Publisher: <span class="publisherCell"><%=videogioco.getPubblisher()%></span></p>
     		</div>
-    		<img class="product-image" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">
+    		<img id="fotoName<%=videogioco.getCodice_prodotto()%>" class="product-image fotoCell" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">
     	</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			
 	<%
 				}
-				//TODO da eliminare
-				it = videogiochi.iterator();
-				VideogiocoBean videogioco = (VideogiocoBean) it.next();
 	%>
-	<table>
-		<thead>
-			<tr>
-				<th>Code</th>
-				<th>Name</th>
-				<th>Edition</th>
-				<th>Description</th>
-				<th>Price</th>
-				<th>Date</th>
-				<th>Platform</th>
-				<th>Console</th>
-				<th>Sale</th>
-				<th>Copy</th>
-				<th>Developer</th>
-				<th>Publisher</th>
-				<th>Photo</th>
-		  	</tr>
-	  	</thead>
-	  <!-- contenuto tabella -->
-	  	<tbody>
-		
-		
-			<tr id="<%=videogioco.getCodice_prodotto()%>">
-				<td class="idCell"			><%=videogioco.getCodice_prodotto()%>							</td>
-			    <td class="nameCell"		><%=videogioco.getNome()%>										</td>
-			    <td class="editionCell"		><%=videogioco.getEdizione()%>									</td>
-			    <td class="descriptionCell"	>
-			    	<%=videogioco.getDescrizione()%>
-			    	<form action="StorageControl" method="post">
-			    		<input type="hidden" name="action" value="ExtendedDescription"> 
-						<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
-						<input type="submit" value="More...">
-					</form>
-			    </td>
-			    <td class="priceCell"		><%=videogioco.getPrezzo_vetrina()%>									</td>
-			    <td class="dateCell"		><%=videogioco.getData_uscita()%>										</td>
-			    <td class="platformCell"	><%=videogioco.getPiattaforma()%>										</td>
-			    <td class="consoleCell"		><%=videogioco.getConsole()%>											</td>
-			    <td class="scontoCell"		><%=videogioco.getSconto()%>											</td>
-			    <td class="copiesCell"		><%=videogioco.getCopie()%>												</td>
-			    <td class="developerCell"	><%=videogioco.getSviluppatore()%>										</td>
-			    <td class="publisherCell"	><%=videogioco.getPubblisher()%>										</td>
-			    <!-- uso Jquery per visualizzare l'immagine -->
-			    <td class="fotoCell"	><img id="fotoName<%=videogioco.getCodice_prodotto()%>" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">	</td>
-		  	</tr>
-		</tbody>
-	</table>
 	
 	<script>highlight();</script>
 	
 			    
 			 
-	<br>
-	<form id="insertForm" action="StorageControl" enctype="multipart/form-data" method="post">
+		<div class="flex-container">
+	<form id="insertForm" class="inputFieldContainer inputList" action="StorageControl" enctype="multipart/form-data" method="post">
 		<fieldset>
 			<legend>Insert</legend>
 			<input type="hidden" name="action" value="insert"> 
@@ -199,8 +128,8 @@
 	
 	
 	
-	<br>
-	<form id="deleteForm" action="StorageControl" method="post">
+
+	<form id="deleteForm" class="inputFieldContainer inputList" action="StorageControl" method="post">
 		<fieldset>
 			<legend>Delete</legend>
 					<input  name="action" 			type="hidden" 	value="delete">
@@ -215,47 +144,13 @@
 	</form>
 	<script>deleteOnSubmit();</script>
 	
-	
-	
-	<!--
-	<br>
-	<form id ="modifyForm" action="StorageControl" enctype="multipart/form-data" method="post">
-		<fieldset>
-			<legend>Modify</legend>
-			<input type="hidden" name="action" value="modify"> 
-			
-			ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 						placeholder="enter ID"			><br>
-			<p  class="ErrorParagraph"></p>
-			
-			Name: 			<input name="nome" 				type="text" 	maxlength="20" 						placeholder="enter name"		><br> 
-			Edition: 		<input name="edizione" 			type="text" 	maxlength="20" 						placeholder="enter name"		><br> 
-			Description: 	<input name="descrizione" 		type="text" 	maxlength="60" 						placeholder="enter description"	><br> 
-			Price: 			<input name="prezzo_vetrina" 	type="text" 	maxlength="20" 						placeholder="enter name"		><br>
-			<p  class="ErrorParagraph"></p>
-			
-			Date: 			<input name="data_uscita" 		type="text" 	maxlength="20"						placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
-			<p  class="ErrorParagraph"></p>
-			
-			Platform: 		<input name="piattaforma" 		type="text" 	maxlength="20" 						placeholder="enter name"		><br>
-			Console: 		<input name="console" 			type="text"	 	maxlength="20" 						placeholder="enter name"		><br>
-			Sale: 			<input name="sconto" 			type="text" 	maxlength="20" 						placeholder="enter name"		><br>
-			<p  class="ErrorParagraph"></p>
-			
-			Copy:			<input name="#copie" 			type="text" 	maxlength="20" 						placeholder="enter name"		><br>
-			<p  class="ErrorParagraph"></p>
-			
-			Developer: 		<input name="Sviluppatore" 		type="text" 	maxlength="20" 						placeholder="enter name"		><br>
-			Publisher: 		<input name="Pubblisher" 		type="text" 	maxlength="20" 						placeholder="enter name"		><br>
-			Photo: 			<input name="foto"				type="file"    	maxlength="255"		class="file"									><br>
-					
-	
-			<button type="button" id ="modifyButton" onclick ="checkModify('modifyForm')">modify</button>
-			<input type="reset" value="Reset">
-				
-		</fieldset>
-	</form>
-	 -->
-		<form id="modifyNomeId" action="StorageControl" method="post">
+
+
+
+
+
+
+		<form id="modifyNomeId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Name</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -274,7 +169,7 @@
 		
 		
 		
-		<form id="modifyEditionId" action="StorageControl" method="post">
+		<form id="modifyEditionId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Edition</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -293,7 +188,7 @@
 		
 		
 		
-		<form id="modifyDescriptionId" action="StorageControl" method="post">
+		<form id="modifyDescriptionId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Description</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -312,7 +207,7 @@
 		
 		
 		
-		<form id="modifyPriceId" action="StorageControl" method="post">
+		<form id="modifyPriceId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Price</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -331,7 +226,7 @@
 		
 		
 		
-		<form id="modifyDateId" action="StorageControl" method="post">
+		<form id="modifyDateId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Date</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -350,7 +245,7 @@
 		
 		
 		
-		<form id="modifyPlatformId" action="StorageControl" method="post">
+		<form id="modifyPlatformId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Platform</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -369,7 +264,7 @@
 		
 		
 		
-		<form id="modifyConsoleId" action="StorageControl" method="post">
+		<form id="modifyConsoleId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Console</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -388,7 +283,7 @@
 		
 		
 		
-		<form id="modifySaleId" action="StorageControl" method="post">
+		<form id="modifySaleId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Sale</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -407,7 +302,7 @@
 		
 		
 		
-		<form id="modifyCopyId" action="StorageControl" method="post">
+		<form id="modifyCopyId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Copy</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -426,7 +321,7 @@
 		
 		
 		
-		<form id="modifyDeveloperId" action="StorageControl" method="post">
+		<form id="modifyDeveloperId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Developer</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -445,7 +340,7 @@
 		
 		
 		
-		<form id="modifyPublisherId" action="StorageControl" method="post">
+		<form id="modifyPublisherId" class="inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Publisher</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -464,7 +359,7 @@
 		
 		
 		
-		<form id="modifyPhotoId" action="StorageControl" enctype="multipart/form-data" method="post">
+		<form id="modifyPhotoId" class="inputFieldContainer inputList" action="StorageControl" enctype="multipart/form-data" method="post">
 				<fieldset>
 					<legend>modify Photo</legend>
 					<input type="hidden" name="action" value="modifyPhoto"> 
@@ -480,6 +375,7 @@
 				</fieldset>
 		</form>
 		<script>modifyOnSubmit("#modifyPhotoId");</script>
+		</div>
 
 <jsp:include page="/WEB-INF/footer.jsp" />
 </body>

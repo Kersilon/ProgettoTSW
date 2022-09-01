@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="trueStorageStyle.css">
+	<link rel="stylesheet" href="inputFieldStyle.css">
+	<link rel="stylesheet" href="body.css">
+	<link rel="stylesheet" href="trueStorageStyle.css">
 
 <!--   
 	il collegamento alle pagine javaScript esterne non funziona se questa si trova in web inf
@@ -19,7 +21,7 @@
 <script src="Test.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 
-	<form id="loginForm" action="LoginStorage" method="post">
+	<form id="loginForm" class="inputFieldContainer inputList" action="LoginStorage" method="post">
 		<fieldset>
 			<legend>Login</legend>
 			<!-- da rendere hidden quando potrò spostarmi dallo storage alla pagina protetta durante l'esecuzione -->

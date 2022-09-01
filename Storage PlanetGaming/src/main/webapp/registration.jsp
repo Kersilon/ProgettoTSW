@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="trueStorageStyle.css">
-<link rel="stylesheet" href="inputFieldStyle.css">
+	<link rel="stylesheet" href="inputFieldStyle.css">
+	<link rel="stylesheet" href="body.css">
+	<link rel="stylesheet" href="trueStorageStyle.css">
 
 <title>Insert title here</title>
 </head>
