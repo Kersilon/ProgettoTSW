@@ -74,6 +74,13 @@
 					<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
 					<input type="submit" value="<%=videogioco.getNome()%>">
 				</form>
+				
+				<form class="product-form" action="CartServlet" method="post">
+					<input type="hidden" name="action" value=addToCart>
+					<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
+					<input type="submit" value="Add to cart">
+				</form>
+				
     		</div>
     		<div class="product-info">
     			<p>ID:<span class="idCell"><%=videogioco.getCodice_prodotto()%></span> | Name: <span class="nameCell"><%=videogioco.getNome()%></span>  | Edition: <span class="editionCell"><%=videogioco.getEdizione()%></span></p>

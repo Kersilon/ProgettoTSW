@@ -85,5 +85,7 @@
 	</form>
 	
 	<script>highlight();</script>
+	
+	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

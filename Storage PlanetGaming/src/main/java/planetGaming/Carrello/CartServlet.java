@@ -140,8 +140,14 @@ public class CartServlet extends HttpServlet {
 		
 		
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
-		dispatcher.forward(request, response);
+		Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
+		if((isAdmin == null) || (!isAdmin.booleanValue())) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
+			dispatcher.forward(request, response);
+		}else {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageAdmin.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 	
 	

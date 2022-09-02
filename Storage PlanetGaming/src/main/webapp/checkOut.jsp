@@ -21,7 +21,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<link rel="stylesheet" href="trueStorageStyle.css">
+		<link rel="stylesheet" href="inputFieldStyle.css">
+		<link rel="stylesheet" href="body.css">
+		<link rel="stylesheet" href="trueStorageStyle.css">
+		<link rel="stylesheet" href="productFlexTable.css">
 	
 	<meta charset="ISO-8859-1">
 	<title>Protected Page</title>
@@ -48,18 +51,6 @@
 		%>
 		
 		<h2>Payment methods</h2>
-		<table>
-			<tr>
-				<th>numero_carta</th>
-				<th>ccv</th>
-				<th>circuito</th>
-				<th>scadenza</th>
-				<th>codiceUtente</th>
-				<th>nome_intestatario</th>
-				<th>cognome_intestatario</th>
-				<th>idCarta</th>
-		  	</tr>
-			  <!-- contenuto tabella -->
 		  
 			<%
 		  		//scorre l'array metodi di pagamento e stampa gli elementi nella tabella
@@ -67,16 +58,14 @@
 					while (it.hasNext()) {
 						MetodoPagamentoBean metodoPagamento = (MetodoPagamentoBean) it.next();
 			%>
-				<tr>
-					<td><%=metodoPagamento.getNumero_carta()%></td>
-					<td><%=metodoPagamento.getCcv()%></td>
-					<td><%=metodoPagamento.getCircuito()%></td>
-					<td><%=metodoPagamento.getScadenza()%></td>
-					<td><%=metodoPagamento.getCodiceUtente()%></td>
-					<td><%=metodoPagamento.getNome_intestatario()%></td>
-					<td><%=metodoPagamento.getCognome_intestatario()%></td>
-					<td><%=metodoPagamento.getIdCarta()%></td>
-			  	</tr>
+			
+				<div id="<%=metodoPagamento.getIdCarta()%>" class="flex-container">
+	    		<!-- <div class="product-info"> -->
+	    			<p>CardId: <span class="idCell"><%=metodoPagamento.getIdCarta()%></span> | cardNumber: <span class=""><%=metodoPagamento.getNumero_carta()%></span>  | ccv: <span class=""><%=metodoPagamento.getCcv()%></span></p>
+	    			<p>Circuit: <span class=""><%=metodoPagamento.getCircuito()%></span> | expiration date: <span class=""><%=metodoPagamento.getScadenza()%></span> | UserId: <span class=""><%=metodoPagamento.getCodiceUtente()%></span></p>
+	    			<p>accountholder's name: <span class="platformCell"><%=metodoPagamento.getNome_intestatario()%></span> | accountholder's surname: <span class=""><%=metodoPagamento.getCognome_intestatario()%></span></p>
+	    		<!-- </div> -->
+    			</div>
 				
 		<%
 					}
@@ -87,57 +76,43 @@
 		%>
 		
 		
-		
+
 		<% 	
 				if(indirizzi != null && !indirizzi.isEmpty()){
 		%>
-		
-				</table>
-				
-				<h2>Addresses</h2>
-				<table>
-					<tr>
-						<th>via</th>
-						<th>cap</th>
-						<th>citta</th>
-						<th>provincia</th>
-						<th>codiceUtente</th>
-						<th>idIndirizzo</th>
-				  	</tr>
-					  <!-- contenuto tabella -->
-				  
+				  		<h2>Delivery addresses</h2>
 					<%
 				  		//scorre l'array indirizzi e stampa gli elementi nella tabella
 				  			it = indirizzi.iterator();
 							while (it.hasNext()) {
 								IndirizzoBean indirizzo = (IndirizzoBean) it.next();
 					%>
-						<tr>
-							<td><%=indirizzo.getVia()%></td>
-							<td><%=indirizzo.getCap()%></td>
-							<td><%=indirizzo.getCitta()%></td>
-							<td><%=indirizzo.getProvincia()%></td>
-							<td><%=indirizzo.getCodice_utente()%></td>
-							<td><%=indirizzo.getIdIndirizzo()%></td>
-					  	</tr>
+					
+						<div id="<%=indirizzo.getIdIndirizzo()%>" class="flex-container">
+				    		<!-- <div class="product-info"> -->
+				    			<p>AddressId: <span class="idCell"><%=indirizzo.getIdIndirizzo()%></span> | Street: <span class=""><%=indirizzo.getVia()%></span>  | cap: <span class=""><%=indirizzo.getCap()%></span></p>
+				    			<p>City: <span class=""><%=indirizzo.getCitta()%></span> | province: <span class=""><%=indirizzo.getProvincia()%></span> | UserId: <span class=""><%=indirizzo.getCodice_utente()%></span></p>
+				    		<!-- </div> -->
+						</div>
 						
 				<%
 							}
 				%>
 				
-					</table>
 		<% 	
 				}
 		%>
 	
 		<fieldset>
 			<legend>Payment method and delivery address</legend>
-			<form action="CartServlet" method="post">
+			<form class="inputFieldContainer inputList" action="CartServlet" method="post">
 				<input type="hidden" name="action" value="actualPurchase">
-				<p>Card ID:		<input type="number" name="cardId" value="Insert card id" required></p>
-				<p>Address ID:	<input type="number" name="AddressId" value="Insert address id" required></p>
+				<p>Card ID:		<input type="number" name="cardId" 		placeholder="Insert card id" 	required></p>
+				<p>Address ID:	<input type="number" name="AddressId" 	placeholder="Insert address id" required></p>
 				<input type="submit" value="Confirm">
 			</form>
 		</fieldset>
+		
+		<jsp:include page="/WEB-INF/footer.jsp" />
 	</body>
 </html>

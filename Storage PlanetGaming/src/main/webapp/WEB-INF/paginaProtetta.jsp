@@ -94,7 +94,7 @@
 			
 			
 			
-			  <h2>Indirizzi di consegna</h2>
+			  <h2>Delivery addresses</h2>
 				<%
 			  		//scorre l'array indirizzi e stampa gli elementi nella tabella
 			  			it = indirizzi.iterator();

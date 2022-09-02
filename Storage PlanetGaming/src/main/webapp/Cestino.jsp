@@ -270,7 +270,50 @@
 				</table>	 --%>
 	
 	
+
+
+
+<!-- tabella pagina descrizione estesa prima delle flex box -->
+<%-- <table>
+		<tr>
+			<th>Code</th>
+			<th>Name</th>
+			<th>Edition</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Date</th>
+			<th>Platform</th>
+			<th>Console</th>
+			<th>Sale</th>
+			<th>Copy</th>
+			<th>Developer</th>
+			<th>Publisher</th>
+			<th>Photo</th>
+	  	</tr>
+	  <!-- contenuto tabella -->
+	  
+			<tr>
+				<td><%=videogioco.getCodice_prodotto()%></td>
+			    <td><%=videogioco.getNome()%></td>
+			    <td><%=videogioco.getEdizione()%></td>
+			    <td><%=videogioco.getDescrizione()%></td>
+			    <td><%=videogioco.getPrezzo_vetrina()%></td>
+			    <td><%=videogioco.getData_uscita()%></td>
+			    <td><%=videogioco.getPiattaforma()%></td>
+			    <td><%=videogioco.getConsole()%></td>
+			    <td><%=videogioco.getSconto()%></td>
+			    <td><%=videogioco.getCopie()%></td>
+			    <td><%=videogioco.getSviluppatore()%></td>
+			    <td><%=videogioco.getPubblisher()%></td>
+			    <!-- uso Jquery per visualizzare l'immagine -->
+			    <td><img src="${pageContext.request.contextPath}/immagini Videogiochi/<%=videogioco.getFoto()%>"></td>
+		  	</tr>
 	
+	</table> --%>
+
+
+
+
 	
 	
 	<!-- vecchio form di modifiy per storage admin, prima che usassi ajax -->
