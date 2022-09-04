@@ -1,8 +1,9 @@
 @charset "ISO-8859-1";
 
-/* .box-of-boxes{
-	 padding-left: 7.4%; 
-} */
+.box-of-boxes{
+	text-align: center;
+
+} 
 
 .box-catalogo{
 	width: 400px;
@@ -14,6 +15,7 @@
 .box-border{
 	border-radius: 10px;
 	color: #91bdb2;
+	margin: 15px;
 }
 
 .bg-image{
@@ -31,6 +33,5 @@
 .videogame-image {
     width: 95%;
     height: auto;
-    padding-left: 2.4%;
     padding-top: 2.4%;
 }

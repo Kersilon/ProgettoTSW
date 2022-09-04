@@ -43,7 +43,6 @@
 	
 	<%
 		if(videogiochi != null && !videogiochi.isEmpty()){
-			System.out.println(request.getServletContext().getRealPath(""));
 	%>
 	<div class="box-of-boxes">
 	<%

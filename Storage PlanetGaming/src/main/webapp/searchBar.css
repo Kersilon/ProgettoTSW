@@ -4,4 +4,5 @@
 	display: flex;
     flex-flow: column wrap;
     text-align: center;
+    margin-bottom: 20px;
 }
