@@ -1,3 +1,5 @@
+/*
+vecchie funzioni usate in paginaOrdini sulle tabelle prima di usare le flexbox
 function hide(){
 	let table;
 	let hideButton;
@@ -30,4 +32,19 @@ function show(){
 	
 	hideButton.style.display = "block";
 	showButton.style.display = "none";
+}*/
+
+function hide(idOrdine){
+	flexBox = document.getElementsByClassName(idOrdine);
+	
+	for(i = 0; i<flexBox.length; i++){
+		flexBox[i].style.display ="none";
+	}
+}
+function show(idOrdine){
+	flexBox = document.getElementsByClassName(idOrdine);
+	
+	for(i = 0; i<flexBox.length; i++){
+		flexBox[i].style.display ="flex";
+	}
 }

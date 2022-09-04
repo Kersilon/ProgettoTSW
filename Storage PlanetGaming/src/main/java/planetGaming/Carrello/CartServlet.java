@@ -37,6 +37,7 @@ public class CartServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
 		String action = request.getParameter("action");
 		
 		if(action != null)
@@ -136,11 +137,9 @@ public class CartServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			
 		}
 		
-		
-		
-		Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
 		if((isAdmin == null) || (!isAdmin.booleanValue())) {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
 			dispatcher.forward(request, response);

@@ -239,4 +239,53 @@ public class VideogiocoDAO implements VideogiocoModel {
 		}
 	}
 
+	@Override
+	public Collection<VideogiocoBean> doRetrieveAllByTitle(String title) throws SQLException {
+		//instauro connessione e realizzazione prepared statement
+ 		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Collection<VideogiocoBean> videogiochi = new LinkedList<VideogiocoBean>();
+		String querySQL = "select * from "+ VideogiocoDAO.TABLE_NAME + " where nome like ?";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(querySQL);
+			preparedStatement.setString(1, "%" + title + "%");
+			//parte centrale del codice
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while (rs.next()) {
+				VideogiocoBean videogioco = new VideogiocoBean();
+
+				videogioco.setCodice_prodotto(rs.getInt("codice_prodotto"));
+				videogioco.setNome(rs.getString("nome"));
+				videogioco.setEdizione(rs.getString("edizione"));
+				videogioco.setDescrizione(rs.getString("descrizione"));
+				videogioco.setPrezzo_vetrina(rs.getDouble("prezzo_vetrina"));
+				videogioco.setData_uscita(rs.getDate("data_uscita"));
+				videogioco.setPiattaforma(rs.getString("piattaforma"));
+				videogioco.setConsole(rs.getString("console"));
+				videogioco.setSconto(rs.getInt("sconto"));
+				videogioco.setCopie(rs.getInt("#copie"));
+				videogioco.setSviluppatore(rs.getString("Sviluppatore"));
+				videogioco.setPubblisher(rs.getString("Pubblisher"));
+				videogioco.setFoto(rs.getString("foto"));
+				
+				videogiochi.add(videogioco);
+			}
+			
+			return videogiochi;
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+	}
+
 }

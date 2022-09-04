@@ -14,16 +14,18 @@
 		dispatcher.forward(request, response);
 	}
 	
-	Collection<?> ordini = (Collection<?>) request.getSession().getAttribute("ordini");
+	Collection<?> ordini = (Collection<?>) request.getSession().getAttribute("paginaOrdini");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="trueStorageStyle.css">
-
 <meta charset="ISO-8859-1">
 <title>Orders</title>
+<link rel="stylesheet" href="productFlexTable.css">
+<link rel="stylesheet" href="inputFieldStyle.css">
+<link rel="stylesheet" href="body.css">
+<link rel="stylesheet" href="trueStorageStyle.css">
 </head>
 <body>
 	<script type="text/javascript" src="HideShowButton.js"></script>
@@ -37,85 +39,56 @@
 		<input type="hidden" name="action" value="OrdersByTotal"> 
 		<input type="submit" value="Orders by total">
 	</form>
-	
-	<h2>Orders</h2>
-	<table>
-		<tr>
-			<td>Order<td>
-		</tr>
-		<tr>
-			<th>id Order</th>
-			<th>id User</th>
-			<th>id paymenth method</th>
-			<th>id Address</th>
-			<th>total price</th>
-			<th>Order date</th>
-			<th>tracking</th>
-	  	</tr>
+
+<%
+	if(ordini != null && !ordini.isEmpty()){
+%>
 	  	
-		  <!-- contenuto tabella -->
+<h2>Orders</h2>
 		  
 		<%
 	  		//scorre l'array ordini e stampa gli elementi nella tabella
 	  		Iterator<?> it = ordini.iterator();
 				while (it.hasNext()) {
 					OrdineBean ordine = (OrdineBean) it.next();
-		%>
-					<tr>
-						<td><%=ordine.getIdOrdine()%></td>
-						<td><%=ordine.getIdUtente()%></td>
-						<td><%=ordine.getIdModalitaPagamento()%></td>
-						<td><%=ordine.getIdIndirizzo()%></td>
-						<td><%=ordine.getPrezzoTotale()%></td>
-						<td><%=ordine.getDataOrdine()%></td>
-						<td><%=ordine.getTracking()%></td>
-						<td>
-							<button type="button" id ="ShowButton" onclick ="show()">Show products</button>
-							<button type="button" id ="HideButton" onclick ="hide()">Hide products</button>
-						</td>
-						<td>
-							<form action="Fattura" method="post">
-								<input type="hidden" name="OrderId" value=<%=ordine.getIdOrdine()%>> 
-								<input type="submit" value="Invoice">
-							</form>
-						</td>
-		  			</tr>
+		%>		
+					<div class="flex-container">
+						<div class="product-buttons">
+							<button onclick="show(<%=ordine.getIdOrdine()%>)">mostra</button>
+							<button onclick="hide(<%=ordine.getIdOrdine()%>)">nascondi</button>
+    					</div>
+		    				<p>idOrder: <span class="idCell"><%=ordine.getIdOrdine()%></span> | idUser: <span class=""><%=ordine.getIdUtente()%></span>  | id paymenth method: <span class=""><%=ordine.getIdModalitaPagamento()%></span></p>
+		    				<p>id Address: <span class=""><%=ordine.getIdIndirizzo()%></span> | total price: <span class=""><%=ordine.getPrezzoTotale()%></span> | Order date: <span class=""><%=ordine.getDataOrdine()%> | tracking: <%=ordine.getTracking()%></span></p>
+	       				</div>
+
+
  		
- 						
-		<tr class ="hide">
-			<th>id product</th>
-			<th>id Order</th>
-			<th>id videogame</th>
-			<th>id videgame's name</th>
-			<th>price</th>
-			<th>discount</th>
-			<th>quantity</th>
-			<th>iva</th>
-			<th>Photo</th>
-	  	</tr>
+
 	<%
+					
 					Iterator<?> itProdotti = ordine.getProdottiOrdine().iterator();
 					while (itProdotti.hasNext()) {
 						prodottoOrdineBean prodottoOrdine = (prodottoOrdineBean) itProdotti.next();
 	%>
-						<tr  class ="hide">
-							<td><%=prodottoOrdine.getIdProdottoOrdine()%></td>
-							<td><%=prodottoOrdine.getIdOrdine()%></td>
-							<td><%=prodottoOrdine.getIdVideogioco()%></td>
-							<td><%=prodottoOrdine.getNomeVideogioco()%></td>
-							<td><%=prodottoOrdine.getPrezzoAcquisto()%></td>
-							<td><%=prodottoOrdine.getScontoAcquisto()%></td>
-							<td><%=prodottoOrdine.getQuantitaAcquisto()%></td>
-							<td><%=prodottoOrdine.getIva()%></td>
-							<td><img src="./immagini Videogiochi/<%=prodottoOrdine.getFoto()%>"></td>
-			  			</tr>
+					<div class="flex-container <%=ordine.getIdOrdine()%>">
+		    			<p>id product:<span class="idCell"><%=prodottoOrdine.getIdProdottoOrdine()%></span> | id Order: <span class=""><%=prodottoOrdine.getIdOrdine()%></span>  | id videogame: <span class=""><%=prodottoOrdine.getIdVideogioco()%></span></p>
+		    			<p>videgame's name: <span class=""><%=prodottoOrdine.getNomeVideogioco()%></span> | price: <span class=""><%=prodottoOrdine.getPrezzoAcquisto()%></span> | discount: <span class=""><%=prodottoOrdine.getScontoAcquisto()%></span></p>
+		    			<p>quantity: <span class=""><%=prodottoOrdine.getQuantitaAcquisto()%></span> | iva: <span class=""><%=prodottoOrdine.getIva()%></span></p>
+		    			<img id="fotoName<%=ordine.getIdOrdine()%>" class="product-image fotoCell" src="./immagini Videogiochi/<%=prodottoOrdine.getFoto()%>">
+	       			</div>
+
 			 <%
 					}
 				}
 			 %>
-			  			
-
-	</table>
+	
+<%
+	}else{
+%>
+	<p>Nothing to see here... yet!</p>
+<%
+	}
+%>
 	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
 </html>

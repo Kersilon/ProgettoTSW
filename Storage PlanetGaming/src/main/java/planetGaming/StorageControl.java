@@ -47,16 +47,30 @@ public class StorageControl extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		VideogiocoModel videogioco = new VideogiocoDAO();
 		
+		Boolean isAdmin;
 		String action = req.getParameter("action");
 		String fileName;
 		FileSupport fs = new FileSupport();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		boolean ajaxFlag = false;
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
 		
 		
 		if(action != null)
 		{
-			if(action.equalsIgnoreCase("insert"))
+			if(action.equalsIgnoreCase("showVideogame")) {
+				try {
+					req.getSession().removeAttribute("videogiochi");
+					req.getSession().setAttribute("videogiochi", videogioco.doRetrieveAllByTitle(req.getParameter("videogameTitle")));
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				
+				
+				
+			}else if(action.equalsIgnoreCase("insert"))
 			{
 				//prendo i valori passati dal form di inserimento e li inserisco in un bean il quale poi viene memorizzato nel DB
 				VideogiocoBean videogiocoBean = new VideogiocoBean();
@@ -274,26 +288,16 @@ public class StorageControl extends HttpServlet {
 				req.setAttribute("paginaVideogioco", videogiocoBean);
 				
 				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/DescrizioneEstesa.jsp");
-				dispatcher.forward(req, resp);
-				
+				dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/DescrizioneEstesa.jsp");
 			}
-		}
-		
-		
-		
-		
-		
-		
-		//a prescindere da come va l'action se non ha già lasciato la servlet
-		try {
-			req.getSession().removeAttribute("videogiochi");
-			
-			//TODO inserire una variabile al posto di ASC
-			req.getSession().setAttribute("videogiochi", videogioco.doRetrieveAll("ASC"));
-			
-		}catch (SQLException e) {
-			System.out.println("Error:" + e.getMessage());
+		}else {
+			try {
+				req.getSession().removeAttribute("videogiochi");
+				req.getSession().setAttribute("videogiochi", videogioco.doRetrieveAll(""));
+				
+			}catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			}
 		}
 
 		
@@ -307,17 +311,14 @@ public class StorageControl extends HttpServlet {
 		
 		//se l'utente è un Admin viene mandato allo storage.jsp che permette di fare le operazioni da admin
 		//altrimenti se non è un admin viene mandato allo storage.jsp per utente semplice
-		Boolean isAdmin = (Boolean) req.getSession().getAttribute("isAdmin");
+		isAdmin = (Boolean) req.getSession().getAttribute("isAdmin");
 		if((isAdmin != null) && isAdmin.booleanValue())
 		{
 			//System.out.println(req.getServletContext().getRealPath(""));
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageAdmin.jsp");
-			dispatcher.forward(req, resp);
-		}else{
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
-			dispatcher.forward(req, resp);
+			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageAdmin.jsp");
 		}
 		
+		dispatcher.forward(req, resp);
 	}
 
 	@Override

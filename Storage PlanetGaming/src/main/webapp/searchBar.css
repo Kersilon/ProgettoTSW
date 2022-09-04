@@ -1,0 +1,7 @@
+@charset "ISO-8859-1";
+
+.searchBar{
+	display: flex;
+    flex-flow: column wrap;
+    text-align: center;
+}

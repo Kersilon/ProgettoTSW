@@ -314,6 +314,76 @@
 
 
 
+
+
+
+<!-- tabella ordini e prodotti ordine in paginaOrdini prima delle flex box -->
+	<%--  			<table>
+		<tr>
+			<td>Order<td>
+		</tr>
+		<tr>
+			<th>id Order</th>
+			<th>id User</th>
+			<th>id paymenth method</th>
+			<th>id Address</th>
+			<th>total price</th>
+			<th>Order date</th>
+			<th>tracking</th>
+	  	</tr>
+					<tr>
+						<td><%=ordine.getIdOrdine()%></td>
+						<td><%=ordine.getIdUtente()%></td>
+						<td><%=ordine.getIdModalitaPagamento()%></td>
+						<td><%=ordine.getIdIndirizzo()%></td>
+						<td><%=ordine.getPrezzoTotale()%></td>
+						<td><%=ordine.getDataOrdine()%></td>
+						<td><%=ordine.getTracking()%></td>
+						<td>
+<!-- 							<button type="button" id ="ShowButton" onclick ="show()">Show products</button>
+							<button type="button" id ="HideButton" onclick ="hide()">Hide products</button> -->
+						</td>
+						<td>
+							<form action="Fattura" method="post">
+								<input type="hidden" name="OrderId" value=<%=ordine.getIdOrdine()%>> 
+								<input type="submit" value="Invoice">
+							</form>
+						</td>
+		  			</tr>
+		  			
+		  			
+		  			
+		  			
+		  			
+		  							
+		<tr class ="hide">
+			<th>id product</th>
+			<th>id Order</th>
+			<th>id videogame</th>
+			<th>id videgame's name</th>
+			<th>price</th>
+			<th>discount</th>
+			<th>quantity</th>
+			<th>iva</th>
+			<th>Photo</th>
+	  	</tr>
+						<tr  class ="hide">
+							<td><%=prodottoOrdine.getIdProdottoOrdine()%></td>
+							<td><%=prodottoOrdine.getIdOrdine()%></td>
+							<td><%=prodottoOrdine.getIdVideogioco()%></td>
+							<td><%=prodottoOrdine.getNomeVideogioco()%></td>
+							<td><%=prodottoOrdine.getPrezzoAcquisto()%></td>
+							<td><%=prodottoOrdine.getScontoAcquisto()%></td>
+							<td><%=prodottoOrdine.getQuantitaAcquisto()%></td>
+							<td><%=prodottoOrdine.getIva()%></td>
+							<td><img src="./immagini Videogiochi/<%=prodottoOrdine.getFoto()%>"></td>
+			  			</tr>
+	</table> --%>
+
+
+
+
+
 	
 	
 	<!-- vecchio form di modifiy per storage admin, prima che usassi ajax -->

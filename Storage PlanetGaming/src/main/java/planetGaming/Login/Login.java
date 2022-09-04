@@ -144,7 +144,9 @@ public class Login extends HttpServlet {
 		}else {
 			//se action è nullo significa che stiamo accedendo alla web app partendo da questa servlet e per tanto si dovrebbe essere rindirizzati
 			//alla homepage
-			response.sendRedirect(request.getContextPath()+"/login-form.jsp");
+//			response.sendRedirect(request.getContextPath()+"/login-form.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login-form.jsp");
+			dispatcher.forward(request, response);
 		}
 /*		
 		if(checkLogin(email, password))

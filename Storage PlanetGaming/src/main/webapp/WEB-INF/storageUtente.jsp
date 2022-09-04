@@ -1,13 +1,7 @@
 <%@ page import="java.util.*" import="planetGaming.Videogioco.*"%>
-
-
 <% 	
 	//verifica se l'oggetto videogiochi è presente nella richiesta altrimenti passa il controllo alla servlet "StorageControl" che lo genera
 	Collection<?> videogiochi = (Collection<?>) request.getSession().getAttribute("videogiochi"); //va bene anche "session" al posto di "request.getSession()"
-	if(videogiochi == null) {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/StorageControl");
-		dispatcher.forward(request, response);	
-	}
 %>
 
 
@@ -22,6 +16,7 @@
 <link rel="stylesheet" href="trueStorageStyle.css">
 <link rel="stylesheet" href="PopUp.css">
 <link rel="stylesheet" href="productBox.css">
+<link rel="stylesheet" href="searchBar.css">
 <link rel="stylesheet" href="storage.css">
 <link rel="stylesheet" href="form.css">
 <link rel="stylesheet" href="body.css">
@@ -33,12 +28,23 @@
 <script type="text/javascript" src="confirmDeleteModifyInsert.js"></script>
 
 <jsp:include page="/WEB-INF/header.jsp" />
-
-
-
-
 	<h1 class="title">Storage</h1> 
 	
+<div class="searchBar">
+	<form class="inputFieldContainer inputList" action="StorageControl" method="get">
+		<input type="hidden" name="action" value="showVideogame">
+		<p><input type="text" name="videogameTitle" placeholder="videogame's title"></p>
+		<input type="submit" value="Search Videogame"/>
+	</form>
+		<form class="inputFieldContainer inputList" action="StorageControl" method="get">
+		<input type="submit" value="Reset"/>
+	</form>
+</div>
+	
+	<%
+		if(videogiochi != null && !videogiochi.isEmpty()){
+			System.out.println(request.getServletContext().getRealPath(""));
+	%>
 	<div class="box-of-boxes">
 	<%
 	  		//scorre l'array videogiochi e stampa gli elementi nella tabella
@@ -65,6 +71,11 @@
 			
 	<%
 				}
+		}else{
+	%>
+		<p>We can't find the game you are searching for!</p>
+	<%
+		}
 	%>
 	
 		<script>highlight();</script>

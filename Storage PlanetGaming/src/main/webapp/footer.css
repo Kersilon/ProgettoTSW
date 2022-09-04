@@ -5,8 +5,57 @@
 	border: solid 1px black;
 	padding: 20px;
 	margin-top: 8%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
 .footer p{
 	color: black;
+}
+
+.info{
+	display: flex;
+	flex-direction: column;
+}
+
+.links{
+	display: flex;
+}
+
+.link{
+	border: 2px solid black;
+    border-radius: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin-right: 5px; 
+}
+
+.twitter{
+	background-color: #1DA1F2;
+	background-image: url(https://expoitalyart.it/wp-content/uploads/2017/11/Twitter-logo-II.jpg);
+}
+
+.instagram{
+	background-color: #1DA1F2;
+	background-image: url(https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_1280.jpg);
+}
+
+.facebook{
+	background-color: #1DA1F2;
+	background-image: url(https://www.facebook.com/images/fb_icon_325x325.png);
+}
+
+.youtube{
+	background-color: white;
+	background-image: url(https://cdn.icon-icons.com/icons2/2699/PNG/512/youtube_logo_icon_168737.png);
+	background-size: 35px;
+}
+
+.twitch{
+	background-color: #1DA1F2;
+	background-image: url(https://i.pinimg.com/736x/67/d6/0b/67d60b975a75d6a80d1defb42d9e4bae.jpg);
 }

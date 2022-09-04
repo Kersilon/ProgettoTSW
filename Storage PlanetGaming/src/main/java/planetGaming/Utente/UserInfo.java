@@ -66,9 +66,7 @@ public class UserInfo extends HttpServlet {
 		utenteDao = new UtenteDAO();
 		RequestDispatcher dispatcher;
 		action = request.getParameter("action");
-					
-					
-					
+
 					if(action != null) {
 						userId = (Integer) request.getSession().getAttribute("userId");
 						
@@ -95,7 +93,7 @@ public class UserInfo extends HttpServlet {
 						
 						
 						
-						if(action.equals("addAddress")) {
+						else if(action.equals("addAddress")) {
 							indirizzoBean = new IndirizzoBean();
 							
 							indirizzoBean.setVia(						request.getParameter("address"));
@@ -114,54 +112,31 @@ public class UserInfo extends HttpServlet {
 			
 						
 						
-						if(action.equals("ordini")) {
-							bufferOrdini = new LinkedList<OrdineBean>();
+						else if(action.equals("ordini")) {
 							ordini = new LinkedList<OrdineBean>();
 							
-							bufferProdottiOrdine = new LinkedList<prodottoOrdineBean>();
-							prodottiOrdine = new LinkedList<prodottoOrdineBean>();
 							
 							ordineDao = new OrdineDAO();
-							ordineBean = new OrdineBean();
 							
-							
-							
-							
+			
 							
 							try {
-								//TODO finire di sistemare il dao ordine
-								bufferOrdini = ordineDao.doRetrieveAll("ASC"); 
+								ordini = ordineDao.doRetrieveAll(userId);
 							} catch (SQLException e) {
+								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							
-							
-							for(OrdineBean ord: bufferOrdini) {
-								if(ord.getIdUtente() == userId) {
-									ordineBean.notSetProdottiOrdine(ord);
-									ordineBean.setProdottiOrdine(new LinkedList<prodottoOrdineBean>());
-									
-									bufferProdottiOrdine = ord.getProdottiOrdine();
-									for(prodottoOrdineBean pOrd: bufferProdottiOrdine) {
-										
-										if(pOrd.getIdOrdine() == ord.getIdOrdine()){
-											ordineBean.getProdottiOrdine().add(pOrd);
-										}
-									}
-									
-									ordini.add(ord);
-								}
-							}
-							
-							request.getSession().setAttribute("ordini", ordini);
+							request.getSession().setAttribute("paginaOrdini", ordini);
 							
 							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaOrdini.jsp");
 							dispatcher.forward(request, response);
 						}
+					
+					
 						
 						
-						
-						if(action.equals("OrdersByTotal")) {
+						else if(action.equals("OrdersByTotal")) {
 							ordini = new LinkedList<OrdineBean>();
 							ordineDao = new OrdineDAO();
 							
@@ -180,7 +155,7 @@ public class UserInfo extends HttpServlet {
 						
 						
 						
-						if(action.equals("modifyUserData")) {
+						else if(action.equals("modifyUserData")) {
 							utenteBean = null;
 							
 							try {
@@ -227,7 +202,7 @@ public class UserInfo extends HttpServlet {
 					
 					//a prescindere da come va l'action se non ha già lasciato la servlet
 					//se non è un admin ma è un utente loggato
-					if(request.getSession().getAttribute("isLogged") != null && (boolean) request.getSession().getAttribute("isLogged")){
+					else if(request.getSession().getAttribute("isLogged") != null && (boolean) request.getSession().getAttribute("isLogged")){
 						userId = (Integer) request.getSession().getAttribute("userId");
 						
 						//TODO inserire questo codice in dei blocchi if dell'action
@@ -299,13 +274,15 @@ public class UserInfo extends HttpServlet {
 						}
 						
 						request.getSession().setAttribute("datiUtente", utenteBean);
+						
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+						dispatcher.forward(request, response);
 				
+					}else {
+						
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
+						dispatcher.forward(request, response);
 					}
-					
-					
-					
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/paginaProtetta.jsp");
-					dispatcher.forward(request, response);
 	}
 
 

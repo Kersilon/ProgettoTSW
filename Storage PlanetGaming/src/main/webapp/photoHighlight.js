@@ -4,11 +4,11 @@ function highlight(){
 	$("img").hover(    
 		// Handler for mouseenter
 		function(){
-			$("img").css("transform", "scale(1.2)");
+			$(this).css("transform", "scale(1.2)");
 		},
 		// Handler for mouseleave
 		function(){
-			$("img").css("transform", "scale(1)");
+			$(this).css("transform", "scale(1)");
 		}
 	);
 }

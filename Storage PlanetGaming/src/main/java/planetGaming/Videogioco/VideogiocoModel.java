@@ -13,5 +13,7 @@ public interface VideogiocoModel {
 	
 	public Collection<VideogiocoBean> doRetrieveAll(String order) throws SQLException;
 	
+	public Collection<VideogiocoBean> doRetrieveAllByTitle(String order) throws SQLException;
+	
 	public void doUpdate(VideogiocoBean videogioco) throws SQLException;
 }
