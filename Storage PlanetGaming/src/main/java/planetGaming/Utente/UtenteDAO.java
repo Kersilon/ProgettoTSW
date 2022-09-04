@@ -38,7 +38,7 @@ public class UtenteDAO implements UtenteModel {
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "INSERT INTO " + UtenteDAO.TABLE_NAME
-				+ "(nome, cognome, dataNascita, nomeUtente, password, email, `#telefono`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				+ "(nome, cognome, dataNascita, nomeUtente, password, email, `#telefono`, codiceFiscale) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
@@ -53,6 +53,7 @@ public class UtenteDAO implements UtenteModel {
 			preparedStatement.setString(5, utente.getPassword());
 			preparedStatement.setString(6, utente.getEmail());
 			preparedStatement.setString(7, utente.getTelefono());
+			preparedStatement.setString(8, utente.getCodiceFiscale());
 			
 			preparedStatement.executeUpdate();
 			connection.commit();
@@ -272,7 +273,7 @@ public class UtenteDAO implements UtenteModel {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
-			String querySQL = "UPDATE " +UtenteDAO.TABLE_NAME+ " SET nome=?, cognome=?, dataNascita=?, nomeUtente=?, password=?, email=?, `#telefono`=?, `#acquisti`=?, AMMINISTRATORE=?, dataRegistrazione=? WHERE codiceUtente=?";
+			String querySQL = "UPDATE " +UtenteDAO.TABLE_NAME+ " SET nome=?, cognome=?, dataNascita=?, nomeUtente=?, password=?, email=?, `#telefono`=?, `#acquisti`=?, AMMINISTRATORE=?, dataRegistrazione=?, codiceFiscale=? WHERE codiceUtente=?";
 			
 			try {
 				connection = ds.getConnection();
@@ -289,7 +290,8 @@ public class UtenteDAO implements UtenteModel {
 				preparedStatement.setInt(8, utente.getAcquisti());
 				preparedStatement.setInt(9, utente.getAMMINISTRATORE());
 				preparedStatement.setDate(10, utente.getDataRegistrazione());
-				preparedStatement.setInt(11, utente.getCodiceUtente());
+				preparedStatement.setString(11, utente.getCodiceFiscale());
+				preparedStatement.setInt(12, utente.getCodiceUtente());
 				
 				preparedStatement.executeUpdate();
 			} finally {
@@ -331,6 +333,7 @@ public class UtenteDAO implements UtenteModel {
 					utente.setEmail(rs.getString("email"));
 					utente.setTelefono(rs.getString("#telefono"));
 					utente.setAcquisti(rs.getInt("#acquisti"));
+					utente.setCodiceFiscale(rs.getString("codiceFiscale"));
 					utente.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
 					utente.setDataRegistrazione(rs.getDate("dataRegistrazione"));
 					
@@ -380,6 +383,7 @@ public class UtenteDAO implements UtenteModel {
 					utente.setEmail(rs.getString("email"));
 					utente.setTelefono(rs.getString("#telefono"));
 					utente.setAcquisti(rs.getInt("#acquisti"));
+					utente.setCodiceFiscale(rs.getString("codiceFiscale"));
 					utente.setAMMINISTRATORE(rs.getBoolean("AMMINISTRATORE"));
 					utente.setDataRegistrazione(rs.getDate("dataRegistrazione"));
 					

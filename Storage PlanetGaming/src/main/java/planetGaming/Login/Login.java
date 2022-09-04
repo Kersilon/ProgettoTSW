@@ -63,6 +63,7 @@ public class Login extends HttpServlet {
 					utenteBean.setNome(			request.getParameter("nome"));
 					utenteBean.setCognome(		request.getParameter("cognome"));
 					utenteBean.setDataNascita(Date.valueOf(request.getParameter("dataNascita")));
+					utenteBean.setCodiceFiscale(		request.getParameter("codiceFiscale"));
 					utenteBean.setNomeUtente(	request.getParameter("nomeUtente"));
 					utenteBean.setPassword(		request.getParameter("password"));
 					utenteBean.setEmail(		request.getParameter("email"));
