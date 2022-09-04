@@ -64,7 +64,7 @@ public class AdministratorPageServlet extends HttpServlet {
 				
 				if(action.equals("ShowOrders")) {
 					try {
-						ordiniUtenti = ordineDao.doRetrieveAll("ASC");
+						ordiniUtenti = ordineDao.doRetrieveAll("");
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
