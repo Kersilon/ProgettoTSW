@@ -21,17 +21,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="inputFieldStyle.css">
-		<link rel="stylesheet" href="body.css">
-		<link rel="stylesheet" href="trueStorageStyle.css">
-		<link rel="stylesheet" href="productFlexTable.css">
+		<link rel="stylesheet" href="css/inputFieldStyle.css">
+		<link rel="stylesheet" href="css/body.css">
+		<link rel="stylesheet" href="css/trueStorageStyle.css">
+		<link rel="stylesheet" href="css/productFlexTable.css">
 	
 	<meta charset="ISO-8859-1">
 	<title>Protected Page</title>
 	</head>
 	<body>
-		<script type="text/javascript" src="ControllaCredenziali.js"></script>
-		<script type="text/javascript" src="HideShowButton.js"></script>
+		<script type="text/javascript" src="javaScript/ControllaCredenziali.js"></script>
+		<script type="text/javascript" src="javaScript/HideShowButton.js"></script>
 		<jsp:include page="/WEB-INF/header.jsp" />
 		
 		<h1>Welcome to the checkout</h1><br>

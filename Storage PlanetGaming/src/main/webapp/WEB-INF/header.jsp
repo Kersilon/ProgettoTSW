@@ -6,9 +6,10 @@
 <meta charset="ISO-8859-1">
 <title></title>
 
-<link rel="stylesheet" href="headerStyle.css">
+<link rel="stylesheet" href="css/headerStyle.css">
 </head>
 	<body>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="header">
 			<ul>
 				<li><a href="login-form.jsp"> <input type="button" value="Login"> </a></li>

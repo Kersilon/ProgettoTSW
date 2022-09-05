@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<link rel="stylesheet" href="body.css">
+		<link rel="stylesheet" href="css/body.css">
 		<style>
 			.errorContainer{
 			    display: flex;

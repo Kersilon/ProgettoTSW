@@ -48,3 +48,25 @@ function show(idOrdine){
 		flexBox[i].style.display ="flex";
 	}
 }
+
+function hideText(){
+	text = $(".hide");
+	
+	for(i=0; i<text.length; i++){
+		text[i].style.display ="none";
+	}
+	
+	$("#hideButton").css("display", "none");
+	$("#showButton").css("display", "block");
+}
+
+function showText(){
+	text = $(".hide");
+	
+	for(i=0; i<text.length; i++){
+		text[i].style.display ="block";	
+	}
+	
+	$("#showButton").css("display", "none");
+	$("#hideButton").css("display", "block");
+}

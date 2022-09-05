@@ -22,13 +22,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Orders</title>
-<link rel="stylesheet" href="productFlexTable.css">
-<link rel="stylesheet" href="inputFieldStyle.css">
-<link rel="stylesheet" href="body.css">
-<link rel="stylesheet" href="trueStorageStyle.css">
+<link rel="stylesheet" href="css/productFlexTable.css">
+<link rel="stylesheet" href="css/inputFieldStyle.css">
+<link rel="stylesheet" href="css/body.css">
+<link rel="stylesheet" href="css/trueStorageStyle.css">
 </head>
 <body>
-	<script type="text/javascript" src="HideShowButton.js"></script>
+	<script type="text/javascript" src="javaScript/HideShowButton.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 	
 	<h1>Welcome to orders page</h1><br>

@@ -1,0 +1,20 @@
+Cosa serve 
+	connection.commit(); nei DAO doSave?
+	private static final long serialVersionUID = 1L; nei Bean che implementano Serializable?
+	synchronized in doRetriveByKey nel DAO dell' Utente?
+	private static final String TABLE_NAME = "utente"; nell'UtenteDAO del login? E perché si usa?
+	dichiarare utenteDao come static in Login.java in storage PlaentGaming?
+	class="file" (in storageAdmin.jsp form per aggiungere un videogioco)?
+Perché 
+	la dimensione massima di un file nel form deve essere 255 (in storageAdmin.jsp form per aggiungere un videogioco nell'input di tipo file delle foto)?
+	si usa enctype = multipart/form-data (in storageAdmin.jsp form per aggiungere un videogioco)?
+	
+differenza tra  
+	"request.getAttribute(""); (storageUtente.jsp)"
+	
+	"req.getSession().getAttribute(""); (servlet StorageControl.java)"
+					
+	"req.getParameter(""); (servlet Login.java)"
+		
+per andare da una jsp ad un'altra se non si passa per una servlet(quindi dal controller) è rispettato il modello MVC?
+(per passare da storageAdmin/Utente.jsp a DescrizioneEstesa.jsp passo per la servlet StorageControl ma mi chiedevo se si potesse fare in un altro modo)

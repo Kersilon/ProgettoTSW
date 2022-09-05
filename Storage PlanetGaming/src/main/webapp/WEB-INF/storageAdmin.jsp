@@ -29,19 +29,19 @@
 	<title>Storage Admin</title>
 	
 	<!-- <link rel="stylesheet" href="trueStorageStyle.css"> -->
-	<link rel="stylesheet" href="Table.css">
-	<link rel="stylesheet" href="PopUp.css">
-	<link rel="stylesheet" href="productBox.css">
-	<link rel="stylesheet" href="productFlexTable.css">
-	<link rel="stylesheet" href="inputFieldStyle.css">
-	<link rel="stylesheet" href="body.css">
-	<link rel="stylesheet" href="trueStorageStyle.css">
+	<link rel="stylesheet" href="css/Table.css">
+	<link rel="stylesheet" href="css/PopUp.css">
+	<link rel="stylesheet" href="css/productBox.css">
+	<link rel="stylesheet" href="css/productFlexTable.css">
+	<link rel="stylesheet" href="css/inputFieldStyle.css">
+	<link rel="stylesheet" href="css/body.css">
+	<link rel="stylesheet" href="css/trueStorageStyle.css">
 </head>
 <body>
-<script type="text/javascript" src="ControllaCredenziali.js"></script>
+<script type="text/javascript" src="javaScript/ControllaCredenziali.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="photoHighlight.js"></script>
-<script type="text/javascript" src="confirmDeleteModifyInsert.js"></script>
+<script type="text/javascript" src="javaScript/photoHighlight.js"></script>
+<script type="text/javascript" src="javaScript/confirmDeleteModifyInsert.js"></script>
 
 
 <jsp:include page="/WEB-INF/header.jsp" />

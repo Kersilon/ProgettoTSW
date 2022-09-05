@@ -208,28 +208,28 @@ public class UtenteDAO implements UtenteModel {
 					connection = ds.getConnection();
 					
 					if(!fiscalCode.isBlank()) {
-						selectSQL = selectSQL.concat(" where codiceFiscale = ?");
+						selectSQL = selectSQL.concat(" where codiceFiscale like ?");
 						preparedStatement = connection.prepareStatement(selectSQL);
-						preparedStatement.setString(1, fiscalCode);
+						preparedStatement.setString(1, "%" + fiscalCode + "%");
 					}
 					
 					else if(!name.isBlank() && !surname.isBlank()) {
-						selectSQL = selectSQL.concat(" where nome = ? && cognome = ?");
+						selectSQL = selectSQL.concat(" where nome like ? && cognome like ?");
 						preparedStatement = connection.prepareStatement(selectSQL);
-						preparedStatement.setString(1, name);
-						preparedStatement.setString(2, surname);
+						preparedStatement.setString(1, "%" + name + "%");
+						preparedStatement.setString(2, "%" + surname + "%");
 					}
 					
 					else if(!name.isBlank()) {
-						selectSQL = selectSQL.concat(" where nome = ?");
+						selectSQL = selectSQL.concat(" where nome like ?");
 						preparedStatement = connection.prepareStatement(selectSQL);
-						preparedStatement.setString(1, name);
+						preparedStatement.setString(1, "%" + name + "%");
 					}
 					
 					else if(!surname.isBlank()) {			
-						selectSQL = selectSQL.concat(" where cognome = ?");
+						selectSQL = selectSQL.concat(" where cognome like ?");
 						preparedStatement = connection.prepareStatement(selectSQL);
-						preparedStatement.setString(1, surname);
+						preparedStatement.setString(1, "%" + surname + "%");
 					}
 					
 					else {
@@ -361,7 +361,7 @@ public class UtenteDAO implements UtenteModel {
 			
 			Collection<UtenteBean> utenti = new LinkedList<UtenteBean>();
 			
-			String querySQL = "select * from "+ UtenteDAO.TABLE_NAME+" where codiceUtente = ?";;
+			String querySQL = "select * from "+ UtenteDAO.TABLE_NAME+" where codiceUtente = ?";
 			
 			try {
 				connection = ds.getConnection();

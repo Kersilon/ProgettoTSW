@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-	<link rel="stylesheet" href="inputFieldStyle.css">
-	<link rel="stylesheet" href="body.css">
-	<link rel="stylesheet" href="trueStorageStyle.css">
+	<link rel="stylesheet" href="css/inputFieldStyle.css">
+	<link rel="stylesheet" href="css/body.css">
+	<link rel="stylesheet" href="css/trueStorageStyle.css">
 
 <!--   
 	il collegamento alle pagine javaScript esterne non funziona se questa si trova in web inf
@@ -16,9 +16,8 @@
 <title>Login</title>
 </head>
 <body>
-<script type="text/javascript" src="ControllaCredenziali.js"></script>
+<script type="text/javascript" src="javaScript/ControllaCredenziali.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="Test.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 
 	<form id="loginForm" class="inputFieldContainer inputList" action="LoginStorage" method="post">

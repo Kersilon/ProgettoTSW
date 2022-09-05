@@ -23,22 +23,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="trueStorageStyle.css">
-<link rel="stylesheet" href="inputFieldStyle.css">
-<link rel="stylesheet" href="body.css">
-<link rel="stylesheet" href="trueStorageStyle.css">
-<link rel="stylesheet" href="productFlexTable.css">
+<link rel="stylesheet" href="css/trueStorageStyle.css">
+<link rel="stylesheet" href="css/inputFieldStyle.css">
+<link rel="stylesheet" href="css/body.css">
+<link rel="stylesheet" href="css/trueStorageStyle.css">
+<link rel="stylesheet" href="css/productFlexTable.css">
 
 <meta charset="ISO-8859-1">
 <title>Protected Page</title>
 </head>
 <body>
-	<script type="text/javascript" src="ControllaCredenziali.js"></script>
-	<script type="text/javascript" src="HideShowButton.js"></script>
+	<script type="text/javascript" src="javaScript/ControllaCredenziali.js"></script>
+	<script type="text/javascript" src="javaScript/HideShowButton.js"></script>
 	<jsp:include page="/WEB-INF/header.jsp" />
 	
 	<h1>Welcome to the user page</h1>
-	<p>Here you can add, delete, payment methods and delivery addresses</p>
+	<p>Here you can add and delete, payment methods and delivery addresses. And modify some personal data</p>
 	
 	<form class="inputFieldContainer inputList" action="UserInfo" method="get">
 		<input type="hidden" name="action" value="ordini"> 
@@ -126,10 +126,10 @@
 			<h2>User's data</h2>
 		    <div class="flex-container">
     		<!-- <div class="product-info"> -->
-    			<p>UserId: <span class="idCell"><%=datiUtente.getCodiceUtente()%></span> | Name: <span class="nameCell"><%=datiUtente.getNome()%></span>  | Surname: <span class="editionCell"><%=datiUtente.getCognome()%></span></p>
-    			<p>Birth date: <span class="descriptionCell"><%=datiUtente.getDataNascita()%></span> | Username: <span class="priceCell"><%=datiUtente.getNomeUtente()%></span></p>
-    			<p><button type="button" id ="ShowButton" onclick ="show()">Show</button><button type="button" id ="HideButton" onclick ="hide()">Hide</button> Password: <span class="hide"><%=datiUtente.getPassword()%></span></p>
-    			<p>Email: <span class="platformCell"><%=datiUtente.getEmail()%></span> | Phone number: <span class="consoleCell"><%=datiUtente.getTelefono()%></span> | Admin?: <span class="scontoCell"><%=datiUtente.isAMMINISTRATORE()%></span></p>
+    			<p>UserId: <span class="idCell"><%=datiUtente.getCodiceUtente()%></span> | Name: <span class="nameCell"><%=datiUtente.getNome()%></span>  | Surname: <span class=""><%=datiUtente.getCognome()%></span></p>
+    			<p>Birth date: <span class=""><%=datiUtente.getDataNascita()%></span> | Username: <span class=""><%=datiUtente.getNomeUtente()%></span> | Fiscal code: <span class=""><%=datiUtente.getCodiceFiscale()%></span></p>
+    			<p><button type="button" id="showButton" onclick ="showText()">Show</button><button type="button" id="hideButton" onclick ="hideText()">Hide</button> Password: <span class="hide"><%=datiUtente.getPassword()%></span></p>
+    			<p>Email: <span class=""><%=datiUtente.getEmail()%></span> | Phone number: <span class=""><%=datiUtente.getTelefono()%></span> | Admin?: <span class=""><%=datiUtente.isAMMINISTRATORE()%></span></p>
     		<!-- </div> -->
     	</div>
     			

@@ -19,10 +19,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="inputFieldStyle.css">
-<link rel="stylesheet" href="body.css">
-<link rel="stylesheet" href="trueStorageStyle.css">
-<link rel="stylesheet" href="productFlexTable.css">
+<link rel="stylesheet" href="css/inputFieldStyle.css">
+<link rel="stylesheet" href="css/body.css">
+<link rel="stylesheet" href="css/trueStorageStyle.css">
+<link rel="stylesheet" href="css/productFlexTable.css">
 
 <meta charset="ISO-8859-1">
 <title>Administrator Page</title>
