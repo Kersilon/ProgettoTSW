@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="css/searchBar.css">
 <link rel="stylesheet" href="css/storage.css">
 <link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/PopUp.css">
 <link rel="stylesheet" href="css/body.css">
 </head>
 <body>
@@ -26,9 +27,14 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="javaScript/photoHighlight.js"></script>
 <script type="text/javascript" src="javaScript/confirmDeleteModifyInsert.js"></script>
+<script type="text/javascript" src="javaScript/popup.js"></script>
 
 <jsp:include page="/WEB-INF/header.jsp" />
 	<h1 class="title">Storage</h1> 
+	
+	<div class="popupContainer">
+	  <span class="popupText" id="popup">Videogame added to the cart</span>
+	</div>
 	
 <div class="searchBar">
 	<form class="inputFieldContainer inputList" action="StorageControl" method="get">
@@ -61,8 +67,9 @@
 			<input type="submit" value="<%=videogioco.getNome()%>">
 		</form>
 		
-		<form class="product-form" action="CartServlet" method="post">
+		<form class="product-form addToCartForm" action="CartServlet" method="post">
 			<input type="hidden" name="action" value=addToCart>
+			<input type="hidden" name="ajax" value=true>
 			<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
 			<input type="submit" value="Add to cart">
 		</form>
@@ -76,8 +83,8 @@
 	<%
 		}
 	%>
-	
 		<script>highlight();</script>
+		<script>activatePopup();</script>
 	</div>
 
 

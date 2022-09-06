@@ -74,6 +74,11 @@ public class CartServlet extends HttpServlet {
 				if(!added) {
 					cart.add(prodotto);
 				}
+				
+				
+				if(request.getParameter("ajax").equalsIgnoreCase("true")) {
+					return;
+				}
 			}
 			
 			
