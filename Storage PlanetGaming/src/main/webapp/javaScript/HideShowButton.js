@@ -56,8 +56,8 @@ function hideText(){
 		text[i].style.display ="none";
 	}
 	
-	$("#hideButton").css("display", "none");
-	$("#showButton").css("display", "block");
+	$("#hideButton").hide();
+	$("#showButton").show();
 }
 
 function showText(){
@@ -67,6 +67,6 @@ function showText(){
 		text[i].style.display ="block";	
 	}
 	
-	$("#showButton").css("display", "none");
-	$("#hideButton").css("display", "block");
+	$("#showButton").hide();
+	$("#hideButton").show();
 }

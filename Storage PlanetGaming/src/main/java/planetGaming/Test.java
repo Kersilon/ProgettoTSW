@@ -14,6 +14,7 @@ import planetGaming.Ordine.OrdineBean;
 import planetGaming.Ordine.OrdineDAO;
 import planetGaming.Ordine.prodottoOrdineBean;
 import planetGaming.Ordine.prodottoOrdineDAO;
+import planetGaming.Videogioco.VideogiocoDAO;
 
 /**
  * Servlet implementation class Test
@@ -34,27 +35,28 @@ public class Test extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		OrdineDAO daoTest = new OrdineDAO();
-		Date min = Date.valueOf("2021-01-01");
-		Date max = Date.valueOf("2022-01-01");
+//		 String text = "some other text";
+//		 response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+//		 response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+//		 response.getWriter().write(text);       // Write response body.
 		
-		try {
-			for(OrdineBean bean : daoTest.doRetrieveAll(min, max)) {
-				System.out.println(bean.getIdOrdine());
-				System.out.println(bean.getDataOrdine());
+//		String action;
+//		
+//		action = request.getParameter("action");
+//		
+//		if(action.equalsIgnoreCase("ajax")) { 
+			VideogiocoDAO videogioco = new VideogiocoDAO();
+			
+			try {
+				request.getSession().removeAttribute("videogiochi");
+				request.getSession().setAttribute("videogiochi", videogioco.doRetrieveAll(""));
+				
+			}catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
 			}
-		} catch (SQLException e) {
 
-			e.printStackTrace();
+
 		}
-		*/
-		 String text = "some text";
-
-		 response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-		 response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-		 response.getWriter().write(text);       // Write response body.
-	}
 		
 
 	/**

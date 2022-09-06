@@ -4,7 +4,7 @@
 <%@ page import="java.util.*" import="planetGaming.Videogioco.*"%>
     
 <%
-		VideogiocoBean videogioco = (VideogiocoBean) request.getAttribute("paginaVideogioco");
+		VideogiocoBean videogioco = (VideogiocoBean) request.getAttribute("videogiocoInserito");
 %>
 <!DOCTYPE html>
 <html>

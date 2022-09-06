@@ -80,8 +80,8 @@
 					<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
 					<input type="submit" value="Add to cart">
 				</form>
-				
     		</div>
+    		
     		<div class="product-info">
     			<p>ID:<span class="idCell"><%=videogioco.getCodice_prodotto()%></span> | Name: <span class="nameCell"><%=videogioco.getNome()%></span>  | Edition: <span class="editionCell"><%=videogioco.getEdizione()%></span></p>
     			<p>Description: <span class="descriptionCell"><%=videogioco.getDescrizione()%></span> | Price: <span class="priceCell"><%=videogioco.getPrezzo_vetrina()%></span> | Date: <span class="dateCell"><%=videogioco.getData_uscita()%></span></p>
@@ -127,11 +127,11 @@
 			<!-- mi sembra eccessivo rendere la foto un campo required -->
 			Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"><br>
 					
-			<input type="submit" name="submit" value="Submit" />
+			<input type="submit" name="submit" value="Submit" >
 			<input type="reset" value="Reset">
 		</fieldset>
 	</form>
-	<script>insertOnSubmit("#insertForm", checkInsert);</script>
+	<script>checkInsert("#insertForm");</script>
 	
 	
 	

@@ -53,6 +53,7 @@ public class StorageControl extends HttpServlet {
 		FileSupport fs = new FileSupport();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		boolean ajaxFlag = false;
+		boolean searchedFlag = false;
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
 		
 		
@@ -67,7 +68,7 @@ public class StorageControl extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				
+				searchedFlag = true;
 				
 				
 			}else if(action.equalsIgnoreCase("insert"))
@@ -110,13 +111,15 @@ public class StorageControl extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				String json = null;
-				json = ObjectToJson(videogiocoBean);
+//				String json = null;
+//				json = ObjectToJson(videogiocoBean);
 					
-				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
-				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?	
-				resp.getWriter().write(json);								// Write response body.
-				ajaxFlag = true;
+//				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
+//				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?	
+//				resp.getWriter().write(json);								// Write response body.
+//				req.getSession().removeAttribute("videogiocoInserito");
+//				req.getSession().setAttribute("videogiocoInserito", videogiocoBean);
+//				ajaxFlag = true;
 			
 				
 				
@@ -290,11 +293,14 @@ public class StorageControl extends HttpServlet {
 				
 				dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/DescrizioneEstesa.jsp");
 			}
-		}else {
+		}
+		
+		
+		if(!searchedFlag) {
 			try {
 				req.getSession().removeAttribute("videogiochi");
 				req.getSession().setAttribute("videogiochi", videogioco.doRetrieveAll(""));
-				
+					
 			}catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
 			}
