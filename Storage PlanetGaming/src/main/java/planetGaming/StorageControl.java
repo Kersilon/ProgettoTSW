@@ -87,7 +87,6 @@ public class StorageControl extends HttpServlet {
 				try {
 					videogiocoBean.setData_uscita(									new java.sql.Date(formatter.parse(req.getParameter("data")).getTime()));
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				

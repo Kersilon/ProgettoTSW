@@ -104,34 +104,33 @@
 			<legend>Insert</legend>
 			<input type="hidden" name="action" value="insert"> 
 			
-			Name: 			<input name="nome" 					type="text" 	maxlength="20" required placeholder="enter name"><br> 
-			Edition: 		<input name="edizione" 				type="text" 	maxlength="20" required placeholder="enter name"><br> 
-			Description: 	<input name="descrizione" 			type="text" 	maxlength="60" required placeholder="enter name"><br> 
-			Price: 			<input name="prezzo_vetrina" 		type="text" 	maxlength="20" required placeholder="enter name"><br>
+			<p>Name: 			<input name="nome" 					type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Edition: 		<input name="edizione" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Description: 	<input name="descrizione" 			type="text" 	maxlength="60" required placeholder="enter name" value="a"> </p>
+			<p>Price: 			<input id="prezzo" name="prezzo_vetrina" 		type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
 			<p class="ErrorParagraph"></p>
 			
-			Date: 			<input name="data" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY" value=2020-08-20><br>
+			<p>Date: 			<input name="data" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY" value=2020-08-20> </p>
 			<p class="ErrorParagraph"></p>
 			
-			Platform: 		<input name="piattaforma" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
-			Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
-			Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
-			<p class="ErrorParagraph"></p>
-			
-			Copy: 			<input name="#copie" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
+			<p>Platform: 		<input name="piattaforma" 			type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
 			<p  class="ErrorParagraph"></p>
 			
-			Developer: 		<input name="Sviluppatore" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
-			Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
+			<p>Copy: 			<input name="#copie" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p  class="ErrorParagraph"></p>
+			
+			<p>Developer: 		<input name="Sviluppatore" 			type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
 	
 			<!-- mi sembra eccessivo rendere la foto un campo required -->
-			Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"><br>
+			<p>Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"> </p>
 					
-			<input type="submit" name="submit" value="Submit" >
-			<input type="reset" value="Reset">
+			<button type="button" id="insertButton" onclick="checkInsert('#insertForm')">Insert</button>
+			<button type="reset" value="Reset">Reset</button>
 		</fieldset>
 	</form>
-	<script>checkInsert("#insertForm");</script>
 	
 	
 	
@@ -141,7 +140,7 @@
 			<legend>Delete</legend>
 					<input  name="action" 			type="hidden" 	value="delete">
 			
-			Code:	<input	name="codice_prodotto" 	type="text" 					maxlength="20" required placeholder="enter code"><br>
+			Code:	<input	name="codice_prodotto" 	type="text" 					maxlength="20" required placeholder="enter code">
 			<p class="ErrorParagraph"></p>
 			
 			<!--  <button type="button" id ="deleteButton" onclick ="checkIdToDelete('deleteForm')">delete</button>-->
@@ -162,10 +161,10 @@
 					<legend>modify Name</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Name: 			<input name="nome" 				type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					Name: 			<input name="nome" 				type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -181,10 +180,10 @@
 					<legend>modify Edition</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Edition: 		<input name="edizione" 			type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					Edition: 		<input name="edizione" 			type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -200,10 +199,10 @@
 					<legend>modify Description</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Description: 	<input name="descrizione" 		type="text" 	maxlength="60"	required	placeholder="enter description"	><br> 
+					Description: 	<input name="descrizione" 		type="text" 	maxlength="60"	required	placeholder="enter description"	> 
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -219,10 +218,10 @@
 					<legend>modify Price</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="text" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="text" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Price: 			<input name="prezzo_vetrina"	type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					Price: 			<input name="prezzo_vetrina"	type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modify">modify</button>
@@ -238,10 +237,10 @@
 					<legend>modify Date</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Date: 			<input name="data" 				type="date" 	maxlength="20"	required	placeholder="DD/MM/YYYY or DD-MM-YYYY"><br>
+					Date: 			<input name="data" 				type="date" 	maxlength="20"	required	placeholder="DD/MM/YYYY or DD-MM-YYYY">
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modify">modify</button>
@@ -257,10 +256,10 @@
 					<legend>modify Platform</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Platform: 		<input name="piattaforma" 		type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					Platform: 		<input name="piattaforma" 		type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -276,10 +275,10 @@
 					<legend>modify Console</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
+					Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name">
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -295,10 +294,10 @@
 					<legend>modify Sale</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name"><br>
+					Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name">
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -314,10 +313,10 @@
 					<legend>modify Copy</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Copy:			<input name="#copie" 			type="text" 	maxlength="20"	required	placeholder="enter name"		><br>
+					Copy:			<input name="#copie" 			type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -333,10 +332,10 @@
 					<legend>modify Developer</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Developer: 		<input name="Sviluppatore" 		type="text" 	maxlength="20" 		required	placeholder="enter name"		><br>
+					Developer: 		<input name="Sviluppatore" 		type="text" 	maxlength="20" 		required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -352,10 +351,10 @@
 					<legend>modify Publisher</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name"><br>
+					Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name">
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>
@@ -371,10 +370,10 @@
 					<legend>modify Photo</legend>
 					<input type="hidden" name="action" value="modifyPhoto"> 
 					
-					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			><br>
+					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Photo: 			<input name="foto"	id="file"			type="file"    	maxlength="255"		class="file"	required><br>
+					Photo: 			<input name="foto"	id="file"			type="file"    	maxlength="255"		class="file"	required>
 					<p class="ErrorParagraph"></p>
 									
 					<button type="submit" value="modifica">modify</button>

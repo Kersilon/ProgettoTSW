@@ -4,11 +4,9 @@
 			}
 			
 			function activatePopup(){
-				alert("entrato");
 				$(".addToCartForm").on('submit', function(e) {
 		
 			    e.preventDefault(); // avoid to execute the actual submit of the form.
-					alert("prevenuto");
 			    var form = $(this);
 			    var actionUrl = form.attr('action');	    
 

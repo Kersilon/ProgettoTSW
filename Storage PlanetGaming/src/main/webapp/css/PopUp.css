@@ -7,7 +7,6 @@
   position: sticky;
   position: fixed;
   top: 10%;
-  
 }
 
 /* The actual popup */
@@ -27,4 +26,5 @@
   padding: 8px 0;
   z-index: 2;
   text-align: center;
+  border: 1px solid #91bdb2;
 }
