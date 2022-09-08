@@ -32,9 +32,15 @@
 <jsp:include page="/WEB-INF/header.jsp" />
 	<h1 class="title">Storage</h1> 
 	
-	<div class="popupContainer">
-	  <span class="popupText" id="popup">Videogame added to the cart</span>
-	</div>
+	
+<script>
+$(document).ready(function(){
+	takePopups();
+});
+</script>	
+<div id="sharedPopupsContainer">
+</div>
+	
 	
 <div class="searchBar">
 	<form class="inputFieldContainer inputList" action="StorageControl" method="get">

@@ -4,38 +4,48 @@
 <%@ page import="java.util.*" import="planetGaming.Videogioco.*"%>
     
 <%
-		VideogiocoBean videogioco = (VideogiocoBean) request.getAttribute("videogiocoInserito");
+		VideogiocoBean videogioco = (VideogiocoBean) request.getAttribute("paginaVideogioco");
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/body.css">
-<link rel="stylesheet" href="css/trueStorageStyle.css">
-<link rel="stylesheet" href="css/productFlexTable.css">
-
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<link rel="stylesheet" href="css/body.css">
+	<link rel="stylesheet" href="css/trueStorageStyle.css">
+	<link rel="stylesheet" href="css/productFlexTable.css">
+	<link rel="stylesheet" href="css/PopUp.css">
+	
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
 </head>
 <body>
+	<script type="text/javascript" src="javaScript/popup.js"></script>
+	<script type="text/javascript" src="javaScript/photoHighlight.js"></script>
+
 	<jsp:include page="/WEB-INF/header.jsp" />
 	
+	
+	<script>
+	$(document).ready(function(){
+		takePopups();
+	});
+	</script>	
+		<div id="sharedPopupsContainer">
+	</div>
+	
+	
 	<form action="StorageControl" method="post">
-		<input type="submit" value="Previous page"/>
+		<input type="submit" value="Previous page">
 	</form>
 
 		    <div id="<%=videogioco.getCodice_prodotto()%>" class="flex-container">
     		<div class="product-buttons">
-		 		<form class="product-form" action="StorageControl" method="post">
-					<input type="hidden" name="action" value="ExtendedDescription"> 
-					<input type="hidden" name="codice_prodotto" value=<%=videogioco.getCodice_prodotto()%>> 
-					<input type="submit" value="<%=videogioco.getNome()%>">
-				</form>
 				
-			<form class="product-form" action="CartServlet" method="post">
-				<input type="hidden" name="action" value=addToCart>
-				<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
-				<input type="submit" value="Add to cart">
-			</form>
+				<form class="product-form addToCartForm" action="CartServlet" method="post">
+					<input type="hidden" name="action" value=addToCart>
+					<input type="hidden" name="ajax" value=true>
+					<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
+					<input type="submit" value="Add to cart">
+				</form>
 			
     		</div>
 	    		<div class="product-info">
@@ -47,6 +57,9 @@
 	    		
 	    		<img id="fotoName<%=videogioco.getCodice_prodotto()%>" class="product-image fotoCell" src="./immagini Videogiochi/<%=videogioco.getFoto()%>">
     		</div>
+    		
+    		<script>highlight();</script>
+			<script>activatePopup();</script>
 	
 	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>

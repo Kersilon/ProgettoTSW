@@ -7,14 +7,20 @@
 	<link rel="stylesheet" href="css/inputFieldStyle.css">
 	<link rel="stylesheet" href="css/body.css">
 	<link rel="stylesheet" href="css/trueStorageStyle.css">
+	<link rel="stylesheet" href="css/PopUp.css">
 
 <title>Insert title here</title>
 </head>
 <body>
 <script type="text/javascript" src="javaScript/ControllaCredenziali.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="javaScript/popup.js"></script>
+
 	<jsp:include page="/WEB-INF/header.jsp" />
 
+	<div class="popupContainer">
+		<span class="popupText" id="popup">Email already used</span>
+	</div>
 
 	<form id="registrationForm" action="LoginStorage" method="post">
 		<fieldset>
@@ -38,6 +44,8 @@
 			
 		</fieldset>
 	</form>
+	
+	<script></script>
 
 
 	<script>	
@@ -48,7 +56,7 @@
 				    var form = $(this);
 				    var actionUrl = form.attr('action');
 				    
-				    if(checkCredentialsRegistration(form.attr("id"))){
+				    if(checkCredentialsRegistration("#" + form.attr("id"))){
 					    $.ajax({
 					        type: "POST",
 					        url: actionUrl,
@@ -56,7 +64,7 @@
 					        success: function(data)
 					        {
 					          if(data === "Email already used"){
-					          	alert(data);
+					        	  popup("#popup");
 					          }else{
 					        	  $(location).attr('href', data);
 					          }

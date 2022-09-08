@@ -26,8 +26,11 @@ function checkPassword(form, indexError){
 	let regex;
 	
 	regex = /(?=.*[0-9])/;	//deve esserci almeno un numero
-	password = document.forms[form]["password"].value;
-	passwordError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
+	
+/*		password = document.forms[form]["password"].value;*/
+		password = $(form + " input[name = password]").val();
+/*		passwordError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);*/
+		passwordError = $(form + " .ErrorParagraph")[indexError];
 
 	if(regex.test(password)){
 		passwordError.innerHTML = "";
@@ -45,7 +48,7 @@ function checkDate(form, indexError){
 	let regex;
 	
 	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;	//data nel formato aaaa-mm-dd va bene sia "-" o "/" per separare i caratteri
-
+	
 /*	birthDate = document.forms[form]["data"].value;*/
 	birthDate = $(form + " input[name = data]").val();
 	
@@ -67,8 +70,10 @@ function checkPhone(form, indexError){
 	let regex;
 	
 	regex = /^(\+)?([ 0-9]){10,16}$/; //si possono inserire prefissi come "+39"
-	phone = document.forms[form]["telefono"].value;
-	phoneError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
+/*	phone = document.forms[form]["telefono"].value;
+	phoneError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);*/
+	phone = $(form + " input[name = telefono]").val();
+	phoneError = $(form + " .ErrorParagraph")[indexError];
 	
 	if(regex.test(phone)){
 		phoneError.innerHTML = "";

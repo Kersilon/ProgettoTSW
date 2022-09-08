@@ -1,3 +1,30 @@
+function takeConfirmModify(){
+	const xhttp = new XMLHttpRequest();
+	
+	xhttp.onload = function(){
+		divContainer = $(".areYouSure");
+		
+		divContainer.html(this.responseText);
+	}
+	
+	xhttp.open("GET", "confirmModify.html");
+	xhttp.send();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //rimuove un videogioco e aggiorna in tempo reale la tabella di videogiochi andando a rimuovere la riga che mostrava tale videogiocho
 //per capire quale righa della tabella deve eliminare queste hanno come id, l'id del videogioco che mostrano
 //quindi tramite quest'ultimo otteniamo la riga del videogioco eliminato
@@ -12,9 +39,9 @@ function deleteOnSubmit(){
 	    var idProduct = $("#" + form.attr("id") + " " + "input[name=codice_prodotto]").val();
 	    
 	    if(checkIdToDelete(form.attr("id"))){
-	    	let bar = confirm('Are you sure you want to delete this videogame?');
-	    	
-	    	if(bar){
+	    	let check = $("#deleteForm input[name=confirmModify]").serialize();
+		    if(check != null && check[check.length - 1] == 'y'){
+			
 	    		$.ajax({
 			        type: "POST",
 			        url: actionUrl,
@@ -23,7 +50,6 @@ function deleteOnSubmit(){
 			        {
 				        //console.log(idProduct);			for debugging
 				        if(data === "successful deletion"){
-				       		//alert(data);
 				          	
 				        	const tableRow = document.getElementById(idProduct);
 				        	
@@ -33,10 +59,7 @@ function deleteOnSubmit(){
 				        		$("#popup").fadeTo(0100, 1);
 				        		$("#popup").fadeOut(3000);
 				        	}
-				    	}else{
-			        		alert("Error");
-			        		alert(data);
-			        	}
+				    	}
 			    	}
 			    });
 	    		
@@ -59,9 +82,11 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 	    
 	    if(checkIdToDelete(form.attr("id"))){
 		    if(checkFunction == null || checkFunction(form.attr("id"), indexError)){
-		    	let bar = confirm('Are you sure you want to modify this parameter?');
+/*		    	let bar = confirm('Are you sure you want to modify this parameter?');
 		    	
-		    	if(bar){
+		    	if(bar){*/
+		    	let check = $(formId + " input[name=confirmModify]").serialize();
+		    	if(check != null && check[check.length - 1] == 'y'){
 			
 					//per le immagini
 				 	var data = new FormData($(formId)[0]);

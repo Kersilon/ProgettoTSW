@@ -276,6 +276,7 @@ public class StorageControl extends HttpServlet {
 				
 				
 			}else if(action.equalsIgnoreCase("ExtendedDescription")) {
+				System.out.println("entrato ExtendedDescription");
 				
 				VideogiocoBean videogiocoBean = new VideogiocoBean();
 				
@@ -291,6 +292,7 @@ public class StorageControl extends HttpServlet {
 				
 				
 				dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/DescrizioneEstesa.jsp");
+				dispatcher.forward(req, resp);
 			}
 		}
 		

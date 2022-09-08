@@ -1,3 +1,18 @@
+function takePopups(){
+	const xhttp = new XMLHttpRequest();
+	
+	xhttp.onload = function(){
+		divContainer = $("#sharedPopupsContainer");
+		
+		divContainer.html(this.responseText);
+	}
+	
+	xhttp.open("GET", "popups.html");
+	xhttp.send();
+}
+
+
+
 			function popup(idPopup){
 				$(idPopup).fadeTo(0100, 1);
 				$(idPopup).fadeOut(3000);
@@ -17,7 +32,7 @@
 			        success: function(data) // success means if the servlet has generated an output
 			        {
 				        
-				        		popup("#popup");
+				        		popup("#popupAddToCart");
 				    }
 			    	
 			    });

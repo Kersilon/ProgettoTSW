@@ -42,21 +42,32 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="javaScript/photoHighlight.js"></script>
 <script type="text/javascript" src="javaScript/confirmDeleteModifyInsert.js"></script>
+<script type="text/javascript" src="javaScript/popup.js"></script>
 
 
 <jsp:include page="/WEB-INF/header.jsp" />
 
-	<div class="popupContainer">
-	  <span class="popupText" id="popup">Videogame Successfully deleted</span>
-	</div>
+
+<script>
+$(document).ready(function(){
+	takePopups();
+});
+</script>	
+<div id="sharedPopupsContainer">
+</div>
+
+<div class="popupContainer">
+	<span class="popupText" id="popup">Videogame Successfully deleted</span>
+</div>
 	
-	<div class="popupContainer">
-	  <span class="popupText" id="popupModify">Videogame Successfully updated</span>
-	</div>
+<div class="popupContainer">
+	<span class="popupText" id="popupModify">Videogame Successfully updated</span>
+</div>
 	
-	<div class="popupContainer">
-	  <span class="popupText" id="popupInsert">Videogame Successfully inserted</span>
-	</div>
+<div class="popupContainer">
+	<span class="popupText" id="popupInsert">Videogame Successfully inserted</span>
+</div>
+
 
 	<h1>Storage Admin</h1>
 	
@@ -75,8 +86,9 @@
 					<input type="submit" value="<%=videogioco.getNome()%>">
 				</form>
 				
-				<form class="product-form" action="CartServlet" method="post">
+				<form class="product-form addToCartForm" action="CartServlet" method="post">
 					<input type="hidden" name="action" value=addToCart>
+					<input type="hidden" name="ajax" value=true>
 					<input type="hidden" name="insertIntoCart" value=<%=videogioco.getCodice_prodotto()%>>
 					<input type="submit" value="Add to cart">
 				</form>
@@ -95,6 +107,7 @@
 	%>
 	
 	<script>highlight();</script>
+	<script>activatePopup();</script>
 	
 			    
 			 
@@ -104,25 +117,25 @@
 			<legend>Insert</legend>
 			<input type="hidden" name="action" value="insert"> 
 			
-			<p>Name: 			<input name="nome" 					type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
-			<p>Edition: 		<input name="edizione" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
-			<p>Description: 	<input name="descrizione" 			type="text" 	maxlength="60" required placeholder="enter name" value="a"> </p>
-			<p>Price: 			<input id="prezzo" name="prezzo_vetrina" 		type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Name: 			<input name="nome" 					type="text" 	maxlength="20" required placeholder="enter name"> </p>
+			<p>Edition: 		<input name="edizione" 				type="text" 	maxlength="20" required placeholder="enter name"> </p>
+			<p>Description: 	<input name="descrizione" 			type="text" 	maxlength="60" required placeholder="enter name"> </p>
+			<p>Price: 			<input id="prezzo" name="prezzo_vetrina" 		type="text" 	maxlength="20" required placeholder="enter name"> </p>
 			<p class="ErrorParagraph"></p>
 			
 			<p>Date: 			<input name="data" 			type="date" 	maxlength="20" required placeholder="DD/MM/YYYY or DD-MM-YYYY" value=2020-08-20> </p>
 			<p class="ErrorParagraph"></p>
 			
-			<p>Platform: 		<input name="piattaforma" 			type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
-			<p>Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
-			<p>Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Platform: 		<input name="piattaforma" 			type="text" 	maxlength="20" required placeholder="enter name"> </p>
+			<p>Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name"> </p>
+			<p>Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name"> </p>
 			<p  class="ErrorParagraph"></p>
 			
-			<p>Copy: 			<input name="#copie" 				type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Copy: 			<input name="#copie" 				type="text" 	maxlength="20" required placeholder="enter name"> </p>
 			<p  class="ErrorParagraph"></p>
 			
-			<p>Developer: 		<input name="Sviluppatore" 			type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
-			<p>Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name" value="a"> </p>
+			<p>Developer: 		<input name="Sviluppatore" 			type="text" 	maxlength="20" required placeholder="enter name"> </p>
+			<p>Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name"> </p>
 	
 			<!-- mi sembra eccessivo rendere la foto un campo required -->
 			<p>Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"> </p>
@@ -135,13 +148,14 @@
 	
 	
 
-	<form id="deleteForm" class="inputFieldContainer inputList" action="StorageControl" method="post">
+	<form id="deleteForm" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 		<fieldset>
 			<legend>Delete</legend>
 					<input  name="action" 			type="hidden" 	value="delete">
 			
 			Code:	<input	name="codice_prodotto" 	type="text" 					maxlength="20" required placeholder="enter code">
 			<p class="ErrorParagraph"></p>
+			<div class="areYouSure"></div>
 			
 			<!--  <button type="button" id ="deleteButton" onclick ="checkIdToDelete('deleteForm')">delete</button>-->
 			<input type="submit" name="submit" value="Submit" />
@@ -154,19 +168,24 @@
 
 
 
+		<script>
+			$(document).ready(function(){
+				takeConfirmModify()
+			});
+		</script>
 
-
-		<form id="modifyNomeId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyNomeId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Name</legend>
 					<input type="hidden" name="action" value="modify"> 
 					
 					ID: 			<input name="codice_prodotto" 	type="number" 	maxlength="20" 	required	placeholder="enter ID"			>
-					<p class="ErrorParagraph"></p>
+					<p class="ErrorParagraph"></p>					
 					
 					Name: 			<input name="nome" 				type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
-									
+					<div class="areYouSure"></div>
+					
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
 				</fieldset>
@@ -175,7 +194,7 @@
 		
 		
 		
-		<form id="modifyEditionId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyEditionId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Edition</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -185,6 +204,7 @@
 					
 					Edition: 		<input name="edizione" 			type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -194,7 +214,7 @@
 		
 		
 		
-		<form id="modifyDescriptionId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyDescriptionId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Description</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -204,6 +224,7 @@
 					
 					Description: 	<input name="descrizione" 		type="text" 	maxlength="60"	required	placeholder="enter description"	> 
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -213,7 +234,7 @@
 		
 		
 		
-		<form id="modifyPriceId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyPriceId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Price</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -223,6 +244,7 @@
 					
 					Price: 			<input name="prezzo_vetrina"	type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modify">modify</button>
 					<input type="reset" value="Reset"/>
@@ -232,7 +254,7 @@
 		
 		
 		
-		<form id="modifyDateId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyDateId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Date</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -242,6 +264,7 @@
 					
 					Date: 			<input name="data" 				type="date" 	maxlength="20"	required	placeholder="DD/MM/YYYY or DD-MM-YYYY">
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modify">modify</button>
 					<input type="reset" value="Reset"/>
@@ -251,7 +274,7 @@
 		
 		
 		
-		<form id="modifyPlatformId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyPlatformId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Platform</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -261,6 +284,7 @@
 					
 					Platform: 		<input name="piattaforma" 		type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -270,7 +294,7 @@
 		
 		
 		
-		<form id="modifyConsoleId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyConsoleId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Console</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -280,6 +304,7 @@
 					
 					Console: 		<input name="console" 				type="text" 	maxlength="20" required placeholder="enter name">
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -289,7 +314,7 @@
 		
 		
 		
-		<form id="modifySaleId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifySaleId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Sale</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -299,6 +324,7 @@
 					
 					Sale: 			<input name="sconto" 				type="text" 	maxlength="20" required placeholder="enter name">
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -308,7 +334,7 @@
 		
 		
 		
-		<form id="modifyCopyId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyCopyId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Copy</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -318,6 +344,7 @@
 					
 					Copy:			<input name="#copie" 			type="text" 	maxlength="20"	required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -327,7 +354,7 @@
 		
 		
 		
-		<form id="modifyDeveloperId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyDeveloperId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Developer</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -337,6 +364,7 @@
 					
 					Developer: 		<input name="Sviluppatore" 		type="text" 	maxlength="20" 		required	placeholder="enter name"		>
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -346,7 +374,7 @@
 		
 		
 		
-		<form id="modifyPublisherId" class="inputFieldContainer inputList" action="StorageControl" method="post">
+		<form id="modifyPublisherId" class="beSureForm inputFieldContainer inputList" action="StorageControl" method="post">
 				<fieldset>
 					<legend>modify Publisher</legend>
 					<input type="hidden" name="action" value="modify"> 
@@ -356,6 +384,7 @@
 					
 					Publisher: 		<input name="Pubblisher" 			type="text" 	maxlength="20" required placeholder="enter name">
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
@@ -365,7 +394,7 @@
 		
 		
 		
-		<form id="modifyPhotoId" class="inputFieldContainer inputList" action="StorageControl" enctype="multipart/form-data" method="post">
+		<form id="modifyPhotoId" class="beSureForm inputFieldContainer inputList" action="StorageControl" enctype="multipart/form-data" method="post">
 				<fieldset>
 					<legend>modify Photo</legend>
 					<input type="hidden" name="action" value="modifyPhoto"> 
@@ -375,6 +404,7 @@
 					
 					Photo: 			<input name="foto"	id="file"			type="file"    	maxlength="255"		class="file"	required>
 					<p class="ErrorParagraph"></p>
+					<div class="areYouSure"></div>
 									
 					<button type="submit" value="modifica">modify</button>
 					<input type="reset" value="Reset"/>
