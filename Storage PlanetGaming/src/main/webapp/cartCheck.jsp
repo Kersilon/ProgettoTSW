@@ -43,7 +43,7 @@
     		<div class="product-buttons">
 		 		<form class="product-form" action="StorageControl" method="post">
 					<input type="hidden" name="action" value="ExtendedDescription"> 
-					<input type="hidden" name="codice_prodotto" value=<%=prodotto.getIdProdottoOrdine()%>> 
+					<input type="hidden" name="codice_prodotto" value=<%=prodotto.getIdVideogioco()%>> 
 					<input type="submit" value="<%=prodotto.getNomeVideogioco()%>">
 				</form>
 				<form action="CartServlet" method="post">
@@ -54,7 +54,7 @@
     		</div>
     		<div class="product-info">
     			<p>Id product:<span class="idCell"><%=prodotto.getIdProdottoOrdine()%></span> | Id order: <span class="idOrderCell"><%=prodotto.getIdOrdine()%></span>  | id videogame: <span class="idVideogameCell"><%=prodotto.getIdVideogioco()%></span></p>
-    			<p>Videogame's name: <span class="nameCell"><%=prodotto.getNomeVideogioco()%></span> | Total price: <span class="priceCell"><%=prodotto.getPrezzoAcquisto()%></span> | Total discount: <span class="scontoCell"><%=prodotto.getScontoAcquisto()%></span></p>
+    			<p>Videogame's name: <span class="nameCell"><%=prodotto.getNomeVideogioco()%></span> | Total price: <span class="priceCell"><%=String.format("%.2f", prodotto.getPrezzoAcquisto()) + " euro"%></span> | Total discount: <span class="scontoCell"><%=String.format("%.2f", prodotto.getScontoAcquisto()) + " euro"%></span></p>
     			<p>Quantity: <span class="copiesCell"><%=prodotto.getQuantitaAcquisto()%></span></p>
     		</div>
     		<img id="fotoName<%=prodotto.getIdProdottoOrdine()%>" class="product-image fotoCell" src="./immagini Videogiochi/<%=prodotto.getFoto()%>">

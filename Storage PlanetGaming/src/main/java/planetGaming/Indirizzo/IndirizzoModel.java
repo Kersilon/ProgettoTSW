@@ -9,6 +9,8 @@ public interface IndirizzoModel {
 	
 	public boolean doDelete(String via, String cap, int codiceUtente) throws SQLException;
 	
+	public boolean doDelete(int AddressId) throws SQLException;
+	
 	public IndirizzoBean doRetrieveByKey(String via, String cap, int codiceUtente) throws SQLException;
 	
 	public Collection<IndirizzoBean> doRetrieveAll(String order) throws SQLException;

@@ -108,7 +108,10 @@ public class StorageControl extends HttpServlet {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					
+					System.out.println("entrato nell'inserimento");
 				}
+				
 				
 //				String json = null;
 //				json = ObjectToJson(videogiocoBean);
@@ -119,6 +122,8 @@ public class StorageControl extends HttpServlet {
 //				req.getSession().removeAttribute("videogiocoInserito");
 //				req.getSession().setAttribute("videogiocoInserito", videogiocoBean);
 //				ajaxFlag = true;
+				
+
 			
 				
 				
@@ -323,9 +328,12 @@ public class StorageControl extends HttpServlet {
 		{
 			//System.out.println(req.getServletContext().getRealPath(""));
 			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageAdmin.jsp");
-		}
+			dispatcher.forward(req, resp);
+		}else {
 		
-		dispatcher.forward(req, resp);
+			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/storageUtente.jsp");
+			dispatcher.forward(req, resp);
+		}
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package planetGaming.Ordine;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 import planetGaming.Videogioco.VideogiocoBean;
 
@@ -13,11 +14,17 @@ public class prodottoOrdineBean implements Serializable {
 	private int idOrdine;
 	private int idVideogioco;
 	private String nomeVideogioco;
-	private double prezzoAcquisto;
-	private double scontoAcquisto;
+	private double prezzoAcquisto;	//aka prezzoTotale
+	private double scontoAcquisto;	//aka prezzoScontato
 	private int quantitaAcquisto;
 	private String foto;
 	
+	private double prezzoBase;
+	private double sconto;
+	private double scontoEuro;
+	private double prezzoScontato;
+	
+	private static final DecimalFormat df = new DecimalFormat("0.00");
 	
 	
 	public prodottoOrdineBean() {
@@ -27,39 +34,33 @@ public class prodottoOrdineBean implements Serializable {
 	public prodottoOrdineBean(VideogiocoBean videogioco) {
 		this.idVideogioco = videogioco.getCodice_prodotto();
 		this.nomeVideogioco = videogioco.getNome();
-		this.prezzoAcquisto = videogioco.getPrezzo_vetrina() - videogioco.getSconto();
-		this.scontoAcquisto = videogioco.getSconto();
 		this.quantitaAcquisto = 1;
 		this.foto = videogioco.getFoto();
+		
+		this.prezzoBase = videogioco.getPrezzo_vetrina();
+		this.sconto = videogioco.getSconto();
+		this.scontoEuro = (this.prezzoBase*this.sconto)/100;
+		this.prezzoScontato = (this.prezzoBase - this.scontoEuro);
+		
+		updateTotal();
 	}
 	
 	public void removeProdotto() {
-		decreasePrezzoAcquisto();
-		decreaseQuantitaAcquisto();
+		this.quantitaAcquisto--;
+		updateTotal();
 	}
 	
 	public void addProdotto() {
-		increasePrezzoAcquisto();
-		increaseQuantitaAcquisto();
-	}
-	
-	public void increaseQuantitaAcquisto() {
 		this.quantitaAcquisto++;
+		updateTotal();
 	}
 	
-	public void decreaseQuantitaAcquisto() {
-		this.quantitaAcquisto--;
+	private void updateTotal() {
+		this.prezzoAcquisto = (this.prezzoScontato*this.quantitaAcquisto);
+		this.scontoAcquisto = (this.scontoEuro*this.quantitaAcquisto);
 	}
 	
-	public void increasePrezzoAcquisto() {
-		this.prezzoAcquisto += this.prezzoAcquisto;
-		this.scontoAcquisto += this.scontoAcquisto;
-	}
 	
-	public void decreasePrezzoAcquisto() {
-		this.prezzoAcquisto -= (this.prezzoAcquisto/this.quantitaAcquisto);
-		this.scontoAcquisto -= (this.scontoAcquisto/this.quantitaAcquisto);
-	}
 	
 	public String getFoto() {
 		return foto;
@@ -97,12 +98,14 @@ public class prodottoOrdineBean implements Serializable {
 		return prezzoAcquisto;
 	}
 	public void setPrezzoAcquisto(double prezzoAcquisto) {
+		this.prezzoBase = prezzoAcquisto;
 		this.prezzoAcquisto = prezzoAcquisto;
 	}
 	public double getScontoAcquisto() {
 		return scontoAcquisto;
 	}
 	public void setScontoAcquisto(double scontoAcquisto) {
+		this.sconto = scontoAcquisto;
 		this.scontoAcquisto = scontoAcquisto;
 	}
 	public int getQuantitaAcquisto() {

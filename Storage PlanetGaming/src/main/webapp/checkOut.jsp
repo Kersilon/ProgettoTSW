@@ -14,8 +14,7 @@
 	}
 	
 	Collection<?> metodiPagamento = (Collection<?>) request.getSession().getAttribute("metodiPagamento");
-	Collection<?> indirizzi = (Collection<?>) request.getSession().getAttribute("indirizzi");
-	
+	Collection<?> indirizzi = (Collection<?>) request.getSession().getAttribute("indirizzi");	
 %>
 
 <!DOCTYPE html>
@@ -72,6 +71,10 @@
 		%>
 		
 		<% 	
+				}else{
+		%>
+				<p>There is no paymenth method registered, go to your user page to add a new one</p>
+		<% 			
 				}
 		%>
 		
@@ -100,8 +103,12 @@
 				%>
 				
 		<% 	
-				}
-		%>
+				}else{
+					%>
+					<p>There is no delivery address registered, go to your user page to add a new one</p>
+			<% 			
+					}
+			%>
 	
 		<fieldset>
 			<legend>Payment method and delivery address</legend>

@@ -72,7 +72,7 @@
 	%>
 					<div class="flex-container <%=ordine.getIdOrdine()%>">
 		    			<p>id product:<span class="idCell"><%=prodottoOrdine.getIdProdottoOrdine()%></span> | id Order: <span class=""><%=prodottoOrdine.getIdOrdine()%></span>  | id videogame: <span class=""><%=prodottoOrdine.getIdVideogioco()%></span></p>
-		    			<p>videgame's name: <span class=""><%=prodottoOrdine.getNomeVideogioco()%></span> | price: <span class=""><%=prodottoOrdine.getPrezzoAcquisto()%></span> | discount: <span class=""><%=prodottoOrdine.getScontoAcquisto()%></span></p>
+		    			<p>videgame's name: <span class=""><%=prodottoOrdine.getNomeVideogioco()%></span> | price: <span class=""><%=String.format("%.2f", prodottoOrdine.getPrezzoAcquisto()) + " euro"%></span> | discount: <span class=""><%=String.format("%.2f", prodottoOrdine.getScontoAcquisto()) + " euro"%></span></p>
 		    			<p>quantity: <span class=""><%=prodottoOrdine.getQuantitaAcquisto()%></span> | iva: <span class=""><%=prodottoOrdine.getIva()%></span></p>
 		    			<img id="fotoName<%=ordine.getIdOrdine()%>" class="product-image fotoCell" src="./immagini Videogiochi/<%=prodottoOrdine.getFoto()%>">
 	       			</div>

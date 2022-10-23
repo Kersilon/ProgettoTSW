@@ -50,8 +50,8 @@
     		</div>
 	    		<div class="product-info">
 	    			<p>ID:<span class="idCell"><%=videogioco.getCodice_prodotto()%></span> | Name: <span class="nameCell"><%=videogioco.getNome()%></span>  | Edition: <span class="editionCell"><%=videogioco.getEdizione()%></span></p>
-	    			<p>Description: <span class="descriptionCell"><%=videogioco.getDescrizione()%></span> | Price: <span class="priceCell"><%=videogioco.getPrezzo_vetrina()%></span> | Date: <span class="dateCell"><%=videogioco.getData_uscita()%></span></p>
-	    			<p>Platform: <span class="platformCell"><%=videogioco.getPiattaforma()%></span> | Console: <span class="consoleCell"><%=videogioco.getConsole()%></span> | Sale: <span class="scontoCell"><%=videogioco.getSconto()%></span></p>
+	    			<p>Description: <span class="descriptionCell"><%=videogioco.getDescrizione()%></span> | Price: <span class="priceCell"><%=videogioco.getPrezzo_vetrina() + " euro"%></span> | Date: <span class="dateCell"><%=videogioco.getData_uscita()%></span></p>
+	    			<p>Platform: <span class="platformCell"><%=videogioco.getPiattaforma()%></span> | Console: <span class="consoleCell"><%=videogioco.getConsole()%></span> | Sale: <span class="scontoCell"><%=videogioco.getSconto() + "%"%></span></p>
 	    			<p>Copy: <span class="copiesCell"><%=videogioco.getCopie()%></span> | Developer: <span class="developerCell"><%=videogioco.getSviluppatore()%></span> | Publisher: <span class="publisherCell"><%=videogioco.getPubblisher()%></span></p>
 	    		</div>
 	    		

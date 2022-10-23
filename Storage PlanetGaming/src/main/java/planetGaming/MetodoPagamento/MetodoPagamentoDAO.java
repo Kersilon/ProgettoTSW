@@ -79,7 +79,7 @@ private static final String TABLE_NAME = "pagamento";
 		
 		int result;
 		
-		String querySQL = "DELETE FROM " + MetodoPagamentoDAO.TABLE_NAME + " WHERE NUMERO_CARTA = ?"; //TODO query sql con "?"
+		String querySQL = "DELETE FROM " + MetodoPagamentoDAO.TABLE_NAME + " WHERE idCarta = ?";
 		
 		try {
 			connection = ds.getConnection();

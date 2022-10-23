@@ -136,6 +136,8 @@ public class IndirizzoDAO implements IndirizzoModel{
 		return indirizzoBean;
 	}
 	
+	
+	
 	@Override
 	public synchronized boolean doDelete(String via, String cap, int codiceUtente) throws SQLException {
 		Connection connection = null;
@@ -165,6 +167,36 @@ public class IndirizzoDAO implements IndirizzoModel{
 		}
 		return (result != 0);
 	}
+	
+	@Override
+	public boolean doDelete(int AddressId) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		int result = 0;
+
+		String deleteSQL = "DELETE FROM " + IndirizzoDAO.TABLE_NAME + " WHERE idIndirizzo = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(deleteSQL);
+			preparedStatement.setInt(1, AddressId);
+
+			result = preparedStatement.executeUpdate();
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return (result != 0);
+	}
+	
+	
 	
 	@Override
 	public synchronized Collection<IndirizzoBean> doRetrieveAll(String order) throws SQLException {
@@ -204,5 +236,4 @@ public class IndirizzoDAO implements IndirizzoModel{
 		}
 		return indirizzi;
 	}
-
 }

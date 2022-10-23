@@ -394,7 +394,7 @@ function checkDeliveryAddress(){
 	}
 }
 
-function checkPaymentMethod(){
+function checkPaymentMethod(form){
 		let counter;
 		
 		
@@ -406,7 +406,7 @@ function checkPaymentMethod(){
 		if(checkCcv()){
 		counter++;
 		}
-		if(checkDate()){
+		if(checkDate(form, 2)){
 		counter++;
 		}
 		
@@ -476,7 +476,8 @@ function checkModify(form){
 
 function checkModify(form, checkFunction){
 	if(checkFunction(form, 0)){
-		document.forms[form].getElementsByTagName("button")[0].setAttribute('type', 'submit');
+/*		document.forms[form].getElementsByTagName("button")[0].setAttribute('type', 'submit');*/
+		$(form +" button").attr("type","submit");
 	}
 }
 

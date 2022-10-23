@@ -167,6 +167,16 @@
 	
 	<form class="inputFieldContainer inputList" action="UserInfo" method="post">
 		<fieldset>
+			<legend>Delete delivery address</legend>
+			<input type="hidden" name="action" value="removeAdress">
+			<p>Address ID: <input name="addressId" type="number" maxlength="10" placeholder="Enter address id"></p>
+			<input type="submit" value="delete Address">
+			<input type="reset" value="Reset"/>
+		</fieldset>
+	</form>
+	
+	<form id="addPymentMethodForm"class="inputFieldContainer inputList" action="UserInfo" method="post">
+		<fieldset>
 			<legend>payment method</legend>
 			<input type="hidden" name="action" value="addPaymentMethod">
 			
@@ -181,11 +191,21 @@
 			
 			Name: 				<input name="name" 				type="text"				 			maxlength="20" 	value ="io" placeholder="enter name on the card"><br>
 			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" 	value ="oi" placeholder="enter surname on the card"><br>
-			Expiration date: 	<input name="dataNascita" 		type ="text" 	id="dataNascita"	maxlength="20" 	value ="2024-10-10" placeholder="enter expiration date"><br>
+			Expiration date: 	<input name="data" 				type ="text" 	id="dataNascita"	maxlength="20" 	value ="2024-10-10" placeholder="enter expiration date"><br>
 			<p id="birthDateError" class="ErrorParagraph"></p>
 			
-			<button type="button" id ="paymentMethodButton" onclick ="checkPaymentMethod()">Save</button>
+			<button type="button" id ="paymentMethodButton" onclick ="checkPaymentMethod('#addPymentMethodForm')">Save</button>
 			<input type="reset" value="Reset"/>
+		</fieldset>
+	</form>
+	
+		<form class="inputFieldContainer inputList" action="UserInfo" method="post">
+		<fieldset>
+			<legend>Delete payment method</legend>
+			<input type="hidden" name="action" value="removePaymentMethod">
+			<p>Payment method ID: <input name="paymentMethodId" type="number" maxlength="10" placeholder="Enter payment method id"></p>
+			<input type="submit" value="delete payment method">
+			<input type="reset" value="Reset">
 		</fieldset>
 	</form>
 	
@@ -210,7 +230,7 @@
 			Password: 	<input name="password" 		type="password"				 		maxlength="20" placeholder="enter password"			><br>
 			<p class="ErrorParagraph"></p>
 							
-			<button type="button" onclick ="checkModify('modifyPassword', checkPassword)">Modify</button>
+			<button type="button" onclick ="checkModify('#modifyPassword', checkPassword)">Modify</button>
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>
@@ -224,7 +244,7 @@
 			telephone: 	<input name="telefono" 		type="number"						maxlength="20" placeholder="enter telephone number"	><br>
 			<p class="ErrorParagraph"></p>
 			
-			<button type="button" onclick ="checkModify('modifyPhone', checkPhone)">Modify</button>
+			<button type="button" onclick ="checkModify('#modifyPhone', checkPhone)">Modify</button>
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>
