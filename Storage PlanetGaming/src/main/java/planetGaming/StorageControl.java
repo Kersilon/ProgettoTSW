@@ -97,7 +97,7 @@ public class StorageControl extends HttpServlet {
 				videogiocoBean.setSviluppatore(									req.getParameter("Sviluppatore"));
 				videogiocoBean.setPubblisher(									req.getParameter("Pubblisher"));
 				
-				//memorizzio l'immagine in una cartella e memorizzo il percorso nel bean
+				//memorizzio l'immagine in una cartella e memorizzo il nome del file nel bean
 				fileName = fs.fileAssembler(req.getParts(), req.getServletContext().getRealPath(""), SAVE_DIR);
 				videogiocoBean.setFoto(fileName);
 				
@@ -106,7 +106,6 @@ public class StorageControl extends HttpServlet {
 				try {
 					videogioco.doSave(videogiocoBean);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					
 					System.out.println("entrato nell'inserimento");

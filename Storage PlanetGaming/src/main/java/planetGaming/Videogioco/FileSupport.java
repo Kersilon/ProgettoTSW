@@ -16,7 +16,7 @@ public class FileSupport {
 
 	
 	public String fileAssembler(Collection<Part> fileParts, String appPath, String saveDir) {
-		String fileName = null;
+		String fileName = null, returningFileName = null;
 		String saveDirPath = appPath + saveDir;
 
 		//creo la cartella se non esiste
@@ -28,9 +28,13 @@ public class FileSupport {
 		//ricostruisco il file nella cartella specificata
 		for(Part part : fileParts) {
 			fileName = part.getSubmittedFileName();
+			
+			System.out.println(fileName);
+			
 			if(fileName != null && !fileName.equals("")) {
 				try {
 					part.write(saveDirPath + File.separator + fileName);
+					returningFileName = fileName;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -39,7 +43,7 @@ public class FileSupport {
 		}
 		
 		//restituisco il percorso del file salvato nella cartella
-		return fileName;
+		return returningFileName;
 	}
 	
 	
