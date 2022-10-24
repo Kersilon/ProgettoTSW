@@ -107,24 +107,9 @@ public class StorageControl extends HttpServlet {
 					videogioco.doSave(videogiocoBean);
 				} catch (SQLException e) {
 					e.printStackTrace();
-					
-					System.out.println("entrato nell'inserimento");
 				}
 				
-				
-//				String json = null;
-//				json = ObjectToJson(videogiocoBean);
-					
-//				resp.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
-//				resp.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?	
-//				resp.getWriter().write(json);								// Write response body.
-//				req.getSession().removeAttribute("videogiocoInserito");
-//				req.getSession().setAttribute("videogiocoInserito", videogiocoBean);
-//				ajaxFlag = true;
-				
-
-			
-				
+				System.out.println("entrato nell'inserimento");
 				
 			}else if(action.equalsIgnoreCase("delete"))
 			{

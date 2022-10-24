@@ -143,6 +143,13 @@ $(document).ready(function(){
 			<button type="button" id="insertButton" onclick="checkInsert('#insertForm')">Insert</button>
 			<button type="reset" value="Reset">Reset</button>
 		</fieldset>
+		
+		<!-- rislve il problema del form riinviato quando si aggiorna la pagina -->
+		<script>
+		    if ( window.history.replaceState ) {
+		        window.history.replaceState( null, null, window.location.href );
+		    }
+		</script>
 	</form>
 	
 	
