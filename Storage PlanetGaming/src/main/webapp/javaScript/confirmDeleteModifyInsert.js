@@ -112,7 +112,6 @@ function modifyOnSubmit(formId, checkFunction, indexError){
 					        	const tableRow = document.getElementById(idProduct);
 					        	
 					        	if(tableRow != null){
-									console.log(videogioco.nome);
 									$(tableRow).find(".idCell").html(videogioco.codice_prodotto);
 									$(tableRow).find(".nameCell").html(videogioco.nome);
 									$(tableRow).find(".editionCell").html(videogioco.edizione);

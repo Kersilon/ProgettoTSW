@@ -249,7 +249,7 @@ $(document).ready(function(){
 					ID: 			<input name="codice_prodotto" 	type="text" 	maxlength="20" 	required	placeholder="enter ID"			>
 					<p class="ErrorParagraph"></p>
 					
-					Price: 			<input name="prezzo_vetrina"	type="text" 	maxlength="20"	required	placeholder="enter name"		>
+					Price: 			<input name="prezzo_vetrina"	type="number" 	maxlength="20"	required	placeholder="enter price"		>
 					<p class="ErrorParagraph"></p>
 					<div class="areYouSure"></div>
 									

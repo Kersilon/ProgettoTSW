@@ -49,11 +49,11 @@ function checkDate(form, indexError){
 	
 	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;	//data nel formato aaaa-mm-dd va bene sia "-" o "/" per separare i caratteri
 	
-/*	birthDate = document.forms[form]["data"].value;*/
-	birthDate = $(form + " input[name = data]").val();
+	birthDate = document.forms[form]["data"].value;
+	//birthDate = $(form + " input[name = data]").val();
 	
-/*	birthDateError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);*/
-	birthDateError = $(form + " .ErrorParagraph")[indexError];
+	birthDateError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
+	//birthDateError = $(form + " .ErrorParagraph")[indexError];
 	
 	if(regex.test(birthDate)){
 		birthDateError.innerHTML = "";
@@ -216,11 +216,13 @@ function checkPrice(form, indexError){
 	
 	regex = /^\d{0,8}(\.\d{1,4})?$/;
 	
-/*	price = document.forms[form]["prezzo_vetrina"].value;*/
-	price = $(form + " input[name=prezzo_vetrina]").val();
+	price = document.forms[form]["prezzo_vetrina"].value;
+	//price = $(form + " input[name=prezzo_vetrina]").val();
 	
-/*	priceError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);*/
-	priceError = $(form + " .ErrorParagraph")[indexError];
+	console.log(price);
+	
+	priceError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
+	//priceError = $(form + " .ErrorParagraph")[indexError];
 	
 	if(regex.test(price)){
 		priceError.innerHTML = "";
@@ -257,11 +259,11 @@ function checkSale(form, indexError){
 	
 	regex = /^100(\.0{0,2})? *%?$|^\d{1,2}(\.\d{1,2})? *%?$/; //matches 	100% 100.00 % 95.4% 1.2 % 12
 	
-/*	sale = document.forms[form]["sconto"].value;*/
-	sale = $(form + " input[name=sconto]").val();
+	sale = document.forms[form]["sconto"].value;
+	//sale = $(form + " input[name=sconto]").val();
 	
-/*	saleError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);*/
-	saleError = $(form + " .ErrorParagraph")[indexError];
+	saleError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
+	//saleError = $(form + " .ErrorParagraph")[indexError];
 	
 	if(regex.test(sale)){
 		saleError.innerHTML = "";
@@ -278,11 +280,11 @@ function checkCopy(form, indexError){
 	let regex;
 	
 	regex = /^\d+$/;
-/*	copy = document.forms[form]["#copie"].value;*/
-	copy = $(form + " input[name='#copie']").val();
+	copy = document.forms[form]["#copie"].value;
+	//copy = $(form + " input[name='#copie']").val();
 		
-/*	copyError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);*/
-	copyError = $(form + " .ErrorParagraph")[indexError];
+	copyError = document.forms[form].getElementsByClassName("ErrorParagraph").item(indexError);
+	//copyError = $(form + " .ErrorParagraph")[indexError];
 
 
 	
