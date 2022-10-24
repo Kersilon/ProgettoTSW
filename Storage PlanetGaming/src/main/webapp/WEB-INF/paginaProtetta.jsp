@@ -189,10 +189,10 @@
 			
 			Name: 				<input name="name" 				type="text"				 			maxlength="20" placeholder="enter name on the card"><br>
 			Cognome: 			<input name="surname" 			type="text"				 			maxlength="20" placeholder="enter surname on the card"><br>
-			Expiration date: 	<input name="data" 				type ="text" 	id="dataNascita"	maxlength="20" placeholder="enter expiration date"><br>
+			Expiration date: 	<input name="data" 				type ="date" 	id="dataNascita"	maxlength="20" placeholder="enter expiration date"><br>
 			<p id="birthDateError" class="ErrorParagraph"></p>
 			
-			<button type="button" id ="paymentMethodButton" onclick ="checkPaymentMethod('#addPymentMethodForm')">Save</button>
+			<button type="button" id ="paymentMethodButton" onclick ="checkPaymentMethod('addPymentMethodForm')">Save</button>
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>

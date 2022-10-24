@@ -49,6 +49,7 @@ function checkDate(form, indexError){
 	
 	regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;	//data nel formato aaaa-mm-dd va bene sia "-" o "/" per separare i caratteri
 	
+	//price = document.forms[form]["prezzo_vetrina"].value;
 	birthDate = document.forms[form]["data"].value;
 	//birthDate = $(form + " input[name = data]").val();
 	
