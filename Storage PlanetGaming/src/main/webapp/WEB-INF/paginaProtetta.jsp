@@ -138,6 +138,13 @@
 			}
 	%>
 	
+			<!-- rislve il problema del form riinviato quando si aggiorna la pagina -->
+		<script>
+		    if ( window.history.replaceState ) {
+		        window.history.replaceState( null, null, window.location.href );
+		    }
+		</script>
+	
 	<h2>Operetions</h2>
 	<div class="flex-container">
 	<form class="inputFieldContainer inputList" action="UserInfo" method="post">
