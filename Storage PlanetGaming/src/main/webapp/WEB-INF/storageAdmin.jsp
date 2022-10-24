@@ -140,7 +140,7 @@ $(document).ready(function(){
 			<!-- mi sembra eccessivo rendere la foto un campo required -->
 			<p>Photo: 			<input class="file" type="file" name="foto"  placeholder="" maxlength="255"> </p>
 					
-			<button type="button" id="insertButton" onclick="checkInsert('#insertForm')">Insert</button>
+			<button type="button" id="insertButton" onclick="checkInsert('insertForm')">Insert</button>
 			<button type="reset" value="Reset">Reset</button>
 		</fieldset>
 		
