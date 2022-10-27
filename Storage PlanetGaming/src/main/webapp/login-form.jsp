@@ -46,7 +46,7 @@
 				    var form = $(this);
 				    var actionUrl = form.attr('action');
 				    
-				    if(checkCredentialsLogin("#" + form.attr("id"))){
+				    if(checkCredentialsLogin(form.attr("id"))){
 					    $.ajax({
 					        type: "POST",
 					        url: actionUrl,

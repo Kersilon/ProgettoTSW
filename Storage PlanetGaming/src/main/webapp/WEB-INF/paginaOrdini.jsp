@@ -56,6 +56,10 @@
 						<div class="product-buttons">
 							<button onclick="show(<%=ordine.getIdOrdine()%>)">mostra</button>
 							<button onclick="hide(<%=ordine.getIdOrdine()%>)">nascondi</button>
+							<form action="Fattura" method="post">
+								<input type="hidden" name="OrderId" value=<%=ordine.getIdOrdine()%>> 
+								<input type="submit" value="Invoice">
+							</form>
     					</div>
 		    				<p>idOrder: <span class="idCell"><%=ordine.getIdOrdine()%></span> | idUser: <span class=""><%=ordine.getIdUtente()%></span>  | id paymenth method: <span class=""><%=ordine.getIdModalitaPagamento()%></span></p>
 		    				<p>id Address: <span class=""><%=ordine.getIdIndirizzo()%></span> | total price: <span class=""><%=ordine.getPrezzoTotale()%></span> | Order date: <span class=""><%=ordine.getDataOrdine()%> | tracking: <%=ordine.getTracking()%></span></p>

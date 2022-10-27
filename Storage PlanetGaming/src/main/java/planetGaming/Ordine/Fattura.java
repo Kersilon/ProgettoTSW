@@ -132,7 +132,7 @@ public class Fattura extends HttpServlet{
 	      cs.newLineAtOffset(270, 750);
 	      //scrivere il testo
 	      cs.showText(InvoiceTitle);
-	      //Specifica che deve terminare quì il testo
+	      //Specifica che deve terminare quï¿½ il testo
 	      cs.endText();
 	      
 	      cs.beginText();
@@ -223,7 +223,7 @@ public class Fattura extends HttpServlet{
 	      for(int i =0; i<ordine.getProdottiOrdine().size(); i++) {
 	    	if(ProductName.get(i).length()>50)
 	    		
-	    		//scrive al più "secondo valore di substring" caratteri
+	    		//scrive al piï¿½ "secondo valore di substring" caratteri
 	    		cs.showText(ProductName.get(i).substring(0,50)+"...");
 	    	else
 	    		cs.showText(ProductName.get(i));

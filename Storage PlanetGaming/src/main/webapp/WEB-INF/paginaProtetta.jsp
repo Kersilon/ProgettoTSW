@@ -235,7 +235,7 @@
 			Password: 	<input name="password" 		type="password"				 		maxlength="20" placeholder="enter password"			><br>
 			<p class="ErrorParagraph"></p>
 							
-			<button type="button" onclick ="checkModify('#modifyPassword', checkPassword)">Modify</button>
+			<button type="button" onclick ="checkModify('modifyPassword', checkPassword)">Modify</button>
 			<input type="reset" value="Reset"/>
 		</fieldset>
 	</form>

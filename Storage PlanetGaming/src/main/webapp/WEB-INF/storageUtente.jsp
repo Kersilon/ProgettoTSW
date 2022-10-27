@@ -48,7 +48,7 @@ $(document).ready(function(){
 		<p><input type="text" name="videogameTitle" placeholder="videogame's title"></p>
 		<input type="submit" value="Search Videogame"/>
 	</form>
-		<form class="inputFieldContainer inputList" action="StorageControl" method="get">
+	<form class="inputFieldContainer inputList" action="StorageControl" method="get">
 		<input type="submit" value="Reset"/>
 	</form>
 </div>

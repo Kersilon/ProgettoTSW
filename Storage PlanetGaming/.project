@@ -37,7 +37,7 @@
 		<link>
 			<name>src/main/webapp/immagini Videogiochi</name>
 			<type>2</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Program%20Files/Apache%20Software%20Foundation/Tomcat%209.0/wtpwebapps/Storage%20PlanetGaming/immagini%20Videogiochi</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Storage%20PlanetGaming/immagini%20Videogiochi</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

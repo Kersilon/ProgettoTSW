@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
 			
 			if(action.equalsIgnoreCase("registration"))
 			{
-				//se le credenziali risultano presenti nel DB allora significa che l'utente è già registrato e quindi viene informato di ciò
+				//se le credenziali risultano presenti nel DB allora significa che l'utente ï¿½ giï¿½ registrato e quindi viene informato di ciï¿½
 				if(checkLogin(email, password))
 				{
 					response.setContentType("text/plain");
@@ -62,8 +62,8 @@ public class Login extends HttpServlet {
 					
 					utenteBean.setNome(			request.getParameter("nome"));
 					utenteBean.setCognome(		request.getParameter("cognome"));
-					utenteBean.setDataNascita(Date.valueOf(request.getParameter("data")));
-					utenteBean.setCodiceFiscale(		request.getParameter("codiceFiscale"));
+					utenteBean.setDataNascita(	Date.valueOf(request.getParameter("data")));
+					utenteBean.setCodiceFiscale(request.getParameter("codiceFiscale"));
 					utenteBean.setNomeUtente(	request.getParameter("nomeUtente"));
 					utenteBean.setPassword(		request.getParameter("password"));
 					utenteBean.setEmail(		request.getParameter("email"));
@@ -101,10 +101,10 @@ public class Login extends HttpServlet {
 					response.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
 					response.getWriter().write("./UserInfo");      					// Write response body
 					
-					//TODO capire perché... response.sendRedirect non va bene in questo contesto non so perché ma facendo così non funziona
+					//TODO capire perchï¿½... response.sendRedirect non va bene in questo contesto non so perchï¿½ ma facendo cosï¿½ non funziona
 					//response.sendRedirect(request.getContextPath()+"/WEB-INF/paginaProtetta.jsp");
 				}else {
-					System.out.println("arrivo quì");
+					System.out.println("arrivo quï¿½");
 					//response.sendRedirect(request.getContextPath()+"/login-form.jsp");
 					response.setContentType("text/plain");  						// Set content type of the response so that jQuery knows what it can expect.
 					response.setCharacterEncoding("UTF-8"); 						// You want world domination, huh?
@@ -130,7 +130,7 @@ public class Login extends HttpServlet {
 						request.getSession().setAttribute("isAdmin", true);
 					}
 					
-					//TODO in teoria l'utente dovrebbe poter accedere allo storage per utenti anche se non è loggato
+					//TODO in teoria l'utente dovrebbe poter accedere allo storage per utenti anche se non ï¿½ loggato
 					//sarebbe come visualizzare lo store di amazon, non devi essere per forza loggato per vederlo
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/StorageControl");
 					dispatcher.forward(request, response);
@@ -143,7 +143,7 @@ public class Login extends HttpServlet {
 			
 			
 		}else {
-			//se action è nullo significa che stiamo accedendo alla web app partendo da questa servlet e per tanto si dovrebbe essere rindirizzati
+			//se action ï¿½ nullo significa che stiamo accedendo alla web app partendo da questa servlet e per tanto si dovrebbe essere rindirizzati
 			//alla homepage
 //			response.sendRedirect(request.getContextPath()+"/login-form.jsp");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login-form.jsp");
@@ -154,7 +154,7 @@ public class Login extends HttpServlet {
 		{
 			request.getSession().setAttribute("isLogged", true);
 			
-			//se non è un admin va comunque allo storage ma non può effetuare operazioni sui prodotti ma solo visualizzarli
+			//se non ï¿½ un admin va comunque allo storage ma non puï¿½ effetuare operazioni sui prodotti ma solo visualizzarli
 			if(utenteBean.isAMMINISTRATORE())
 			{
 				request.getSession().setAttribute("isAdmin", true);
@@ -171,8 +171,8 @@ public class Login extends HttpServlet {
 			//se il login non va a buon fine allora o vuoi registrarti oppure hai sbagliato le credenziali
 			if(action != null && action.equals("Registration"))
 			{
-				//già sappiamo che non c'è un email e password corrrispondenti a quelle con cui vogliamo registrarci
-				//ciò lo capiamo dal fatto che se siamo quì il checklogin è fallito
+				//giï¿½ sappiamo che non c'ï¿½ un email e password corrrispondenti a quelle con cui vogliamo registrarci
+				//ciï¿½ lo capiamo dal fatto che se siamo quï¿½ il checklogin ï¿½ fallito
 				//quindi possiamo procedere all'inserimento dei dati nel database
 				utenteBean.setNome(request.getParameter("nome"));
 				utenteBean.setCognome(request.getParameter("cognome"));
@@ -190,7 +190,7 @@ public class Login extends HttpServlet {
 			}
 		}
 		
-		//se vuoi usare invalidLogin.jsp quando si fallisce il login deve avvenire quì la redirezione
+		//se vuoi usare invalidLogin.jsp quando si fallisce il login deve avvenire quï¿½ la redirezione
 		//distinguendo la redirezione che avviene quando si effettua la registrazione
 		//e quella che avviene quando si inseriscono credenziali di login errate
 		response.sendRedirect(request.getContextPath()+"/login-form.jsp");
